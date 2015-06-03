@@ -38,13 +38,30 @@
     stroke-width: .1px;
   }
   #country-area {
-    width: 50%;
+    width: 49%;
+    padding: .5%;
     height: 500px;
     position: absolute;
 
-    background-color: black;
+    background-color: whitesmoke;
     top: 0;
-    left: -50%;
+    left: -51%;
+    border: #333333 solid;
+    border-width: 0 4px 0 0;
+    z-index: 100;
+  }
+
+  .chart-detail.y-axis line,
+  .chart-detail.y-axis path
+  {
+    fill: none;
+    stroke: black;
+    shape-rendering:crispEdges;
+  }
+
+  .chart-detail.y-axis, .legend-text {
+    font-family: sans-serif;
+    font-size: 11px;
   }
 
   #main-activity-area {
@@ -57,20 +74,65 @@
 
   #country-loader { position: absolute; width: 100px; left: 50%; margin-left: -50px; top: 100px; text-align: center; color: white;}
 
-  #country-details { width: 100%; }
+  #country-details { width: 100%; position: relative; }
+  #country-details-viewport { width: 100%; position: relative; }
+
+  #country-details-triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #aaaaaa;
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+  }
 
   text.legend-label { font-size: 10px; fill: black; font-family: sans-serif; }
 
   /*SVG*/
   rect.chart_in_need {
     fill: lightgray;
+    cursor: pointer;
   }
   rect.chart-funded {
     fill: #0F6CB6;
+    cursor: pointer;
   }
   #country-details-area h3,
-  #country-details-area h1 { font-family: sans-serif; color: white; }
+  #country-details-area h1 { font-family: sans-serif; color: #333333; }
 
+  rect.chart-legend-item {
+    width: 15px;
+    height: 15px;
+  }
+
+  #country-details-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    z-index: 100;
+    background-color: whitesmoke;
+    border: solid #aaaaaa 3px;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: 11px;
+
+    width: 200px;
+
+    border-radius: 3px;
+
+    display: none;
+  }
+
+  #country-details-hover h4 { padding: 0; margin: 0; font-size: 13px; }
+  #country-details-hover #country-detail-image{
+    width: 40px;
+    height: 40px;
+    float: left;
+    background-image: url(img/fund.png);
+  }
 </style>
 <body>
 <div id="main-activity-area">
@@ -84,6 +146,30 @@
         <h1 class="country-title"></h1>
         <h3>Funding by Cluster</h3>
         <div id="country-details">
+
+            <div id="country-details-hover">
+              <div id="country-details-viewport">
+                <div id="country-detail-image"></div>
+                <h4>Lorem Ipsum</h4>
+                <table id="country-detail-table">
+                  <tr>
+                    <th>Requirement:</th>
+                    <td><span id="country-detail-requirement">100000000</span></td>
+                  </tr>
+                  <tr>
+                    <th>Funding:</th>
+                    <td><span id="country-detail-funding">5000000</span></td>
+                  </tr>
+                  <tr>
+                    <th>Pledges</th>
+                    <td><span id="country-detail-pledge">5000</span></td>
+                  </tr>
+                </table>
+                <div id="country-details-triangle"></div>
+              </div>
+            </div>
+
+
         </div>
       </div>
     </div>
@@ -133,6 +219,10 @@ var transform = d3.geo.transform({point: projectPoint}),
     path = d3.geo.path().projection(transform);
 
 var stored_zoom = null, stored_center = null;
+var lookup_image = null;
+
+/* load data*/
+initialize();
 
 d3.json("data/countries.json", function(error, data) {
     if (error) {
@@ -151,7 +241,7 @@ d3.json("data/countries.json", function(error, data) {
       gha_csv = data.reduce(function(o, v, i) { if (v.ISO) { o[v.ISO] = v; } return o;}, {});
 
       //Scale for values...
-      domInNeed = raw_gha_csv.map(function(d) { return parseInt(d.in_need); });
+      domInNeed  = raw_gha_csv.map(function(d) { return parseInt(d.in_need); });
       domFunding = raw_gha_csv.map(function(d) { return parseInt(d.funding); });
 
 
@@ -195,19 +285,57 @@ d3.json("data/countries.json", function(error, data) {
               // console.log(d);
               var format = d3.formatPrefix(scaleInNeed.invert(d));
               // console.log(format);
-              return d3.round(format.scale(scaleInNeed.invert(d)), 1) + format.symbol;
+              return d3.round(format.scale(scaleInNeed.invert(d))) + format.symbol;
             });
 
 
   }
 
   //Event on mouseover for chart element
-  function showChartBlockInformation() {
-    console.log("Something is happening here");
+  var showChartBlockInformation_timeout = null;
+  function showChartBlockInformation(d) {
+    // console.log("Something is happening here", a,b,c);
+    // console.log(this);
+    if (showChartBlockInformation_timeout) {
+      clearTimeout(showChartBlockInformation_timeout);
+    }
+
+    var fmt = d3.format(",");
+
+    $("#country-detail-requirement").text("$"+ fmt(d.current_requirement));
+    $("#country-detail-funding").text("$"+ fmt(d.funding));
+    $("#country-detail-pledge").text("$"+ fmt(d.pledges));
+    $("#country-details-viewport h4").text(d.name);
+
+    var lookup = d.name.toLowerCase();
+    // console.log("img/"+lookup_image[lookup], $("#country-detail-image").css("background-image"));
+
+    $("#country-detail-image").css("background-image", "url(img/"+lookup_image[lookup]+")");
+    $("#country-details-hover").show();
+
+
+
+    console.log($("#country-details-hover").height());
+    var target = d3.select(this);
+    var boxHeight = $("#country-details-hover").height();
+    var bottomOffset = scaleFunds(d.current_requirement ? d.current_requirement : d.funding);
+    var leftOffset = parseInt(target.attr("x")) + 3;
+
+    $("#country-details-hover")
+        .stop(true, true)
+        .animate(
+        {"bottom": (bottomOffset + 35) + "px",
+         "left" : leftOffset + "px" }, 100);
+  }
+
+  function showChartBlockInformation_hide(d) {
+    showChartBlockInformation_timeout = setTimeout(function() { $("#country-details-hover").fadeOut(100); }, 500);
   }
 
   var cluster_data = null, scaleFunds = null, scaleFundLabels = null;
   function showMoreDetails(data) {
+    if (d3.event.defaultPrevented) return; // click suppressed
+
     $("#close-country-profile").show();
     // in_need_layer.style("visibility", "hidden");
 
@@ -272,7 +400,7 @@ d3.json("data/countries.json", function(error, data) {
     cluster_data = cluster_data.sort(function(a,b) { return b.current_requirement - a.current_requirement; })
 
     //Build chart...
-    $content_detail.empty();
+    $content_detail.find("svg").remove();
     var cont_width = $profile.width(), cont_height = $profile.height();
 
     var svg_chart = d3.select($content_detail[0]).append("svg")
@@ -283,28 +411,51 @@ d3.json("data/countries.json", function(error, data) {
 
 
     var current_requirement = cluster_data.map(function(h) { return h.current_requirement });
-    var padding = 10;
+    var padding = 20;
 
     scaleFunds = d3.scale.linear()
                   .domain([d3.min(current_requirement), d3.max(current_requirement)])
-                  .range([padding, (cont_height/2) - padding]);
+                  .rangeRound([padding, (cont_height/2) - (padding*3)]);
+
     scaleFundLabels = d3.scale.ordinal()
                         .domain(d3.range(cluster_data.length))
-                        .rangeRoundBands([padding, cont_width-padding],0.1);
+                        .rangeRoundBands([padding*2, cont_width-padding],0.1);
+
+    var for_axis_scale = scaleFunds.copy();
+        for_axis_scale.range(for_axis_scale.range().reverse());
+
+    var yAxis = d3.svg.axis()
+                        .scale(d3.scale.linear()
+                            .domain([d3.min(current_requirement), d3.max(current_requirement)])
+                            .range([(cont_height/2) - padding, padding * 2])
+                          )
+                        .orient("left")
+                        .tickFormat(function(tick) {
+                          var tickForm = d3.formatPrefix(tick);
+                          return "$" + tickForm.scale(tick) + tickForm.symbol;
+                        });
+
+    var axis_group = svg_chart.append("g")
+                                .attr("class", "chart-detail y-axis")
+                                .attr("transform", "translate(" + padding*2 + ",0)")
+                                .call(yAxis);
 
     var g_chart_reqt = svg_chart.append("g").attr("id", "funding-requirement");
+    var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
+    var g_chart_funding_img = svg_chart.append("g").attr("id", "funding-image");
     g_chart_reqt.selectAll("rect")
             .data(cluster_data)
             .enter()
             .append("rect")
               .attr("class", "chart_in_need")
               .attr("width", scaleFundLabels.rangeBand())
+              .attr("data-requirement", function(d) { return d.current_requirement; })
               .attr("x", function(d,i) { return scaleFundLabels(i); })
-              .attr("height", function(d) { return scaleFunds(d.current_requirement); })
-              .attr("y", function(d) { return cont_height/2 - padding - scaleFunds(d.current_requirement); })
-              .on("mouseover", showChartBlockInformation);
+              .attr("y", function(d) { return cont_height/2 - padding; })
+              .attr("height", 0)
+              .on("mouseenter", showChartBlockInformation)
+              .on("mouseleave", showChartBlockInformation_hide);
 
-      var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
 
       g_chart_funded.selectAll("rect.chart-funded")
             .data(cluster_data)
@@ -313,10 +464,68 @@ d3.json("data/countries.json", function(error, data) {
                 .attr("class", "chart-funded")
                 .attr("width", scaleFundLabels.rangeBand())
                 .attr("x", function(d,i) { return scaleFundLabels(i); })
-                .attr("height", function(d) { return scaleFunds(d.funding); })
-                .attr("y", function(d) { return cont_height/2 - padding - scaleFunds(d.funding); })
-                .on("mouseover", showChartBlockInformation);
+                .attr("height", 0)
+                .attr("y", cont_height/2 - padding)
+                .on("mouseenter", showChartBlockInformation)
+                .on("mouseleave", showChartBlockInformation_hide);
 
+      g_chart_funding_img.selectAll("image.chart-funded-img")
+          .data(cluster_data)
+          .enter()
+            .append("image")
+              .attr("class", "chart-funded-img")
+              .attr("width", "40")
+              .attr("x", function(d,i) { return scaleFundLabels(i); })
+              .attr("height", "40")
+              .attr("y", cont_height/2 - padding - 40)
+              .attr("xlink:href", function(d) { return "img/" +lookup_image[d.name.toLowerCase()]; });
+
+//animate
+    g_chart_reqt.selectAll("rect.chart_in_need")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              // .delay(function(d,i) { return i * 10;})
+              .attr("height", function(d) { return scaleFunds(d.current_requirement); })
+              .attr("y", function(d) { return Math.round(cont_height/2 - padding - scaleFunds(d.current_requirement)); });
+
+      g_chart_funded.selectAll("rect.chart-funded")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              .attr("height", function(d) { return scaleFunds(d.funding); })
+              .attr("y", function(d) { return Math.round(cont_height/2 - padding - scaleFunds(d.funding)); });
+
+      g_chart_funding_img.selectAll("image.chart-funded-img")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              .attr("y", function(d) {
+                    return Math.round(cont_height/2 - padding -
+                      scaleFunds(d.current_requirement ? d.current_requirement : d.funding) - 40); })
+              ;
+
+      //legend
+      var g_legend = svg_chart.append("g").attr("class", "chart-legend");
+      var req = g_legend.append("rect").attr("class", "chart-legend-item chart_in_need")
+                      .attr("y", cont_height/2 - padding/2)
+                      .attr("x", padding*2 + 10)
+                      .attr("width", 15),
+         req_label = g_legend.append("text").attr("class", "legend-text").text("Current Requirement")
+                      .attr("y", cont_height/2 - padding/2 + 10)
+                      .attr("x", parseInt(req.attr("x")) + parseInt(req.attr("width")) + 2 )
+                      .attr("width", function(d) { return this.getBBox().width; }),
+          funded = g_legend.append("rect").attr("class", "chart-legend-item chart-funded")
+                      .attr("y", cont_height/2 - padding/2)
+                      .attr("x", parseInt(req_label.attr("x")) + parseInt(req_label.attr("width")) + 6)
+                      .attr("width", 15),
+          funded_label = g_legend.append("text").attr("class", "legend-text").text("Current Funded")
+                      .attr("y", cont_height/2 - padding/2 + 10)
+                      .attr("x", parseInt(funded.attr("x")) + parseInt(funded.attr("width")) + 2)
+                      ;
+
+      //floating item
+      var g_chart_hover = svg_chart.append("g").attr("class", "chart-hover");
 
       $loader.hide();
 
@@ -356,7 +565,6 @@ d3.json("data/countries.json", function(error, data) {
               var x = [];
               for (var i in d.geometry.coordinates) {
                 if (d.geometry.type == "MultiPolygon") {
-
                   x = x.concat(d.geometry.coordinates[i][0].map(function (gmx) { return gmx[0]; }));
                 } else {
                   x = x.concat(d.geometry.coordinates[i].map(function (gmx) { return gmx[0]; }));
@@ -459,11 +667,24 @@ d3.json("data/countries.json", function(error, data) {
       $("#close-country-profile").hide();
       var $profile = $("#country-area");
       var $map = $("#map");
-      $map.animate({"marginLeft" : "0%", "width" : "100%" }, 300, function() {
+      $map.animate({"marginLeft" : "0%", "width" : "100%" }, 400, function() {
         map.invalidateSize();
         // map.setView(stored_center, stored_zoom);
       });
-      $profile.animate({"left": "-50%"}, 700, function() { $profile.attr("data-show", "false"); });
+      $profile.animate({"left": "-50%"}, 400, function() { $profile.attr("data-show", "false"); });
   });
+
+  function initialize() {
+    $.ajax({
+      // url: "http://fts.unocha.org/api/v1/cluster/appeal/" + gha_data.Appeal_ID_2015 + ".json",
+      url: "./data/lookup-image.json",
+      dataType: "json",
+      success: function(data) {
+
+        lookup_image = data;
+        console.log(lookup_image);
+      }
+    });
+  }
 </script>
 </body>
