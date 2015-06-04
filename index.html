@@ -7,7 +7,7 @@
   body { margin: 0; padding: 0; }
   #map {
     width: 100%;
-    height: 500px;
+    height: 700px;
   }
 
   svg {
@@ -40,7 +40,7 @@
   #country-area {
     width: 49%;
     padding: .5%;
-    height: 500px;
+    height: 700px;
     position: absolute;
 
     background-color: whitesmoke;
@@ -99,8 +99,40 @@
     fill: #0F6CB6;
     cursor: pointer;
   }
+
+  rect.chart-pledged {
+    fill: #E4EA89;
+    cursor: pointer;
+  }
   #country-details-area h3,
-  #country-details-area h1 { font-family: sans-serif; color: #333333; }
+  #country-details-area .main-area h1 { font-size: 24px; font-family: sans-serif; color: #333333; padding: 0; margin: 0; margin: 10px 0;}
+  #country-details-area h3 { text-transform: uppercase; font-size: 12px; padding: 0; margin: 0; color: gray;}
+
+  /*#country-details-area .main-area h1 { width: 48%; }*/
+  #country-details-area .main-area h1#country-title {
+    /*float: left;*/
+    text-align: center;
+    background-color: #333333;
+    color: white;
+    text-transform: uppercase;
+    font-size: 21px;
+    padding: 14px 12px 14px 6px;
+    margin: -6px -6px 0 -6px;
+  }
+  #country-details-area .main-area h1#people-in-need-title {
+        /*float: right; */
+        text-align: left;
+
+        line-height: 0.8;
+        color: #A82B2B;
+        margin-top: 15px;
+        padding-left: 1%
+  }
+
+  #country-details-area .main-area h1#people-in-need-title div.num-area {
+    float: left; font-size: 31px;vertical-align: top;margin-top: -2px;margin-right: 5px;margin-bottom: 21px;
+  }
+  #country-details-area .main-area h1#people-in-need-title  span.span-area { font-size: 14px; vertical-align: top; }
 
   rect.chart-legend-item {
     width: 15px;
@@ -133,6 +165,75 @@
     float: left;
     background-image: url(img/fund.png);
   }
+  #country-detail-table th { text-align: right; }
+
+  .clear { clear: both; }
+
+  /*For buttons*/
+  #map-layer-ctrl {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    display: inline-block;
+    /*margin-left: -12%;*/
+    z-index: 1000;
+  }
+
+  #map-layer-ctrl button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  #map-layer-ctrl button.active {
+
+    background-color: gray;
+    border: black;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+  }
+  .country-details { background-color: rgb(232, 232, 232);   margin-left: -6px; margin-right: -6px; margin-bottom: 20px;}
+  .country-details div.country-detail-item {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-width: 48%;
+    font-family: sans-serif;
+  }
+  .country-details #country-details-people-in-need {
+    /*float: left;*/
+  }
+
+  .country-details #country-details-funding {
+    /*float: right;*/
+  }
+
+  .country-detail-item { text-align: left; }
+  .country-detail-item span .arrow { font-size: 10px; display: none;}
+  span.previous-appeal sub ,
+  span.current-appeal sub {
+    font-size: 10px;
+    float: left;
+  }
+  span.previous-appeal, span.current-appeal {
+    display: block;
+    text-align: left;
+    position: relative;
+  }
+  span.current-appeal { text-align: left; color: #CC0000; }
+  span.previous-appeal h4 {
+    font-size: 20px;
+    padding: 0; margin: 0;
+    font-weight: normal;
+    float: left;
+  }
+
+  span.previous-appeal sub, span.current-appeal sub {
+    position: absolute;
+    top: 0;
+    right: -10px;
+  }
+
+  span.current-appeal h4 { font-size: 20px; padding: 0; margin: 0; /*margin-bottom: -5px;*/ font-weight: bold;}
 </style>
 <body>
 <div id="main-activity-area">
@@ -143,10 +244,45 @@
         <button id="close-country-profile">Close</button>
       </div>
       <div id="country-details-area">
-        <h1 class="country-title"></h1>
+        <div class="main-area">
+          <h1 id="country-title"></h1>
+        </div>
+        <div class="clear"></div>
+        <div class="country-details">
+          <div id="country-details-people-in-need" class="country-detail-item">
+            <h3>People targetted for Assistance</h3>
+            <span class="previous-appeal">
+              <h4>98M</h4>
+              <sub>Dec 2014</sub>
+            </span>
+            <div class="clear"></div>
+            <span class="current-appeal">
+              <h4>120M</h4><span class="arrow">^ 20%</span>
+              <sub>Jun 2015</sub>
+            </span>
+            <div class="clear"></div>
+          </div>
+          <div id="country-details-funding" class="country-detail-item">
+            <h3>Funding</h3>
+            <span class="previous-appeal">
+              <h4>$408M</h4>
+              <sub>Dec 2014</sub>
+            </span>
+            <div class="clear"></div>
+            <span class="current-appeal">
+              <span>
+                <h4>$620M</h4><span class="arrow">UP 20%</span>
+              </span>
+              <sub>Jun 2015</sub>
+            </span>
+            <div class="clear"></div>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
         <h3>Funding by Cluster</h3>
+        <!-- <h3 style="color: #cc3333">Priority Cluster: <span id="priority-cluster"></span></h3> -->
         <div id="country-details">
-
             <div id="country-details-hover">
               <div id="country-details-viewport">
                 <div id="country-detail-image"></div>
@@ -160,21 +296,26 @@
                     <th>Funding:</th>
                     <td><span id="country-detail-funding">5000000</span></td>
                   </tr>
-                  <tr>
-                    <th>Pledges</th>
+                  <!-- <tr>
+                    <th>Pledges:</th>
                     <td><span id="country-detail-pledge">5000</span></td>
-                  </tr>
+                  </tr> -->
                 </table>
                 <div id="country-details-triangle"></div>
               </div>
             </div>
-
-
         </div>
       </div>
     </div>
   </div>
-  <div id="map"></div>
+  <div id="map">
+
+    <div id="map-layer-ctrl">
+      <button id="target-layer-assistance" class="target-layer active" data-type="Assistance">Assistance</button>
+      <button id="target-layer-funding" class="target-layer" data-type="Funding">Funding</button>
+      <button id="target-layer-change" class="target-layer" data-type="Percent Change">% Change</button>
+    </div>
+  </div>
 </div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script src="js/d3.js"></script>
@@ -192,10 +333,10 @@ var map = new L.Map("map", {center: [24, 27], zoom: 2})
     .addLayer(new L.TileLayer("http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA"));
 var features = null; //contains geojson data
 
-var country = null, country_in_need = null, country_funding = null;
+var country = null, country_in_need = null, country_funding = null, country_percent_change = null;
 var country_label = null;
 var gha_csv = null;
-var raw_gha_csv = null, domInNeed = null, domFunding = null;
+var raw_gha_csv = null, domInNeed = null, domFunding = null, domPercentChange = null;
 
 //Scales
 var redColorScale = null, fundColorScale = null, scaleInNeed = null, scaleFunding = null ;
@@ -208,8 +349,9 @@ var svg_legend = d3.select(map.getContainer())
 var legend_area = svg_legend.append("g").attr("class", "legends_area");
 
 var svg = d3.select(map.getPanes().overlayPane).append("svg"),
-    in_need_layer = svg.append("g").attr("class", "in_need_layer"),
-    funding_layer = svg.append("g").attr("class", "funding_layer"),
+    in_need_layer = svg.append("g").attr("class", "in_need_layer map-layer").attr("data-type", "Assistance"),
+    funding_layer = svg.append("g").attr("class", "funding_layer map-layer").attr("data-type", "Funding"),
+    percent_change_layer = svg.append("g").attr("class", "funding_layer map-layer").attr("data-type", "Percent Change"),
     g = svg.append("g").attr("class", "leaflet-zoom-hide");
 
 var svg_indepth = d3.select(map.getContainer()).append("svg");
@@ -220,9 +362,30 @@ var transform = d3.geo.transform({point: projectPoint}),
 
 var stored_zoom = null, stored_center = null;
 var lookup_image = null;
+var padding = 20;
 
 /* load data*/
 initialize();
+
+//basic interactions
+$("#map-layer-ctrl").css("marginLeft", "-"+$("#map-layer-ctrl").width()/2 + "px");
+$("#map-layer-ctrl button").on("click", function() {
+  var dataLayer = $(this).attr("data-type");
+
+  $("#map-layer-ctrl button").removeClass("active");
+
+  $(in_need_layer[0]).hide("fast");
+  $(funding_layer[0]).hide("fast");
+  $(percent_change_layer[0]).hide("fast");
+
+  $(".map-layer[data-type='" + dataLayer +"']").stop(true, true).show("fast");
+
+  console.log("#map-layer-ctrl button[data-type='" + dataLayer +"']");
+  $("#map-layer-ctrl button[data-type='" + dataLayer +"']").addClass("active");
+
+  define_scales(dataLayer);
+
+});
 
 d3.json("data/countries.json", function(error, data) {
     if (error) {
@@ -243,57 +406,159 @@ d3.json("data/countries.json", function(error, data) {
       //Scale for values...
       domInNeed  = raw_gha_csv.map(function(d) { return parseInt(d.in_need); });
       domFunding = raw_gha_csv.map(function(d) { return parseInt(d.funding); });
+      domPercentChange = raw_gha_csv.map(function(d) { return (parseFloat(d.June_2015_funding_required) / parseFloat(d.funding)) - 1; });
 
+      domPercentChange = domPercentChange.filter( function(d) { return !isNaN(d); } );
+      domInNeed = domInNeed.filter(function(d) { return d != 0; });
+      domFunding = domFunding.filter(function(d) { return d != 0; });
 
-      domInNeed = domInNeed.filter(function(d) { return d != 0; })
+      console.log(domPercentChange);
 
       initialize_map();
     });
   }
 
-  function define_scales() {
-    //Scales..
-    redColorScale = d3.scale.linear().domain([0,9]).interpolate(d3.interpolateRgb).range(["#f8e5e5", "#BF0000"]);
-    scaleInNeed = d3.scale.log().domain([d3.min(domInNeed), d3.max(domInNeed)]).range([1,10]);
+  function define_scales(dataLayer) {
+    //Clear insides
+    $(legend_area[0]).empty();
 
-    //Show legends
+    //Scales for INNEED..
+    switch(dataLayer)
+    {
+      case "Assistance":
 
-    svg_legend.style("height", 20)
-          .style("width", d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length * 50);
+        svg_legend.style("height", 20)
+              .style("width", d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length * 50);
 
-    legend_area.selectAll("rect.legend-item.in-need")
-        .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
-        .enter()
-        .append("rect")
-          .attr("class", "legend-item in-need")
-          .attr("fill", function(d) { return redColorScale(d); })
-          .attr("x", function(d) { return d * 50; })
-          .attr("y", 0)
-          .attr("width", 50)
-          .attr("height", 20);
-          //.style("display", function(d,i) { return d%2 == 0 ? "none": "block"; });
+        legend_area.selectAll("rect.legend-item.in-need")
+            .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
+            .enter()
+            .append("rect")
+              .attr("class", "legend-item in-need")
+              .attr("fill", function(d) { return redColorScale(d); })
+              .attr("y", 0)
+              .attr("width", 0)
+              .attr("x", 0)
+              .attr("height", 20);
 
-    legend_area.selectAll("text.legend-label")
-        .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
-        .enter()
-          .append("text")
-            .attr("y", 15)
-            .attr("x", function(d) { return d * 50 + 25; })
-            .attr("text-anchor", "middle")
-            // .style("display", function(d,i) { return d%2 == 0 ? "none": "block"; })
-            .text(function(d) {
-              // console.log(d);
-              var format = d3.formatPrefix(scaleInNeed.invert(d));
-              // console.log(format);
-              return d3.round(format.scale(scaleInNeed.invert(d))) + format.symbol;
-            });
+        legend_area.selectAll("text.legend-label")
+            .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
+            .enter()
+              .append("text")
+                .attr("class", "legend-label")
+                .attr("y", 15)
+                .attr("text-anchor", "middle")
+                .attr("x", 0)
+                .text(function(d) {
+                  var format = d3.formatPrefix(scaleInNeed.invert(d));
+                  return d3.round(format.scale(scaleInNeed.invert(d))) + format.symbol;
+                });
+
+          legend_area.selectAll("text.legend-label")
+            .transition()
+            .duration(500)
+            .attr("x", function(d) { return d * 50 + 25; });
+
+          legend_area.selectAll("rect.legend-item.in-need")
+            .transition()
+            .duration(500)
+            .attr("x", function(d) { return d * 50; })
+            .attr("width", 50);
+        break;
+
+        case "Funding" :
+          console.log("Entered");
+
+          svg_legend.style("height", 20)
+                .style("width", d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length * 50);
+
+          legend_area.selectAll("rect.legend-item")
+              .data(d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1))
+              .enter()
+              .append("rect")
+                .attr("class", "legend-item in-funding")
+                .attr("fill", function(d) { return fundColorScale(d); })
+                .attr("y", 0)
+                .attr("width", 0)
+                .attr("x", 0)
+                .attr("height", 20);
+
+          legend_area.selectAll("text.legend-label")
+              .data(d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1))
+              .enter()
+                .append("text")
+                  .attr("class", "legend-label")
+                  .attr("y", 15)
+                  .attr("text-anchor", "middle")
+                  .attr("x", 0)
+                  .text(function(d) {
+                    var format = d3.formatPrefix(scaleFunding.invert(d));
+
+                    console.log(d3.round(format.scale(scaleFunding.invert(d))) + format.symbol);
+                    return d3.round(format.scale(scaleFunding.invert(d))) + format.symbol;
+                  });
+
+            legend_area.selectAll("text.legend-label")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d * 50 + 25; });
+
+            legend_area.selectAll("rect.legend-item")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d * 50; })
+              .attr("width", 50);
+        break;
+
+        case "Percent Change" :
+          // scaleChange
+          // percentColorScale
+
+          svg_legend.style("height", 20)
+                .style("width", d3.range(scaleChange.range()[0], scaleChange.range()[2]+1).length * 40);
+
+          legend_area.selectAll("rect.legend-item")
+              .data(d3.range(scaleChange.range()[0], scaleChange.range()[2]+1))
+              .enter()
+              .append("rect")
+                .attr("class", "legend-item in-change")
+                .attr("fill", function(d) { return percentColorScale(d); })
+                .attr("y", 0)
+                .attr("width", 0)
+                .attr("x", 0)
+                .attr("height", 20);
+
+          legend_area.selectAll("text.legend-label")
+              .data(d3.range(scaleChange.range()[0], scaleChange.range()[2]+1))
+              .enter()
+                .append("text")
+                  .attr("class", "legend-label")
+                  .attr("y", 15)
+                  .attr("text-anchor", "middle")
+                  .attr("x", 0)
+                  .text(function(d) {
+                    return d3.round(scaleChange.invert(d)*10) + "%";
+                  });
+
+            legend_area.selectAll("text.legend-label")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d  * 40 + 20; });
+
+            legend_area.selectAll("rect.legend-item")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d  * 40; })
+              .attr("width", 40);
+        break;
+    }
 
 
   }
 
   //Event on mouseover for chart element
   var showChartBlockInformation_timeout = null;
-  function showChartBlockInformation(d) {
+  function showChartBlockInformation(d, i) {
     // console.log("Something is happening here", a,b,c);
     // console.log(this);
     if (showChartBlockInformation_timeout) {
@@ -304,7 +569,7 @@ d3.json("data/countries.json", function(error, data) {
 
     $("#country-detail-requirement").text("$"+ fmt(d.current_requirement));
     $("#country-detail-funding").text("$"+ fmt(d.funding));
-    $("#country-detail-pledge").text("$"+ fmt(d.pledges));
+    // $("#country-detail-pledge").text("$"+ fmt(d.pledges));
     $("#country-details-viewport h4").text(d.name);
 
     var lookup = d.name.toLowerCase();
@@ -318,8 +583,8 @@ d3.json("data/countries.json", function(error, data) {
     console.log($("#country-details-hover").height());
     var target = d3.select(this);
     var boxHeight = $("#country-details-hover").height();
-    var bottomOffset = scaleFunds(d.current_requirement ? d.current_requirement : d.funding);
-    var leftOffset = parseInt(target.attr("x")) + 3;
+    var bottomOffset = scaleFunds(d.current_requirement ? d.current_requirement : d.funding)-padding;
+    var leftOffset = parseInt(target.attr("x")) - 17 + parseInt(scaleFundLabels.rangeBand())/2;
 
     $("#country-details-hover")
         .stop(true, true)
@@ -355,7 +620,7 @@ d3.json("data/countries.json", function(error, data) {
     var $content = $("#country-details-area");
     var $content_detail = $("#country-details");
 
-    $content.find("h1.country-title").text(countryData.properties.name);
+    $content.find("h1#country-title").text(countryData.properties.name);
 
     $loader.show();
     //SLIDE MAP TO THE LEFT
@@ -383,8 +648,91 @@ d3.json("data/countries.json", function(error, data) {
       $profile.animate({"left": 0}, 300, function() { $profile.attr("data-show", "true"); });
     }
 
-    //BUILD CHART
+
+
     var gha_data = gha_csv[data.id];
+    //TWEEN PEOPLE IN NEED
+
+    console.log(gha_data, parseInt(gha_data.in_need));
+    d3.select("#country-details-people-in-need .previous-appeal h4")
+        .transition()
+        .duration(2000)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.in_need));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
+              }
+              else {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-people-in-need .current-appeal h4")
+        .transition()
+        .duration(2000)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_in_need));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
+              }
+              else {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-funding .previous-appeal h4")
+        .transition()
+        .duration(2000)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.funding));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+
+              var symbol = fmt_pref.symbol == "G" ? "B" : fmt_pref.symbol;
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                  this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+              else {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-funding .current-appeal h4")
+        .transition()
+        .duration(2000)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_funding_required));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t));
+
+              var symbol = fmt_pref.symbol == "G" ? "B" : fmt_pref.symbol;
+
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+              else {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+            };
+        });
+      ;
+
+
+    //BUILD CHART
     cluster_data = null;
     $.ajax({
       // url: "http://fts.unocha.org/api/v1/cluster/appeal/" + gha_data.Appeal_ID_2015 + ".json",
@@ -399,35 +747,35 @@ d3.json("data/countries.json", function(error, data) {
     //Sort data
     cluster_data = cluster_data.sort(function(a,b) { return b.current_requirement - a.current_requirement; })
 
+    // $("#priority-cluster").text(cluster_data[0].name);
     //Build chart...
     $content_detail.find("svg").remove();
-    var cont_width = $profile.width(), cont_height = $profile.height();
+    var cont_width = $profile.width(), cont_height = $profile.height()*2/5;
 
     var svg_chart = d3.select($content_detail[0]).append("svg")
                 .attr("width", cont_width-20)
-                .attr("height", (cont_height/2))
+                .attr("height", cont_height)
                 .style("padding", 10)
                 .attr("class", "svg-details");
 
 
     var current_requirement = cluster_data.map(function(h) { return h.current_requirement });
-    var padding = 20;
+
 
     scaleFunds = d3.scale.linear()
-                  .domain([d3.min(current_requirement), d3.max(current_requirement)])
-                  .rangeRound([padding, (cont_height/2) - (padding*3)]);
+                  .domain([0, d3.max(current_requirement)])
+                  .rangeRound([padding, (cont_height) - padding*2]);
 
     scaleFundLabels = d3.scale.ordinal()
                         .domain(d3.range(cluster_data.length))
                         .rangeRoundBands([padding*2, cont_width-padding],0.1);
 
-    var for_axis_scale = scaleFunds.copy();
-        for_axis_scale.range(for_axis_scale.range().reverse());
-
+    console.log("INITIAL", current_requirement);
     var yAxis = d3.svg.axis()
-                        .scale(d3.scale.linear()
-                            .domain([d3.min(current_requirement), d3.max(current_requirement)])
-                            .range([(cont_height/2) - padding, padding * 2])
+                        .scale(
+                          d3.scale.linear()
+                            .domain([0, d3.max(current_requirement)])
+                            .rangeRound([(cont_height) - padding, padding*2])
                           )
                         .orient("left")
                         .tickFormat(function(tick) {
@@ -437,12 +785,14 @@ d3.json("data/countries.json", function(error, data) {
 
     var axis_group = svg_chart.append("g")
                                 .attr("class", "chart-detail y-axis")
-                                .attr("transform", "translate(" + padding*2 + ",0)")
+                                .attr("transform", "translate(" + padding*2 + ", 0)")
                                 .call(yAxis);
+    console.log("END", current_requirement);
 
     var g_chart_reqt = svg_chart.append("g").attr("id", "funding-requirement");
     var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
     var g_chart_funding_img = svg_chart.append("g").attr("id", "funding-image");
+    // var g_chart_pledged = svg_chart.append("g").attr("id", "funding-pledged");
     g_chart_reqt.selectAll("rect")
             .data(cluster_data)
             .enter()
@@ -451,7 +801,7 @@ d3.json("data/countries.json", function(error, data) {
               .attr("width", scaleFundLabels.rangeBand())
               .attr("data-requirement", function(d) { return d.current_requirement; })
               .attr("x", function(d,i) { return scaleFundLabels(i); })
-              .attr("y", function(d) { return cont_height/2 - padding; })
+              .attr("y", function(d) { return cont_height - padding; })
               .attr("height", 0)
               .on("mouseenter", showChartBlockInformation)
               .on("mouseleave", showChartBlockInformation_hide);
@@ -465,20 +815,33 @@ d3.json("data/countries.json", function(error, data) {
                 .attr("width", scaleFundLabels.rangeBand())
                 .attr("x", function(d,i) { return scaleFundLabels(i); })
                 .attr("height", 0)
-                .attr("y", cont_height/2 - padding)
+                .attr("y", cont_height - padding)
                 .on("mouseenter", showChartBlockInformation)
                 .on("mouseleave", showChartBlockInformation_hide);
+
+      // g_chart_pledged.selectAll("rect.chart-pledged")
+      //       .data(cluster_data)
+      //       .enter()
+      //         .append("rect")
+      //           .attr("class", "chart-pledged")
+      //           .attr("width", scaleFundLabels.rangeBand())
+      //           .attr("x", function(d,i) { return scaleFundLabels(i); })
+      //           .attr("height", 0)
+      //           .attr("y", cont_height - padding)
+      //           .on("mouseenter", showChartBlockInformation)
+      //           .on("mouseleave", showChartBlockInformation_hide);
 
       g_chart_funding_img.selectAll("image.chart-funded-img")
           .data(cluster_data)
           .enter()
             .append("image")
               .attr("class", "chart-funded-img")
-              .attr("width", "40")
+              .attr("width", scaleFundLabels.rangeBand())
               .attr("x", function(d,i) { return scaleFundLabels(i); })
-              .attr("height", "40")
-              .attr("y", cont_height/2 - padding - 40)
+              .attr("height", scaleFundLabels.rangeBand())
+              .attr("y", cont_height - padding - scaleFundLabels.rangeBand())
               .attr("xlink:href", function(d) { return "img/" +lookup_image[d.name.toLowerCase()]; });
+
 
 //animate
     g_chart_reqt.selectAll("rect.chart_in_need")
@@ -486,46 +849,65 @@ d3.json("data/countries.json", function(error, data) {
               .duration(500)
               .ease("sin")
               // .delay(function(d,i) { return i * 10;})
-              .attr("height", function(d) { return scaleFunds(d.current_requirement); })
-              .attr("y", function(d) { return Math.round(cont_height/2 - padding - scaleFunds(d.current_requirement)); });
+              .attr("height", function(d) { return scaleFunds(d.current_requirement)- padding; })
+              .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.current_requirement)); });
 
       g_chart_funded.selectAll("rect.chart-funded")
               .transition()
               .duration(500)
               .ease("sin")
-              .attr("height", function(d) { return scaleFunds(d.funding); })
-              .attr("y", function(d) { return Math.round(cont_height/2 - padding - scaleFunds(d.funding)); });
+              .attr("height", function(d) { return scaleFunds(d.funding)- padding; })
+              .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.funding)); });
+
+
+      // g_chart_pledged.selectAll("rect.chart-pledged")
+      //         .transition()
+      //         .duration(500)
+      //         .ease("sin")
+      //         .attr("height", function(d) { var exp = d.pledges*10; return scaleFunds(d.pledges) - padding; })
+      //         .attr("y", function(d) { return Math.round(cont_height- scaleFunds(d.pledges + d.funding)); });
 
       g_chart_funding_img.selectAll("image.chart-funded-img")
               .transition()
               .duration(500)
               .ease("sin")
               .attr("y", function(d) {
-                    return Math.round(cont_height/2 - padding -
-                      scaleFunds(d.current_requirement ? d.current_requirement : d.funding) - 40); })
+                    return Math.round(cont_height -
+                      scaleFunds(d.current_requirement ? d.current_requirement : d.funding) - scaleFundLabels.rangeBand()); })
               ;
 
       //legend
       var g_legend = svg_chart.append("g").attr("class", "chart-legend");
       var req = g_legend.append("rect").attr("class", "chart-legend-item chart_in_need")
-                      .attr("y", cont_height/2 - padding/2)
+                      .attr("y", cont_height - padding/2)
                       .attr("x", padding*2 + 10)
                       .attr("width", 15),
-         req_label = g_legend.append("text").attr("class", "legend-text").text("Current Requirement")
-                      .attr("y", cont_height/2 - padding/2 + 10)
+         req_label = g_legend.append("text").attr("class", "legend-text").text("Requirement")
+                      .attr("y", cont_height - padding/2 + 10)
                       .attr("x", parseInt(req.attr("x")) + parseInt(req.attr("width")) + 2 )
                       .attr("width", function(d) { return this.getBBox().width; }),
           funded = g_legend.append("rect").attr("class", "chart-legend-item chart-funded")
-                      .attr("y", cont_height/2 - padding/2)
+                      .attr("y", cont_height - padding/2)
                       .attr("x", parseInt(req_label.attr("x")) + parseInt(req_label.attr("width")) + 6)
                       .attr("width", 15),
-          funded_label = g_legend.append("text").attr("class", "legend-text").text("Current Funded")
-                      .attr("y", cont_height/2 - padding/2 + 10)
+          funded_label = g_legend.append("text").attr("class", "legend-text").text("Funding")
+                      .attr("y", cont_height - padding/2 + 10)
                       .attr("x", parseInt(funded.attr("x")) + parseInt(funded.attr("width")) + 2)
+                      .attr("width", function(d) { return this.getBBox().width; })
+          // pledged = g_legend.append("rect").attr("class", "chart-legend-item chart-pledged")
+          //             .attr("y", cont_height - padding/2)
+          //             .attr("x", parseInt(funded_label.attr("x")) + parseInt(funded_label.attr("width")) + 6)
+          //             .attr("width", 15),
+          // pledged_label = g_legend.append("text").attr("class", "legend-text").text("Pledges")
+          //             .attr("y", cont_height - padding/2 + 10)
+          //             .attr("x", parseInt(pledged.attr("x")) + parseInt(pledged.attr("width")) + 2)
                       ;
 
       //floating item
       var g_chart_hover = svg_chart.append("g").attr("class", "chart-hover");
+
+
+      //Show total
 
       $loader.hide();
 
@@ -534,11 +916,27 @@ d3.json("data/countries.json", function(error, data) {
 
   function initialize_map() {
 
-    define_scales();
+    /* Define Scales */
+    redColorScale = d3.scale.linear().domain([0,9]).interpolate(d3.interpolateRgb).range(["#f8e5e5", "#BF0000"]);
+    scaleInNeed = d3.scale.log().domain([d3.min(domInNeed), d3.max(domInNeed)]).range([1,10]);
+
+    fundColorScale = d3.scale.linear().domain([0,9]).interpolate(d3.interpolateRgb).range(["#f8e5e5", "#CC0000"]);
+    scaleFunding = d3.scale.log().domain([d3.min(domFunding), d3.max(domFunding)]).range([1,11]);
+
+    fundChangeScale = d3.scale.linear().domain([0,5,10]).interpolate(d3.interpolateRgb)
+                          .range(["#006400", "#FFFFFF", "#BF0000"]);
+
+    var minMaxChange = d3.max([Math.abs(d3.min(domPercentChange)), Math.abs(d3.max(domPercentChange))]);
+
+    scaleChange = d3.scale.linear().domain([minMaxChange*-1, 0, minMaxChange]).range([0,5,10]);
+    percentColorScale = d3.scale.linear().domain([0,5,10]).interpolate(d3.interpolateRgb)
+                          .range(["#00CC00", "#FFFFFF", "#CC0000"]);
+
+    console.log(domFunding);
+
+    define_scales("Assistance");
 
     features = topojson.feature(focus_countries, focus_countries.objects.focus_countries);
-
-
     country_in_need = in_need_layer.selectAll("path.focused-in-need").data(features.features)
                           .enter()
                           .append("path")
@@ -552,6 +950,44 @@ d3.json("data/countries.json", function(error, data) {
                                 return gha_csv[d.id]
                                           ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
                                           : "#000000"; })
+
+    country_funding = funding_layer.selectAll("path.focused-funding").data(features.features)
+                          .enter()
+                          .append("path")
+                            .attr("data-iso", function(d) { return d.id; })
+                            .attr("class", "focused-funding")
+                            // .attr("stroke", function(d) {
+                            //     return gha_csv[d.id]
+                            //               ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
+                            //               : "#000000"; })
+                            .attr("fill", function(d) {
+                                return gha_csv[d.id]
+                                          ? fundColorScale(scaleFunding(gha_csv[d.id].funding))
+                                          : "#000000"; })
+
+    country_percent_change = percent_change_layer.selectAll("path.focused-percent-change").data(features.features)
+                          .enter()
+                          .append("path")
+                          .attr("data-iso", function(d) { return d.id; })
+                          .each(function(d) { d.csv = gha_csv[d.id]; })
+                          .attr("fill", function(d) {
+                            if ( gha_csv[d.id] ) {
+                              var csv_datum = gha_csv[d.id];
+                              var delta = (parseFloat(csv_datum.June_2015_funding_required) / parseFloat(csv_datum.funding)) - 1;
+
+                              if ( isNaN(delta) || !delta) {
+                                  delta = 0;
+                              }
+
+                              return percentColorScale(scaleChange(delta));
+                            } else {
+                              return "#000000";
+                            }
+
+                          });
+
+    $(percent_change_layer[0]).hide();
+    $(funding_layer[0]).hide();
 
 
     country = g.selectAll("path.focused-country")
@@ -588,32 +1024,13 @@ d3.json("data/countries.json", function(error, data) {
                     y = y.concat(d.geometry.coordinates[i].map(function (gmy) { return gmy[1]; }));
                   }
                 }
-
-
                 var y1 = d3.min(y), y2 = d3.max(y);
-
                 var yc = (y1 +((y2-y1)/2));
-                // console.log("FINAL", y1, y2, yc);
                 return (y1 +((y2-y1)/2));
              })
-            // .attr("data-centroid",
-            //   function(d) {
-            //   var x = d.geometry.coordinates[0].map(function (d) { return d[0]; }),
-            //       y = d.geometry.coordinates[0].map(function (d) { return d[1]; });
-            //   var x1 = d3.min(x), x2 = d3.max(x), y1 = d3.min(x), y2 = d3.max(x);
-
-            //   var cx =  x1 +((x2-x1)/2),
-            //       cy =  y1 +((y2-y1)/2),;
-
-            //   return cx + "," + cy;
-
-            // }
-            // )
             .on("click", showMoreDetails);
 
     //Coloring the in-need layer
-
-
     country_label = g.selectAll("text.focused-country-label")
                         .data(features.features)
                         .enter()
@@ -624,6 +1041,7 @@ d3.json("data/countries.json", function(error, data) {
                           .text(function(d) { return d.properties.name; });
 
     // console.log(country_label);
+    // var svg_total = ;
 
     //Scaling the SVG element
     triggerLayerChange();
@@ -631,6 +1049,8 @@ d3.json("data/countries.json", function(error, data) {
 
   map.on('zoomstart', function() {
     in_need_layer.style("visibility", "hidden");
+    percent_change_layer.style("visibility", "hidden");
+    funding_layer.style("visibility", "hidden");
   });
   map.on('zoomend', triggerLayerChange);
   // map.on('move', triggerLayerChange);
@@ -642,7 +1062,12 @@ d3.json("data/countries.json", function(error, data) {
   }
 
   function triggerLayerChange() {
+
+    //Hide layers
     in_need_layer.style("visibility", "hidden");
+    percent_change_layer.style("visibility", "hidden");
+    funding_layer.style("visibility", "hidden");
+
     var bounds = path.bounds(features),
           topLeft = bounds[0],
           bottomRight =bounds[1];
@@ -654,12 +1079,20 @@ d3.json("data/countries.json", function(error, data) {
 
     g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
     in_need_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+    percent_change_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+    funding_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
 
     in_need_layer.style("visibility", "visible");
+    percent_change_layer.style("visibility", "visible");
+    funding_layer.style("visibility", "visible");
+
     country.attr("d", path);
     country_in_need.attr("d", path);
+    country_percent_change.attr("d", path);
+    country_funding.attr("d", path);
 
     country_label.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")";} );
+
   }
 
   /* Bind Buttons */
