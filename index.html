@@ -106,7 +106,8 @@
   }
   #country-details-area h3,
   #country-details-area .main-area h1 { font-size: 24px; font-family: sans-serif; color: #333333; padding: 0; margin: 0; margin: 10px 0;}
-  #country-details-area h3 { text-transform: uppercase; font-size: 12px; padding: 0; margin: 0; color: gray;}
+  #country-details-area h3 { text-transform: uppercase; font-size: 15px; padding: 0; margin: 0; color: gray;   padding-right: 90px;
+    margin-bottom: 4px;}
 
   /*#country-details-area .main-area h1 { width: 48%; }*/
   #country-details-area .main-area h1#country-title {
@@ -192,48 +193,123 @@
     color: white;
     font-weight: bold;
   }
-  .country-details { background-color: rgb(232, 232, 232);   margin-left: -6px; margin-right: -6px; margin-bottom: 20px;}
+  #country-main-info { background-color: rgb(232,232,232); padding-right: 5px; margin-right: -5px; margin-bottom: 10px;}
+  .country-details { background-color: rgb(232, 232, 232);   margin-left: -6px; margin-right: -6px; padding-bottom: 10px; }
   .country-details div.country-detail-item {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    padding-top: 10px;
     min-width: 48%;
     font-family: sans-serif;
+    position: relative;
   }
   .country-details #country-details-people-in-need {
-    /*float: left;*/
+    float: left;
   }
 
   .country-details #country-details-funding {
-    /*float: right;*/
+    float: right;
   }
 
-  .country-detail-item { text-align: left; }
-  .country-detail-item span .arrow { font-size: 10px; display: none;}
+  .country-detail-item { text-align: left;}
+  .country-detail-item span.arrow {
+      font-size: 10px;
+      width: 26px;
+      height: 26px;
+      background-repeat: no-repeat;
+      background-size: 58%;
+      display: inline-block;
+      position: absolute;
+      right: -4px;
+      top: 57px;
+      padding: 8px;
+      font-weight: bold;
+      background-position-x: 65%;
+    }
+
+
+
+
   span.previous-appeal sub ,
   span.current-appeal sub {
     font-size: 10px;
     float: left;
+    margin-top: 4px;
   }
   span.previous-appeal, span.current-appeal {
     display: block;
     text-align: left;
     position: relative;
+    padding-right: 90px;
   }
   span.current-appeal { text-align: left; color: #CC0000; }
+  span.current-appeal h4 { float: right; margin-left: 3px; margin-right: 40px;}
   span.previous-appeal h4 {
-    font-size: 20px;
+    font-size: 29px;
     padding: 0; margin: 0;
     font-weight: normal;
-    float: left;
+    float: right;
+    margin-left: 3px;
   }
+
 
   span.previous-appeal sub, span.current-appeal sub {
-    position: absolute;
-    top: 0;
-    right: -10px;
+      color: white;
+      padding: 2px 5px;
+      float: right;
+  }
+  span.previous-appeal sub { background-color: #333333; }
+  span.current-appeal sub { background-color: #CC0000; }
+
+  span.current-appeal h4 { font-size: 29px; padding: 0; margin: 0; /*margin-bottom: -5px;*/ font-weight: bold; margin-left: 3px; margin-top: }
+
+  #country-details-viewport-area{
+    float: left;
+    width: 100%;
+    text-align: right;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 3%;
+  }
+  #country-details-viewport-area * { text-align: right; }
+
+   .country-detail-item span.arrow.arrow-up
+  {   background-image: url(img/red-arrow-up.png);
+      padding-top: 23px;
+      color: #990000;
   }
 
-  span.current-appeal h4 { font-size: 20px; padding: 0; margin: 0; /*margin-bottom: -5px;*/ font-weight: bold;}
+  .country-detail-item span.arrow.arrow-down
+  {background-image: url(img/green-arrow-down.png);
+
+    background-position-y: 17px;
+    padding-top: 5px;
+  height: 29px;
+  color: #005500;}
+
+  #country-funding-gap-area {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+  }
+
+  /** FUNDING GAP AREA */
+  .gap-bars[data-type='Requirement'] { fill: lightgray; }
+  .gap-bars[data-type='Funded'] { fill: #0F6CB6; }
+
+  .gap-labels {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .detail-info-img {
+    width: 70px;
+    right: 17px;
+    top: 25px;
+    position: absolute;
+
+  }
+
 </style>
 <body>
 <div id="main-activity-area">
@@ -248,36 +324,51 @@
           <h1 id="country-title"></h1>
         </div>
         <div class="clear"></div>
-        <div class="country-details">
-          <div id="country-details-people-in-need" class="country-detail-item">
-            <h3>People targetted for Assistance</h3>
-            <span class="previous-appeal">
-              <h4>98M</h4>
-              <sub>Dec 2014</sub>
-            </span>
+        <div id="country-main-info">
+            <div id="country-details-viewport-area" class="country-details">
+              <div id="country-details-people-in-need" class="country-detail-item">
+                <h3>People targeted</h3>
+                <img src="img/people-affected-big.png" class='detail-info-img' />
+                <span class="arrow arrow-up">20%</span>
+                <span class="previous-appeal">
+                  <h4>98M</h4>
+                  <sub>Dec 2014</sub>
+                </span>
+                <div class="clear"></div>
+                <span class="current-appeal">
+                  <h4>120M</h4>
+                  <sub>Jun 2015</sub>
+                </span>
+                <div class="clear"></div>
+              </div>
+              <div id="country-details-funding" class="country-detail-item">
+                <h3>Funding Requested</h3>
+                <img src="img/fund-big.png" class='detail-info-img' />
+                <span class="arrow arrow-down">20%</span>
+                <span class="previous-appeal">
+                  <h4>$408M</h4>
+                  <sub>Dec 2014</sub>
+                </span>
+                <div class="clear"></div>
+                <span class="current-appeal">
+                  <span>
+                    <h4>$620M</h4>
+                  </span>
+                  <sub>Jun 2015</sub>
+                </span>
+                <div class="clear"></div>
+              </div>
+              <div class="clear"></div>
+            </div>
             <div class="clear"></div>
-            <span class="current-appeal">
-              <h4>120M</h4><span class="arrow">^ 20%</span>
-              <sub>Jun 2015</sub>
-            </span>
-            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id="country-funding-gap-area">
+          <div class="country-detail-item">
+            <h3>Total Funding Status</h3>
+            <div id="funding-gap-chart">
+            </div>
           </div>
-          <div id="country-details-funding" class="country-detail-item">
-            <h3>Funding</h3>
-            <span class="previous-appeal">
-              <h4>$408M</h4>
-              <sub>Dec 2014</sub>
-            </span>
-            <div class="clear"></div>
-            <span class="current-appeal">
-              <span>
-                <h4>$620M</h4><span class="arrow">UP 20%</span>
-              </span>
-              <sub>Jun 2015</sub>
-            </span>
-            <div class="clear"></div>
-          </div>
-          <div class="clear"></div>
         </div>
         <div class="clear"></div>
         <h3>Funding by Cluster</h3>
@@ -336,7 +427,9 @@ var features = null; //contains geojson data
 var country = null, country_in_need = null, country_funding = null, country_percent_change = null;
 var country_label = null;
 var gha_csv = null;
-var raw_gha_csv = null, domInNeed = null, domFunding = null, domPercentChange = null;
+var raw_gha_csv = null, domInNeed = null, domFunding = null, domPercentChange = null,
+    data_2015_funding = null;
+;
 
 //Scales
 var redColorScale = null, fundColorScale = null, scaleInNeed = null, scaleFunding = null ;
@@ -386,16 +479,6 @@ $("#map-layer-ctrl button").on("click", function() {
   define_scales(dataLayer);
 
 });
-
-d3.json("data/countries.json", function(error, data) {
-    if (error) {
-      console.log(error);
-    }
-
-    focus_countries = data;
-
-    load_gha_data();
-  });
 
   //loading gha data from csv
   function load_gha_data() {
@@ -656,7 +739,7 @@ d3.json("data/countries.json", function(error, data) {
     console.log(gha_data, parseInt(gha_data.in_need));
     d3.select("#country-details-people-in-need .previous-appeal h4")
         .transition()
-        .duration(2000)
+        .duration(500)
         .tween("text",function() {
             var i = d3.interpolateRound(0, parseInt(gha_data.in_need));
             return function(t) {
@@ -674,7 +757,7 @@ d3.json("data/countries.json", function(error, data) {
 
       d3.select("#country-details-people-in-need .current-appeal h4")
         .transition()
-        .duration(2000)
+        .duration(500)
         .tween("text",function() {
             var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_in_need));
             return function(t) {
@@ -692,7 +775,7 @@ d3.json("data/countries.json", function(error, data) {
 
       d3.select("#country-details-funding .previous-appeal h4")
         .transition()
-        .duration(2000)
+        .duration(500)
         .tween("text",function() {
             var i = d3.interpolateRound(0, parseInt(gha_data.funding));
             return function(t) {
@@ -701,9 +784,10 @@ d3.json("data/countries.json", function(error, data) {
               var symbol = fmt_pref.symbol == "G" ? "B" : fmt_pref.symbol;
               if (fmt_pref.symbol != "k" && i(t) > 1000)
               {
-                  this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
               }
-              else {
+              else
+              {
                 this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
               }
             };
@@ -712,7 +796,7 @@ d3.json("data/countries.json", function(error, data) {
 
       d3.select("#country-details-funding .current-appeal h4")
         .transition()
-        .duration(2000)
+        .duration(500)
         .tween("text",function() {
             var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_funding_required));
             return function(t) {
@@ -843,7 +927,7 @@ d3.json("data/countries.json", function(error, data) {
               .attr("xlink:href", function(d) { return "img/" +lookup_image[d.name.toLowerCase()]; });
 
 
-//animate
+    //animate
     g_chart_reqt.selectAll("rect.chart_in_need")
               .transition()
               .duration(500)
@@ -907,11 +991,80 @@ d3.json("data/countries.json", function(error, data) {
       var g_chart_hover = svg_chart.append("g").attr("class", "chart-hover");
 
 
+      //Build_funding
+      build_funding_gap_chart(data.id);
+
       //Show total
 
       $loader.hide();
 
     // $("#map").animate({"marginLeft" : "0%" }, 300); $("#country-area").animate({"left": "-50%"}, 500);
+  }
+
+  function build_funding_gap_chart(target_iso) {
+    console.log(target_iso);
+    $("#funding-gap-chart").empty();
+
+    var svg_gap = d3.select("#funding-gap-chart").append("svg").attr("width", "99%").attr("height", 120);
+    var funding_data = data_2015_funding.filter(function(d) { return d.id == gha_csv[target_iso].Appeal_ID_2015; })[0];
+    var gap_collated_data = [{"name": "Requirement", "value": funding_data.current_requirements}, {"name": "Funded", "value": funding_data.funding}];
+
+    var gap_width = $(svg_gap[0]).width();
+    var gap_height = 40;
+    var gap_padding = 80;
+
+    var gap_scale = d3.scale.linear().domain([0, funding_data.current_requirements]).rangeRound([0, gap_width - gap_padding]);
+
+    var gap_bars = svg_gap.selectAll("rect.gap-bars").data(gap_collated_data)
+                      .enter()
+                        .append("rect")
+                            .attr("class", "gap-bars")
+                            .attr("width", 0)
+                            .attr("height", 40)
+                            .attr("x", 0)
+                            .attr("data-type", function(d){ return d.name; })
+                            .attr("y", function(d, i) { return (i * 60) + 20; })
+                            .style("background-color", "black");
+
+    gap_bars.transition()
+        .duration(500)
+        .attr("width", function(d) { return gap_scale(d.value); });
+
+    var gap_labels = svg_gap.selectAll("text.gap-labels").data(gap_collated_data)
+                        .enter()
+                            .append("text")
+                              .attr("class", "gap-labels")
+                              .attr("x", 0)
+                              .attr("y", function(d,i) { return (i * 60) +18; })
+                              .attr("data-type", function(d){ return d.name; })
+                              .text(function(d) { return d.name; });
+
+    var gap_info_text = svg_gap.selectAll("text.gap-info-text").data(gap_collated_data).enter().append("text").attr("class", "gap-info-text").attr("x", 0).attr("y", function(d,i) { return i * 60 + 50; });
+
+    gap_info_text.transition().duration(500)
+      .attr("x", function(d) { return gap_scale(d.value)+5 })
+      .tween("text",function(data) {
+          var i = d3.interpolateRound(0, parseInt(data.value));
+          return function(t) {
+            var fmt_pref = d3.formatPrefix(i(t))
+            var symbol = fmt_pref.symbol;
+            if (symbol == "G") { symbol = "B"; }
+
+            if (fmt_pref.symbol != "k" && i(t) > 1000)
+            {
+              if (fmt_pref.scale(i(t)).toFixed(1)  == fmt_pref.scale(i(t)).toFixed(0))
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+              else {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+            }
+            else {
+              this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+            }
+          };
+      });
   }
 
   function initialize_map() {
@@ -931,8 +1084,6 @@ d3.json("data/countries.json", function(error, data) {
     scaleChange = d3.scale.linear().domain([minMaxChange*-1, 0, minMaxChange]).range([0,5,10]);
     percentColorScale = d3.scale.linear().domain([0,5,10]).interpolate(d3.interpolateRgb)
                           .range(["#00CC00", "#FFFFFF", "#CC0000"]);
-
-    console.log(domFunding);
 
     define_scales("Assistance");
 
@@ -1043,18 +1194,17 @@ d3.json("data/countries.json", function(error, data) {
     // console.log(country_label);
     // var svg_total = ;
 
+    //Map Listeners
+    map.on('zoomstart', function() {
+      in_need_layer.style("visibility", "hidden");
+      percent_change_layer.style("visibility", "hidden");
+      funding_layer.style("visibility", "hidden");
+    });
+    map.on('zoomend', triggerLayerChange);
+
     //Scaling the SVG element
     triggerLayerChange();
   }
-
-  map.on('zoomstart', function() {
-    in_need_layer.style("visibility", "hidden");
-    percent_change_layer.style("visibility", "hidden");
-    funding_layer.style("visibility", "hidden");
-  });
-  map.on('zoomend', triggerLayerChange);
-  // map.on('move', triggerLayerChange);
-  // map.on('dragend', triggerLayerChange);
 
   function projectPoint(x, y) {
     var point = map.latLngToLayerPoint(new L.LatLng(y, x));
@@ -1117,6 +1267,21 @@ d3.json("data/countries.json", function(error, data) {
         lookup_image = data;
         console.log(lookup_image);
       }
+    });
+
+    d3.json("data/2015_funding.json", function(error, data) {
+        console.log(error);
+        data_2015_funding = data;
+    });
+
+    d3.json("data/countries.json", function(error, data) {
+      if (error) {
+        console.log(error);
+      }
+
+      focus_countries = data;
+
+      load_gha_data();
     });
   }
 </script>
