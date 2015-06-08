@@ -164,7 +164,7 @@
     width: 40px;
     height: 40px;
     float: left;
-    background-image: url(img/fund.png);
+    background-image: url(img/icons/fund.png);
   }
   #country-detail-table th { text-align: right; }
 
@@ -272,13 +272,13 @@
   #country-details-viewport-area * { text-align: right; }
 
    .country-detail-item span.arrow.arrow-up
-  {   background-image: url(img/red-arrow-up.png);
+  {   background-image: url(img/icons/red-arrow-up.png);
       padding-top: 23px;
       color: #990000;
   }
 
   .country-detail-item span.arrow.arrow-down
-  {background-image: url(img/green-arrow-down.png);
+  {background-image: url(img/icons/green-arrow-down.png);
 
     background-position-y: 17px;
     padding-top: 5px;
@@ -310,6 +310,88 @@
 
   }
 
+#map-list h3 {
+  padding: 0;
+  margin: 8px 0 4px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+/** Map detail area */
+#map-detail-area {
+  width: 220px;
+  background-color: whitesmoke;
+  /*padding: 10px;*/
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 0;
+  height: 700px;
+}
+#map-detail-viewport {
+  padding: 10px;
+}
+#map-detail-viewport #map-details-show-hide {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: -40px;
+  background-color: white;
+}
+#map-detail-viewport #map-details-show-hide a {
+  content: "Hide";
+}
+
+#map-detail-viewport #map-details-show-hide a.show-navigation {
+  content: "Show";
+}
+#map-detail-area #map-title h1 {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 38px;
+}
+#map-detail-area #map-title > p {
+  font-size: 14px;
+  line-height: 1.25;
+  color: #333333;
+  padding: 0; margin: 4px 0;
+  font-family: sans-serif;
+}
+#regional-area, #country-list-area {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#regional-area .region-item, #country-list-area .country-list-item { cursor: pointer; margin-bottom: 2px; padding: 2px;}
+#regional-area .region-item .region-image, #country-list-area .country-list-item .country-list-image {
+  float: left;
+  width: 70px;
+  margin-right: 5px;
+}
+
+#regional-area .region-item h4, #country-list-area .country-list-item h4 {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: normal;
+  color: #0174BD;
+}
+
+#regional-area .region-item .regional-profile, #country-list-area .country-list-item .country-list-profile {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 11px;
+    color: #0174BD;
+
+}
+
+#regional-area .region-item .regional-profile img, #country-list-area .country-list-item .country-list-profile img {
+  vertical-align: bottom;
+}
 </style>
 <body>
 <div id="main-activity-area">
@@ -328,7 +410,7 @@
             <div id="country-details-viewport-area" class="country-details">
               <div id="country-details-people-in-need" class="country-detail-item">
                 <h3>People targeted</h3>
-                <img src="img/people-affected-big.png" class='detail-info-img' />
+                <img src="img/icons/people-affected-big.png" class='detail-info-img' />
                 <span class="arrow arrow-up">20%</span>
                 <span class="previous-appeal">
                   <h4>98M</h4>
@@ -343,7 +425,7 @@
               </div>
               <div id="country-details-funding" class="country-detail-item">
                 <h3>Funding Requested</h3>
-                <img src="img/fund-big.png" class='detail-info-img' />
+                <img src="img/icons/fund-big.png" class='detail-info-img' />
                 <span class="arrow arrow-down">20%</span>
                 <span class="previous-appeal">
                   <h4>$408M</h4>
@@ -400,11 +482,66 @@
     </div>
   </div>
   <div id="map">
-
     <div id="map-layer-ctrl">
       <button id="target-layer-assistance" class="target-layer active" data-type="Assistance">Assistance</button>
       <button id="target-layer-funding" class="target-layer" data-type="Funding">Funding</button>
       <button id="target-layer-change" class="target-layer" data-type="Percent Change">% Change</button>
+    </div>
+  </div>
+  <div id="map-detail-area">
+    <div id="map-detail-viewport">
+      <div id="map-details-show-hide">
+        <a href="javascript: void(0);" class="show-navigation">Hide</a>
+      </div>
+      <div id="map-title">
+        <h1>The State of Aid</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <a>Share</a><a>Tweet</a>
+      </div>
+      <div id="map-list">
+        <h3>Regional Response Plans</h3>
+        <ul id="regional-area">
+          <li class='region-item'>
+            <img class='region-image' src='img/countries/sahel.png'/>
+            <h4>Sahel Regional</h4>
+            <div class='regional-profile'>
+              <img src='img/icons/people-small.png'/> <span>12M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$34M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+          <li class='region-item'>
+            <img class='region-image' src='img/countries/ssd-reg.png'/>
+            <h4>South Sudan Refugee Regional</h4>
+            <div class='regional-profile'>
+              <img src='img/icons/people-small.png'/> <span>22M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$54M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+        </ul>
+        <hr/>
+        <h3>Country Response Plans</h3>
+        <ul id="country-list-area">
+          <li class='country-list-item' data-iso="SYR">
+            <img class='country-list-image' src='img/countries/syr.png'/>
+            <h4>Syria</h4>
+            <div class='country-list-profile'>
+              <img src='img/icons/people-small.png'/> <span>12M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$34M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+          <li class='country-list-item' data-iso="PAK">
+            <img class='country-list-image' src='img/countries/pak.png'/>
+            <h4>Pakistan</h4>
+            <div class='country-list-profile'>
+              <img src='img/icons/people-small.png'/> <span>22M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$54M</</span>
+            </div>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
@@ -420,8 +557,152 @@
 // L.mapbox.accessToken = 'pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA';
 // var map = L.mapbox.map('map', 'mapbox.streets')
     // .setView([40, -74.50], 1);
+
+/** CONSTANTS! */
+var ANIMATION_DURATION = 400;
+var MAPBOX_TILES_URL = "http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA";
+
+var ocha = ocha || {};
+var $j = jQuery;
+
+console.log("XX", ocha);
+/*
+  Map Control
+  Controller for the Map
+*/
+ocha.MapControl = function(map, mapContainer, details, navigation) {
+  if ( map == null ){
+    this.map = new L.Map("map", {center: [24, 27], zoom: 2})
+    .addLayer(new L.TileLayer(MAPBOX_TILES_URL));
+  }
+  else {
+    console.log(map);
+    this.map = map;
+  }
+
+  this.detailsContainer = $j(details);
+  this.mapContainer = $j(mapContainer);
+  this.navigationContainer = $j(navigation);
+
+  this.showNavigation = true;
+  this.showDetails = false;
+
+  this.navigationWidth = this.navigationContainer.width();
+  this.mapWidth = this.mapContainer.width();
+  this.detailsWidth = this.detailsContainer.width();
+
+};
+
+ocha.MapControl.prototype.showNavigationArea = function(callback) {
+  this.changeMap(true, this.showDetails);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.hideNavigationArea = function(callback) {
+  this.changeMap(false, this.showDetails);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.showCountryDetails = function(callback) {
+  this.changeMap(this.showNavigation, true);
+  if ( callback ) {
+    callback();
+  }
+
+};
+
+ocha.MapControl.prototype.hideCountryDetails = function(callback) {
+  this.changeMap(this.showNavigation, false);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.changeMap = function(showNavigation, showDetails, callback) {
+  /* If ordered to show nav and navigation is not shown */
+  var that = this;
+
+  if ( showNavigation !== that.showNavigation ) {
+    that.showNavigation = showNavigation;
+    that.navigationContainer
+            .stop(true,true)
+            .animate({"right" : that.showNavigation ? "0" : (-1 * this.navigationWidth) + "px"},
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+    that.mapContainer
+            .stop(true,true)
+            .animate({"width" : that.showNavigation
+                                  ? that.mapContainer.width() - that.navigationWidth
+                                  : that.mapContainer.width() + that.navigationWidth },
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+  }
+
+  if ( showDetails !== that.showDetails ) {
+    that.showDetails = showDetails;
+    that.detailsContainer
+            .stop(true,true)
+            .animate({"left" : that.showDetails ? "0" : (-1 * this.detailsWidth) + "px"},
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+    that.mapContainer
+            .stop(true,true)
+            .animate({"width" : that.showDetails
+                                  ? that.mapContainer.width() - that.detailsWidth
+                                  : that.mapContainer.width() + that.detailsWidth,
+                      "marginLeft" : that.showDetails
+                                  ? that.detailsWidth
+                                  : 0
+                      },
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+  }
+
+  if ( callback ) {
+    callback();
+  }
+};
+
+/* Change map without specificying changeMap Parameters*/
+ocha.MapControl.prototype.toggleNav = function() {
+  this.changeMap(!this.showNavigation, this.showDetails);
+};
+
+/*Initalization*/
+ocha.MapControl.prototype.init = function() {
+  var that = this;
+
+  //initialize widths
+  that.mapContainer.width(that.mapWidth - this.navigationWidth);
+
+  //Add clicke event
+  $j("#map-details-show-hide a").on("click", function () { that.toggleNav(); $(this).toggleClass("show-navigation"); });
+
+  that.map.invalidateSize();
+
+}
+
+
+// $("#map").width($("#map").width() - 200);
+
+var showDetail = false;
+var showNav = true;
+
+
 var map = new L.Map("map", {center: [24, 27], zoom: 2})
     .addLayer(new L.TileLayer("http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA"));
+
+var map_control = new ocha.MapControl(map, $j("#map"), $("#country-area"), $("#map-detail-area"));
+    map_control.init();
+
 var features = null; //contains geojson data
 
 var country = null, country_in_need = null, country_funding = null, country_percent_change = null;
@@ -658,7 +939,7 @@ $("#map-layer-ctrl button").on("click", function() {
     var lookup = d.name.toLowerCase();
     // console.log("img/"+lookup_image[lookup], $("#country-detail-image").css("background-image"));
 
-    $("#country-detail-image").css("background-image", "url(img/"+lookup_image[lookup]+")");
+    $("#country-detail-image").css("background-image", "url(img/icons/"+lookup_image[lookup]+")");
     $("#country-details-hover").show();
 
 
@@ -707,28 +988,21 @@ $("#map-layer-ctrl button").on("click", function() {
 
     $loader.show();
     //SLIDE MAP TO THE LEFT
-    if ( $profile.attr("data-show") == "true" )
+    if ( map_control.showDetails )
     {
           var cy = node.attr("data-centroid-y");
           var cx = node.attr("data-centroid-x");
-          map.setView([cy, cx], 5);
+          map_control.map.setView([cy, cx], 5);
     }
     else {
-
-      $map.animate({"marginLeft" : "50%", "width" : "50%" }, 300, function() {
+      map_control.changeMap(false, true, function() {
          //Stored items so that people can go back to the old map..
-            map.invalidateSize();
             var cy = node.attr("data-centroid-y");
             var cx = node.attr("data-centroid-x");
-            map.setView([cy, cx], 5, { animate: false });
+            map_control.map.setView([cy, cx], 5, { animate: false });
       });
 
-      map.invalidateSize();
-            var cy = node.attr("data-centroid-y");
-            var cx = node.attr("data-centroid-x");
-            map.setView([cy, cx], 5, { animate: false });
 
-      $profile.animate({"left": 0}, 300, function() { $profile.attr("data-show", "true"); });
     }
 
 
@@ -1250,10 +1524,11 @@ $("#map-layer-ctrl button").on("click", function() {
       $("#close-country-profile").hide();
       var $profile = $("#country-area");
       var $map = $("#map");
-      $map.animate({"marginLeft" : "0%", "width" : "100%" }, 400, function() {
-        map.invalidateSize();
-        // map.setView(stored_center, stored_zoom);
-      });
+      map_control.hideCountryDetails();
+      // $map.animate({"marginLeft" : "0%", "width" : "100%" }, 400, function() {
+      //   map.invalidateSize();
+      //   // map.setView(stored_center, stored_zoom);
+      // });
       $profile.animate({"left": "-50%"}, 400, function() { $profile.attr("data-show", "false"); });
   });
 

@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="../css/leaflet.css" />
+<script src='../js/mapbox.js'></script>
+<link href='../css/mapbox.css' rel='stylesheet' />
+
+<style>
+body { margin: 0; padding: 0; }
+#mosaic-area #mosaic-actual
+{ width: inherit;
+  height: inherit;
+  position: relative;
+  overflow: hidden;
+  background-color: black;
+}
+
+#mosaic-actual span.mosaic-item {
+  display: inline-block;
+  position: relative;
+}
+
+#mosaic-actual span.mosaic-item img {
+  width: inherit;
+  height: inherit;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#mosaic-overlay-area {
+
+  position: absolute;
+  z-index: 1000;
+  width: inherit;
+  height: inherit;
+  opacity: 0.8;
+
+  top: 0;
+  left: 0;
+
+  background: -webkit-radial-gradient(white, whitesmoke, gray); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(white, whitesmoke, gray); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(white, whitesmoke, gray); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(white, whitesmoke, gray); /* Standard syntax */
+
+}
+
+#mosaic-title-area {
+  position: absolute;
+  z-index: 2000;
+  text-align: center;
+  font-family: sans-serif;
+  font-weight: bold;
+
+  width: inherit;
+  height: inherit;
+
+  top: 0;
+  left: 0;
+
+}
+
+#mosaic-title-area h1 {
+  font-size: 8em;
+  padding: 0 1em;
+  margin: 0;
+  margin-top: 1em;
+  text-shadow: 2px 1px 1px rgb(255,255,255);
+}
+</style>
+
+
+<body>
+
+<!-- data-next-0="ocha.Story.titleProcess1"
+           data-next-1="ocha.Story.titleProcess2" -->
+  <section id="mosaic-area" class="hub-section"
+           data-next-before="ocha.Story.titleToOpening"
+           data-next="fade">
+    <div id="mosaic-actual"></div>
+    <div id="mosaic-overlay-area"></div>
+    <div id="mosaic-title-area">
+      <h1>Lorem Ipsum Dolor Est</h1>
+      <h3>A Global Humanitarian Appeals Update (Jan 2015 - Jun 2015)</h3>
+    </div>
+  </section>
+
+  <section class="hub-section" style="background-color: rgb(255,0,0); "></section>
+  <section class="hub-section"  style="background-color: rgb(0, 255,0); "></section>
+  <section class="hub-section"  style="background-color: rgb(255,0,255); "></section>
+  <section class="hub-section"  style="background-color: rgb(0, 255,255); "></section>
+
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/d3.js"></script>
+<script src="../js/topojson.js"></script>
+<script src="../js/leaflet.js"></script>
+
+<script type="text/javascript">
+$j = jQuery;
+
+
+var IMAGE_COUNT = 54;
+
+var ANIMATION_DURATION = 500;
+
+var ocha = ocha || {};
+
+ocha.FaceMosaic = function(selector, imageList) {
+
+//Private function to help the hide
+
+
+  this.TIMEOUT_PERIOD = 4000;
+
+  this.SQUARE_SIZE = 75; //suggested square_size
+
+  this.imageList = imageList;
+  this.container = $j(selector);
+  this.d3Container = d3.select(selector);
+  this.d3Scale = null;
+
+  this.transitionOngoing = false;
+
+  this.mW = this.container.width(); //mosaic Width
+  this.mH = this.container.height(); //mosaic Height
+
+  this.scaleHorizontal = d3.scale.ordinal().domain(d3.range(parseInt(this.mW/this.SQUARE_SIZE) + 2)).rangeRoundBands([0,this.SQUARE_SIZE  * (parseInt(this.mW/this.SQUARE_SIZE) + 2)]);
+
+  this.mosaicIntervalHandler = null;
+
+  this.mosaicDimension = [ this.SQUARE_SIZE  * (parseInt(this.mW/this.SQUARE_SIZE) + 2),
+                          this.SQUARE_SIZE  * (parseInt(this.mH/this.SQUARE_SIZE) + 2)]
+
+  this.helper = {
+    endAllEvent : function ( transition, callback ) {
+        var n = 0;
+        transition
+          .each(function() { ++n; })
+          .each("end", function() { if (!--n && callback !== undefined) callback.apply(this, arguments); });
+      }
+  }
+
+  this.startMosaic = function() {
+    var that = this;
+
+    that.mosaicIntervalHandler = setInterval(function() {
+      console.log("Hello World");
+      that.d3Container
+        .selectAll("span.mosaic-item")
+        .each(function(d) {
+
+          var coinFlip = Math.random() * 100;
+          if ( coinFlip > 80 ) {  //get new and replace
+            var randomIndex = parseInt(that.imageList.length * Math.random());
+            var toBeRemoved = d3.select(this).select("img");
+
+            toBeRemoved
+              .attr("data-image-status", "for-removal")
+              .style("z-index", "0");
+
+            console.log(that.imageList[randomIndex]);
+            var toBeAdded = d3.select(this).append("img")
+              .attr("data-image-status", "new-image")
+              .attr("src", that.imageList[randomIndex])
+              .style("opacity", 0)
+              .style("z-index", "100");
+
+            toBeAdded.transition()
+              .duration(500 + that.TIMEOUT_PERIOD/2)
+              .delay(Math.random() * that.TIMEOUT_PERIOD/2)
+              .style("opacity", 1)
+              .each("end", function() { toBeRemoved.remove(); });
+          }
+
+        });
+
+    }, that.TIMEOUT_PERIOD);
+  };
+
+  this.stopMosaic = function() {
+    var that = this;
+    clearTimeout(that.mosaicIntervalHandler);
+  };
+
+  this.initialize();
+};
+
+ocha.FaceMosaic.prototype.initialize = function () {
+  var that = this;
+  // console.log(that.d3Container.selectAll);
+
+  that.mosaicRows = that.d3Container
+                      .selectAll("div.mosaic-row")
+                      .data(d3.range(parseInt((this.mH/this.SQUARE_SIZE) + 2)))
+                      .enter()
+                        .append("div")
+                          .attr("class", "mosaic-row")
+                          .style("height", that.scaleHorizontal.rangeBand() + "px")
+                          .style("width", that.SQUARE_SIZE*(parseInt(that.mW/that.SQUARE_SIZE) + 2) + "px")
+                          .attr("data-row-id", function(d) { return "row-id-" + d;})
+                          .each(function(d) {
+                            //Creating individual item..
+                             d3.select(this).selectAll("span.mosaic-item")
+                                .data(d3.range(parseInt(that.mW/that.SQUARE_SIZE + 2)))
+                                .enter()
+                                  .append("span")
+                                    .attr("class", "mosaic-item")
+                                    .style("width", that.scaleHorizontal.rangeBand() + "px")
+                                    .style("height", that.scaleHorizontal.rangeBand() + "px")
+                                    .each(function() {
+                                      var randomIndex = that.imageList.length * Math.random();
+
+                                      var newImage = d3.select(this).append("img")
+                                          .attr("src", that.imageList[parseInt(randomIndex)])
+                                          .attr("data-image-status", "new-image")
+                                          .style("opacity", 0);
+
+                                      newImage.transition()
+                                          .duration(500)
+                                          .delay(Math.random() * 2000)
+                                          .style("opacity", 1);
+                                    })
+                          });
+
+    // this.startMosaic();
+};
+
+ocha.FaceMosaic.prototype.hide = function (userDefMode, callback) {
+  var that = this;
+  var mode = "fade";
+
+
+  if (userDefMode !== undefined) {
+    mode = userDefMode;
+  }
+
+  switch (mode) {
+    case "fade" :
+      that.d3Container
+        .selectAll("span.mosaic-item")
+          .transition()
+            .duration(function() { return 500 + that.TIMEOUT_PERIOD/2; })
+            .delay(function() { return Math.random() * that.TIMEOUT_PERIOD/2; })
+            .style("opacity", 0)
+            .call(that.helper.endAllEvent, callback);
+
+      break;
+    default:
+      break;
+  }
+
+  // if ( callback ) {
+  //   console.log("calling call back");
+  //   callback();
+  // }
+};
+
+//* Hub Section Scrolling */
+var ocha = ocha || {};
+ocha.HubScrolling = function(sections) {
+  var $j = jQuery;
+  this.TRANSITION_SPEED = 1000;
+
+  this.scroller = null;
+
+  this.currentSubPage = 0;
+  this.currentPageNumber = 0;
+  this.d3Containers = d3.selectAll(sections[0]);
+  this.containers = $j(sections) ;
+  this.pageCount = this.containers.length;
+
+  //Scrolling items:
+  this.scrollPositionTop = $(window).scrollTop();
+  this.scrollPossitionBottom = $(window).scrollTop();
+  this.initialize();
+};
+
+ocha.HubScrolling.prototype.windowListenerNext = function(d) {
+      var that = d.data;
+
+      var h = that.containers.height();
+      var limit = h/5; //1/10 of the height;
+
+      var scrollTop = $(window).scrollTop();
+      var target = that.surrogates.filter(function(i, item) {
+        // console.log( "TOP OFFSET :: ", $(item).offset().top );
+
+      var topOffset = $(item).offset().top;
+
+      // console.log(topOffset+limit+5, scrollTop, topOffset+limit);
+      // console.log(topOffset-limit, scrollTop, topOffset-limit-5);
+
+      // console.log("RESULT", (topOffset+limit+5 < scrollTop && scrollTop > topOffset+limit) ||
+             // (topOffset-limit < scrollTop && scrollTop > topOffset-limit-5));
+
+      // if (topOffset+limit+50 > scrollTop && scrollTop > topOffset+limit) {
+        // console.log("TOP OFFSET " , limit,  topOffset);
+      // }
+      return (topOffset+limit+50 > scrollTop && scrollTop > topOffset+limit);
+
+    });
+
+    // console.log("XXXX", target, scrollTop);
+
+    // if ($(target).length) {
+    //   console.log($(target).attr("data-page-scroll"), scrollTop);
+    // }
+
+    that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
+    // console.log(target, $(target).attr("data-page-scroll"));
+    //Determine if he user scrolled up or down..
+    // if ( target.length > 0 ) {
+      if (target.length > 0  && scrollTop > that.scrollPositionTop) {
+        console.log("NEXT()", target, that.currentPageNumber);
+        d.data.next();
+      }
+      // else {
+      //   console.log("PREV()", target, that.currentPageNumber);
+      // //   // d.data.prev();
+      // }
+    // }
+
+    that.scrollPositionTop = scrollTop;
+
+    // console.log("HUBSCROLLING ::: ", hubScrolling.scrollPosition);
+    //$(window).off("scroll", that.windowListener);
+
+}
+
+ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
+    var that = d.data;
+
+
+    console.log("XXX");
+    var h = that.containers.height();
+    var limit = h/5; //1/10 of the height;
+
+    var scrollTop = $(window).scrollTop();
+    // console.log(scrollTop);
+    var target = that.surrogates.filter(function(i, item) {
+      // console.log( "TOP OFFSET :: ", $(item).offset().top );
+
+      var topOffset = $(item).offset().top;
+
+      // console.log(topOffset+limit+5, scrollTop, topOffset+limit);
+      // console.log(topOffset-limit, scrollTop, topOffset-limit-5);
+
+      // console.log("RESULT", (topOffset+limit+5 < scrollTop && scrollTop > topOffset+limit) ||
+             // (topOffset-limit < scrollTop && scrollTop > topOffset-limit-5));
+
+      // if (topOffset+limit+50 > scrollTop && scrollTop > topOffset+limit) {
+      //   // console.log("TOP OFFSET " , limit,  topOffset);
+      // }
+
+      return (topOffset-limit > scrollTop && scrollTop > topOffset-limit-50);
+
+    });
+
+    console.log("XXXX", target.length, scrollTop);
+
+    // if ($(target).length) {
+    //   console.log($(target).attr("data-page-scroll"), scrollTop);
+    // }
+
+    that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
+    // console.log(target, $(target).attr("data-page-scroll"));
+    //Determine if he user scrolled up or down..
+    if (target.length > 0  && scrollTop < that.scrollPositionBottom) {
+      // if (scrollTop > that.scrollPosition) {
+        console.log("PREV()", target, that.currentPageNumber, that);
+        that.previous();
+      // }
+      // else {
+      //   console.log("PREV()", target);
+      //   // d.data.prev();
+      // }
+    }
+
+    that.scrollPositionBottom = scrollTop;
+
+    // console.log("HUBSCROLLING ::: ", hubScrolling.scrollPosition);
+    //$(window).off("scroll", that.windowListener);
+
+}
+
+
+ocha.HubScrolling.prototype.initialize = function() {
+  var that = this;
+  that.resizeWindow();
+
+  //Add data-page counter;
+  this.containers.each(
+      function(i, item) {
+
+        $j(item)
+          .attr("data-page", i)
+          .css({
+              "position": "fixed",
+              "zIndex" : ( that.pageCount - i ) * 100,
+              "top" : i != 0 ? that.containers.height() : 0,
+              "left" : 0
+          });
+
+          //Insert surrogate containers
+          var $surrogate = $("<div />")
+                          .addClass("hub-container-scroll hub-surrogate")
+                          .attr("data-page-scroll", i)
+                          .width(that.containers.width())
+                          .height(that.containers.height());
+
+          $("body").append($surrogate);
+
+      }
+  );
+
+  this.surrogates = $("body > .hub-surrogate");
+
+
+    $(window).on("scroll", that, that.windowListenerNext);
+    $(window).on("scroll", that, that.windowListenerPrev);
+
+  //Event listeners
+  $j(window).on("resize", function () { that.resizeWindow(); });
+};
+
+ocha.HubScrolling.prototype.resizeWindow = function() {
+  var that = this;
+  var $window = $j(window);
+  var w = $window.width(),
+      h = $window.height();
+
+  that.containers.width(w);
+  that.containers.height(h);
+
+  //For the scroller at the background
+  // if (!this.scroller) {
+  //   var wAll = that.containers.width(),
+  //       hAll = that.containers.height() * pageCount;
+  // }
+};
+
+ocha.HubScrolling.prototype.previous = function() {
+  var that = this;
+  console.log("XXXXX");
+
+  $(window).off("scroll", that.windowListenerNext);
+  $(window).off("scroll", that.windowListenerPrev);
+
+  var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
+
+  var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+
+
+  console.log(currentPage, currentSurrogate);
+  nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
+
+    var mode = "scrollDown";
+
+    if ( currentPage.attr("data-next") !== undefined ) {
+      mode = currentPage.attr("data-next");
+    }
+
+    var callback = currentPage.attr("data-next-after");
+    console.log("Mode, Callback", currentPage, mode, callback);
+
+    var func = null;
+    if (callback !== undefined) {
+      func = eval(callback);
+    } else {
+      func = function(){};
+    }
+
+    that.currentPageNumber --;
+
+    //Scroll towards new surrogaete
+    var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+
+    that.transition(currentPage, nextPage, mode, func);
+
+    //Reset Subpage
+    that.currentSubPage = 0;
+
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+      function() {
+        that.transitionOngoing = false;
+        that.scrollPositionTop = $(window).scrollTop();
+        that.scrollPossitionBottom = $(window).scrollTop();
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      }
+    );
+};
+
+ocha.HubScrolling.prototype.next = function() {
+  var that = this;
+  // var that = this;
+  $(window).off("scroll", that.windowListenerNext);
+  $(window).off("scroll", that.windowListenerPrev);
+
+  var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
+
+  var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+
+
+  if ( currentPage.attr("data-next-" + that.currentSubPage) != undefined ) {
+    currentPage.attr("data-subpage", that.currentSubPage);
+    var action = currentPage.attr("data-next-" + that.currentSubPage);
+    var func = eval(action);
+
+    console.log("Assessing subpages." , that.currentSubPage, action);
+
+    //Execute Subpage
+    func();
+    that.currentSubPage ++;
+
+    // setTimeout(function() {
+    //   // console.log("TURNED ON");
+
+    //   // $("#hub-scrolling-scroller-component").show();
+    // }, 500);
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+      function() {
+        that.transitionOngoing = false;
+        that.scrollPositionTop = $(window).scrollTop();
+        that.scrollPossitionBottom = $(window).scrollTop();
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      }
+    );
+  }
+  else
+  {
+    nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber+1; });
+
+    var mode = currentPage.attr("data-next");
+
+    var callback = currentPage.attr("data-next-after");
+    console.log("Mode, Callback", currentPage, mode, callback);
+
+    var func = null;
+    if (callback !== undefined) {
+      func = eval(callback);
+    } else {
+      func = function(){};
+    }
+
+    that.currentPageNumber ++;
+
+    //Scroll towards new surrogaete
+    var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+
+    that.transition(currentPage, nextPage, mode, func);
+
+    //Reset Subpage
+    that.currentSubPage = 0;
+
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+      function() {
+        that.transitionOngoing = false;
+        that.scrollPositionTop = $(window).scrollTop();
+        that.scrollPossitionBottom = $(window).scrollTop();
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      }
+    );
+  }
+};
+
+ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, callback) {
+  var that = this;
+  console.log(mode)
+  if (!mode) {
+    mode = "scrollUp";
+  }
+
+  switch ( mode ) {
+    case "scrollUp":
+      that.transitionOngoing = true;
+      var h = that.containers.height();
+      currentPage.show().position({top: 0}); currentPage.css("opacity", 1);
+      nextPage.position({top: h}); nextPage.css("opacity", 1); nextPage.show();
+
+
+      currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED, callback);
+      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
+    break;
+
+    case "scrollDown":
+      that.transitionOngoing = true;
+      var h = that.containers.height();
+      currentPage.show().css("top", "0px").css("opacity", 1);
+      // nextPage.css("opacity", 1);
+      nextPage.css("top", (-1*h) + "px").css("opacity", 1).show();
+
+
+      currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, callback);
+      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
+    break;
+
+    case "fade":
+      that.transitionOngoing = true;
+      currentPage.show().css("opacity", 1).css("top", 0);
+      nextPage.css("opacity", 0).css("top", 0);
+      currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, callback);
+      nextPage.stop(true, true).animate({ opacity: 1}, that.TRANSITION_SPEED, function() {
+        that.transitionOngoing=false;
+        currentPage.hide();
+      });
+    break;
+
+  }
+};
+
+var ocha = ocha || {};
+
+ocha.Story = function() {
+  return {
+    titleToOpening : function () {
+      /** Transition from Title page to */
+      console.log("Hello World title to opening");
+    },
+    titleProcess1 : function() {
+      console.log("TITLE PROCESS ONE");
+    },
+    titleProcess2 : function() {
+      console.log("TITLE PROCESS TWO");
+    }
+  };
+}();
+
+
+/* Creating image list .. */
+var fmt = d3.format("03d");
+var hubScrolling = new ocha.HubScrolling($j(".hub-section"));
+var faceMosaic = new ocha.FaceMosaic("#mosaic-area #mosaic-actual",
+                                      d3.range(IMAGE_COUNT)
+                                        .map(function(d) { return "../img/faces/" + fmt(d) + ".png"; }));
+
+
+
+</script>
+</body>
