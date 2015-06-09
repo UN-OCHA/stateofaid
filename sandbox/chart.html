@@ -3,7 +3,134 @@
 <link rel="stylesheet" href="../css/leaflet.css" />
 <script src='../js/mapbox.js'></script>
 <link href='../css/mapbox.css' rel='stylesheet' />
+<link href='../css/c3.css' rel='stylesheet' />
 
 <link href='../css/custom.css' rel='stylesheet' />
 
 <style>
+  .node {
+    fill: gray;
+  }
+</style>
+<body>
+<div id="chart-area"></div>
+<script src="../js/jquery-1.11.3.min.js"></script>
+<script src="../js/d3.js"></script>
+<script src="../js/c3.js"></script>
+
+<script src="../js/topojson.js"></script>
+<script src="../js/leaflet.js"></script>
+<script type="text/javascript">
+var $j = jQuery;
+
+var gha = null;
+var countryChart = null;
+
+// var globalData =
+
+// d3.csv("../data/gha.csv", function(err, data) {
+//   if (err) {
+//     console.error(err);
+//   } else{
+//     gha = data;
+//     countryChart = new ocha.CountryChart($("#chart-area"), globalData);
+//     countryChart.initialize();
+//   }
+// });
+
+$j("#chart-area").width($(window).width());
+$j("#chart-area").height($(window).height()/2);
+var ocha = ocha || {};
+ocha.CountryChart = function (container) {
+  this.container = $j(container);
+  this.d3Container = d3.select(container[0]);
+  this.svg = this.d3Container.append("svg").attr("class", "country-chart");
+  this.data = [ { year: 2003, requirement: 5300000000},
+               { year: 2004, requirement: 3000000000},
+               { year: 2005, requirement: 5000000000, targeted: 40000000},
+               { year: 2006, requirement: 4800000000, targeted: 32000000},
+               { year: 2007, requirement: 4400000000, targeted: 26000000},
+               { year: 2008, requirement: 6300000000, targeted: 28000000},
+               { year: 2009, requirement: 9500000000, targeted: 43000000},
+               { year: 2010, requirement: 9500000000, targeted: 53000000},
+               { year: 2011, requirement: 7900000000, targeted: 65000000},
+               { year: 2012, requirement: 8800000000, targeted: 62000000},
+               { year: 2013, requirement: 12900000000, targeted: 73000000},
+               { year: 2014},
+               { year: 2015}
+            ];
+
+  this.chart = null;
+  this.nodeData = null;
+  this.forceLayout = null;
+
+  this.radiusScale;
+  this.colorScale;
+
+  this.nodes = null;
+
+  this.initialize = function () {
+    var that = this;
+    var data = that.data;
+    var year = data.map(function(d) { return d.year; });
+    var requirements = [];
+    var targeted = [];
+
+    console.log(data, year);
+
+    for (var i in year) {
+      console.log(i, year[i]);
+      var filtered = data.filter(function(d) { return d.year == year[i]; });
+
+      console.log(filtered);
+
+      if ( filtered.length == 0 ) {
+        requirements.push(null);
+        targeted.push(null);
+      } else {
+        requirements.push(filtered[0].requirement == undefined ? null : filtered[0].requirement);
+        targeted.push(filtered[0].targeted == undefined ? null : filtered[0].targeted);
+      }
+    }
+
+    that.chart = c3.generate({
+        bindto: that.d3Container,
+        data: {
+          x: 'x',
+          columns: [
+            ['x'].concat(year),
+            ['People Targeted'].concat(targeted),
+            ['Funding Requirement'].concat(requirements)
+          ],
+          axes: {
+            'People Targeted' : 'y',
+            'Funding Requirement' : 'y2'
+          }
+        },
+        axis: {
+          y2: {
+            show: true
+          }
+        },
+        oninit: function () {
+            this.main.append('rect')
+                .style('fill', 'white')
+                .attr('x', 0.5)
+                .attr('y', -0.5)
+                .attr('width', this.width)
+                .attr('height', this.height)
+              .transition().duration(3000)
+                .attr('x', this.width)
+                .attr('width', 0)
+              .remove();
+        }
+    });
+  }
+};
+
+var countryChart = new ocha.CountryChart($("#chart-area"));
+countryChart.initialize();
+
+
+</script>
+</body>

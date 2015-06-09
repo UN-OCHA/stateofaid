@@ -101,7 +101,7 @@ section.hub-section {
   overflow: hidden;
 }
 
-#hub-slide-1 {
+#hub-slide-1, #hub-slide-1-a {
   background-image: url(../img/story/001.jpg);
 
   #hub-slide-1-good-news,
@@ -133,7 +133,7 @@ section.hub-section {
   }
 
   #hub-slide-1-bad-news {
-    display: none;
+/*    display: none;*/
 
     h1, p {
       color: #CC0000;
@@ -243,3 +243,16 @@ div.hub-radial-overlay {
   }
 }
 
+#hub-slide-2 {
+  .content {
+    h2 {
+      font-size: 2.4em;
+      padding: 0 2em;
+      margin-top: 1.2em;
+    }
+  }
+  #chart-container {
+    position: absolute;
+    bottom: 10px;
+  }
+}
