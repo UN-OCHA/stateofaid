@@ -4,28 +4,17 @@
 <script src='../js/mapbox.js'></script>
 <link href='../css/mapbox.css' rel='stylesheet' />
 
+<link href='../css/custom.css' rel='stylesheet' />
+
 <style>
 body { margin: 0; padding: 0; }
-#mosaic-area #mosaic-actual
-{ width: inherit;
-  height: inherit;
-  position: relative;
-  overflow: hidden;
+#mosaic-area {
   background-color: black;
-}
+  background-repeat: no-repeat;
+  background-size: cover;
 
-#mosaic-actual span.mosaic-item {
-  display: inline-block;
-  position: relative;
-}
-
-#mosaic-actual span.mosaic-item img {
-  width: inherit;
-  height: inherit;
-
-  position: absolute;
-  top: 0;
-  left: 0;
+  /*background-image: url(../img/story/000.jpg);*/
+  background-position: bottom center;
 }
 
 #mosaic-overlay-area {
@@ -60,6 +49,7 @@ body { margin: 0; padding: 0; }
   left: 0;
 
 }
+#title-content { z-index: 500; }
 
 #mosaic-title-area h1 {
   font-size: 8em;
@@ -68,6 +58,7 @@ body { margin: 0; padding: 0; }
   margin-top: 1em;
   text-shadow: 2px 1px 1px rgb(255,255,255);
 }
+
 </style>
 
 
@@ -77,19 +68,221 @@ body { margin: 0; padding: 0; }
            data-next-1="ocha.Story.titleProcess2" -->
   <section id="mosaic-area" class="hub-section"
            data-next-before="ocha.Story.titleToOpening"
-           data-next="fade">
+           data-next="fade"
+
+           data-next-after="ocha.Story.reshowImages">
     <div id="mosaic-actual"></div>
     <div id="mosaic-overlay-area"></div>
     <div id="mosaic-title-area">
-      <h1>Lorem Ipsum Dolor Est</h1>
+      <h1>Mid-year Update</h1>
       <h3>A Global Humanitarian Appeals Update (Jan 2015 - Jun 2015)</h3>
     </div>
   </section>
 
-  <section class="hub-section" style="background-color: rgb(255,0,0); "></section>
-  <section class="hub-section"  style="background-color: rgb(0, 255,0); "></section>
-  <section class="hub-section"  style="background-color: rgb(255,0,255); "></section>
-  <section class="hub-section"  style="background-color: rgb(0, 255,255); "></section>
+  <!-- First Slide -->
+  <section class="hub-section" id="hub-slide-1" data-next-0="ocha.Story.hideGoodShowBad">
+    <div class='hub-viewport'>
+      <div class="content" id="hub-slide-1-good-news">
+        <h1>The Good News</h1>
+        <p>We are doing more for more people than ever before.</p>
+      </div>
+      <div class="content" id="hub-slide-1-bad-news">
+        <h1>The Bad News</h1>
+        <p>the humanitarian system is under unprecedented strain.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="hub-section" id="hub-slide-2"></section>
+
+  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3" div-next-after="ocha.Story.startIraqCounter">
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+          <h2>In many countries, violence and insecurity continue to cause massive internal and cross-border displacement. In 2015 alone, we have seen <strong>700,000</strong> people newly displaced.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class="hub-section" id="hub-slide-4" div-next-after="ocha.Story.startSyriaCounter">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Iraq</h2></div>
+      <div class='hub-country-stats'>
+        <ul>
+          <li><span class='country-stat-count' data-stat-count='8200000'>0</span> people in need of assistance</li>
+          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people internally displaced</li>
+          <li><span class='country-stat-count' data-stat-count='60'>0</span>% of frontline humanitarian operations are at risk of shutting down due to overfunding</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section" id="hub-slide-5">
+    <div class='hub-viewport'>
+        <div class='hub-country-title'><h2>Syria</h2></div>
+        <div class='hub-country-stats'>
+          <ul>
+            <li><span class='country-stat-count' data-stat-count='7600000'>0</span> people have been internally displaced</li>
+            <li><span class='country-stat-count' data-stat-count='4000000'>0</span> people internally displaced</li>
+            <li><span class='country-stat-count' data-stat-count='4800000'>0</span> people are living in hard-to-reach or besieged locations</li>
+          </ul>
+        </div>
+      </div>
+  </section>
+  <section class="hub-section"  id="hub-slide-6">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>South Sudan</h2></div>
+      <div class='hub-country-stats'>
+        <ul>
+          <li><span class='country-stat-count' data-stat-count='1500000'>0</span> internally displaced</li>
+          <li><span class='country-stat-count' data-stat-count='550000'>0</span> refugees</li>
+          <li><span class='country-stat-count' data-stat-count='4800000'>0</span> poeple are severely food insecure</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section" id="hub-slide-7" data-next="fade">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Yemen</h2></div>
+      <div class='hub-country-stats'>
+        <ul>
+          <li><span class='country-stat-count' data-stat-count='545000'>0</span> civilians displaced</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-8">
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2><strong>Ukraine</strong> aid agecies have received just</h2>
+        <h1>19%</h1>
+        <h2>of their needs. This has left many conflic-affected families with no access to emergency shelter</h2>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9">
+
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2>Natural disasters of devastating proportions continue to wreak havoc, flattening villages and reducing entire livelihood to dust.</h2>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section" id="hub-slide-10">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Nepal</h2></div>
+      <div class='hub-country-stats'>
+        <ul>
+          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people displaced</li>
+          <li><span class='country-stat-count' data-stat-count='3500000'>0</span> million people need food assistance</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' data-next="fade" id='hub-slide-11'>
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2>In many parts of the world, humanitarian crises show no sign of abating.</h2>
+        <h1>Protracted is the new normal.</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' id="hub-slide-12">
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2>
+        In the <strong style="color: #99000;">SAHEL</strong> alone</h2>
+        <h1>9 million</h1>
+        <h2>women, children and men will go hungry this year if aid doesn't reach them.</h2>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' id='hub-slide-13'>
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2>
+          Aid organizations have achieved a lot so far in 2015. they have saved lives, supported the livelihoods and protected the safety of millions of people.
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section' id='hub-slide-14'>
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Somalia</h2></div>
+      <div class='hub-country-stats abs-left'>
+        <ul>
+          <li>Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span> people</li>
+          <li><span class='country-stat-count' data-stat-count='128000'>0</span> received seeds, tools, and fishing equipment</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section' id='hub-slide-15' data-next-after="ocha.Story.showSecondFace">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Vanuatu</h2></div>
+      <div class='hub-country-stats'>
+        <ul>
+          <li><span class='country-stat-count' data-stat-count='19500'>0</span> children vaccinated against measles</li>
+          <li><span class='country-stat-count' data-stat-count='370000'>0</span> people received food assistance and <span class='country-stat-count' data-stat-count='47000'>0</span> with clean water.</li>
+          <li><span class='country-stat-count' data-stat-count='50000'>0</span> people received emergency shelter assistance.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' id='hub-slide-16' data-next="fade" data-next-before="ocha.Story.hideAllForMap"
+    data-next-0="ocha.Story.remove16_00"
+    data-next-1="ocha.Story.remove16_01"
+    data-next-2="ocha.Story.remove16_02"
+    >
+    <div class='hub-viewport'>
+      <div id='hub-face-final-area'></div>
+      <div class='hub-radial-overlay'></div>
+      <div class='content' id="hub-16-00">
+        <h2>
+          But each year millions of people do not get the help they need because humanitarian access is compromised.
+        </h2>
+      </div>
+      <div class='content' id="hub-16-01" style="display: none">
+        <h2>
+          Or because the funding does not come through
+        </h2>
+      </div>
+      <div class='content' id="hub-16-02" style="display: none">
+        <h2>
+          Donors have been generous but the global humanitarian appeal remains just
+        </h2>
+        <h1>23 per cent</h1>
+        <h2>funded half way through the year</h2>
+      </div>
+      <div class='content' id="hub-16-03" style="display: none">
+        <h2>
+          One thing is clear: the sheer scale of needs continues to outpace the level of funding
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section' id='hub-slide-17'>
+    <div class='hub-viewport'>
+      <div class='content'>
+        <iframe id='hub-slide-map' src='http://www.unocha.org' scrolling="no" border="no" ></iframe>
+      </div>
+    </div>
+  </section>
+
+
+
+
 
 <script src="../js/jquery-1.11.3.min.js"></script>
 <script src="../js/d3.js"></script>
@@ -102,18 +295,19 @@ $j = jQuery;
 
 var IMAGE_COUNT = 54;
 
-var ANIMATION_DURATION = 500;
+var ANIMATION_DURATION = 1000;
 
 var ocha = ocha || {};
 
-ocha.FaceMosaic = function(selector, imageList) {
+ocha.FaceMosaic = function(selector, imageList, squareSize) {
 
 //Private function to help the hide
 
 
-  this.TIMEOUT_PERIOD = 4000;
+  this.TIMEOUT_PERIOD = 2000;
 
-  this.SQUARE_SIZE = 75; //suggested square_size
+  this.SQUARE_SIZE = squareSize || 50; //suggested square_size
+  this.FADE_DURATION = 200;
 
   this.imageList = imageList;
   this.container = $j(selector);
@@ -122,8 +316,11 @@ ocha.FaceMosaic = function(selector, imageList) {
 
   this.transitionOngoing = false;
 
+  console.log(this.container);
   this.mW = this.container.width(); //mosaic Width
   this.mH = this.container.height(); //mosaic Height
+
+  console.log(this.mH, this.mW);
 
   this.scaleHorizontal = d3.scale.ordinal().domain(d3.range(parseInt(this.mW/this.SQUARE_SIZE) + 2)).rangeRoundBands([0,this.SQUARE_SIZE  * (parseInt(this.mW/this.SQUARE_SIZE) + 2)]);
 
@@ -133,19 +330,14 @@ ocha.FaceMosaic = function(selector, imageList) {
                           this.SQUARE_SIZE  * (parseInt(this.mH/this.SQUARE_SIZE) + 2)]
 
   this.helper = {
-    endAllEvent : function ( transition, callback ) {
-        var n = 0;
-        transition
-          .each(function() { ++n; })
-          .each("end", function() { if (!--n && callback !== undefined) callback.apply(this, arguments); });
-      }
+
   }
 
   this.startMosaic = function() {
     var that = this;
 
     that.mosaicIntervalHandler = setInterval(function() {
-      console.log("Hello World");
+      // console.log("Hello World");
       that.d3Container
         .selectAll("span.mosaic-item")
         .each(function(d) {
@@ -159,7 +351,7 @@ ocha.FaceMosaic = function(selector, imageList) {
               .attr("data-image-status", "for-removal")
               .style("z-index", "0");
 
-            console.log(that.imageList[randomIndex]);
+            // console.log(that.imageList[randomIndex]);
             var toBeAdded = d3.select(this).append("img")
               .attr("data-image-status", "new-image")
               .attr("src", that.imageList[randomIndex])
@@ -186,10 +378,25 @@ ocha.FaceMosaic = function(selector, imageList) {
   this.initialize();
 };
 
+ocha.FaceMosaic.prototype.endAllEvent = function ( transition, callback ) {
+
+  var n = 0;
+  transition
+    .each(function() { ++n; })
+    .each("end", function() { if (!--n && callback !== undefined) {
+
+        callback.apply(this, arguments);
+    } });
+};
+
+ocha.FaceMosaic.prototype.reshowImages = function() {
+  var that = this;
+  that.mosaicRows.selectAll("span.mosaic-item").style("opacity", 1);
+};
 ocha.FaceMosaic.prototype.initialize = function () {
   var that = this;
   // console.log(that.d3Container.selectAll);
-
+  that.container.addClass("mosaic-container");
   that.mosaicRows = that.d3Container
                       .selectAll("div.mosaic-row")
                       .data(d3.range(parseInt((this.mH/this.SQUARE_SIZE) + 2)))
@@ -217,8 +424,8 @@ ocha.FaceMosaic.prototype.initialize = function () {
                                           .style("opacity", 0);
 
                                       newImage.transition()
-                                          .duration(500)
-                                          .delay(Math.random() * 2000)
+                                          .duration(that.FADE_DURATION)
+                                          .delay(Math.random() * that.TIMEOUT_PERIOD)
                                           .style("opacity", 1);
                                     })
                           });
@@ -235,15 +442,17 @@ ocha.FaceMosaic.prototype.hide = function (userDefMode, callback) {
     mode = userDefMode;
   }
 
+  // console.log("Callback", callback);
+
   switch (mode) {
     case "fade" :
       that.d3Container
         .selectAll("span.mosaic-item")
           .transition()
-            .duration(function() { return 500 + that.TIMEOUT_PERIOD/2; })
-            .delay(function() { return Math.random() * that.TIMEOUT_PERIOD/2; })
+            .duration(that.FADE_DURATION)
+            .delay(function() { return Math.random() * that.TIMEOUT_PERIOD; })
             .style("opacity", 0)
-            .call(that.helper.endAllEvent, callback);
+            .call(that.endAllEvent, callback);
 
       break;
     default:
@@ -265,6 +474,8 @@ ocha.HubScrolling = function(sections) {
   this.scroller = null;
 
   this.currentSubPage = 0;
+
+  this.currentPage = null, this.nextPage = null;
   this.currentPageNumber = 0;
   this.d3Containers = d3.selectAll(sections[0]);
   this.containers = $j(sections) ;
@@ -277,29 +488,17 @@ ocha.HubScrolling = function(sections) {
 };
 
 ocha.HubScrolling.prototype.windowListenerNext = function(d) {
+      console.log("XXX");
       var that = d.data;
 
       var h = that.containers.height();
-      var limit = h/5; //1/10 of the height;
+      var limit = h/4; //1/10 of the height;
 
       var scrollTop = $(window).scrollTop();
       var target = that.surrogates.filter(function(i, item) {
-        // console.log( "TOP OFFSET :: ", $(item).offset().top );
-
-      var topOffset = $(item).offset().top;
-
-      // console.log(topOffset+limit+5, scrollTop, topOffset+limit);
-      // console.log(topOffset-limit, scrollTop, topOffset-limit-5);
-
-      // console.log("RESULT", (topOffset+limit+5 < scrollTop && scrollTop > topOffset+limit) ||
-             // (topOffset-limit < scrollTop && scrollTop > topOffset-limit-5));
-
-      // if (topOffset+limit+50 > scrollTop && scrollTop > topOffset+limit) {
-        // console.log("TOP OFFSET " , limit,  topOffset);
-      // }
-      return (topOffset+limit+50 > scrollTop && scrollTop > topOffset+limit);
-
-    });
+        var topOffset = $(item).offset().top;
+        return (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit);
+      });
 
     // console.log("XXXX", target, scrollTop);
 
@@ -307,12 +506,14 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
     //   console.log($(target).attr("data-page-scroll"), scrollTop);
     // }
 
-    that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
+    // console.log(that.currentPageNumber)
     // console.log(target, $(target).attr("data-page-scroll"));
     //Determine if he user scrolled up or down..
     // if ( target.length > 0 ) {
       if (target.length > 0  && scrollTop > that.scrollPositionTop) {
-        console.log("NEXT()", target, that.currentPageNumber);
+        that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
+        // console.log(that.currentPageNumber);
+        // console.log("NEXT()", target, that.currentPageNumber);
         d.data.next();
       }
       // else {
@@ -326,15 +527,15 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
     // console.log("HUBSCROLLING ::: ", hubScrolling.scrollPosition);
     //$(window).off("scroll", that.windowListener);
 
-}
+};
 
 ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
     var that = d.data;
 
 
-    console.log("XXX");
+    // console.log("XXX");
     var h = that.containers.height();
-    var limit = h/5; //1/10 of the height;
+    var limit = h/4; //1/10 of the height;
 
     var scrollTop = $(window).scrollTop();
     // console.log(scrollTop);
@@ -353,20 +554,21 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
       //   // console.log("TOP OFFSET " , limit,  topOffset);
       // }
 
-      return (topOffset-limit > scrollTop && scrollTop > topOffset-limit-50);
+      return (topOffset-limit > scrollTop && scrollTop > topOffset-limit-limit);
 
     });
 
-    console.log("XXXX", target.length, scrollTop);
+    // console.log("XXXX", target.length, scrollTop);
 
     // if ($(target).length) {
     //   console.log($(target).attr("data-page-scroll"), scrollTop);
     // }
 
-    that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
+
     // console.log(target, $(target).attr("data-page-scroll"));
     //Determine if he user scrolled up or down..
     if (target.length > 0  && scrollTop < that.scrollPositionBottom) {
+      that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
       // if (scrollTop > that.scrollPosition) {
         console.log("PREV()", target, that.currentPageNumber, that);
         that.previous();
@@ -441,8 +643,11 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
 };
 
 ocha.HubScrolling.prototype.previous = function() {
+  $("html,body").css("overflow", "hidden");
+
   var that = this;
-  console.log("XXXXX");
+
+  // console.log("XXXXX");
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
@@ -452,17 +657,17 @@ ocha.HubScrolling.prototype.previous = function() {
   var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
 
-  console.log(currentPage, currentSurrogate);
+  // console.log(currentPage, currentSurrogate);
   nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
 
     var mode = "scrollDown";
 
-    if ( currentPage.attr("data-next") !== undefined ) {
-      mode = currentPage.attr("data-next");
+    if ( currentPage.attr("data-prev") !== undefined ) {
+      mode = currentPage.attr("data-prev");
     }
 
-    var callback = currentPage.attr("data-next-after");
-    console.log("Mode, Callback", currentPage, mode, callback);
+    var callback = currentPage.attr("data-prev-after");
+    // console.log("Mode, Callback", currentPage, mode, callback);
 
     var func = null;
     if (callback !== undefined) {
@@ -474,25 +679,29 @@ ocha.HubScrolling.prototype.previous = function() {
     that.currentPageNumber --;
 
     //Scroll towards new surrogaete
-    var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+    var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
     that.transition(currentPage, nextPage, mode, func);
 
     //Reset Subpage
     that.currentSubPage = 0;
 
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
       function() {
+
         that.transitionOngoing = false;
         that.scrollPositionTop = $(window).scrollTop();
         that.scrollPossitionBottom = $(window).scrollTop();
+        console.log("XX");
         $(window).on("scroll", that, that.windowListenerNext);
         $(window).on("scroll", that, that.windowListenerPrev);
+        $("html,body").css("overflow", "auto");
       }
     );
 };
 
 ocha.HubScrolling.prototype.next = function() {
+  $("html,body").css("overflow", "hidden");
   var that = this;
   // var that = this;
   $(window).off("scroll", that.windowListenerNext);
@@ -500,32 +709,39 @@ ocha.HubScrolling.prototype.next = function() {
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
-  var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
 
-  if ( currentPage.attr("data-next-" + that.currentSubPage) != undefined ) {
-    currentPage.attr("data-subpage", that.currentSubPage);
-    var action = currentPage.attr("data-next-" + that.currentSubPage);
+  console.log(currentPage, currentPage.attr("data-current-subpage"))
+  var currentSubPage = currentPage.attr("data-current-subpage") || 0;
+  if ( currentPage.attr("data-next-" + currentSubPage) != undefined ) {
+
+    console.log("CURRENT SUBPAGE", currentSubPage);
+    currentSubPage = parseInt(currentSubPage);
+    currentPage.attr("data-subpage", currentSubPage);
+    var action = currentPage.attr("data-next-" + currentSubPage);
     var func = eval(action);
 
-    console.log("Assessing subpages." , that.currentSubPage, action);
+    console.log("Assessing subpages." , func, action);
 
     //Execute Subpage
     func();
-    that.currentSubPage ++;
+    currentPage.attr("data-current-subpage", currentSubPage + 1);
 
     // setTimeout(function() {
     //   // console.log("TURNED ON");
 
     //   // $("#hub-scrolling-scroller-component").show();
     // }, 500);
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
       function() {
+        console.log("XXXXX About to body");
         that.transitionOngoing = false;
         that.scrollPositionTop = $(window).scrollTop();
         that.scrollPossitionBottom = $(window).scrollTop();
         $(window).on("scroll", that, that.windowListenerNext);
         $(window).on("scroll", that, that.windowListenerPrev);
+        $("html,body").css("overflow", "auto");
       }
     );
   }
@@ -533,43 +749,83 @@ ocha.HubScrolling.prototype.next = function() {
   {
     nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber+1; });
 
-    var mode = currentPage.attr("data-next");
+    this.nextPage = nextPage;
+    this.currentPage = currentPage;
 
-    var callback = currentPage.attr("data-next-after");
-    console.log("Mode, Callback", currentPage, mode, callback);
-
+    var beforeAction = currentPage.attr("data-next-before");
     var func = null;
-    if (callback !== undefined) {
-      func = eval(callback);
-    } else {
-      func = function(){};
+
+    try { func = eval(beforeAction); } catch (ex) { func = null; }
+
+    if (beforeAction && func) {
+      func();
+    }
+    else {
+      that.nextAction();
     }
 
-    that.currentPageNumber ++;
-
-    //Scroll towards new surrogaete
-    var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
-
-    that.transition(currentPage, nextPage, mode, func);
-
-    //Reset Subpage
-    that.currentSubPage = 0;
-
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
-      function() {
-        that.transitionOngoing = false;
-        that.scrollPositionTop = $(window).scrollTop();
-        that.scrollPossitionBottom = $(window).scrollTop();
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
-      }
-    );
   }
 };
 
+ocha.HubScrolling.prototype.nextAction = function() {
+  //Disable scrolling...
+
+  console.log("DISABLING NEXT ACTION:::");
+
+  var that = this;
+  // console.log(that, that.currentPageNumber);
+  var currentPage = that.currentPage;
+  var nextPage = that.nextPage;
+
+  var mode = $(currentPage).attr("data-next");
+
+  var callback = $(currentPage).attr("data-next-after");
+  // console.log("Mode, Callback", currentPage, mode, callback);
+
+  var func = null;
+  if (callback !== undefined) {
+    try {
+      func = eval(callback);
+    } catch (ex) { func = null; }
+
+    console.log(func);
+
+  } else {
+    func = function(){};
+  }
+
+  that.currentPageNumber ++;
+
+  // console.log("nextAction", that.surrogates);
+
+  //Scroll towards new surrogaete
+  var currentSurrogate = $(that.surrogates.filter(function(d, item) {
+    // console.log($(item).attr("data-page-scroll"), that.currentPageNumber);
+    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+
+  // console.log(currentSurrogate);
+
+  that.transition(currentPage, nextPage, mode, func);
+
+  //Reset Subpage
+  that.currentSubPage = 0;
+
+  $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    function() {
+      console.log("XXXXX About to body");
+      that.transitionOngoing = false;
+      that.scrollPositionTop = $(window).scrollTop();
+      that.scrollPossitionBottom = $(window).scrollTop();
+      $(window).on("scroll", that, that.windowListenerNext);
+      $(window).on("scroll", that, that.windowListenerPrev);
+      $("html,body").css("overflow", "auto");
+    }
+  );
+}
+
 ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, callback) {
   var that = this;
-  console.log(mode)
+  // console.log(mode)
   if (!mode) {
     mode = "scrollUp";
   }
@@ -582,7 +838,8 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
       nextPage.position({top: h}); nextPage.css("opacity", 1); nextPage.show();
 
 
-      currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED, callback);
+      currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED,
+        function() { if (callback) callback(); });
       nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
     break;
 
@@ -594,15 +851,19 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
       nextPage.css("top", (-1*h) + "px").css("opacity", 1).show();
 
 
-      currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, callback);
+      currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, function() { if (callback) callback(); });
       nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
     break;
 
     case "fade":
       that.transitionOngoing = true;
+      console.log(nextPage, currentPage);
+
       currentPage.show().css("opacity", 1).css("top", 0);
-      nextPage.css("opacity", 0).css("top", 0);
-      currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, callback);
+      nextPage.show().css("opacity", 0).css("top", 0);
+
+
+      currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, function() { if (callback) callback(); });
       nextPage.stop(true, true).animate({ opacity: 1}, that.TRANSITION_SPEED, function() {
         that.transitionOngoing=false;
         currentPage.hide();
@@ -614,30 +875,128 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
 var ocha = ocha || {};
 
+var titlePlayed = false;
+var lastMosaic;
+
+var lastMosaicInitialized = false;
 ocha.Story = function() {
   return {
-    titleToOpening : function () {
+    initialize : function() {
+      // console.log("Initializing Story", "-" + $(".hub-slide-center-text h2").height()/2 +"px");
+      $(".hub-neutral-background div.content").css("marginTop", "-" + parseInt($(".hub-neutral-background div.content").height()/2) +"px");
+
+
+        $(window).on("resize", function() {
+          $("#hub-slide-17 iframe").width($("#hub-slide-17").width());
+          $("#hub-slide-17 iframe").height($("#hub-slide-17").height());
+        })
+
+        $(window).trigger("resize");
+    },
+    titleToOpening : function (callback) {
       /** Transition from Title page to */
-      console.log("Hello World title to opening");
+      // console.log("CurrentPage", hubScrolling.currentPageNumber);
+      $("#mosaic-area").css("backgroundImage", "url(../img/story/000.jpg)");
+      $("#mosaic-title-area, #mosaic-overlay-area").fadeOut("fast");
+      if (!titlePlayed) {
+        faceMosaic.hide(undefined, function() { hubScrolling.nextAction() });
+        titlePlayed = true;
+      } else {
+        hubScrolling.nextAction();
+      }
+
+
+      // console.log("Hello World title to opening");
+    },
+    reshowImages : function () {
+      $("#mosaic-area").css("backgroundImage", "url(../img/story/000.jpg)");
+      $("#mosaic-title-area").fadeIn("fast");
+      // faceMosaic.reshowImages();
     },
     titleProcess1 : function() {
-      console.log("TITLE PROCESS ONE");
+      // console.log("TITLE PROCESS ONE");
+      $("#mosaic-area #mosaic-title-area, #mosaic-area #mosaic-overlay-area").fadeOut("fast");
+
     },
     titleProcess2 : function() {
-      console.log("TITLE PROCESS TWO");
+      // console.log("TITLE PROCESS TWO");
+    },
+    hideGoodShowBad : function () {
+      $("#hub-slide-1-good-news").stop(true, true).fadeOut("fast", function() {
+        $("#hub-slide-1-bad-news").stop(true, true).fadeIn("fast");
+      });
+
+    },
+    showSecondFace : function () {
+      $(window).trigger("resize");
+
+      if ( !lastMosaicInitialized ) {
+        $("#hub-slide-16 #hub-face-final-area").height($("#hub-slide-16").width());
+        $("#hub-slide-16 #hub-face-final-area").empty();
+        lastMosaic = new ocha.FaceMosaic("#hub-slide-16 #hub-face-final-area",
+                                        d3.range(IMAGE_COUNT)
+                                          .map(function(d) { return "../img/faces/" + fmt(d) + ".png"; }),
+                                          40);
+
+        // lastMosaic.initialize();
+      }
+
+      lastMosaic.stopMosaic();
+      lastMosaic.startMosaic();
+    },
+    hideAllForMap : function() {
+      $("#hub-slide-16").css("background-image", "url(../img/story/010.jpg)");
+      $("#hub-slide-16").css("background-position", "center center");
+      $("#hub-slide-16 hub-radial-overlay").fadeOut("fast");
+
+      lastMosaicInitialized = false;
+      lastMosaic.stopMosaic();
+      lastMosaic.hide(undefined, function() { hubScrolling.nextAction() });
+    },
+    remove16_00 : function () {
+      console.log("XXX 00");
+      $("#hub-16-00").stop(true, true).fadeOut("fast", function () {
+        $("#hub-16-01").stop(true,true).fadeIn("fast");
+      });
+    },
+    remove16_01 : function () {
+      console.log("XXX 01");
+      $("#hub-16-01").stop(true, true).fadeOut("fast", function () {
+        $("#hub-16-02").stop(true,true).fadeIn("fast");
+      });
+    },
+    remove16_02 : function () {
+      console.log("XXX 02");
+      $("#hub-16-02").stop(true, true).fadeOut("fast", function () {
+        $("#hub-16-03").stop(true,true).fadeIn("fast");
+      });
+    },
+
+    finalMap : function() {
+      lastMosaic.stopMosaic();
     }
+
   };
 }();
+
+ocha.Story.initialize();
 
 
 /* Creating image list .. */
 var fmt = d3.format("03d");
 var hubScrolling = new ocha.HubScrolling($j(".hub-section"));
-var faceMosaic = new ocha.FaceMosaic("#mosaic-area #mosaic-actual",
-                                      d3.range(IMAGE_COUNT)
+console.log($("#mosaic-area").height());
+
+var faceMosaic = null;
+
+$("#mosaic-area").css("opacity", 1);
+
+jQuery(window).load(function() {
+  $("#mosaic-actual").height($("#mosaic-area").height());
+  faceMosaic = new ocha.FaceMosaic("#mosaic-area #mosaic-actual",
+                                     d3.range(IMAGE_COUNT)
                                         .map(function(d) { return "../img/faces/" + fmt(d) + ".png"; }));
-
-
+});
 
 </script>
 </body>

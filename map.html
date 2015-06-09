@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800">
+ <link rel="stylesheet" href="css/leaflet.css" />
+  <script src='js/mapbox.js'></script>
+  <link href='css/mapbox.css' rel='stylesheet' />
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+  }
+  #map {
+    width: 100%;
+    height: 700px;
+  }
+
+  svg {
+    position: relative;
+  }
+
+  path.focused-country {
+    fill: #000;
+    fill-opacity: .0;
+    stroke: black;
+    stroke-width: .25px;
+  }
+
+  path.focused-in-need, rect.legend-item{
+    /*fill-opacity: .9;*/
+  }
+
+  path.focused-country:hover {
+    fill: brown;
+    fill-opacity: .7;
+  }
+
+  text.focused-country-label {
+    font-familiy: sans-serif;
+    font-size: 13px;
+    fill: white;
+    /*stroke: white;*/
+    stroke-width: .1px;
+  }
+  #country-area {
+    width: 49%;
+    padding: .5%;
+    height: 700px;
+    position: absolute;
+
+    background-color: whitesmoke;
+    top: 0;
+    left: -51%;
+    border: #333333 solid;
+    border-width: 0 4px 0 0;
+    z-index: 100;
+  }
+
+  .chart-detail.y-axis line,
+  .chart-detail.y-axis path
+  {
+    fill: none;
+    stroke: black;
+    shape-rendering:crispEdges;
+  }
+
+  .chart-detail.y-axis, .legend-text {
+    font-family: sans-serif;
+    font-size: 11px;
+  }
+
+  #main-activity-area {
+    position: relative;
+    overflow: hidden;
+  }
+
+  #country-viewport { position: relative; }
+  #country-header { position: absolute; right: 20px; top: 20px; z-index: 100;}
+
+  #country-loader { position: absolute; width: 100px; left: 50%; margin-left: -50px; top: 100px; text-align: center; color: white;}
+
+  #country-details { width: 100%; position: relative; }
+  #country-details-viewport { width: 100%; position: relative; }
+
+  #country-details-triangle {
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid #aaaaaa;
+    position: absolute;
+    bottom: -15px;
+    left: 10px;
+  }
+
+  text.legend-label { font-size: 10px; fill: black; font-family: sans-serif; }
+
+  /*SVG*/
+  rect.chart_in_need {
+    fill: lightgray;
+    cursor: pointer;
+  }
+  rect.chart-funded {
+    fill: #0F6CB6;
+    cursor: pointer;
+  }
+
+  rect.chart-pledged {
+    fill: #E4EA89;
+    cursor: pointer;
+  }
+  #country-details-area h3,
+  #country-details-area .main-area h1 { font-size: 24px; font-family: sans-serif; color: #333333; padding: 0; margin: 0; margin: 10px 0;}
+  #country-details-area h3 { text-transform: uppercase; font-size: 15px; padding: 0; margin: 0; color: gray;   padding-right: 90px;
+    margin-bottom: 4px;}
+
+  /*#country-details-area .main-area h1 { width: 48%; }*/
+  #country-details-area .main-area h1#country-title {
+    /*float: left;*/
+    text-align: center;
+    background-color: #333333;
+    color: white;
+    text-transform: uppercase;
+    font-size: 21px;
+    padding: 14px 12px 14px 6px;
+    margin: -6px -6px 0 -6px;
+  }
+  #country-details-area .main-area h1#people-in-need-title {
+        /*float: right; */
+        text-align: left;
+
+        line-height: 0.8;
+        color: #A82B2B;
+        margin-top: 15px;
+        padding-left: 1%
+  }
+
+  #country-details-area .main-area h1#people-in-need-title div.num-area {
+    float: left; font-size: 31px;vertical-align: top;margin-top: -2px;margin-right: 5px;margin-bottom: 21px;
+  }
+  #country-details-area .main-area h1#people-in-need-title  span.span-area { font-size: 14px; vertical-align: top; }
+
+  rect.chart-legend-item {
+    width: 15px;
+    height: 15px;
+  }
+
+  #country-details-hover {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    z-index: 100;
+    background-color: whitesmoke;
+    border: solid #aaaaaa 3px;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: 11px;
+
+    width: 200px;
+
+    border-radius: 3px;
+
+    display: none;
+  }
+
+  #country-details-hover h4 { padding: 0; margin: 0; font-size: 13px; }
+  #country-details-hover #country-detail-image{
+    width: 40px;
+    height: 40px;
+    float: left;
+    background-image: url(img/icons/fund.png);
+  }
+  #country-detail-table th { text-align: right; }
+
+  .clear { clear: both; }
+
+  /*For buttons*/
+  #map-layer-ctrl {
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    display: inline-block;
+    /*margin-left: -12%;*/
+    z-index: 1000;
+  }
+
+  #map-layer-ctrl button {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+
+  #map-layer-ctrl button.active {
+
+    background-color: gray;
+    border: black;
+    border-radius: 2px;
+    color: white;
+    font-weight: bold;
+  }
+  #country-main-info { background-color: rgb(232,232,232); padding-right: 5px; margin-right: -5px; margin-bottom: 10px;}
+  .country-details { background-color: rgb(232, 232, 232);   margin-left: -6px; margin-right: -6px; padding-bottom: 10px; }
+  .country-details div.country-detail-item {
+    padding-top: 10px;
+    min-width: 48%;
+    font-family: sans-serif;
+    position: relative;
+  }
+  .country-details #country-details-people-in-need {
+    float: left;
+  }
+
+  .country-details #country-details-funding {
+    float: right;
+  }
+
+  .country-detail-item { text-align: left;}
+  .country-detail-item span.arrow {
+      font-size: 10px;
+      width: 26px;
+      height: 26px;
+      background-repeat: no-repeat;
+      background-size: 58%;
+      display: inline-block;
+      position: absolute;
+      right: -4px;
+      top: 57px;
+      padding: 8px;
+      font-weight: bold;
+      background-position-x: 65%;
+    }
+
+
+
+
+  span.previous-appeal sub ,
+  span.current-appeal sub {
+    font-size: 10px;
+    float: left;
+    margin-top: 4px;
+  }
+  span.previous-appeal, span.current-appeal {
+    display: block;
+    text-align: left;
+    position: relative;
+    padding-right: 90px;
+  }
+  span.current-appeal { text-align: left; color: #CC0000; }
+  span.current-appeal h4 { float: right; margin-left: 3px; margin-right: 40px;}
+  span.previous-appeal h4 {
+    font-size: 29px;
+    padding: 0; margin: 0;
+    font-weight: normal;
+    float: right;
+    margin-left: 3px;
+  }
+
+
+  span.previous-appeal sub, span.current-appeal sub {
+      color: white;
+      padding: 2px 5px;
+      float: right;
+  }
+  span.previous-appeal sub { background-color: #333333; }
+  span.current-appeal sub { background-color: #CC0000; }
+
+  span.current-appeal h4 { font-size: 29px; padding: 0; margin: 0; /*margin-bottom: -5px;*/ font-weight: bold; margin-left: 3px; margin-top: }
+
+  #country-details-viewport-area{
+    float: left;
+    width: 100%;
+    text-align: right;
+    padding-right: 1%;
+    padding-top: 1%;
+    padding-bottom: 3%;
+  }
+  #country-details-viewport-area * { text-align: right; }
+
+   .country-detail-item span.arrow.arrow-up
+  {   background-image: url(img/icons/red-arrow-up.png);
+      padding-top: 23px;
+      color: #990000;
+  }
+
+  .country-detail-item span.arrow.arrow-down
+  {background-image: url(img/icons/green-arrow-down.png);
+
+    background-position-y: 17px;
+    padding-top: 5px;
+  height: 29px;
+  color: #005500;}
+
+  #country-funding-gap-area {
+    width: 100%;
+    text-align: left;
+    margin-bottom: 15px;
+    font-family: sans-serif;
+  }
+
+  /** FUNDING GAP AREA */
+  .gap-bars[data-type='Requirement'] { fill: lightgray; }
+  .gap-bars[data-type='Funded'] { fill: #0F6CB6; }
+
+  .gap-labels {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+
+  .detail-info-img {
+    width: 70px;
+    right: 17px;
+    top: 25px;
+    position: absolute;
+
+  }
+
+#map-list h3 {
+  padding: 0;
+  margin: 8px 0 4px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif;
+}
+/** Map detail area */
+#map-detail-area {
+  width: 220px;
+  background-color: whitesmoke;
+  /*padding: 10px;*/
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 0;
+  height: 700px;
+}
+#map-detail-viewport {
+  padding: 10px;
+}
+#map-detail-viewport #map-details-show-hide {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: -40px;
+  background-color: white;
+}
+#map-detail-viewport #map-details-show-hide a {
+  content: "Hide";
+}
+
+#map-detail-viewport #map-details-show-hide a.show-navigation {
+  content: "Show";
+}
+#map-detail-area #map-title h1 {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 38px;
+}
+#map-detail-area #map-title > p {
+  font-size: 14px;
+  line-height: 1.25;
+  color: #333333;
+  padding: 0; margin: 4px 0;
+  font-family: sans-serif;
+}
+#regional-area, #country-list-area {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+#regional-area .region-item, #country-list-area .country-list-item { cursor: pointer; margin-bottom: 2px; padding: 2px;}
+#regional-area .region-item .region-image, #country-list-area .country-list-item .country-list-image {
+  float: left;
+  width: 70px;
+  margin-right: 5px;
+}
+
+#regional-area .region-item h4, #country-list-area .country-list-item h4 {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: normal;
+  color: #0174BD;
+}
+
+#regional-area .region-item .regional-profile, #country-list-area .country-list-item .country-list-profile {
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+    font-size: 11px;
+    color: #0174BD;
+
+}
+
+#regional-area .region-item .regional-profile img, #country-list-area .country-list-item .country-list-profile img {
+  vertical-align: bottom;
+}
+</style>
+<body>
+<div id="main-activity-area">
+  <div id="country-area">
+    <div id="country-viewport">
+      <div id="country-loader">Loading</div>
+      <div id="country-header">
+        <button id="close-country-profile">Close</button>
+      </div>
+      <div id="country-details-area">
+        <div class="main-area">
+          <h1 id="country-title"></h1>
+        </div>
+        <div class="clear"></div>
+        <div id="country-main-info">
+            <div id="country-details-viewport-area" class="country-details">
+              <div id="country-details-people-in-need" class="country-detail-item">
+                <h3>People targeted</h3>
+                <img src="img/icons/people-affected-big.png" class='detail-info-img' />
+                <span class="arrow arrow-up">20%</span>
+                <span class="previous-appeal">
+                  <h4>98M</h4>
+                  <sub>Dec 2014</sub>
+                </span>
+                <div class="clear"></div>
+                <span class="current-appeal">
+                  <h4>120M</h4>
+                  <sub>Jun 2015</sub>
+                </span>
+                <div class="clear"></div>
+              </div>
+              <div id="country-details-funding" class="country-detail-item">
+                <h3>Funding Requested</h3>
+                <img src="img/icons/fund-big.png" class='detail-info-img' />
+                <span class="arrow arrow-down">20%</span>
+                <span class="previous-appeal">
+                  <h4>$408M</h4>
+                  <sub>Dec 2014</sub>
+                </span>
+                <div class="clear"></div>
+                <span class="current-appeal">
+                  <span>
+                    <h4>$620M</h4>
+                  </span>
+                  <sub>Jun 2015</sub>
+                </span>
+                <div class="clear"></div>
+              </div>
+              <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div id="country-funding-gap-area">
+          <div class="country-detail-item">
+            <h3>Total Funding Status</h3>
+            <div id="funding-gap-chart">
+            </div>
+          </div>
+        </div>
+        <div class="clear"></div>
+        <h3>Funding by Cluster</h3>
+        <!-- <h3 style="color: #cc3333">Priority Cluster: <span id="priority-cluster"></span></h3> -->
+        <div id="country-details">
+            <div id="country-details-hover">
+              <div id="country-details-viewport">
+                <div id="country-detail-image"></div>
+                <h4>Lorem Ipsum</h4>
+                <table id="country-detail-table">
+                  <tr>
+                    <th>Requirement:</th>
+                    <td><span id="country-detail-requirement">100000000</span></td>
+                  </tr>
+                  <tr>
+                    <th>Funding:</th>
+                    <td><span id="country-detail-funding">5000000</span></td>
+                  </tr>
+                  <!-- <tr>
+                    <th>Pledges:</th>
+                    <td><span id="country-detail-pledge">5000</span></td>
+                  </tr> -->
+                </table>
+                <div id="country-details-triangle"></div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="map">
+    <div id="map-layer-ctrl">
+      <span style="color: white">Show trend:</span>
+      <button id="target-layer-assistance" class="target-layer active" data-type="Assistance">Assistance</button>
+      <button id="target-layer-funding" class="target-layer" data-type="Requirement">Requirement</button>
+      <button id="target-layer-change" class="target-layer" data-type="Percent Funded">% Funded</button>
+    </div>
+  </div>
+  <div id="map-detail-area">
+    <div id="map-detail-viewport">
+      <div id="map-details-show-hide">
+        <a href="javascript: void(0);" class="show-navigation">Hide</a>
+      </div>
+      <div id="map-title">
+        <h1>The State of Aid</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <a>Share</a><a>Tweet</a>
+      </div>
+      <div id="map-list">
+        <h3>Regional Response Plans</h3>
+        <ul id="regional-area">
+          <li class='region-item'>
+            <img class='region-image' src='img/countries/sahel.png'/>
+            <h4>Sahel Regional</h4>
+            <div class='regional-profile'>
+              <img src='img/icons/people-small.png'/> <span>12M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$34M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+          <li class='region-item'>
+            <img class='region-image' src='img/countries/ssd-reg.png'/>
+            <h4>South Sudan Refugee Regional</h4>
+            <div class='regional-profile'>
+              <img src='img/icons/people-small.png'/> <span>22M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$54M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+        </ul>
+        <hr/>
+        <h3>Country Response Plans</h3>
+        <ul id="country-list-area">
+          <li class='country-list-item' data-iso="SYR">
+            <img class='country-list-image' src='img/countries/syr.png'/>
+            <h4>Syria</h4>
+            <div class='country-list-profile'>
+              <img src='img/icons/people-small.png'/> <span>12M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$34M</</span>
+            </div>
+            <div class="clear"></div>
+          </li>
+          <li class='country-list-item' data-iso="PAK">
+            <img class='country-list-image' src='img/countries/pak.png'/>
+            <h4>Pakistan</h4>
+            <div class='country-list-profile'>
+              <img src='img/icons/people-small.png'/> <span>22M</</span>&nbsp;&nbsp;
+              <img src='img/icons/fund-small.png' /> <span>$54M</</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/d3.js"></script>
+<script src="js/topojson.js"></script>
+<script src="js/leaflet.js"></script>
+
+<script>
+
+// L.mapbox.accessToken = 'pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA';
+
+// L.mapbox.accessToken = 'pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA';
+// var map = L.mapbox.map('map', 'mapbox.streets')
+    // .setView([40, -74.50], 1);
+
+/** CONSTANTS! */
+var ANIMATION_DURATION = 400;
+var MAPBOX_TILES_URL = "http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA";
+
+var ocha = ocha || {};
+var $j = jQuery;
+
+console.log("XX", ocha);
+/*
+  Map Control
+  Controller for the Map
+*/
+ocha.MapControl = function(map, mapContainer, details, navigation) {
+  if ( map == null ){
+    this.map = new L.Map("map", {center: [24, 27], zoom: 2})
+    .addLayer(new L.TileLayer(MAPBOX_TILES_URL));
+  }
+  else {
+    console.log(map);
+    this.map = map;
+  }
+
+  this.detailsContainer = $j(details);
+  this.mapContainer = $j(mapContainer);
+  this.navigationContainer = $j(navigation);
+
+  this.showNavigation = true;
+  this.showDetails = false;
+
+  this.navigationWidth = this.navigationContainer.width();
+  this.mapWidth = this.mapContainer.width();
+  this.detailsWidth = this.detailsContainer.width();
+
+};
+
+ocha.MapControl.prototype.showNavigationArea = function(callback) {
+  this.changeMap(true, this.showDetails);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.hideNavigationArea = function(callback) {
+  this.changeMap(false, this.showDetails);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.showCountryDetails = function(callback) {
+  this.changeMap(this.showNavigation, true);
+  if ( callback ) {
+    callback();
+  }
+
+};
+
+ocha.MapControl.prototype.hideCountryDetails = function(callback) {
+  this.changeMap(this.showNavigation, false);
+  if ( callback ) {
+    callback();
+  }
+};
+
+ocha.MapControl.prototype.changeMap = function(showNavigation, showDetails, callback) {
+  /* If ordered to show nav and navigation is not shown */
+  var that = this;
+
+  if ( showNavigation !== that.showNavigation ) {
+    that.showNavigation = showNavigation;
+    that.navigationContainer
+            .stop(true,true)
+            .animate({"right" : that.showNavigation ? "0" : (-1 * this.navigationWidth) + "px"},
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+    that.mapContainer
+            .stop(true,true)
+            .animate({"width" : that.showNavigation
+                                  ? that.mapContainer.width() - that.navigationWidth
+                                  : that.mapContainer.width() + that.navigationWidth },
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+  }
+
+  if ( showDetails !== that.showDetails ) {
+    that.showDetails = showDetails;
+    that.detailsContainer
+            .stop(true,true)
+            .animate({"left" : that.showDetails ? "0" : (-1 * this.detailsWidth) + "px"},
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+    that.mapContainer
+            .stop(true,true)
+            .animate({"width" : that.showDetails
+                                  ? that.mapContainer.width() - that.detailsWidth
+                                  : that.mapContainer.width() + that.detailsWidth,
+                      "marginLeft" : that.showDetails
+                                  ? that.detailsWidth
+                                  : 0
+                      },
+                      ANIMATION_DURATION,
+                      function() {  that.map.invalidateSize(); });
+
+  }
+
+  if ( callback ) {
+    callback();
+  }
+};
+
+/* Change map without specificying changeMap Parameters*/
+ocha.MapControl.prototype.toggleNav = function() {
+  this.changeMap(!this.showNavigation, this.showDetails);
+};
+
+/*Initalization*/
+ocha.MapControl.prototype.init = function() {
+  var that = this;
+
+  //initialize widths
+  that.mapContainer.width(that.mapWidth - this.navigationWidth);
+
+  //Add clicke event
+  $j("#map-details-show-hide a").on("click", function () { that.toggleNav(); $(this).toggleClass("show-navigation"); });
+
+  that.map.invalidateSize();
+
+}
+
+
+// $("#map").width($("#map").width() - 200);
+
+var showDetail = false;
+var showNav = true;
+
+
+var map = new L.Map("map", {center: [24, 27], zoom: 2})
+    .addLayer(new L.TileLayer("http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA"));
+
+    map.scrollWheelZoom.disable();
+
+var map_control = new ocha.MapControl(map, $j("#map"), $("#country-area"), $("#map-detail-area"));
+    map_control.init();
+
+var features = null; //contains geojson data
+
+var country = null, country_in_need = null, country_funding = null, country_percent_change = null;
+var country_label = null;
+var gha_csv = null;
+var raw_gha_csv = null, domInNeed = null, domFunding = null, domPercentChange = null,
+    data_2015_funding = null;
+;
+
+//Scales
+var redColorScale = null, fundColorScale = null, scaleInNeed = null, scaleFunding = null ;
+
+var svg_legend = d3.select(map.getContainer())
+                    .append("svg")
+                      .attr("width", d3.select(map.getContainer()).style("width"))
+                      .attr("height", d3.select(map.getContainer()).style("height"))
+                      .attr("style", "position: absolute; bottom: 0; left: 20px;");
+var legend_area = svg_legend.append("g").attr("class", "legends_area");
+
+var svg = d3.select(map.getPanes().overlayPane).append("svg"),
+    in_need_layer = svg.append("g").attr("class", "in_need_layer map-layer").attr("data-type", "Assistance"),
+    funding_layer = svg.append("g").attr("class", "funding_layer map-layer").attr("data-type", "Requirement"),
+    percent_change_layer = svg.append("g").attr("class", "funding_layer map-layer").attr("data-type", "Percent Funded"),
+    g = svg.append("g").attr("class", "leaflet-zoom-hide");
+
+var svg_indepth = d3.select(map.getContainer()).append("svg");
+
+var focus_countries = null;
+var transform = d3.geo.transform({point: projectPoint}),
+    path = d3.geo.path().projection(transform);
+
+var stored_zoom = null, stored_center = null;
+var lookup_image = null;
+var padding = 20;
+
+/* load data*/
+initialize();
+
+//basic interactions
+$("#map-layer-ctrl").css("marginLeft", "-"+$("#map-layer-ctrl").width()/2 + "px");
+$("#map-layer-ctrl button").on("click", function() {
+  var dataLayer = $(this).attr("data-type");
+
+  $("#map-layer-ctrl button").removeClass("active");
+
+  $(in_need_layer[0]).hide("fast");
+  $(funding_layer[0]).hide("fast");
+  $(percent_change_layer[0]).hide("fast");
+
+  $(".map-layer[data-type='" + dataLayer +"']").stop(true, true).show("fast");
+
+  console.log("#map-layer-ctrl button[data-type='" + dataLayer +"']");
+  $("#map-layer-ctrl button[data-type='" + dataLayer +"']").addClass("active");
+
+  define_scales(dataLayer);
+
+});
+
+  //loading gha data from csv
+  function load_gha_data() {
+    d3.csv("data/gha.csv", function(data) {
+      raw_gha_csv = data;
+      gha_csv = data.reduce(function(o, v, i) { if (v.ISO) { o[v.ISO] = v; } return o;}, {});
+
+      //Scale for values...
+      domInNeed  = raw_gha_csv.map(function(d) { return parseInt(d.in_need); });
+      domFunding = raw_gha_csv.map(function(d) { return parseInt(d.funding); });
+      domPercentChange = data_2015_funding.map(function(d) { return (parseFloat(d.funding) / parseFloat(d.current_requirements)); });
+
+      domPercentChange = domPercentChange.filter( function(d) { return !isNaN(d) && d != Infinity; } );
+      domInNeed = domInNeed.filter(function(d) { return d != 0; });
+      domFunding = domFunding.filter(function(d) { return d != 0; });
+
+      console.log(domPercentChange);
+
+      initialize_map();
+    });
+  }
+
+  function define_scales(dataLayer) {
+    //Clear insides
+    $(legend_area[0]).empty();
+
+    //Scales for INNEED..
+    switch(dataLayer)
+    {
+      case "Assistance":
+
+        svg_legend.style("height", 20)
+              .style("width", d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length * 50);
+
+        legend_area.selectAll("rect.legend-item.in-need")
+            .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
+            .enter()
+            .append("rect")
+              .attr("class", "legend-item in-need")
+              .attr("fill", function(d) { return redColorScale(d); })
+              .attr("y", 0)
+              .attr("width", 0)
+              .attr("x", 0)
+              .attr("height", 20);
+
+        legend_area.selectAll("text.legend-label")
+            .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
+            .enter()
+              .append("text")
+                .attr("class", "legend-label")
+                .attr("y", 15)
+                .attr("text-anchor", "middle")
+                .attr("x", 0)
+                .text(function(d) {
+                  var format = d3.formatPrefix(scaleInNeed.invert(d));
+                  return d3.round(format.scale(scaleInNeed.invert(d))) + format.symbol;
+                });
+
+          legend_area.selectAll("text.legend-label")
+            .transition()
+            .duration(500)
+            .attr("x", function(d) { return d * 50 + 25; });
+
+          legend_area.selectAll("rect.legend-item.in-need")
+            .transition()
+            .duration(500)
+            .attr("x", function(d) { return d * 50; })
+            .attr("width", 50);
+        break;
+
+        case "Requirement" :
+          console.log("Entered");
+
+          svg_legend.style("height", 20)
+                .style("width", d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length * 50);
+
+          legend_area.selectAll("rect.legend-item")
+              .data(d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1))
+              .enter()
+              .append("rect")
+                .attr("class", "legend-item in-funding")
+                .attr("fill", function(d) { return fundColorScale(d); })
+                .attr("y", 0)
+                .attr("width", 0)
+                .attr("x", 0)
+                .attr("height", 20);
+
+          legend_area.selectAll("text.legend-label")
+              .data(d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1))
+              .enter()
+                .append("text")
+                  .attr("class", "legend-label")
+                  .attr("y", 15)
+                  .attr("text-anchor", "middle")
+                  .attr("x", 0)
+                  .text(function(d) {
+                    var format = d3.formatPrefix(scaleFunding.invert(d));
+
+                    console.log(d3.round(format.scale(scaleFunding.invert(d))) + format.symbol);
+                    return d3.round(format.scale(scaleFunding.invert(d))) + format.symbol;
+                  });
+
+            legend_area.selectAll("text.legend-label")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d * 50 + 25; });
+
+            legend_area.selectAll("rect.legend-item")
+              .transition()
+              .duration(500)
+              .attr("x", function(d) { return d * 50; })
+              .attr("width", 50);
+        break;
+
+        case "Percent Funded" :
+          // scaleChange
+          // percentColorScale
+
+          svg_legend.style("height", 20)
+                .style("width", 11 * 40);
+
+          var perc_data = d3.range(0, 1, percentColorScale.domain()[2]/10);
+
+          perc_data.push(1);
+
+          console.log("PERCENT DATA", perc_data);
+
+          legend_area.selectAll("rect.legend-item")
+              .data(perc_data)
+              .enter()
+              .append("rect")
+                .attr("class", "legend-item in-change")
+                .attr("fill", function(d) {
+                  console.log(d);
+                  return percentColorScale(d); })
+                .attr("y", 0)
+                .attr("width", 0)
+                .attr("x", 0)
+                .attr("height", 20);
+
+          legend_area.selectAll("text.legend-label")
+              .data(perc_data)
+              .enter()
+                .append("text")
+                  .attr("class", "legend-label")
+                  .attr("y", 15)
+                  .attr("text-anchor", "middle")
+                  .attr("x", 0)
+                  .text(function(d) {
+                    console.log(d, d3.round(d*100));
+                    return d3.round(d*100) + "%";
+                  });
+
+            legend_area.selectAll("text.legend-label")
+              .transition()
+              .duration(500)
+              .attr("x", function(d, i) { return i  * 40 + 20; });
+
+            legend_area.selectAll("rect.legend-item")
+              .transition()
+              .duration(500)
+              .attr("x", function(d, i) { return i  * 40; })
+              .attr("width", 40);
+        break;
+    }
+
+
+  }
+
+  //Event on mouseover for chart element
+  var showChartBlockInformation_timeout = null;
+  function showChartBlockInformation(d, i) {
+    // console.log("Something is happening here", a,b,c);
+    // console.log(this);
+    if (showChartBlockInformation_timeout) {
+      clearTimeout(showChartBlockInformation_timeout);
+    }
+
+    var fmt = d3.format(",");
+
+    $("#country-detail-requirement").text("$"+ fmt(d.current_requirement));
+    $("#country-detail-funding").text("$"+ fmt(d.funding));
+    // $("#country-detail-pledge").text("$"+ fmt(d.pledges));
+    $("#country-details-viewport h4").text(d.name);
+
+    var lookup = d.name.toLowerCase();
+    // console.log("img/"+lookup_image[lookup], $("#country-detail-image").css("background-image"));
+
+    $("#country-detail-image").css("background-image", "url(img/icons/"+lookup_image[lookup]+")");
+    $("#country-details-hover").show();
+
+
+
+    console.log($("#country-details-hover").height());
+    var target = d3.select(this);
+    var boxHeight = $("#country-details-hover").height();
+    var bottomOffset = scaleFunds(d.current_requirement ? d.current_requirement : d.funding)-padding;
+    var leftOffset = parseInt(target.attr("x")) - 17 + parseInt(scaleFundLabels.rangeBand())/2;
+
+    $("#country-details-hover")
+        .stop(true, true)
+        .animate(
+        {"bottom": (bottomOffset + 35) + "px",
+         "left" : leftOffset + "px" }, 100);
+  }
+
+  function showChartBlockInformation_hide(d) {
+    showChartBlockInformation_timeout = setTimeout(function() { $("#country-details-hover").fadeOut(100); }, 500);
+  }
+
+  var cluster_data = null, scaleFunds = null, scaleFundLabels = null;
+  function showMoreDetails(data) {
+    if (d3.event.defaultPrevented) return; // click suppressed
+
+    $("#close-country-profile").show();
+    // in_need_layer.style("visibility", "hidden");
+
+    var node = d3.select(this);
+
+    var countryData = data;
+    console.log(countryData);
+    // console.log(data, this, node, node.attr("data-centroid"));
+    stored_zoom = map.getZoom();
+    stored_center = map.getCenter();
+
+    var $profile = $("#country-area");
+    var $map = $("#map");
+
+    //From the country details area;
+    var $loader = $("#country-loader");
+    var $content = $("#country-details-area");
+    var $content_detail = $("#country-details");
+
+    $content.find("h1#country-title").text(countryData.properties.name);
+
+    $loader.show();
+    //SLIDE MAP TO THE LEFT
+    if ( map_control.showDetails )
+    {
+          var cy = node.attr("data-centroid-y");
+          var cx = node.attr("data-centroid-x");
+          map_control.map.setView([cy, cx], 5);
+    }
+    else {
+      map_control.changeMap(false, true, function() {
+         //Stored items so that people can go back to the old map..
+            var cy = node.attr("data-centroid-y");
+            var cx = node.attr("data-centroid-x");
+            map_control.map.setView([cy, cx], 5, { animate: false });
+      });
+
+
+    }
+
+
+
+    var gha_data = gha_csv[data.id];
+    //TWEEN PEOPLE IN NEED
+
+    console.log(gha_data, parseInt(gha_data.in_need));
+    d3.select("#country-details-people-in-need .previous-appeal h4")
+        .transition()
+        .duration(500)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.in_need));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
+              }
+              else {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-people-in-need .current-appeal h4")
+        .transition()
+        .duration(500)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_in_need));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
+              }
+              else {
+                this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-funding .previous-appeal h4")
+        .transition()
+        .duration(500)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.funding));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t))
+
+              var symbol = fmt_pref.symbol == "G" ? "B" : fmt_pref.symbol;
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+              else
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+            };
+        });
+      ;
+
+      d3.select("#country-details-funding .current-appeal h4")
+        .transition()
+        .duration(500)
+        .tween("text",function() {
+            var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_funding_required));
+            return function(t) {
+              var fmt_pref = d3.formatPrefix(i(t));
+
+              var symbol = fmt_pref.symbol == "G" ? "B" : fmt_pref.symbol;
+
+              if (fmt_pref.symbol != "k" && i(t) > 1000)
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+              else {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+            };
+        });
+      ;
+
+
+    //BUILD CHART
+    cluster_data = null;
+    $.ajax({
+      // url: "http://fts.unocha.org/api/v1/cluster/appeal/" + gha_data.Appeal_ID_2015 + ".json",
+      url: "./data/fts.json",
+      async: false,
+      dataType: "json",
+      success: function(data) {
+        console.log(data);
+        cluster_data = data;
+      }
+    });
+    //Sort data
+    cluster_data = cluster_data.sort(function(a,b) { return b.current_requirement - a.current_requirement; })
+
+    // $("#priority-cluster").text(cluster_data[0].name);
+    //Build chart...
+    $content_detail.find("svg").remove();
+    var cont_width = $profile.width(), cont_height = $profile.height()*2/5;
+
+    var svg_chart = d3.select($content_detail[0]).append("svg")
+                .attr("width", cont_width-20)
+                .attr("height", cont_height)
+                .style("padding", 10)
+                .attr("class", "svg-details");
+
+
+    var current_requirement = cluster_data.map(function(h) { return h.current_requirement });
+
+
+    scaleFunds = d3.scale.linear()
+                  .domain([0, d3.max(current_requirement)])
+                  .rangeRound([padding, (cont_height) - padding*2]);
+
+    scaleFundLabels = d3.scale.ordinal()
+                        .domain(d3.range(cluster_data.length))
+                        .rangeRoundBands([padding*2, cont_width-padding],0.1);
+
+    console.log("INITIAL", current_requirement);
+    var yAxis = d3.svg.axis()
+                        .scale(
+                          d3.scale.linear()
+                            .domain([0, d3.max(current_requirement)])
+                            .rangeRound([(cont_height) - padding, padding*2])
+                          )
+                        .orient("left")
+                        .tickFormat(function(tick) {
+                          var tickForm = d3.formatPrefix(tick);
+                          return "$" + tickForm.scale(tick) + tickForm.symbol;
+                        });
+
+    var axis_group = svg_chart.append("g")
+                                .attr("class", "chart-detail y-axis")
+                                .attr("transform", "translate(" + padding*2 + ", 0)")
+                                .call(yAxis);
+    console.log("END", current_requirement);
+
+    var g_chart_reqt = svg_chart.append("g").attr("id", "funding-requirement");
+    var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
+    var g_chart_funding_img = svg_chart.append("g").attr("id", "funding-image");
+    // var g_chart_pledged = svg_chart.append("g").attr("id", "funding-pledged");
+    g_chart_reqt.selectAll("rect")
+            .data(cluster_data)
+            .enter()
+            .append("rect")
+              .attr("class", "chart_in_need")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("data-requirement", function(d) { return d.current_requirement; })
+              .attr("x", function(d,i) { return scaleFundLabels(i); })
+              .attr("y", function(d) { return cont_height - padding; })
+              .attr("height", 0)
+              .on("mouseenter", showChartBlockInformation)
+              .on("mouseleave", showChartBlockInformation_hide);
+
+
+      g_chart_funded.selectAll("rect.chart-funded")
+            .data(cluster_data)
+            .enter()
+              .append("rect")
+                .attr("class", "chart-funded")
+                .attr("width", scaleFundLabels.rangeBand())
+                .attr("x", function(d,i) { return scaleFundLabels(i); })
+                .attr("height", 0)
+                .attr("y", cont_height - padding)
+                .on("mouseenter", showChartBlockInformation)
+                .on("mouseleave", showChartBlockInformation_hide);
+
+      // g_chart_pledged.selectAll("rect.chart-pledged")
+      //       .data(cluster_data)
+      //       .enter()
+      //         .append("rect")
+      //           .attr("class", "chart-pledged")
+      //           .attr("width", scaleFundLabels.rangeBand())
+      //           .attr("x", function(d,i) { return scaleFundLabels(i); })
+      //           .attr("height", 0)
+      //           .attr("y", cont_height - padding)
+      //           .on("mouseenter", showChartBlockInformation)
+      //           .on("mouseleave", showChartBlockInformation_hide);
+
+      g_chart_funding_img.selectAll("image.chart-funded-img")
+          .data(cluster_data)
+          .enter()
+            .append("image")
+              .attr("class", "chart-funded-img")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("x", function(d,i) { return scaleFundLabels(i); })
+              .attr("height", scaleFundLabels.rangeBand())
+              .attr("y", cont_height - padding - scaleFundLabels.rangeBand())
+              .attr("xlink:href", function(d) { return "img/" +lookup_image[d.name.toLowerCase()]; });
+
+
+    //animate
+    g_chart_reqt.selectAll("rect.chart_in_need")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              // .delay(function(d,i) { return i * 10;})
+              .attr("height", function(d) { return scaleFunds(d.current_requirement)- padding; })
+              .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.current_requirement)); });
+
+      g_chart_funded.selectAll("rect.chart-funded")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              .attr("height", function(d) { return scaleFunds(d.funding)- padding; })
+              .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.funding)); });
+
+
+      // g_chart_pledged.selectAll("rect.chart-pledged")
+      //         .transition()
+      //         .duration(500)
+      //         .ease("sin")
+      //         .attr("height", function(d) { var exp = d.pledges*10; return scaleFunds(d.pledges) - padding; })
+      //         .attr("y", function(d) { return Math.round(cont_height- scaleFunds(d.pledges + d.funding)); });
+
+      g_chart_funding_img.selectAll("image.chart-funded-img")
+              .transition()
+              .duration(500)
+              .ease("sin")
+              .attr("y", function(d) {
+                    return Math.round(cont_height -
+                      scaleFunds(d.current_requirement ? d.current_requirement : d.funding) - scaleFundLabels.rangeBand()); })
+              ;
+
+      //legend
+      var g_legend = svg_chart.append("g").attr("class", "chart-legend");
+      var req = g_legend.append("rect").attr("class", "chart-legend-item chart_in_need")
+                      .attr("y", cont_height - padding/2)
+                      .attr("x", padding*2 + 10)
+                      .attr("width", 15),
+         req_label = g_legend.append("text").attr("class", "legend-text").text("Requirement")
+                      .attr("y", cont_height - padding/2 + 10)
+                      .attr("x", parseInt(req.attr("x")) + parseInt(req.attr("width")) + 2 )
+                      .attr("width", function(d) { return this.getBBox().width; }),
+          funded = g_legend.append("rect").attr("class", "chart-legend-item chart-funded")
+                      .attr("y", cont_height - padding/2)
+                      .attr("x", parseInt(req_label.attr("x")) + parseInt(req_label.attr("width")) + 6)
+                      .attr("width", 15),
+          funded_label = g_legend.append("text").attr("class", "legend-text").text("Funding")
+                      .attr("y", cont_height - padding/2 + 10)
+                      .attr("x", parseInt(funded.attr("x")) + parseInt(funded.attr("width")) + 2)
+                      .attr("width", function(d) { return this.getBBox().width; })
+          // pledged = g_legend.append("rect").attr("class", "chart-legend-item chart-pledged")
+          //             .attr("y", cont_height - padding/2)
+          //             .attr("x", parseInt(funded_label.attr("x")) + parseInt(funded_label.attr("width")) + 6)
+          //             .attr("width", 15),
+          // pledged_label = g_legend.append("text").attr("class", "legend-text").text("Pledges")
+          //             .attr("y", cont_height - padding/2 + 10)
+          //             .attr("x", parseInt(pledged.attr("x")) + parseInt(pledged.attr("width")) + 2)
+                      ;
+
+      //floating item
+      var g_chart_hover = svg_chart.append("g").attr("class", "chart-hover");
+
+
+      //Build_funding
+      build_funding_gap_chart(data.id);
+
+      //Show total
+
+      $loader.hide();
+
+    // $("#map").animate({"marginLeft" : "0%" }, 300); $("#country-area").animate({"left": "-50%"}, 500);
+  }
+
+  function build_funding_gap_chart(target_iso) {
+    console.log(target_iso);
+    $("#funding-gap-chart").empty();
+
+    var svg_gap = d3.select("#funding-gap-chart").append("svg").attr("width", "99%").attr("height", 120);
+    var funding_data = data_2015_funding.filter(function(d) { return d.id == gha_csv[target_iso].Appeal_ID_2015; })[0];
+    var gap_collated_data = [{"name": "Requirement", "value": funding_data.current_requirements}, {"name": "Funded", "value": funding_data.funding}];
+
+    var gap_width = $(svg_gap[0]).width();
+    var gap_height = 40;
+    var gap_padding = 80;
+
+    var gap_scale = d3.scale.linear().domain([0, funding_data.current_requirements]).rangeRound([0, gap_width - gap_padding]);
+
+    var gap_bars = svg_gap.selectAll("rect.gap-bars").data(gap_collated_data)
+                      .enter()
+                        .append("rect")
+                            .attr("class", "gap-bars")
+                            .attr("width", 0)
+                            .attr("height", 40)
+                            .attr("x", 0)
+                            .attr("data-type", function(d){ return d.name; })
+                            .attr("y", function(d, i) { return (i * 60) + 20; })
+                            .style("background-color", "black");
+
+    gap_bars.transition()
+        .duration(500)
+        .attr("width", function(d) { return gap_scale(d.value); });
+
+    var gap_labels = svg_gap.selectAll("text.gap-labels").data(gap_collated_data)
+                        .enter()
+                            .append("text")
+                              .attr("class", "gap-labels")
+                              .attr("x", 0)
+                              .attr("y", function(d,i) { return (i * 60) +18; })
+                              .attr("data-type", function(d){ return d.name; })
+                              .text(function(d) { return d.name; });
+
+    var gap_info_text = svg_gap.selectAll("text.gap-info-text").data(gap_collated_data).enter().append("text").attr("class", "gap-info-text").attr("x", 0).attr("y", function(d,i) { return i * 60 + 50; });
+
+    gap_info_text.transition().duration(500)
+      .attr("x", function(d) { return gap_scale(d.value)+5 })
+      .tween("text",function(data) {
+          var i = d3.interpolateRound(0, parseInt(data.value));
+          return function(t) {
+            var fmt_pref = d3.formatPrefix(i(t))
+            var symbol = fmt_pref.symbol;
+            if (symbol == "G") { symbol = "B"; }
+
+            if (fmt_pref.symbol != "k" && i(t) > 1000)
+            {
+              if (fmt_pref.scale(i(t)).toFixed(1)  == fmt_pref.scale(i(t)).toFixed(0))
+              {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+              }
+              else {
+                this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(1) + symbol;
+              }
+            }
+            else {
+              this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
+            }
+          };
+      });
+  }
+
+  function initialize_map() {
+
+    /* Define Scales */
+    redColorScale = d3.scale.linear().domain([0,9]).interpolate(d3.interpolateRgb).range(["#f8e5e5", "#CC0000"]);
+    scaleInNeed = d3.scale.log().domain([d3.min(domInNeed), d3.max(domInNeed)]).range([1,10]);
+
+    fundColorScale = d3.scale.linear().domain([0,9]).interpolate(d3.interpolateRgb).range(["#f8e5e5", "#CC0000"]);
+    scaleFunding = d3.scale.log().domain([d3.min(domFunding), d3.max(domFunding)]).range([1,11]);
+
+    fundChangeScale = d3.scale.linear().domain([0,5,10]).interpolate(d3.interpolateRgb)
+                          .range(["#006400", "#FFFFFF", "#BF0000"]);
+
+    var maxFunded = d3.max(domPercentChange);
+
+    console.log(maxFunded);
+    // scaleChange = d3.scale.linear().domain([0, maxFunded]).range([0,8]);
+    percentColorScale = d3.scale.linear().domain([0, 0.5, 1.0]).interpolate(d3.interpolateRgb)
+                          .range(["#CC0000", "#999999", "#00CC00"]);
+
+    console.log(percentColorScale.domain(), percentColorScale.range());
+    define_scales("Assistance");
+
+    features = topojson.feature(focus_countries, focus_countries.objects.focus_countries);
+    country_in_need = in_need_layer.selectAll("path.focused-in-need").data(features.features)
+                          .enter()
+                          .append("path")
+                            .attr("data-iso", function(d) { return d.id; })
+                            .attr("class", "focused-in-need")
+                            // .attr("stroke", function(d) {
+                            //     return gha_csv[d.id]
+                            //               ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
+                            //               : "#000000"; })
+                            .attr("fill", function(d) {
+                                return gha_csv[d.id]
+                                          ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
+                                          : "#000000"; })
+
+    country_funding = funding_layer.selectAll("path.focused-funding").data(features.features)
+                          .enter()
+                          .append("path")
+                            .attr("data-iso", function(d) { return d.id; })
+                            .attr("class", "focused-funding")
+                            // .attr("stroke", function(d) {
+                            //     return gha_csv[d.id]
+                            //               ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
+                            //               : "#000000"; })
+                            .attr("fill", function(d) {
+                                return gha_csv[d.id]
+                                          ? fundColorScale(scaleFunding(gha_csv[d.id].funding))
+                                          : "#000000"; })
+
+    country_percent_change = percent_change_layer.selectAll("path.focused-percent-change").data(features.features)
+                          .enter()
+                          .append("path")
+                          .attr("data-iso", function(d) { return d.id; })
+                          .each(function(d) { d.csv = gha_csv[d.id]; })
+                          .attr("fill", function(d) {
+                            if ( gha_csv[d.id] ) {
+                              var csv_datum = gha_csv[d.id];
+
+                              var appeal = data_2015_funding.filter(function(d) { return d.id == csv_datum.Appeal_ID_2015})[0];
+                              // var funding = data_2015_funding[csv_data.Appeal_ID_2015];
+
+                              console.log("XXX APPEAL!!!",  appeal);
+                              var delta = (parseFloat(appeal.funding) / parseFloat(appeal.current_requirements));
+
+                              if ( isNaN(delta) || !delta) {
+                                  delta = 0;
+                              }
+
+                              return percentColorScale(delta);
+                            } else {
+                              return "#000000";
+                            }
+
+                          });
+
+    $(percent_change_layer[0]).hide();
+    $(funding_layer[0]).hide();
+
+
+    country = g.selectAll("path.focused-country")
+        .data(features.features)
+          .enter()
+          .append("path")
+            .attr("data-iso", function(d) { return d.properties.id})
+            .attr("class", "focused-country")
+            .attr("data-centroid-x",  function(d) {
+
+              var x = [];
+              for (var i in d.geometry.coordinates) {
+                if (d.geometry.type == "MultiPolygon") {
+                  x = x.concat(d.geometry.coordinates[i][0].map(function (gmx) { return gmx[0]; }));
+                } else {
+                  x = x.concat(d.geometry.coordinates[i].map(function (gmx) { return gmx[0]; }));
+                }
+              }
+
+              // console.log("X LIST", x);
+              var x1 = d3.min(x), x2 = d3.max(x);
+
+              var xc = (x1 +((x2-x1)/2));
+              // console.log("FINAL", x1, x2, xc);
+              return xc;
+            })
+            .attr("data-centroid-y",  function(d) {
+              // console.log("Y LIST RAW", d.geometry);
+                var y = [];
+                for (var i in d.geometry.coordinates) {
+                  if (d.geometry.type == "MultiPolygon") {
+                    y = y.concat(d.geometry.coordinates[i][0].map(function (gmy) { return gmy[1]; }));
+                  } else {
+                    y = y.concat(d.geometry.coordinates[i].map(function (gmy) { return gmy[1]; }));
+                  }
+                }
+                var y1 = d3.min(y), y2 = d3.max(y);
+                var yc = (y1 +((y2-y1)/2));
+                return (y1 +((y2-y1)/2));
+             })
+            .on("click", showMoreDetails);
+
+    //Coloring the in-need layer
+    country_label = g.selectAll("text.focused-country-label")
+                        .data(features.features)
+                        .enter()
+                        .append("text")
+                          .attr("text-anchor", "middle")
+                          .attr("data-iso", function(d) { return d.id; })
+                          .attr("class", "focused-country-label")
+                          .text(function(d) { return d.properties.name; });
+
+    // console.log(country_label);
+    // var svg_total = ;
+
+    //Map Listeners
+    map.on('zoomstart', function() {
+      in_need_layer.style("visibility", "hidden");
+      percent_change_layer.style("visibility", "hidden");
+      funding_layer.style("visibility", "hidden");
+    });
+    map.on('zoomend', triggerLayerChange);
+
+    //Scaling the SVG element
+    triggerLayerChange();
+  }
+
+  function projectPoint(x, y) {
+    var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+    this.stream.point(point.x, point.y);
+  }
+
+  function triggerLayerChange() {
+
+    //Hide layers
+    in_need_layer.style("visibility", "hidden");
+    percent_change_layer.style("visibility", "hidden");
+    funding_layer.style("visibility", "hidden");
+
+    var bounds = path.bounds(features),
+          topLeft = bounds[0],
+          bottomRight =bounds[1];
+
+    svg.attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .style("left", topLeft[0] + "px")
+      .style("top", topLeft[1] + "px");
+
+    g.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+    in_need_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+    percent_change_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+    funding_layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+    in_need_layer.style("visibility", "visible");
+    percent_change_layer.style("visibility", "visible");
+    funding_layer.style("visibility", "visible");
+
+    country.attr("d", path);
+    country_in_need.attr("d", path);
+    country_percent_change.attr("d", path);
+    country_funding.attr("d", path);
+
+    country_label.attr("transform", function(d) { return "translate(" + path.centroid(d) + ")";} );
+
+  }
+
+  /* Bind Buttons */
+  $("#close-country-profile").on("click", function() {
+      $("#close-country-profile").hide();
+      var $profile = $("#country-area");
+      var $map = $("#map");
+      map_control.hideCountryDetails();
+      // $map.animate({"marginLeft" : "0%", "width" : "100%" }, 400, function() {
+      //   map.invalidateSize();
+      //   // map.setView(stored_center, stored_zoom);
+      // });
+      $profile.animate({"left": "-50%"}, 400, function() { $profile.attr("data-show", "false"); });
+  });
+
+  function initialize() {
+    $.ajax({
+      // url: "http://fts.unocha.org/api/v1/cluster/appeal/" + gha_data.Appeal_ID_2015 + ".json",
+      url: "./data/lookup-image.json",
+      dataType: "json",
+      success: function(data) {
+
+        lookup_image = data;
+        console.log(lookup_image);
+      }
+    });
+
+    d3.json("data/2015_funding.json", function(error, data) {
+        console.log(error);
+        data_2015_funding = data;
+    });
+
+    d3.json("data/countries.json", function(error, data) {
+      if (error) {
+        console.log(error);
+      }
+
+      focus_countries = data;
+
+      load_gha_data();
+    });
+  }
+</script>
+</body>
