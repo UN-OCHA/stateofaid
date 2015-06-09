@@ -4,6 +4,12 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+td.td-left {
+  text-align: left;
+}
+td.td-right {
+  text-align: right;
+}
 .clear { clear: both; }
 .mosaic-container {
   width: inherit;
@@ -56,21 +62,27 @@ section.hub-section {
     padding-right: 0.5em;
     right: 0;
 
-    ul {
+    tr {
       list-style-type: none;
 
-      li {
+      td {
           margin-bottom: 0.75em;
           text-transform: uppercase;
           font-size: .6em;
 
           .country-stat-count {
-            font-size: 2em;
-            float: left;
-            margin-right: 4px;
-            vertical-align: top;
-            margin-top: -6px;
-            font-weight: bold;
+              font-size: 2em;
+              margin-right: 4px;
+              vertical-align: top;
+              margin-top: -8px;
+              font-weight: bold;
+              display: inline-block;
+            }
+
+          &.td-right {
+            width: 20%;
+          }
+          &.td-left {
           }
       }
     }

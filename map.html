@@ -94,7 +94,7 @@
   }
 
   text.legend-label { font-size: 10px; fill: black; font-family: sans-serif; }
-
+  text.gap-info-text { font-weight: bold; }
   /*SVG*/
   rect.chart_in_need {
     fill: lightgray;
@@ -280,6 +280,7 @@
   {   background-image: url(img/icons/red-arrow-up.png);
       padding-top: 23px;
       color: #990000;
+      margin-right: 22px;
   }
 
   .country-detail-item span.arrow.arrow-down
@@ -308,11 +309,10 @@
   }
 
   .detail-info-img {
-    width: 70px;
-    right: 17px;
+    width: 48px;
+    right: 40px;
     top: 25px;
     position: absolute;
-
   }
 
 #map-list h3 {
@@ -416,7 +416,7 @@
               <div id="country-details-people-in-need" class="country-detail-item">
                 <h3>People targeted</h3>
                 <img src="img/icons/people-affected-big.png" class='detail-info-img' />
-                <span class="arrow arrow-up">20%</span>
+                <span class="arrow">20%</span>
                 <span class="previous-appeal">
                   <h4>98M</h4>
                   <sub>Dec 2014</sub>
@@ -431,7 +431,7 @@
               <div id="country-details-funding" class="country-detail-item">
                 <h3>Funding Requested</h3>
                 <img src="img/icons/fund-big.png" class='detail-info-img' />
-                <span class="arrow arrow-down">20%</span>
+                <span class="arrow">20%</span>
                 <span class="previous-appeal">
                   <h4>$408M</h4>
                   <sub>Dec 2014</sub>
@@ -489,8 +489,8 @@
   <div id="map">
     <div id="map-layer-ctrl">
       <span style="color: white">Show trend:</span>
-      <button id="target-layer-assistance" class="target-layer active" data-type="Assistance">Assistance</button>
-      <button id="target-layer-funding" class="target-layer" data-type="Requirement">Requirement</button>
+      <button id="target-layer-assistance" class="target-layer active" data-type="Assistance">Targeted for Assistance</button>
+      <button id="target-layer-funding" class="target-layer" data-type="Requirement">Funding Requirement</button>
       <button id="target-layer-change" class="target-layer" data-type="Percent Funded">% Funded</button>
     </div>
   </div>
@@ -776,8 +776,8 @@ $("#map-layer-ctrl button").on("click", function() {
       gha_csv = data.reduce(function(o, v, i) { if (v.ISO) { o[v.ISO] = v; } return o;}, {});
 
       //Scale for values...
-      domInNeed  = raw_gha_csv.map(function(d) { return parseInt(d.in_need); });
-      domFunding = raw_gha_csv.map(function(d) { return parseInt(d.funding); });
+      domInNeed  = raw_gha_csv.map(function(d) { return parseInt(d.June_2015_in_need); });
+      domFunding = raw_gha_csv.map(function(d) { return parseInt(d.June_2015_funding_required); });
       domPercentChange = data_2015_funding.map(function(d) { return (parseFloat(d.funding) / parseFloat(d.current_requirements)); });
 
       domPercentChange = domPercentChange.filter( function(d) { return !isNaN(d) && d != Infinity; } );
@@ -800,7 +800,7 @@ $("#map-layer-ctrl button").on("click", function() {
       case "Assistance":
 
         svg_legend.style("height", 20)
-              .style("width", d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length * 50);
+              .style("width", (d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length+1) * 50);
 
         legend_area.selectAll("rect.legend-item.in-need")
             .data(d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1))
@@ -842,7 +842,7 @@ $("#map-layer-ctrl button").on("click", function() {
           console.log("Entered");
 
           svg_legend.style("height", 20)
-                .style("width", d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length * 50);
+                .style("width", (d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length+1) * 50);
 
           legend_area.selectAll("rect.legend-item")
               .data(d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1))
@@ -866,8 +866,9 @@ $("#map-layer-ctrl button").on("click", function() {
                   .text(function(d) {
                     var format = d3.formatPrefix(scaleFunding.invert(d));
 
+                    if (format.symbol == "G") { format.symbol = "B"; }
                     console.log(d3.round(format.scale(scaleFunding.invert(d))) + format.symbol);
-                    return d3.round(format.scale(scaleFunding.invert(d))) + format.symbol;
+                    return "$" + d3.round(format.scale(scaleFunding.invert(d))) + format.symbol;
                   });
 
             legend_area.selectAll("text.legend-label")
@@ -1027,16 +1028,39 @@ $("#map-layer-ctrl button").on("click", function() {
     var gha_data = gha_csv[data.id];
     //TWEEN PEOPLE IN NEED
 
+    var jun2015inNeed = gha_data.June_2015_in_need;
+    var dec2014inNeed = gha_data.in_need;
+    var changeInNeed = (parseFloat(jun2015inNeed)/parseFloat(dec2014inNeed)) - 1;
+
+    var jun2015funding = gha_data.June_2015_funding_required;
+    var dec2014funding = gha_data.funding;
+    var changeFunding = (parseFloat(jun2015funding)/parseFloat(dec2014funding)) - 1;
+
+
+    $("#country-details-people-in-need .arrow, #country-details-funding .arrow")
+      .removeClass("arrow-up arrow-down");
+
     console.log(gha_data, parseInt(gha_data.in_need));
-    d3.select("#country-details-people-in-need .previous-appeal h4")
+    /* If there is past information */
+    // console.log("XXXXXXXXXXX", gha_data.in_needisNaN(gha_data.in_need));
+    if (gha_data.in_need) {
+      $("#country-details-people-in-need .arrow").show();
+      $("#country-details-people-in-need .previous-appeal").show();
+
+      d3.select("#country-details-people-in-need .arrow")
+      .text(function() {
+        return d3.round(changeInNeed * 100,2) + "%";
+      })
+      .classed(changeInNeed < 0 ? "arrow-down" : "arrow-up", true);
+
+      d3.select("#country-details-people-in-need .previous-appeal h4")
         .transition()
         .duration(500)
         .tween("text",function() {
             var i = d3.interpolateRound(0, parseInt(gha_data.in_need));
             return function(t) {
-              var fmt_pref = d3.formatPrefix(i(t))
-              if (fmt_pref.symbol != "k" && i(t) > 1000)
-              {
+              var fmt_pref = d3.formatPrefix(i(t));
+              if (fmt_pref.symbol != "k" && i(t) > 1000) {
                 this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
               }
               else {
@@ -1045,24 +1069,41 @@ $("#map-layer-ctrl button").on("click", function() {
             };
         });
       ;
+    } else {
+      $("#country-details-people-in-need .arrow").hide();
+      $("#country-details-people-in-need .previous-appeal").hide();
 
-      d3.select("#country-details-people-in-need .current-appeal h4")
-        .transition()
-        .duration(500)
-        .tween("text",function() {
-            var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_in_need));
-            return function(t) {
-              var fmt_pref = d3.formatPrefix(i(t))
-              if (fmt_pref.symbol != "k" && i(t) > 1000)
-              {
-                this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
-              }
-              else {
-                this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
-              }
-            };
-        });
-      ;
+    }
+
+
+    d3.select("#country-details-people-in-need .current-appeal h4")
+      .transition()
+      .duration(500)
+      .tween("text",function() {
+          var i = d3.interpolateRound(0, parseInt(gha_data.June_2015_in_need));
+          return function(t) {
+            var fmt_pref = d3.formatPrefix(i(t))
+            if (fmt_pref.symbol != "k" && i(t) > 1000)
+            {
+              this.textContent = fmt_pref.scale(i(t)).toFixed(1) + fmt_pref.symbol;
+            }
+            else {
+              this.textContent = fmt_pref.scale(i(t)).toFixed(0) + fmt_pref.symbol;
+            }
+          };
+      });
+    ;
+
+    if (gha_data.funding) {
+      $("#country-details-funding .arrow").show();
+      $("#country-details-funding .previous-appeal").show();
+
+      d3.select("#country-details-funding .arrow")
+      .text(function() {
+        return d3.round(changeFunding * 100,2) + "%";
+      })
+      .classed(changeFunding < 0 ? "arrow-down" : "arrow-up", true);
+
 
       d3.select("#country-details-funding .previous-appeal h4")
         .transition()
@@ -1083,7 +1124,11 @@ $("#map-layer-ctrl button").on("click", function() {
               }
             };
         });
-      ;
+        ;
+      } else {
+        $("#country-details-funding .arrow").hide();
+        $("#country-details-funding .previous-appeal").hide();
+      }
 
       d3.select("#country-details-funding .current-appeal h4")
         .transition()
@@ -1298,7 +1343,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
     var svg_gap = d3.select("#funding-gap-chart").append("svg").attr("width", "99%").attr("height", 120);
     var funding_data = data_2015_funding.filter(function(d) { return d.id == gha_csv[target_iso].Appeal_ID_2015; })[0];
-    var gap_collated_data = [{"name": "Requirement", "value": funding_data.current_requirements}, {"name": "Funded", "value": funding_data.funding}];
+    var gap_collated_data = [{"name": "Requirement", "value": funding_data.current_requirements}, {"name": "Funded", "value" : funding_data.funding, "percent": parseFloat(funding_data.funding)/parseFloat(funding_data.current_requirements) }];
 
     var gap_width = $(svg_gap[0]).width();
     var gap_height = 40;
@@ -1330,17 +1375,19 @@ $("#map-layer-ctrl button").on("click", function() {
                               .attr("data-type", function(d){ return d.name; })
                               .text(function(d) { return d.name; });
 
-    var gap_info_text = svg_gap.selectAll("text.gap-info-text").data(gap_collated_data).enter().append("text").attr("class", "gap-info-text").attr("x", 0).attr("y", function(d,i) { return i * 60 + 50; });
+    var gap_info_text = svg_gap.selectAll("text.gap-info-text")
+            .data(gap_collated_data).enter().append("text").attr("class", "gap-info-text").attr("x", 0).attr("y", function(d,i) { return i * 60 + 50; });
 
     gap_info_text.transition().duration(500)
       .attr("x", function(d) { return gap_scale(d.value)+5 })
       .tween("text",function(data) {
+
+        if (data.name == "Requirement") {
           var i = d3.interpolateRound(0, parseInt(data.value));
           return function(t) {
             var fmt_pref = d3.formatPrefix(i(t))
             var symbol = fmt_pref.symbol;
             if (symbol == "G") { symbol = "B"; }
-
             if (fmt_pref.symbol != "k" && i(t) > 1000)
             {
               if (fmt_pref.scale(i(t)).toFixed(1)  == fmt_pref.scale(i(t)).toFixed(0))
@@ -1355,6 +1402,15 @@ $("#map-layer-ctrl button").on("click", function() {
               this.textContent = "$" + fmt_pref.scale(i(t)).toFixed(0) + symbol;
             }
           };
+        } else { //Funded
+          console.log(data.percent);
+          var i = d3.interpolate(0, data.percent);
+          console.log(i);
+          return function(t) {
+            console.log(i(t));
+            this.textContent = d3.round(i(t) * 100, 2) + "%";
+          }
+        }
       });
   }
 
@@ -1392,7 +1448,7 @@ $("#map-layer-ctrl button").on("click", function() {
                             //               : "#000000"; })
                             .attr("fill", function(d) {
                                 return gha_csv[d.id]
-                                          ? redColorScale(scaleInNeed(gha_csv[d.id].in_need))
+                                          ? redColorScale(scaleInNeed(gha_csv[d.id].June_2015_in_need))
                                           : "#000000"; })
 
     country_funding = funding_layer.selectAll("path.focused-funding").data(features.features)
@@ -1406,7 +1462,7 @@ $("#map-layer-ctrl button").on("click", function() {
                             //               : "#000000"; })
                             .attr("fill", function(d) {
                                 return gha_csv[d.id]
-                                          ? fundColorScale(scaleFunding(gha_csv[d.id].funding))
+                                          ? fundColorScale(scaleFunding(gha_csv[d.id].June_2015_funding_required))
                                           : "#000000"; })
 
     country_percent_change = percent_change_layer.selectAll("path.focused-percent-change").data(features.features)
@@ -1422,6 +1478,10 @@ $("#map-layer-ctrl button").on("click", function() {
                               // var funding = data_2015_funding[csv_data.Appeal_ID_2015];
 
                               console.log("XXX APPEAL!!!",  appeal);
+                              if (!appeal || !appeal.funding) {
+                                return "#000000";
+                              }
+
                               var delta = (parseFloat(appeal.funding) / parseFloat(appeal.current_requirements));
 
                               if ( isNaN(delta) || !delta) {
@@ -1439,14 +1499,7 @@ $("#map-layer-ctrl button").on("click", function() {
     $(funding_layer[0]).hide();
 
 
-    country = g.selectAll("path.focused-country")
-        .data(features.features)
-          .enter()
-          .append("path")
-            .attr("data-iso", function(d) { return d.properties.id})
-            .attr("class", "focused-country")
-            .attr("data-centroid-x",  function(d) {
-
+    var getCentroidX = function(d) {
               var x = [];
               for (var i in d.geometry.coordinates) {
                 if (d.geometry.type == "MultiPolygon") {
@@ -1462,21 +1515,31 @@ $("#map-layer-ctrl button").on("click", function() {
               var xc = (x1 +((x2-x1)/2));
               // console.log("FINAL", x1, x2, xc);
               return xc;
-            })
-            .attr("data-centroid-y",  function(d) {
-              // console.log("Y LIST RAW", d.geometry);
-                var y = [];
-                for (var i in d.geometry.coordinates) {
-                  if (d.geometry.type == "MultiPolygon") {
-                    y = y.concat(d.geometry.coordinates[i][0].map(function (gmy) { return gmy[1]; }));
-                  } else {
-                    y = y.concat(d.geometry.coordinates[i].map(function (gmy) { return gmy[1]; }));
-                  }
-                }
-                var y1 = d3.min(y), y2 = d3.max(y);
-                var yc = (y1 +((y2-y1)/2));
-                return (y1 +((y2-y1)/2));
-             })
+    };
+
+    var getCentroidY = function(d) {
+      // console.log("Y LIST RAW", d.geometry);
+        var y = [];
+        for (var i in d.geometry.coordinates) {
+          if (d.geometry.type == "MultiPolygon") {
+            y = y.concat(d.geometry.coordinates[i][0].map(function (gmy) { return gmy[1]; }));
+          } else {
+            y = y.concat(d.geometry.coordinates[i].map(function (gmy) { return gmy[1]; }));
+          }
+        }
+        var y1 = d3.min(y), y2 = d3.max(y);
+        var yc = (y1 +((y2-y1)/2));
+        return (y1 +((y2-y1)/2));
+     };
+
+    country = g.selectAll("path.focused-country")
+        .data(features.features)
+          .enter()
+          .append("path")
+            .attr("data-iso", function(d) { return d.properties.id})
+            .attr("class", "focused-country")
+            .attr("data-centroid-x", getCentroidX)
+            .attr("data-centroid-y",  getCentroidY)
             .on("click", showMoreDetails);
 
     //Coloring the in-need layer
@@ -1485,9 +1548,12 @@ $("#map-layer-ctrl button").on("click", function() {
                         .enter()
                         .append("text")
                           .attr("text-anchor", "middle")
-                          .attr("data-iso", function(d) { return d.id; })
+                          .attr("data-iso", function(d) { return d.properties.id; })
+                          .attr("data-centroid-x", getCentroidX)
+                          .attr("data-centroid-y",  getCentroidY)
                           .attr("class", "focused-country-label")
-                          .text(function(d) { return d.properties.name; });
+                          .text(function(d) { return d.properties.name; })
+                          .on("click", showMoreDetails);;
 
     // console.log(country_label);
     // var svg_total = ;

@@ -67,7 +67,7 @@ body { margin: 0; padding: 0; }
 
 <!-- data-next-0="ocha.Story.titleProcess1"
            data-next-1="ocha.Story.titleProcess2" -->
-  <!-- <section id="mosaic-area" class="hub-section"
+  <section id="mosaic-area" class="hub-section"
            data-next-before="ocha.Story.titleToOpening"
            data-next="fade"
 
@@ -95,7 +95,7 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section" id="hub-slide-2" style="background-color: white">
     Chart area
-  </section> -->
+  </section>
 
   <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3"
           data-next-after="ocha.Story.startIraqCounter">
@@ -111,17 +111,32 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Iraq</h2></div>
       <div class='hub-country-stats'>
-        <ul>
-          <li>
-              <span class='country-stat-count' data-stat-count='8200000'>0</span> people in need of assistance
-              <div class="clear"></div>
-            </li>
-          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people internally displaced
-              <div class="clear"></div>
-            </li>
-          <li><span class='country-stat-count' data-stat-count='60'>0</span>% of frontline humanitarian operations are at risk of shutting down due to overfunding
-                        <div class="clear"></div></li>
-        </ul>
+          <table>
+            <tr>
+              <td class='td-right'>
+                <span class='country-stat-count' data-stat-count='8200000'>0</span>
+              </td>
+              <td class='td-left'>
+                <span class=''>people in need of assistance</span>
+              </td>
+            </tr>
+            <tr>
+              <td class='td-right'>
+                <span class='country-stat-count' data-stat-count='2800000'>0</span>
+              </td>
+              <td class='td-left'>
+                people internally displaced
+              </td>
+            </tr>
+            <tr>
+              <td class='td-right'>
+                <span class='country-stat-count' data-stat-count='60'>0</span>%
+              </td>
+              <td class='td-left'>
+                of frontline humanitarian operations are at risk of shutting down due to overfunding
+              </td>
+            </tr>
+          </table>
       </div>
     </div>
   </section>
@@ -129,11 +144,20 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
         <div class='hub-country-title'><h2>Syria</h2></div>
         <div class='hub-country-stats'>
-          <ul>
-            <li><span class='country-stat-count' data-stat-count='7600000'>0</span> people have been internally displaced<div class="clear"></div></li>
-            <li><span class='country-stat-count' data-stat-count='4000000'>0</span> people internally displaced<div class="clear"></div></li>
-            <li><span class='country-stat-count' data-stat-count='4800000'>0</span> people are living in hard-to-reach or besieged locations<div class="clear"></div></li>
-          </ul>
+          <table>
+            <tr>
+                <td class='td-right'><span class='country-stat-count' data-stat-count='7600000'>0</span></td>
+                <td class='td-left'>people have been internally displaced<div class="clear"></div></td>
+            </tr>
+            <tr>
+              <td class='td-right'><span class='country-stat-count' data-stat-count='4000000'>0</span></td>
+              <td class='td-left'>people internally displaced<div class="clear"></div></td>
+            </tr>
+            <tr>
+              <td class='td-right'><span class='country-stat-count' data-stat-count='4800000'>0</span></td>
+              <td class='td-left'>people are living in hard-to-reach or besieged locations<div class="clear"></div></td>
+            </tr>
+          </table>
         </div>
       </div>
   </section>
@@ -141,11 +165,20 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>South Sudan</h2></div>
       <div class='hub-country-stats'>
-        <ul>
-          <li><span class='country-stat-count' data-stat-count='1500000'>0</span> internally displaced<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='550000'>0</span> refugees<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='4800000'>0</span> poeple are severely food insecure<div class="clear"></div></li>
-        </ul>
+        <table>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='1500000'>0</span></td>
+            <td class='td-left'>internally displaced<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='550000'>0</span></td>
+            <td class='td-left'>refugees<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='4800000'>0</span></td>
+            <td class='td-left'>people are severely food insecure<div class="clear"></div></td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>
@@ -153,9 +186,11 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Yemen</h2></div>
       <div class='hub-country-stats'>
-        <ul>
-          <li><span class='country-stat-count' data-stat-count='545000'>0</span> civilians displaced</li>
-        </ul>
+        <table>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='545000'>0</span></td>
+            <td class='td-left'>civilians displaced</td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>
@@ -183,10 +218,18 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Nepal</h2></div>
       <div class='hub-country-stats'>
-        <ul>
-          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people displaced<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='3500000'>0</span> million people need food assistance<div class="clear"></div></li>
-        </ul>
+        <table>
+          <tr>
+            <td class='td-right'>
+              <span class='country-stat-count' data-stat-count='2800000'>0</span>
+            </td>
+            <td class='td-left'>people displaced<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='3500000'>0</span></td>
+            <td class='td-left'>million people need food assistance<div class="clear"></div></td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>
@@ -228,10 +271,16 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Somalia</h2></div>
       <div class='hub-country-stats abs-left'>
-        <ul>
-          <li>Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span> people<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='128000'>0</span> received seeds, tools, and fishing equipment<div class="clear"></div></li>
-        </ul>
+        <table>
+          <tr>
+            <td colspan="2">Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span>people<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'>
+              <span class='country-stat-count' data-stat-count='128000'>0</span></td>
+            <td class='td-left'>received seeds, tools, and fishing equipment<div class="clear"></div></td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>
@@ -240,12 +289,23 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Vanuatu</h2></div>
       <div class='hub-country-stats'>
-        <ul>
-          <li><span class='country-stat-count' data-stat-count='19500'>0</span> children vaccinated against measles<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='370000'>0</span> people received food assistance<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='47000'>0</span> people received clean water.<div class="clear"></div></li>
-          <li><span class='country-stat-count' data-stat-count='50000'>0</span> people received emergency shelter assistance.<div class="clear"></div></li>
-        </ul>
+        <table>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='19500'>0</span></td>
+            <td class='td-left'>children vaccinated against measles<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='370000'>0</span></td>
+            <td class='td-left'>people received food assistance<div class="clear"></div></td>
+          </tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='47000'>0</span></td>
+            <td class='td-left'>people received clean water.<div class="clear"></div></td></tr>
+          <tr>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='50000'>0</span></td>
+            <td class='td-left'>people received emergency shelter assistance.<div class="clear"></div></td>
+          </tr>
+        </table>
       </div>
     </div>
   </section>
@@ -1026,48 +1086,48 @@ ocha.Story = function() {
     },
 
     startIraqCounter : function () {
-      d3.selectAll("#hub-slide-4 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-4 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
 
     startSyriaCounter : function () {
-      d3.selectAll("#hub-slide-5 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-5 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
 
     startNepalCounter : function () {
-      d3.selectAll("#hub-slide-10 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-10 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
 
     startSouthSudanCounter : function () {
-      d3.selectAll("#hub-slide-6 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-6 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
 
     startYemenCounter : function () {
-      d3.selectAll("#hub-slide-7 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-7 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
 
     startSomaliaCounter : function () {
-      d3.selectAll("#hub-slide-14 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-14 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
     startVanuatuCounter : function () {
-      d3.selectAll("#hub-slide-15 .hub-country-stats li span.country-stat-count")
+      d3.selectAll("#hub-slide-15 .hub-country-stats span.country-stat-count")
       .transition()
       .duration(1500)
       .tween("text", ocha.Story.tweener);

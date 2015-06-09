@@ -3,6 +3,12 @@ body {
   padding: 0;
   font-family: 'Open Sans', sans-serif; }
 
+td.td-left {
+  text-align: left; }
+
+td.td-right {
+  text-align: right; }
+
 .clear {
   clear: both; }
 
@@ -46,19 +52,21 @@ section.hub-section {
     color: #f47932;
     padding-right: 0.5em;
     right: 0; }
-    section.hub-section .hub-country-stats ul {
+    section.hub-section .hub-country-stats tr {
       list-style-type: none; }
-      section.hub-section .hub-country-stats ul li {
+      section.hub-section .hub-country-stats tr td {
         margin-bottom: 0.75em;
         text-transform: uppercase;
         font-size: .6em; }
-        section.hub-section .hub-country-stats ul li .country-stat-count {
+        section.hub-section .hub-country-stats tr td .country-stat-count {
           font-size: 2em;
-          float: left;
           margin-right: 4px;
           vertical-align: top;
-          margin-top: -6px;
-          font-weight: bold; }
+          margin-top: -8px;
+          font-weight: bold;
+          display: inline-block; }
+        section.hub-section .hub-country-stats tr td.td-right {
+          width: 20%; }
     section.hub-section .hub-country-stats.abs-left {
       right: auto;
       left: 0; }
