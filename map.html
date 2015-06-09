@@ -1215,7 +1215,7 @@ $("#map-layer-ctrl button").on("click", function() {
               .attr("x", function(d,i) { return scaleFundLabels(i); })
               .attr("height", scaleFundLabels.rangeBand())
               .attr("y", cont_height - padding - scaleFundLabels.rangeBand())
-              .attr("xlink:href", function(d) { return "img/" +lookup_image[d.name.toLowerCase()]; });
+              .attr("xlink:href", function(d) { return "img/icons/" +lookup_image[d.name.toLowerCase()]; });
 
 
     //animate

@@ -67,7 +67,7 @@ body { margin: 0; padding: 0; }
 
 <!-- data-next-0="ocha.Story.titleProcess1"
            data-next-1="ocha.Story.titleProcess2" -->
-  <section id="mosaic-area" class="hub-section"
+  <!-- <section id="mosaic-area" class="hub-section"
            data-next-before="ocha.Story.titleToOpening"
            data-next="fade"
 
@@ -95,9 +95,10 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section" id="hub-slide-2" style="background-color: white">
     Chart area
-  </section>
+  </section> -->
 
-  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3" div-next-after="ocha.Story.startIraqCounter">
+  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3"
+          data-next-after="ocha.Story.startIraqCounter">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
@@ -106,38 +107,44 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class="hub-section" id="hub-slide-4" div-next-after="ocha.Story.startSyriaCounter">
+  <section class="hub-section" id="hub-slide-4" data-next-after="ocha.Story.startSyriaCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Iraq</h2></div>
       <div class='hub-country-stats'>
         <ul>
-          <li><span class='country-stat-count' data-stat-count='8200000'>0</span> people in need of assistance</li>
-          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people internally displaced</li>
-          <li><span class='country-stat-count' data-stat-count='60'>0</span>% of frontline humanitarian operations are at risk of shutting down due to overfunding</li>
+          <li>
+              <span class='country-stat-count' data-stat-count='8200000'>0</span> people in need of assistance
+              <div class="clear"></div>
+            </li>
+          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people internally displaced
+              <div class="clear"></div>
+            </li>
+          <li><span class='country-stat-count' data-stat-count='60'>0</span>% of frontline humanitarian operations are at risk of shutting down due to overfunding
+                        <div class="clear"></div></li>
         </ul>
       </div>
     </div>
   </section>
-  <section class="hub-section" id="hub-slide-5">
+  <section class="hub-section" id="hub-slide-5" data-next-after="ocha.Story.startSouthSudanCounter">
     <div class='hub-viewport'>
         <div class='hub-country-title'><h2>Syria</h2></div>
         <div class='hub-country-stats'>
           <ul>
-            <li><span class='country-stat-count' data-stat-count='7600000'>0</span> people have been internally displaced</li>
-            <li><span class='country-stat-count' data-stat-count='4000000'>0</span> people internally displaced</li>
-            <li><span class='country-stat-count' data-stat-count='4800000'>0</span> people are living in hard-to-reach or besieged locations</li>
+            <li><span class='country-stat-count' data-stat-count='7600000'>0</span> people have been internally displaced<div class="clear"></div></li>
+            <li><span class='country-stat-count' data-stat-count='4000000'>0</span> people internally displaced<div class="clear"></div></li>
+            <li><span class='country-stat-count' data-stat-count='4800000'>0</span> people are living in hard-to-reach or besieged locations<div class="clear"></div></li>
           </ul>
         </div>
       </div>
   </section>
-  <section class="hub-section"  id="hub-slide-6">
+  <section class="hub-section"  id="hub-slide-6" data-next-after="ocha.Story.startYemenCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>South Sudan</h2></div>
       <div class='hub-country-stats'>
         <ul>
-          <li><span class='country-stat-count' data-stat-count='1500000'>0</span> internally displaced</li>
-          <li><span class='country-stat-count' data-stat-count='550000'>0</span> refugees</li>
-          <li><span class='country-stat-count' data-stat-count='4800000'>0</span> poeple are severely food insecure</li>
+          <li><span class='country-stat-count' data-stat-count='1500000'>0</span> internally displaced<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='550000'>0</span> refugees<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='4800000'>0</span> poeple are severely food insecure<div class="clear"></div></li>
         </ul>
       </div>
     </div>
@@ -162,7 +169,8 @@ body { margin: 0; padding: 0; }
       </div>
     </div>
   </section>
-  <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9">
+  <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9"
+        data-next-after="ocha.Story.startNepalCounter">
 
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
@@ -176,8 +184,8 @@ body { margin: 0; padding: 0; }
       <div class='hub-country-title'><h2>Nepal</h2></div>
       <div class='hub-country-stats'>
         <ul>
-          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people displaced</li>
-          <li><span class='country-stat-count' data-stat-count='3500000'>0</span> million people need food assistance</li>
+          <li><span class='country-stat-count' data-stat-count='2800000'>0</span> people displaced<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='3500000'>0</span> million people need food assistance<div class="clear"></div></li>
         </ul>
       </div>
     </div>
@@ -205,7 +213,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section hub-neutral-background' id='hub-slide-13'>
+  <section class='hub-section hub-neutral-background' id='hub-slide-13' data-next-after="ocha.Story.startSomaliaCounter">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
@@ -216,13 +224,13 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-14'>
+  <section class='hub-section' id='hub-slide-14'  data-next-after="ocha.Story.startVanuatuCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Somalia</h2></div>
       <div class='hub-country-stats abs-left'>
         <ul>
-          <li>Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span> people</li>
-          <li><span class='country-stat-count' data-stat-count='128000'>0</span> received seeds, tools, and fishing equipment</li>
+          <li>Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span> people<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='128000'>0</span> received seeds, tools, and fishing equipment<div class="clear"></div></li>
         </ul>
       </div>
     </div>
@@ -233,9 +241,10 @@ body { margin: 0; padding: 0; }
       <div class='hub-country-title'><h2>Vanuatu</h2></div>
       <div class='hub-country-stats'>
         <ul>
-          <li><span class='country-stat-count' data-stat-count='19500'>0</span> children vaccinated against measles</li>
-          <li><span class='country-stat-count' data-stat-count='370000'>0</span> people received food assistance and <span class='country-stat-count' data-stat-count='47000'>0</span> with clean water.</li>
-          <li><span class='country-stat-count' data-stat-count='50000'>0</span> people received emergency shelter assistance.</li>
+          <li><span class='country-stat-count' data-stat-count='19500'>0</span> children vaccinated against measles<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='370000'>0</span> people received food assistance<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='47000'>0</span> people received clean water.<div class="clear"></div></li>
+          <li><span class='country-stat-count' data-stat-count='50000'>0</span> people received emergency shelter assistance.<div class="clear"></div></li>
         </ul>
       </div>
     </div>
@@ -1016,8 +1025,73 @@ ocha.Story = function() {
       });
     },
 
+    startIraqCounter : function () {
+      d3.selectAll("#hub-slide-4 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
+    startSyriaCounter : function () {
+      d3.selectAll("#hub-slide-5 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
+    startNepalCounter : function () {
+      d3.selectAll("#hub-slide-10 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
+    startSouthSudanCounter : function () {
+      d3.selectAll("#hub-slide-6 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
+    startYemenCounter : function () {
+      d3.selectAll("#hub-slide-7 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
+    startSomaliaCounter : function () {
+      d3.selectAll("#hub-slide-14 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+    startVanuatuCounter : function () {
+      d3.selectAll("#hub-slide-15 .hub-country-stats li span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
+
     finalMap : function() {
       lastMosaic.stopMosaic();
+    },
+
+    tweener : function() {
+      var target = d3.select(this);
+      console.log(target);
+      var i = d3.interpolateRound(0, parseInt(target.attr("data-stat-count")));
+      return function(t) {
+        console.log(i(t), this);
+        var fP = d3.formatPrefix(i(t));
+
+        if (fP.symbol != "")
+        {
+          this.textContent = d3.round(fP.scale(i(t)),1) + fP.symbol;
+        } else {
+          this.textContent = fP.scale(i(t)) + fP.symbol;
+        }
+      };
     }
 
   };
