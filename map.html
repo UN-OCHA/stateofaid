@@ -42,6 +42,11 @@
     /*stroke: white;*/
     stroke-width: .1px;
   }
+
+  #twitter-button {
+    display: inline-block;
+    vertical-align: middle;
+  }
   #country-area {
     width: 49%;
     padding: .5%;
@@ -317,7 +322,7 @@
 
 #map-list h3 {
   padding: 0;
-  margin: 8px 0 4px;
+  margin: 12px 0 4px;
   font-size: 15px;
   font-weight: bold;
   font-family: sans-serif;
@@ -399,6 +404,15 @@
 }
 </style>
 <body>
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=469606566518244";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
 <div id="main-activity-area">
   <div id="country-area">
     <div id="country-viewport">
@@ -502,7 +516,12 @@
       <div id="map-title">
         <h1>The State of Aid</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <a>Share</a><a>Tweet</a>
+        <div class="fb-share-button" data-href="http://www.staging.unocha.org/stateofaid-draft/" data-layout="button_count"></div>
+        <span id="twitter-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="pikittakbo">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </span>
+
       </div>
       <div id="map-list">
         <h3>Regional Response Plans</h3>
@@ -527,7 +546,7 @@
           </li>
         </ul>
         <hr/>
-        <h3>Country Response Plans</h3>
+        <!-- <h3>Country Response Plans</h3>
         <ul id="country-list-area">
           <li class='country-list-item' data-iso="SYR">
             <img class='country-list-image' src='img/countries/syr.png'/>
@@ -546,7 +565,7 @@
               <img src='img/icons/fund-small.png' /> <span>$54M</</span>
             </div>
           </li>
-        </ul>
+        </ul> -->
       </div>
     </div>
   </div>
