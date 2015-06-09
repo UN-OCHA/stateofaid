@@ -75,8 +75,8 @@ body { margin: 0; padding: 0; }
     <div id="mosaic-actual"></div>
     <div id="mosaic-overlay-area"></div>
     <div id="mosaic-title-area">
-      <h1>Mid-year Update</h1>
-      <h3>A Global Humanitarian Appeals Update (Jan 2015 - Jun 2015)</h3>
+      <h1>Humanitarian Needs:</h1>
+      <h2>State of Play</h2>
     </div>
   </section>
 
@@ -89,19 +89,20 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class="hub-section" id="hub-slide-1-a" data-prev="fade" data-next-after="ocha.Story.loadChart">
+  <section class="hub-section" id="hub-slide-1-a" data-prev="fade">
     <div class='hub-viewport'>
       <div class="content" id="hub-slide-1-bad-news">
         <h1>The Bad News</h1>
-        <p>the humanitarian system is under unprecedented strain.</p>
+        <p>The humanitarian system is under unprecedented strain.</p>
       </div>
     </div>
   </section>
 
-  <section class="hub-section" id="hub-slide-2" style="background-color: white">
+  <section class="hub-section" id="hub-slide-2" style="background-color: white" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
       <div class='content'>
-        <h2>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</h2>
+        <h2>In just over a decade, the number of people  in need of aid increased by <strong style="color: #990000">600%</strong>.
+          At the same time, the amount of funding available to help stayed relatively the same. </h2>
       </div>
       <div id="chart-container">
         <div id="chart-area" class='chart'></div>
@@ -109,17 +110,16 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3"
-          data-next-after="ocha.Story.startIraqCounter">
+  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
-          <h2>In many countries, violence and insecurity continue to cause massive internal and cross-border displacement. In 2015 alone, we have seen <strong>700,000</strong> people newly displaced.</h2>
+          <h2>In many countries, violence and insecurity continue to cause massive internal and cross-border displacement.<br/><br/>In 2015 alone, we have seen <strong>700,000</strong> people newly displaced.</h2>
       </div>
     </div>
   </section>
 
-  <section class="hub-section" id="hub-slide-4" data-next-after="ocha.Story.startSyriaCounter">
+  <section class="hub-section" id="hub-slide-4" data-on-init="ocha.Story.startIraqCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Iraq</h2></div>
       <div class='hub-country-stats'>
@@ -145,35 +145,35 @@ body { margin: 0; padding: 0; }
                 <span class='country-stat-count' data-stat-count='60'>0</span>%
               </td>
               <td class='td-left'>
-                of frontline humanitarian operations are at risk of shutting down due to overfunding
+                of frontline humanitarian operations at risk of shutting down due to overfunding
               </td>
             </tr>
           </table>
       </div>
     </div>
   </section>
-  <section class="hub-section" id="hub-slide-5" data-next-after="ocha.Story.startSouthSudanCounter">
+  <section class="hub-section" id="hub-slide-5" data-on-init="ocha.Story.startSyriaCounter">
     <div class='hub-viewport'>
         <div class='hub-country-title'><h2>Syria</h2></div>
         <div class='hub-country-stats'>
           <table>
             <tr>
                 <td class='td-right'><span class='country-stat-count' data-stat-count='7600000'>0</span></td>
-                <td class='td-left'>people have been internally displaced<div class="clear"></div></td>
+                <td class='td-left'>internally displaced<div class="clear"></div></td>
             </tr>
             <tr>
               <td class='td-right'><span class='country-stat-count' data-stat-count='4000000'>0</span></td>
-              <td class='td-left'>people internally displaced<div class="clear"></div></td>
+              <td class='td-left'>forced across borders<div class="clear"></div></td>
             </tr>
             <tr>
               <td class='td-right'><span class='country-stat-count' data-stat-count='4800000'>0</span></td>
-              <td class='td-left'>people are living in hard-to-reach or besieged locations<div class="clear"></div></td>
+              <td class='td-left'>people living in hard-to-reach or besieged locations<div class="clear"></div></td>
             </tr>
           </table>
         </div>
       </div>
   </section>
-  <section class="hub-section"  id="hub-slide-6" data-next-after="ocha.Story.startYemenCounter">
+  <section class="hub-section"  id="hub-slide-6" data-on-init="ocha.Story.startSouthSudanCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>South Sudan</h2></div>
       <div class='hub-country-stats'>
@@ -188,13 +188,13 @@ body { margin: 0; padding: 0; }
           </tr>
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='4800000'>0</span></td>
-            <td class='td-left'>people are severely food insecure<div class="clear"></div></td>
+            <td class='td-left'>severely food insecure<div class="clear"></div></td>
           </tr>
         </table>
       </div>
     </div>
   </section>
-  <section class="hub-section" id="hub-slide-7" data-next="fade">
+  <section class="hub-section" id="hub-slide-7" data-on-init="ocha.Story.startYemenCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Yemen</h2></div>
       <div class='hub-country-stats'>
@@ -206,13 +206,17 @@ body { margin: 0; padding: 0; }
       </div>
     </div>
   </section>
-  <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-8">
+  <section class="hub-section" data-next="fade" id="hub-slide-8" data-on-init="ocha.Story.startUkraineCounter">
     <div class='hub-viewport'>
-      <div class='hub-radial-overlay'></div>
-      <div class='content'>
-        <h2><strong>Ukraine</strong> aid agencies have received just</h2>
-        <h1>19%</h1>
-        <h2>of their needs. This has left many conflict-affected families with no access to emergency shelter</h2>
+      <div class='hub-country-title'><h2>Ukraine</h2></div>
+      <div class='hub-country-stats abs-left'>
+        <table>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='5000000'>0</span></td>
+            <td class='td-left'>in need of humanitarian assistance</td>
+          </tr>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='2200000'>0</span></td>
+              <td class='td-left'>uprooted by the conflict</td>
+        </table>
       </div>
     </div>
   </section>
@@ -239,7 +243,7 @@ body { margin: 0; padding: 0; }
           </tr>
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='3500000'>0</span></td>
-            <td class='td-left'>million people need food assistance<div class="clear"></div></td>
+            <td class='td-left'>in need of food assistance<div class="clear"></div></td>
           </tr>
         </table>
       </div>
@@ -273,7 +277,7 @@ body { margin: 0; padding: 0; }
       <div class='hub-radial-overlay'></div>
       <div class='content'>
         <h2>
-          Aid organizations have achieved a lot so far in 2015. they have saved lives, supported the livelihoods and protected the safety of millions of people.
+          Aid organizations have achieved a lot so far in 2015. <br/><br/>They have saved lives, supported the livelihoods and protected the safety of millions of people.
         </h2>
       </div>
     </div>
@@ -285,7 +289,8 @@ body { margin: 0; padding: 0; }
       <div class='hub-country-stats abs-left'>
         <table>
           <tr>
-            <td colspan="2">Aid groups provided food assistance to <span class='country-stat-count' data-stat-count='333000'>0</span>people<div class="clear"></div></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='333000'>0</span></td>
+            <td class='td-left'>received food assistance<div class="clear"></div></td>
           </tr>
           <tr>
             <td class='td-right'>
@@ -332,13 +337,12 @@ body { margin: 0; padding: 0; }
       <div class='hub-radial-overlay'></div>
       <div class='content' id="hub-16-00">
         <h2>
-          But each year millions of people do not get the help they need because humanitarian access is compromised.
-        </h2>
+          But each year millions of people do not get the help they need because</h2>
+        <h1>humanitarian access is compromised.</h1>
       </div>
       <div class='content' id="hub-16-01" style="display: none">
-        <h2>
-          Or because the funding does not come through
-        </h2>
+        <h2>Or because the funding</h2>
+        <h1>does not come through.</h1>
       </div>
       <div class='content' id="hub-16-02" style="display: none">
         <h2>
@@ -363,6 +367,24 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
+  <section class='hub-section hub-neutral-background' id='hub-slide-18' data-next="fade">
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h1>We can turn this around.</h1>
+      </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' id='hub-slide-18'>
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
+      <div class='content'>
+        <h2>Together we can do more to help every child, woman and man, from Chad to Yemen, to receive the life
+          saving assistance that they deserver &dash; if we fully fund the humanitarian response in 2015.</h2>
+      </div>
+    </div>
+  </section>
 
 
 
@@ -949,6 +971,17 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
     mode = "scrollUp";
   }
 
+  var onInit = nextPage.attr("data-on-init");
+  try {
+    onInit = eval(onInit);
+  } catch (ex) {
+    onInit = function() {};
+  };
+
+  if ( typeof onInit !== "function" ) {
+    onInit = function() {};
+  }
+
   // console.log("ScrollUp : NEXT PAGE ", nextPage, mode);
   switch ( mode ) {
     case "scrollUp":
@@ -961,7 +994,9 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED,
         function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
+      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+        onInit();
+      });
     break;
 
     case "scrollDown":
@@ -975,7 +1010,9 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
       // console.log("NEXT PAGE ", nextPage);
 
       currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false});
+      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+        onInit();
+      });
     break;
 
     case "fade":
@@ -983,13 +1020,18 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
       // console.log(nextPage, currentPage);
 
       currentPage.show().css("opacity", 1).css("top", 0);
-      nextPage.show().css("opacity", 0).css("top", 0);
+      nextPage.show().css("opacity", 1).css("top", 0);
 
+      var nextPageZindex = nextPage.css("zIndex");
+
+      nextPage.css("zIndex", parseInt(currentPage.css("zIndex")) - 10);
 
       currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, function() { if (callback) callback(); });
       nextPage.stop(true, true).animate({ opacity: 1}, that.TRANSITION_SPEED, function() {
         that.transitionOngoing=false;
+        nextPage.css("zIndex", nextPageZindex);
         currentPage.hide();
+        onInit();
       });
     break;
 
@@ -1020,8 +1062,8 @@ ocha.CountryChart = function (container) {
                { year: 2011, requirement: 7900000000, targeted: 65000000},
                { year: 2012, requirement: 8800000000, targeted: 62000000},
                { year: 2013, requirement: 12900000000, targeted: 73000000},
-               { year: 2014},
-               { year: 2015}
+               { year: 2014, requirement: 13000000000, targeted: 81000000},
+               { year: 2015, requirement: 18806048959, targeted: 78913640}
             ];
 
   this.chart = null;
@@ -1200,6 +1242,12 @@ ocha.Story = function() {
       });
     },
 
+    startUkraineCounter : function() {
+      d3.selectAll("#hub-slide-8 .hub-country-stats span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
     startIraqCounter : function () {
       d3.selectAll("#hub-slide-4 .hub-country-stats span.country-stat-count")
       .transition()
