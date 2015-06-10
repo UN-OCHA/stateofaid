@@ -1,14 +1,26 @@
 body, html {
   overflow: hidden; }
 
+#chart-container {
+  left: 50%; }
+  #chart-container #chart-area .c3-line-People-Targeted, #chart-container #chart-area .c3-line-Funding-Requirement {
+    stroke-width: 5; }
+
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif; }
+  font-family: 'Open Sans', sans-serif;
+  background-size: cover;
+  background-image: url(../img/bg-light.png);
+  background-repeat: no-repeat; }
 
-#mosaic-area h2 {
-  font-size: 4em;
-  text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.8); }
+#mosaic-area {
+  background-size: cover;
+  background-image: url(../img/bg.png);
+  background-repeat: no-repeat; }
+  #mosaic-area h2 {
+    font-size: 4em;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.8); }
 
 td.td-left {
   text-align: left; }
@@ -90,7 +102,8 @@ section.hub-section {
   position: absolute;
   left: 50%;
   padding-top: 5%;
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(0, 56, 86, 0.7);
+  color: #f47932;
   padding: 5% 2%;
   width: 40%; }
   #hub-slide-1 #hub-slide-1-good-news h1,
@@ -99,14 +112,13 @@ section.hub-section {
     font-size: 2.5em;
     margin: 0;
     padding: 0;
-    color: #333333;
-    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.5);
+    color: #f47932;
     text-transform: uppercase; }
   #hub-slide-1 #hub-slide-1-good-news p,
   #hub-slide-1 #hub-slide-1-bad-news p, #hub-slide-1-a #hub-slide-1-good-news p,
   #hub-slide-1-a #hub-slide-1-bad-news p {
     font-size: 2em;
-    font-size: #333333;
+    color: #f47932;
     line-height: 1.5;
     padding: 0;
     margin: 0; }
@@ -121,10 +133,15 @@ section.hub-section {
     position: absolute;
     left: 0;
     padding-top: 5%;
-    background-color: rgba(255, 255, 255, 0.8);
     padding: 1% 0% 1% 3%;
-    width: 70%;
+    width: 97%;
     bottom: 0; }
+    #hub-slide-1 #hub-slide-1-good-news h1 {
+      font-size: 3.5em; }
+    #hub-slide-1 #hub-slide-1-good-news p, #hub-slide-1 #hub-slide-1-good-news h1 {
+      color: whitesmoke;
+      text-transform: uppercase;
+      font-weight: bold; }
 
 #hub-slide-1-a {
   background-image: url(../img/story/001.jpg); }
@@ -136,11 +153,16 @@ section.hub-section {
     padding-right: 1em;
     position: absolute;
     padding-top: 5%;
-    background-color: rgba(255, 255, 255, 0.8);
-    padding: 1% 2% 1% 0%;
-    width: 48%; }
+    background-color: rgba(78, 108, 6, 0.7);
+    padding: 1% 2% 1% 1%;
+    width: 22%;
+    height: 100%; }
     #hub-slide-1-a #hub-slide-1-bad-news h1 {
-      color: #990000; }
+      font-size: 3.5em; }
+    #hub-slide-1-a #hub-slide-1-bad-news h1, #hub-slide-1-a #hub-slide-1-bad-news p {
+      color: whitesmoke;
+      text-transform: uppercase;
+      font-weight: bold; }
 
 .hub-neutral-background {
   background-size: cover;
@@ -194,6 +216,9 @@ div.hub-radial-overlay {
 #hub-slide-7 {
   background-image: url(../img/story/005.jpg); }
 
+#hub-slide-10-a {
+  background-image: url(../img/story/yemen-02.jpg); }
+
 #hub-slide-8 {
   background-size: cover;
   background-image: url(../img/story/ukraine.jpg); }
@@ -206,6 +231,32 @@ div.hub-radial-overlay {
 
 #hub-slide-10 {
   background-image: url(../img/story/006.jpg); }
+
+#hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
+  background-color: transparent;
+  bottom: auto;
+  right: auto; }
+  #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
+    width: 40%; }
+  #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
+    font-size: 1.3em;
+    font-weight: bold;
+    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+    width: 50%;
+    color: #990000; }
+  #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
+    font-size: 3em;
+    vertical-align: bottom;
+    font-weight: bold;
+    display: inline-block;
+    text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
+    color: #990000;
+    margin-bottom: -0.24em; }
+
+#hub-slide-10 .hub-country-stats {
+  bottom: auto;
+  top: 29%;
+  left: 41%; }
 
 #hub-slide-12 {
   background-image: url(../img/story/007.jpg); }
@@ -231,12 +282,29 @@ div.hub-radial-overlay {
     color: #333333;
     text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.6); }
 
-#hub-slide-2 .content h2 {
-  font-size: 2.4em;
-  padding: 0 2em;
-  margin-top: 1.2em; }
-#hub-slide-2 #chart-container {
+#hub-slide-2 {
+  background-color: #a6c1d0; }
+  #hub-slide-2 .content {
+    text-align: center; }
+    #hub-slide-2 .content h2 {
+      font-size: 2.4em;
+      padding: 0 2em;
+      margin-top: 1.2em; }
+  #hub-slide-2 #chart-container {
+    position: absolute;
+    bottom: 10px; }
+
+#hub-slide-17 {
+  background: url(../img/bg.png); }
+
+#hub-slide-2 .content {
+  top: 0;
   position: absolute;
-  bottom: 10px; }
+  z-index: 500;
+  width: 98%;
+  padding: 0 1%;
+  margin-top: 0 !important;
+  text-shadow: 2px 2px 1px rgba(120, 120, 120, 0.7);
+  color: black !important; }
 
 /*# sourceMappingURL=custom.css.map */

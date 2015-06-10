@@ -10,9 +10,9 @@
 <style>
 body { margin: 0; padding: 0; }
 #mosaic-area {
-  background-color: black;
-  background-repeat: no-repeat;
-  background-size: cover;
+  /*background-color: black;*/
+  /*background-repeat: no-repeat;*/
+  /*background-size: cover;*/
 
   /*background-image: url(./img/story/000.jpg);*/
   background-position: center center;
@@ -40,7 +40,7 @@ body { margin: 0; padding: 0; }
   position: absolute;
   z-index: 2000;
   text-align: center;
-  font-family: sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: bold;
 
   width: inherit;
@@ -56,7 +56,7 @@ body { margin: 0; padding: 0; }
   font-size: 8em;
   padding: 0 1em;
   margin: 0;
-  margin-top: 1em;
+  /*margin-top: 1em;*/
   text-shadow: 2px 1px 1px rgb(255,255,255);
 }
 
@@ -67,7 +67,7 @@ body { margin: 0; padding: 0; }
 
 <!-- data-next-0="ocha.Story.titleProcess1"
            data-next-1="ocha.Story.titleProcess2" -->
-  <section id="mosaic-area" class="hub-section"
+  <section id="mosaic-area" class="hub-section hub-neutral-background"
            data-next-before="ocha.Story.titleToOpening"
            data-next="fade"
 
@@ -98,11 +98,13 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class="hub-section" id="hub-slide-2" style="background-color: white" data-on-init="ocha.Story.loadChart">
+  <section class="hub-section hub-neutral-background" id="hub-slide-2" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
+      <div class='hub-radial-overlay'></div>
       <div class='content'>
-        <h2>In just over a decade, the number of people  in need of aid increased by <strong style="color: #990000">XXX%</strong>.
-          At the same time, the amount of funding available to help stayed relatively the same. </h2>
+        <h2>In just over a decade, the number of people in need of aid has reached an astounding <strong style="color: #990000">78.9 million</strong>.
+          <br/><br/>
+          We need <strong style="color: #990000">$18.8 billion</strong> to help them. </h2>
       </div>
       <div id="chart-container">
         <div id="chart-area" class='chart'></div>
@@ -112,9 +114,9 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3">
     <div class='hub-viewport'>
-      <div class='hub-radial-overlay'></div>
+      <div class='hub-radial-overlay' style="opacity: 0.5"></div>
       <div class='content'>
-          <h2>In many countries, violence and insecurity continue to cause massive internal and cross-border displacement.<br/><br/>In 2015 alone, we have seen <strong>700,000</strong> people newly displaced.</h2>
+          <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/>In 2015 alone, we have seen <strong>700,000</strong> people <br/>newly displaced.</h2>
       </div>
     </div>
   </section>
@@ -202,6 +204,9 @@ body { margin: 0; padding: 0; }
           <tr><td class='td-right'><span class='country-stat-count' data-stat-count='545000'>0</span></td>
             <td class='td-left'>civilians displaced</td>
           </tr>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='600000'>0</span></td>
+            <td class='td-left'>people don't know where their next meal will come from</td>
+          </tr>
         </table>
       </div>
     </div>
@@ -220,8 +225,7 @@ body { margin: 0; padding: 0; }
       </div>
     </div>
   </section>
-  <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9"
-        data-next-after="ocha.Story.startNepalCounter">
+  <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9">
 
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
@@ -230,20 +234,33 @@ body { margin: 0; padding: 0; }
       </div>
     </div>
   </section>
-  <section class="hub-section" id="hub-slide-10">
+  <section class="hub-section" id="hub-slide-10" data-on-init="ocha.Story.startNepalCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Nepal</h2></div>
       <div class='hub-country-stats'>
         <table>
           <tr>
-            <td class='td-right'>
+            <td class='td-left'>
               <span class='country-stat-count' data-stat-count='2800000'>0</span>
             </td>
-            <td class='td-left'>people displaced<div class="clear"></div></td>
           </tr>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='3500000'>0</span></td>
-            <td class='td-left'>in need of food assistance<div class="clear"></div></td>
+            <td class="td-left">people displaced<br>by the earthquake<div class="clear"></div></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </section>
+  <section class="hub-section" id="hub-slide-10-a" data-on-init="ocha.Story.startSecondNepalCounter">
+    <div class='hub-viewport'>
+      <div class='hub-country-title'><h2>Nepal</h2></div>
+      <div class='hub-country-stats'>
+        <table>
+          <tr>
+            <td class='td-left'><span class='country-stat-count' data-stat-count='3500000'>0</span></td>
+          </tr>
+          <tr>
+            <td class='td-left'>in need of<br/>food assistance<div class="clear"></div></td>
           </tr>
         </table>
       </div>
@@ -359,10 +376,10 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-17'>
+  <section class='hub-section' id='hub-slide-17' data-on-init="ocha.Story.loadGHOMap">
     <div class='hub-viewport'>
       <div class='content'>
-        <iframe id='hub-slide-map' src='./map.html' scrolling="no" border="no" ></iframe>
+        <iframe id='hub-slide-map' data-loaded='false' scrolling="no" border="no" ></iframe>
       </div>
     </div>
   </section>
@@ -1067,8 +1084,9 @@ CHART AREA
 
 *****/
 
-$j("#chart-area").width($(window).width());
-$j("#chart-area").height($(window).height()/2);
+$j("#chart-container").width($(window).width() * 3 / 4);
+$j("#chart-container").css("marginLeft", "-" + parseInt($j("#chart-container").width()/2) + "px");
+$j("#chart-container").height($(window).height()/2);
 var ocha = ocha || {};
 ocha.CountryChart = function (container) {
   this.container = $j(container);
@@ -1095,6 +1113,7 @@ ocha.CountryChart = function (container) {
 
   this.radiusScale;
   this.colorScale;
+  this.clipChart;
 
   this.nodes = null;
 
@@ -1137,21 +1156,69 @@ ocha.CountryChart = function (container) {
           }
         },
         axis: {
+          x: {
+            tick: {
+              format: function(d) {
+                if ( d < 2015 ) {
+                  return "DEC " + d;
+                }
+                else {
+                  return "JUN " + d;
+                }
+              }
+            }
+          },
+          y: {
+            label: {
+              text: "People Targeted",
+              position: "outer-top"
+            },
+            tick: {
+              format: function(d) {
+                var fmt = d3.formatPrefix(d);
+
+                if (fmt.symbol == "G") { fmt.symbol = "B"; }
+
+                return d3.round(fmt.scale(d), 1) + fmt.symbol;
+              }
+            }
+          },
           y2: {
-            show: true
+            show: true,
+            label: {
+              text: "Funding Requirement",
+              position: "outer-top"
+            },
+            tick: {
+              format: function(d) {
+                var fmt = d3.formatPrefix(d);
+
+                if (fmt.symbol == "G") { fmt.symbol = "B"; }
+
+                return "$" + d3.round(fmt.scale(d), 1) + fmt.symbol;
+              }
+            }
           }
         },
         oninit: function () {
-            this.main.append('rect')
-                .style('fill', 'white')
-                .attr('x', 0.5)
-                .attr('y', -0.5)
-                .attr('width', this.width)
-                .attr('height', this.height)
-              .transition().duration(3000)
-                .attr('x', this.width)
-                .attr('width', 0)
-              .remove();
+            // this.main.append('rect')
+            //     .style('fill', '#a6c1d0')
+            //     .attr('x', 0.5)
+            //     .attr('y', -0.5)
+            //     .attr('width', this.width)
+            //     .attr('height', this.height)
+            //   .transition().duration(3000)
+            //     .attr('x', this.width)
+            //     .attr('width', 0)
+            //   .remove();
+            that.clipChart = this.clipChart;
+
+            // this.clipChart.attr("width", 0);
+            // console.log("CHART IS NOW LOADED ::: ", this, this.clipChart, this.clipChart.attr("width") );
+            // d3.select(this.clipChart)
+              // .attr('width', 0);
+              // .transition().duration(1000)
+              // .attr('width', this.width);
         }
     });
   }
@@ -1170,6 +1237,10 @@ ocha.Story = function() {
     initialize : function() {
       // console.log("Initializing Story", "-" + $(".hub-slide-center-text h2").height()/2 +"px");
       $(".hub-neutral-background div.content").css("marginTop", "-" + parseInt($(".hub-neutral-background div.content").height()/2) +"px");
+
+      $("#mosaic-title-area").css("top", "50%");
+      $("#mosaic-title-area").css("marginTop", "-" + parseInt($("#mosaic-title-area").height()/2) +"px");
+
 
         // $(window).trigger("resize");
     },
@@ -1193,7 +1264,7 @@ ocha.Story = function() {
       // console.log("Hello World title to opening");
     },
     reshowImages : function () {
-      $("#mosaic-area").css("backgroundImage", "url(./img/story/000.jpg)");
+      $("#mosaic-area").css("backgroundImage", "url(./img/story/000.jpg?q=x)");
       $("#mosaic-title-area").fadeIn("fast");
       // faceMosaic.reshowImages();
     },
@@ -1305,6 +1376,12 @@ ocha.Story = function() {
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
+    startSecondNepalCounter : function () {
+      d3.selectAll("#hub-slide-10-a .hub-country-stats span.country-stat-count")
+      .transition()
+      .duration(1500)
+      .tween("text", ocha.Story.tweener);
+    },
 
     startSomaliaCounter : function () {
       d3.selectAll("#hub-slide-14 .hub-country-stats span.country-stat-count")
@@ -1318,7 +1395,9 @@ ocha.Story = function() {
       .duration(1500)
       .tween("text", ocha.Story.tweener);
     },
-
+    loadGHOMap : function () {
+      $("iframe#hub-slide-map").attr("src", './map.html');
+    },
     finalMap : function() {
       lastMosaic.stopMosaic();
     },
