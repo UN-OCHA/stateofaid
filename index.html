@@ -15,7 +15,7 @@ body { margin: 0; padding: 0; }
   background-size: cover;
 
   /*background-image: url(./img/story/000.jpg);*/
-  background-position: bottom center;
+  background-position: center center;
 }
 
 #mosaic-overlay-area {
@@ -101,7 +101,7 @@ body { margin: 0; padding: 0; }
   <section class="hub-section" id="hub-slide-2" style="background-color: white" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
       <div class='content'>
-        <h2>In just over a decade, the number of people  in need of aid increased by <strong style="color: #990000">600%</strong>.
+        <h2>In just over a decade, the number of people  in need of aid increased by <strong style="color: #990000">XXX%</strong>.
           At the same time, the amount of funding available to help stayed relatively the same. </h2>
       </div>
       <div id="chart-container">
@@ -435,6 +435,8 @@ ocha.FaceMosaic = function(selector, imageList, squareSize) {
   this.mosaicDimension = [ this.SQUARE_SIZE  * (parseInt(this.mW/this.SQUARE_SIZE) + 2),
                           this.SQUARE_SIZE  * (parseInt(this.mH/this.SQUARE_SIZE) + 2)]
 
+  this.eventActive = false;
+
   this.helper = {
 
   }
@@ -537,6 +539,7 @@ ocha.FaceMosaic.prototype.initialize = function () {
                           });
 
     // this.startMosaic();
+    $("html,body").css("overflow", "auto");
 };
 
 ocha.FaceMosaic.prototype.hide = function (userDefMode, callback) {
@@ -589,7 +592,7 @@ ocha.HubScrolling = function(sections) {
 
   //Scrolling items:
   this.scrollPositionTop = $(window).scrollTop();
-  this.scrollPossitionBottom = $(window).scrollTop();
+  this.scrollPositionBottom = $(window).scrollTop();
 };
 
 ocha.HubScrolling.prototype.windowListenerNext = function(d) {
@@ -599,9 +602,11 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
       var h = that.containers.height();
       var limit = h/4; //1/10 of the height;
 
+
       var scrollTop = $(window).scrollTop();
       var target = that.surrogates.filter(function(i, item) {
         var topOffset = $(item).offset().top;
+        // console.log("Limit ::: ", topOffset+limit+limit, scrollTop, topOffset+limit, (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit) ? "TRUE" : "FALSE");
         return (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit);
       });
 
@@ -616,15 +621,16 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
     //Determine if he user scrolled up or down..
     // if ( target.length > 0 ) {
       if (target.length > 0  && scrollTop > that.scrollPositionTop) {
+
         that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
         // console.log(that.currentPageNumber);
-        // console.log("NEXT()", target, that.currentPageNumber);
+        console.log("NEXT()", target, that.currentPageNumber);
         d.data.next();
       }
-      // else {
-      //   console.log("PREV()", target, that.currentPageNumber);
+      else if (target.length > 0  && scrollTop < that.scrollPositionTop) {
+        console.log("FROM WINDOW LISTENER NEXT ::: PREV()", target, that.currentPageNumber);
       // //   // d.data.prev();
-      // }
+      }
     // }
 
     that.scrollPositionTop = scrollTop;
@@ -749,8 +755,12 @@ ocha.HubScrolling.prototype.initialize = function() {
   this.surrogates = $("body > .hub-surrogate");
 
 
-    $(window).on("scroll", that, that.windowListenerNext);
-    $(window).on("scroll", that, that.windowListenerPrev);
+    // if (!this.eventActive) {
+    //   this.eventActive = true;
+      $(window).on("scroll", that, that.windowListenerNext);
+      $(window).on("scroll", that, that.windowListenerPrev);
+
+    // }
 
   //Event listeners
   $j(window).on("resize", function () { that.resizeWindow(); });
@@ -781,6 +791,7 @@ ocha.HubScrolling.prototype.previous = function() {
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
+  // that.eventActive = false;
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
@@ -816,15 +827,18 @@ ocha.HubScrolling.prototype.previous = function() {
     //Reset Subpage
     that.currentSubPage = 0;
 
-    $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
       function() {
 
         that.transitionOngoing = false;
         that.scrollPositionTop = $(window).scrollTop();
-        that.scrollPossitionBottom = $(window).scrollTop();
+        that.scrollPositionBottom = $(window).scrollTop();
         // console.log("XX");
+        // if (!that.eventActive) {
+        //   that.eventActive = true;
         $(window).on("scroll", that, that.windowListenerNext);
         $(window).on("scroll", that, that.windowListenerPrev);
+        // }
         $("html,body").css("overflow", "auto");
       }
     );
@@ -834,6 +848,7 @@ ocha.HubScrolling.prototype.next = function() {
   $("html,body").css("overflow", "hidden");
   var that = this;
   // var that = this;
+  // that.eventActive = false;
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
 
@@ -864,14 +879,17 @@ ocha.HubScrolling.prototype.next = function() {
 
     //   // $("#hub-scrolling-scroller-component").show();
     // }, 500);
-    $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
       function() {
         // console.log("XXXXX About to body");
         that.transitionOngoing = false;
         that.scrollPositionTop = $(window).scrollTop();
-        that.scrollPossitionBottom = $(window).scrollTop();
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
+        that.scrollPositionBottom = $(window).scrollTop();
+        // if (!that.eventActive) {
+        //   that.eventActive = true;
+          $(window).on("scroll", that, that.windowListenerNext);
+          $(window).on("scroll", that, that.windowListenerPrev);
+        // }
         $("html,body").css("overflow", "auto");
       }
     );
@@ -950,16 +968,21 @@ ocha.HubScrolling.prototype.nextAction = function() {
 
   console.log("Entered Here", that);
 
-  $("body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+  console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
+  $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
     function() {
       // console.log("XXXXX About to body");
       console.log("Entered Here");
       that.transitionOngoing = false;
       that.scrollPositionTop = $(window).scrollTop();
-      that.scrollPossitionBottom = $(window).scrollTop();
-      $(window).on("scroll", that, that.windowListenerNext);
-      $(window).on("scroll", that, that.windowListenerPrev);
+      that.scrollPositionBottom = $(window).scrollTop();
+      // if (!that.eventActive) {
+      //   that.eventActive = true;
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      // }
       $("html,body").css("overflow", "auto");
+      console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
     }
   );
 }
@@ -1157,7 +1180,7 @@ ocha.Story = function() {
     titleToOpening : function (callback) {
       /** Transition from Title page to */
       // console.log("CurrentPage", hubScrolling.currentPageNumber);
-      $("#mosaic-area").css("backgroundImage", "url(./img/story/000.jpg)");
+      $("#mosaic-area").css("backgroundImage", "url(./img/story/000.jpg?q=x)");
       $("#mosaic-title-area, #mosaic-overlay-area").fadeOut("fast");
       if (!titlePlayed && faceMosaic) {
         faceMosaic.hide(undefined, function() { hubScrolling.nextAction() });
