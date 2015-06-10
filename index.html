@@ -83,7 +83,7 @@ body { margin: 0; padding: 0; }
   <section class="hub-section" id="hub-slide-1" data-next="fade">
     <div class='hub-viewport'>
       <div class="content" id="hub-slide-1-good-news">
-        <h1>The Good News</h1>
+        <h1>The Good News:</h1>
         <p>We are doing more for more people than ever before.</p>
       </div>
     </div>
@@ -92,7 +92,7 @@ body { margin: 0; padding: 0; }
   <section class="hub-section" id="hub-slide-1-a" data-prev="fade">
     <div class='hub-viewport'>
       <div class="content" id="hub-slide-1-bad-news">
-        <h1>The Bad News</h1>
+        <h1>The Bad News:</h1>
         <p>The humanitarian system is under unprecedented strain.</p>
       </div>
     </div>
@@ -101,10 +101,15 @@ body { margin: 0; padding: 0; }
   <section class="hub-section hub-neutral-background" id="hub-slide-2" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
-      <div class='content'>
-        <h2>In just over a decade, the number of people in need of aid has reached an astounding <strong style="color: #990000">78.9 million</strong>.
+      <div class='content' id="content-2-a">
+        <h2>In just over a decade, the number of people in need of aid has reached an astounding <strong style="color: rgb(197, 234, 255)">78.9 million</strong>.
           <br/><br/>
-          We need <strong style="color: #990000">$18.8 billion</strong> to help them. </h2>
+          We need <strong style="color: #ff7f0e">$18.8 billion</strong> to help them. </h2>
+      </div>
+      <div class='content' id="content-2-b">
+        <h2>In just over a decade, the number of people in need of aid has reached an astounding <strong style="color: rgb(197, 234, 255)">78.9 million</strong>.
+          <br/><br/>
+          We need <strong style="color: #ff7f0e">$18.8 billion</strong> to help them. </h2>
       </div>
       <div id="chart-container">
         <div id="chart-area" class='chart'></div>
@@ -114,7 +119,7 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section hub-neutral-background" data-next="fade" id="hub-slide-3">
     <div class='hub-viewport'>
-      <div class='hub-radial-overlay' style="opacity: 0.5"></div>
+      <div class='hub-radial-overlay' style="opacity: 0.3"></div>
       <div class='content'>
           <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/>In 2015 alone, we have seen <strong>700,000</strong> people <br/>newly displaced.</h2>
       </div>
@@ -1011,6 +1016,13 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
     mode = "scrollUp";
   }
 
+  var hideThese = that.containers.filter(function(page) {
+    return $(page).attr("data-page") != currentPage.attr("data-page") && $(page).attr("data-page") != nextPage.attr("data-page");
+  });
+
+  $(hideThese).hide();
+
+
   var onInit = nextPage.attr("data-on-init");
   try {
     onInit = eval(onInit);
@@ -1200,27 +1212,33 @@ ocha.CountryChart = function (container) {
             }
           }
         },
-        oninit: function () {
-            // this.main.append('rect')
-            //     .style('fill', '#a6c1d0')
-            //     .attr('x', 0.5)
-            //     .attr('y', -0.5)
-            //     .attr('width', this.width)
-            //     .attr('height', this.height)
-            //   .transition().duration(3000)
-            //     .attr('x', this.width)
-            //     .attr('width', 0)
-            //   .remove();
-            that.clipChart = this.clipChart;
-
-            // this.clipChart.attr("width", 0);
-            // console.log("CHART IS NOW LOADED ::: ", this, this.clipChart, this.clipChart.attr("width") );
-            // d3.select(this.clipChart)
-              // .attr('width', 0);
-              // .transition().duration(1000)
-              // .attr('width', this.width);
+        colors : {
+          "People Targeted" : "#FFFFFF"
         }
+        // oninit: function (d) {
+        //     // this.main.append('rect')
+        //     //     .style('fill', '#a6c1d0')
+        //     //     .attr('x', 0.5)
+        //     //     .attr('y', -0.5)
+        //     //     .attr('width', this.width)
+        //     //     .attr('height', this.height)
+        //     //   .transition().duration(3000)
+        //     //     .attr('x', this.width)
+        //     //     .attr('width', 0)
+        //     //   .remove();
+        //     that.clipChart = this.clipChart;
+
+        //     // console.log(d, this, this.data);
+        //     // this.clipChart.attr("width", 0);
+        //     // console.log("CHART IS NOW LOADED ::: ", this, this.clipChart, this.clipChart.attr("width") );
+        //     // d3.select(this.clipChart)
+        //       // .attr('width', 0);
+        //       // .transition().duration(1000)
+        //       // .attr('width', this.width);
+        // }
     });
+
+    that.chart.data.colors({"People Targeted": "rgb(197, 234, 255)"})
   }
 };
 
@@ -1230,7 +1248,7 @@ var titlePlayed = false;
 var lastMosaic;
 
 var countryChart = new ocha.CountryChart($("#chart-area"));
-
+var iframeLoaded = false, chartLoaded = false;
 var lastMosaicInitialized = false;
 ocha.Story = function() {
   return {
@@ -1245,8 +1263,10 @@ ocha.Story = function() {
         // $(window).trigger("resize");
     },
     loadChart: function () {
-      console.log("ENTERED HERE --> Load chart...");
-      countryChart.initialize();
+      if ( !chartLoaded ) {
+        countryChart.initialize();
+        chartLoaded = true;
+      }
     },
     titleToOpening : function (callback) {
       /** Transition from Title page to */
@@ -1396,7 +1416,10 @@ ocha.Story = function() {
       .tween("text", ocha.Story.tweener);
     },
     loadGHOMap : function () {
-      $("iframe#hub-slide-map").attr("src", './map.html');
+      if (!iframeLoaded) {
+        $("iframe#hub-slide-map").attr("src", './map.html');
+        iframeLoaded = true;
+      }
     },
     finalMap : function() {
       lastMosaic.stopMosaic();
@@ -1441,9 +1464,13 @@ $("#mosaic-area").css("opacity", 1);
 jQuery(window).load(function() {
   hubScrolling.initialize();
   $("#mosaic-actual").height($("#mosaic-area").height());
+
+  var faceWidth = $(window).width() < 1400 ? 50 : 100;
+
   faceMosaic = new ocha.FaceMosaic("#mosaic-area #mosaic-actual",
                                      d3.range(IMAGE_COUNT)
-                                        .map(function(d) { return "./img/faces/" + fmt(d) + ".png"; }));
+                                        .map(function(d) { return "./img/faces/" + fmt(d) + ".png"; }),
+                                      faceWidth);
 
 });
 
