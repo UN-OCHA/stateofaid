@@ -145,10 +145,12 @@ section.hub-section {
   background-repeat: no-repeat; }
   .hub-neutral-background div.content {
     text-align: center;
-    padding: 0 8%;
+    padding: 0;
     top: 50%;
     position: absolute;
-    z-index: 500; }
+    z-index: 500;
+    width: 84%;
+    padding: 0 8%; }
     .hub-neutral-background div.content h1 {
       font-size: 5em;
       margin: 0;
