@@ -78,14 +78,10 @@ body { margin: 0; padding: 0; }
       <h1>Humanitarian Needs:</h1>
       <h2>State of Play</h2>
     </div>
-    <div class="hub-viewport">
-      <div class="hub-photo-credit">Credit: UN Photo/Tobin Jones/Somalia, 2013 </div>
-    </div>
   </section>
 
   <section class="hub-section" id="hub-slide-1" data-next="fade">
     <div class='hub-viewport'>
-      <div class="hub-photo-credit hub-photo-credit-right">Credit: OCHA/Yasmina Guerda/Sierra Leone, 2014</div>
       <div class="content" id="hub-slide-1-good-news">
         <h1>The Good News:</h1>
         <p>We are doing more for more people than ever before.</p>
@@ -95,7 +91,6 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section" id="hub-slide-1-a" data-prev="fade">
     <div class='hub-viewport'>
-      <div class="hub-photo-credit hub-photo-credit-right">Credit: Edwin Koo/Singapore, 2014</div>
       <div class="content" id="hub-slide-1-bad-news">
         <h1>The Bad News:</h1>
         <p>The humanitarian system is under unprecedented strain.</p>
@@ -133,7 +128,6 @@ body { margin: 0; padding: 0; }
 
   <section class="hub-section" id="hub-slide-4" data-on-init="ocha.Story.startIraqCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit' style="color: #333333;">Credit: OCHA/Charlotte Cans/Iraq, 2015</div>
       <div class='hub-country-title'><h2>Iraq</h2></div>
       <div class='hub-country-stats'>
           <table>
@@ -167,7 +161,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section" id="hub-slide-5" data-on-init="ocha.Story.startSyriaCounter">
     <div class='hub-viewport'>
-        <div class='hub-photo-credit hub-photo-credit-right'>Credit: UNHCR/S. Rich/Jordan, 2013</div>
         <div class='hub-country-title'><h2>Syria</h2></div>
         <div class='hub-country-stats abs-left'>
           <table>
@@ -189,7 +182,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section"  id="hub-slide-6" data-on-init="ocha.Story.startSouthSudanCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit'>Credit: UN Photo/JC McIlwaine/South Sudan, 2015 </div>
       <div class='hub-country-title'><h2>South Sudan</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -211,7 +203,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section" id="hub-slide-7" data-on-init="ocha.Story.startYemenCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit'>Credit: UNICEF/Hamoud/Yemen, 2015 </div>
       <div class='hub-country-title'><h2>Yemen</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -227,7 +218,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section" data-next="fade" id="hub-slide-8" data-on-init="ocha.Story.startUkraineCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit hub-photo-credit-right'>Credit: UNICEF/Ukraine, 2015</div>
       <div class='hub-country-title'><h2>Ukraine</h2></div>
       <div class='hub-country-stats abs-left'>
         <table>
@@ -253,7 +243,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section" id="hub-slide-10" data-on-init="ocha.Story.startNepalCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit'>Credit: UNDP/Nepal, 2015 </div>
       <div class='hub-country-title'><h2>Nepal</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -271,7 +260,6 @@ body { margin: 0; padding: 0; }
   </section>
   <section class="hub-section" id="hub-slide-10-a" data-on-init="ocha.Story.startSecondNepalCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit hub-photo-credit-right'>Credit: Fardin Waezi/UNAMA/Afghanistan, 2014 </div>
       <div class='hub-country-title'><h2>Afghanistan</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -298,7 +286,6 @@ body { margin: 0; padding: 0; }
 
   <section class='hub-section hub-neutral-background' id="hub-slide-12">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit hub-photo-credit-right' style="color: #333333;">Credit: French Red Cross/Sylvain Cherkaoui/Niger, 2012 </div>
       <div class='hub-radial-overlay' style="opacity: 0.55"></div>
       <div class='content'>
         <h2>
@@ -322,7 +309,6 @@ body { margin: 0; padding: 0; }
 
   <section class='hub-section' id='hub-slide-14'  data-next-after="ocha.Story.startVanuatuCounter">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit hub-photo-credit-right'>Credit: UN Photo/Tobin Jones/Somalia, 2013 </div>
       <div class='hub-country-title'><h2>Somalia</h2></div>
       <div class='hub-country-stats abs-left'>
         <table>
@@ -342,7 +328,6 @@ body { margin: 0; padding: 0; }
 
   <section class='hub-section' id='hub-slide-15' data-next-after="ocha.Story.showSecondFace">
     <div class='hub-viewport'>
-      <div class='hub-photo-credit'>UNICEF Pacific/Vanuatu, 2015 </div>
       <div class='hub-country-title'><h2>Vanuatu</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -897,6 +882,7 @@ ocha.HubScrolling.prototype.next = function() {
   var that = this;
   // var that = this;
   // that.eventActive = false;
+
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
 
