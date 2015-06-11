@@ -146,6 +146,21 @@ section.hub-section {
   width: inherit;
   position: relative;
   overflow: hidden;
+  .hub-photo-credit {
+
+    position: absolute;
+    bottom:0;
+    left: 0;
+    padding:2px 5px;
+    // background-color: rgba(255,255,255,0.5);
+    color: white;
+    font-size: 10px;
+
+    &.hub-photo-credit-right {
+      left: auto;
+      right: 0;
+    }
+  }
 }
 
 #hub-slide-1, #hub-slide-1-a {
@@ -273,11 +288,11 @@ div.hub-radial-overlay {
 }
 
 #hub-slide-4 {
-  background-image: url(../img/story/002.jpg);
+  background-image: url(http://ocha.smugmug.com/Countries/IRQ/May-2015-CSB-mission/i-7Q5j5dK/0/X3/605A4408-X3.jpg);
 }
 
 #hub-slide-5 {
-  background-image: url(../img/story/003.jpg);
+  background-image: url(http://ocha.smugmug.com/photos/i-X8CpcZG/0/X3/i-X8CpcZG-X3.jpg);
 }
 
 #hub-slide-6 {
@@ -349,6 +364,7 @@ div.hub-radial-overlay {
 }
 
 #hub-slide-12 {
+  background-position: center 52%;
   background-image: url(../img/story/007.jpg);
   .hub-radial-overlay { opacity: 0.8; }
   h2 {
@@ -359,11 +375,11 @@ div.hub-radial-overlay {
 }
 
 #hub-slide-14 {
-  background-image: url(../img/story/008.jpg);
+  background-image: url(http://ocha.smugmug.com/Countries/Somalia/TOPPIC/i-XgpGxpP/0/X3/People%20displaced%20by%20Jowhar%20floods%20queue%20for%20food%20aid.%20Nov%202013.%20%C2%A9UN%20Photo%20Tobin%20Jones-X3.jpg);
 }
 
 #hub-slide-15 {
-  background-image: url(../img/story/009.jpg);
+  background-image: url(http://ocha.smugmug.com/Countries/VUT/After-the-cyclone-Vanuatu-in-p/i-rBM2kTJ/0/X3/09%20Two%20months%20on-X3.jpg);
 }
 
 #hub-slide-16 {
