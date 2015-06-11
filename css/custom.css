@@ -189,7 +189,7 @@ section.hub-section {
     .hub-neutral-background div.content h1 {
       font-size: 5em;
       margin: 0;
-      color: #990000;
+      color: #C50000;
       text-shadow: 2px 2px 2px rgba(10, 10, 10, 0.5); }
     .hub-neutral-background div.content h2 {
       font-size: 3em;
@@ -227,7 +227,7 @@ div.hub-radial-overlay {
   background-image: url(../img/story/005.jpg); }
 
 #hub-slide-10-a {
-  background-image: url(../img/story/yemen-02.jpg); }
+  background-image: url(../img/story/afghanistan.jpg); }
 
 #hub-slide-8 {
   background-size: cover;
@@ -251,16 +251,16 @@ div.hub-radial-overlay {
   #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
     font-size: 1.3em;
     font-weight: bold;
-    text-shadow: 2px 2px 2px rgba(255, 255, 255, 0.9);
+    text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.6);
     width: 50%;
-    color: #990000; }
+    color: #C50000; }
   #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
     font-size: 3em;
     vertical-align: bottom;
     font-weight: bold;
     display: inline-block;
     text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.7);
-    color: #990000;
+    color: #C50000;
     margin-bottom: -0.24em; }
 
 #hub-slide-10 .hub-country-stats {
