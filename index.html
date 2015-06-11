@@ -102,11 +102,11 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content' id="content-2-a">
-        <h2>In just over a decade, the number of <br/>people in need of aid has almost doubled.<br/>2015 opened with <strong style="color: #C90000; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">73 million people</strong> <br/>in 22 countries needing assistance.</h2>
+        <h2>In just over a decade, the number of <br/>people in need of aid has almost doubled.<br/>2015 opened with <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">73 million people</strong> <br/>in 22 countries needing assistance.</h2>
       </div>
       <div class='content' id="content-2-b" style="display: none">
         <h2>
-          Six months later, we are calling for help to <br/>support an astounding <strong style="color: #C90000; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9 million people</strong>.
+          Six months later, we are calling for help to <br/>support an astounding <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9 million people</strong>.
           <br/>
           We need <strong style="color: #ff7f0e">$18.8 billion</strong> to help them.
         </h2>
@@ -289,7 +289,7 @@ body { margin: 0; padding: 0; }
       <div class='hub-radial-overlay' style="opacity: 0.55"></div>
       <div class='content'>
         <h2>
-        In the <strong style="color: #C50000;">SAHEL</strong> alone</h2>
+        In the <strong style="color: #811B1B;">SAHEL</strong> alone</h2>
         <h1>9 million</h1>
         <h2>women, children and men will go hungry this year if aid doesn't reach them.</h2>
       </div>
@@ -412,8 +412,8 @@ body { margin: 0; padding: 0; }
       <div class='content'>
         <h2 style="font-size: 2.5em">Together we can do more to help every child, woman
         <br/>and man, from Chad to Yemen, to receive the
-        <br/><strong style="color: #C90000">life saving assistance</strong> that they deserve &dash;
-        <br/>if we <strong style="color: #C90000">fully fund</strong> the humanitarian response in 2015.</h2>
+        <br/><strong style="color: #811B1B">life saving assistance</strong> that they deserve &dash;
+        <br/>if we <strong style="color: #811B1B">fully fund</strong> the humanitarian response in 2015.</h2>
       </div>
     </div>
   </section>
@@ -673,6 +673,17 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
 
 };
 
+ocha.HubScrolling.prototype.keyPressDown = function(e) {
+    var that = e.data;
+    console.log(that, e);
+    var code = (e.keyCode ? e.keyCode : e.which);
+    if (code == 40) {
+        e.data.next();
+    } else if (code == 38) {
+        e.data.previous();
+    }
+};
+
 ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
     var that = d.data;
 
@@ -797,6 +808,7 @@ ocha.HubScrolling.prototype.initialize = function() {
 
   //Event listeners
   $j(window).on("resize", function () { that.resizeWindow(); });
+  // $j(window).on("keydown", that, that.keyPressDown);
 };
 
 ocha.HubScrolling.prototype.resizeWindow = function() {
@@ -824,6 +836,7 @@ ocha.HubScrolling.prototype.previous = function() {
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
+  // $(window).off("keydown", that.keyPressDown);
   // that.eventActive = false;
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
@@ -871,6 +884,7 @@ ocha.HubScrolling.prototype.previous = function() {
         //   that.eventActive = true;
         $(window).on("scroll", that, that.windowListenerNext);
         $(window).on("scroll", that, that.windowListenerPrev);
+        // $(window).on("keydown", that, that.keyPressDown);
         // }
         $("html,body").css("overflow", "auto");
       }
@@ -878,6 +892,7 @@ ocha.HubScrolling.prototype.previous = function() {
 };
 
 ocha.HubScrolling.prototype.next = function() {
+
   $("html,body").css("overflow", "hidden");
   var that = this;
   // var that = this;
@@ -885,6 +900,7 @@ ocha.HubScrolling.prototype.next = function() {
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
+  // $(window).off("keydown", that.keyPressDown);
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
@@ -923,6 +939,8 @@ ocha.HubScrolling.prototype.next = function() {
         //   that.eventActive = true;
           $(window).on("scroll", that, that.windowListenerNext);
           $(window).on("scroll", that, that.windowListenerPrev);
+
+          // $(window).on("keydown", that, that.keyPressDown);
         // }
         $("html,body").css("overflow", "auto");
       }
@@ -1014,6 +1032,7 @@ ocha.HubScrolling.prototype.nextAction = function() {
       //   that.eventActive = true;
         $(window).on("scroll", that, that.windowListenerNext);
         $(window).on("scroll", that, that.windowListenerPrev);
+        // $(window).on("keydown", that, that.keyPressDown);
       // }
       $("html,body").css("overflow", "auto");
       console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
@@ -1225,7 +1244,7 @@ ocha.CountryChart = function (container) {
           }
         },
         colors : {
-          "People Targeted" : "#C90000"
+          "People Targeted" : "#811B1B"
         }
         // oninit: function (d) {
         //     // this.main.append('rect')
@@ -1250,7 +1269,7 @@ ocha.CountryChart = function (container) {
         // }
     });
 
-    that.chart.data.colors({"People Targeted": "#C90000"})
+    that.chart.data.colors({"People Targeted": "#811B1B"})
   }
 };
 
