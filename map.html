@@ -280,6 +280,10 @@
   }
   #country-details-viewport-area * { text-align: right; }
 
+  .country-detail-item span.arrow.arrow-none {
+    display: none !important;
+  }
+
    .country-detail-item span.arrow.arrow-up
   {   background-image: url(img/icons/red-arrow-up.png);
       padding-top: 23px;
@@ -1069,7 +1073,8 @@ $("#map-layer-ctrl button").on("click", function() {
 
 
     $("#country-details-people-in-need .arrow, #country-details-funding .arrow")
-      .removeClass("arrow-up arrow-down");
+      .removeClass("arrow-up arrow-down arrow-none");
+
 
     console.log(gha_data, parseInt(gha_data.in_need));
     /* If there is past information */
@@ -1078,11 +1083,16 @@ $("#map-layer-ctrl button").on("click", function() {
       $("#country-details-people-in-need .arrow").show();
       $("#country-details-people-in-need .previous-appeal").show();
 
-      d3.select("#country-details-people-in-need .arrow")
-      .text(function() {
-        return d3.round(changeInNeed * 100,2) + "%";
-      })
-      .classed(changeInNeed < 0 ? "arrow-down" : "arrow-up", true);
+      if (d3.round(changeInNeed  * 100,1) == 0) {
+        d3.select("#country-details-people-in-need .arrow").classed("arrow-none", true);
+      }
+      else {
+        d3.select("#country-details-people-in-need .arrow")
+        .text(function() {
+          return d3.round(changeInNeed * 100,2) + "%";
+        })
+        .classed(changeInNeed < 0 ? "arrow-down" : "arrow-up", true);
+      }
 
       d3.select("#country-details-people-in-need .previous-appeal h4")
         .transition()
@@ -1129,12 +1139,16 @@ $("#map-layer-ctrl button").on("click", function() {
       $("#country-details-funding .arrow").show();
       $("#country-details-funding .previous-appeal").show();
 
-      d3.select("#country-details-funding .arrow")
-      .text(function() {
-        return d3.round(changeFunding * 100,2) + "%";
-      })
-      .classed(changeFunding < 0 ? "arrow-down" : "arrow-up", true);
 
+      if (d3.round(changeFunding * 100,1) == 0) {
+        d3.select("#country-details-funding .arrow").classed("arrow-none", true);
+      } else {
+        d3.select("#country-details-funding .arrow")
+        .text(function() {
+          return d3.round(changeFunding * 100,2) + "%";
+        })
+        .classed(changeFunding < 0 ? "arrow-down" : "arrow-up", true);
+      }
 
       d3.select("#country-details-funding .previous-appeal h4")
         .transition()
