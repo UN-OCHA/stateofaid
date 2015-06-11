@@ -404,13 +404,22 @@
 </style>
 <body>
   <div id="fb-root"></div>
-<script>(function(d, s, id) {
+<script>/*
+(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=469606566518244";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
+}(document, 'script', 'facebook-jssdk'));
+
+ <div class="fb-share-button" data-href="http://www.staging.unocha.org/stateofaid-draft/" data-layout="button_count"></div>
+        <span id="twitter-button">
+        <a href="https://twitter.com/share" class="twitter-share-button" data-via="pikittakbo">Tweet</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</*script>
+        </span>
+        */
+</script>
 
 <div id="main-activity-area">
   <div id="country-area">
@@ -515,11 +524,7 @@
       <div id="map-title">
         <h1>The State of Aid</h1>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-        <div class="fb-share-button" data-href="http://www.staging.unocha.org/stateofaid-draft/" data-layout="button_count"></div>
-        <span id="twitter-button">
-        <a href="https://twitter.com/share" class="twitter-share-button" data-via="pikittakbo">Tweet</a>
-<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-        </span>
+
 
       </div>
       <div id="map-list">
@@ -619,6 +624,7 @@ ocha.MapControl = function(map, mapContainer, details, navigation) {
   this.mapWidth = this.mapContainer.width();
   this.detailsWidth = this.detailsContainer.width();
 
+  this.detailsContainer.height($(window).height());
 };
 
 ocha.MapControl.prototype.showNavigationArea = function(callback) {
@@ -748,7 +754,7 @@ var redColorScale = null, fundColorScale = null, scaleInNeed = null, scaleFundin
 var svg_legend = d3.select(map.getContainer())
                     .append("svg")
                       .attr("width", d3.select(map.getContainer()).style("width"))
-                      .attr("height", d3.select(map.getContainer()).style("height"))
+                      .attr("height", 20)
                       .attr("style", "position: absolute; bottom: 0; left: 20px;");
 var legend_area = svg_legend.append("g").attr("class", "legends_area");
 
