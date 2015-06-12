@@ -124,7 +124,7 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay' style="opacity: 0.3"></div>
       <div class='content'>
-          <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/><br/>In 2015 alone, we have seen</h2> <h1>700,000 people newly displaced.</h1>
+          <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/><br/>In 2015 alone, </h2> <h1>700,000 people have been newly displaced.</h1>
       </div>
     </div>
   </section>
@@ -347,7 +347,7 @@ body { margin: 0; padding: 0; }
             <td class='td-left'>people received clean water.<div class="clear"></div></td></tr> -->
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='50000'>0</span></td>
-            <td class='td-left'>people received emergency shelter assistance<div class="clear"></div></td>
+            <td class='td-left'>people received emergency shelter<div class="clear"></div></td>
           </tr>
         </table>
       </div>
@@ -365,23 +365,23 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div id='hub-face-final-area'></div>
       <div class='hub-radial-overlay'></div>
-      <div class='content' id="hub-16-00">
+      <div class='content hub-subsection' id="hub-16-00">
         <h2>
           But each year millions of people<br/>do not get the help they need because</h2>
         <h1>humanitarian access is compromised.</h1>
       </div>
-      <div class='content' id="hub-16-01" style="display: none">
+      <div class='content hub-subsection' id="hub-16-01" style="display: none">
         <h2>Or because </h2>
         <h1>funding does <br/> not come through.</h1>
       </div>
-      <div class='content' id="hub-16-02" style="display: none">
+      <div class='content hub-subsection' id="hub-16-02" style="display: none">
         <h2>
           Donors have been generous but the global humanitarian appeal remains just
         </h2>
         <h1>23 per cent funded</h1>
         <h2>half-way through the year.</h2>
       </div>
-      <div class='content' id="hub-16-03" style="display: none">
+      <div class='content hub-subsection' id="hub-16-03" style="display: none">
         <h2>
           One thing is clear: the sheer scale of needs continues to outpace the level of funding.
         </h2>
@@ -404,7 +404,7 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
-        <h1>We can turn this around.</h1>
+        <h1>Together we can turn this around.</h1>
       </div>
     </div>
   </section>
@@ -413,7 +413,7 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
-        <h2 style="font-size: 2.5em">Together we can do more to help every child, woman
+        <h2 style="font-size: 2.5em">We can do more to help every child, woman
         <br/>and man, from Chad to Yemen, to receive the
         <br/><strong style="color: #811B1B">life saving assistance</strong> that they deserve &dash;
         <br/>if we <strong style="color: #811B1B">fully fund</strong> the humanitarian response in 2015.</h2>
@@ -612,9 +612,8 @@ ocha.FaceMosaic.prototype.hide = function (userDefMode, callback) {
 
 //* Hub Section Scrolling */
 var ocha = ocha || {};
-ocha.HubScrolling = function(sections) {
+ocha.HubScrolling = function(sections, options) {
   var $j = jQuery;
-  this.TRANSITION_SPEED = 1000;
 
   this.scroller = null;
 
@@ -629,6 +628,12 @@ ocha.HubScrolling = function(sections) {
   //Scrolling items:
   this.scrollPositionTop = $(window).scrollTop();
   this.scrollPositionBottom = $(window).scrollTop();
+
+  this.options = $.extend({
+
+    transitionSpeed: 500
+
+  }, options);
 };
 
 ocha.HubScrolling.prototype.windowListenerNext = function(d) {
@@ -814,6 +819,10 @@ ocha.HubScrolling.prototype.initialize = function() {
   // $j(window).on("keydown", that, that.keyPressDown);
 };
 
+ocha.HubScrolling.prototype.stopScrolling = function() {
+
+};
+
 ocha.HubScrolling.prototype.resizeWindow = function() {
   var that = this;
   var $window = $j(window);
@@ -876,7 +885,7 @@ ocha.HubScrolling.prototype.previous = function() {
     //Reset Subpage
     that.currentSubPage = 0;
 
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
       function() {
 
         that.transitionOngoing = false;
@@ -932,7 +941,7 @@ ocha.HubScrolling.prototype.next = function() {
 
     //   // $("#hub-scrolling-scroller-component").show();
     // }, 500);
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
       function() {
         // console.log("XXXXX About to body");
         that.transitionOngoing = false;
@@ -1024,7 +1033,7 @@ ocha.HubScrolling.prototype.nextAction = function() {
   console.log("Entered Here", that);
 
   console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
-  $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+  $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
     function() {
       // console.log("XXXXX About to body");
       console.log("Entered Here");
@@ -1078,9 +1087,9 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       // console.log("ScrollUp : NEXT PAGE ", nextPage);
 
-      currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED,
+      currentPage.stop(true, true).animate({ top: -h + "px" }, that.options.transitionSpeed,
         function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+      nextPage.stop(true, true).animate({ top: "0px" }, that.options.transitionSpeed, function() {that.transitionOngoing=false
         onInit();
       });
     break;
@@ -1095,8 +1104,8 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       // console.log("NEXT PAGE ", nextPage);
 
-      currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+      currentPage.stop(true, true).animate({ top: h + "px" }, that.options.transitionSpeed, function() { if (callback) callback(); });
+      nextPage.stop(true, true).animate({ top: "0px" }, that.options.transitionSpeed, function() {that.transitionOngoing=false
         onInit();
       });
     break;
@@ -1112,8 +1121,8 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       nextPage.css("zIndex", parseInt(currentPage.css("zIndex")) - 10);
 
-      currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ opacity: 1}, that.TRANSITION_SPEED, function() {
+      currentPage.stop(true, true).animate({ opacity: 0}, that.options.transitionSpeed, function() { if (callback) callback(); });
+      nextPage.stop(true, true).animate({ opacity: 1}, that.options.transitionSpeed, function() {
         that.transitionOngoing=false;
         nextPage.css("zIndex", nextPageZindex);
         currentPage.hide();
