@@ -301,7 +301,7 @@ body { margin: 0; padding: 0; }
       <div class='hub-radial-overlay'></div>
       <div class='content'>
         <h2>
-          Aid organizations have<br/>achieved a lot so far in 2015. <br/><br/>They have saved lives,<br/>supported the livelihoods and<br/>protected the safety of millions of people.
+          Aid organizations have<br/>achieved a lot so far in 2015. <br/><br/>They have saved lives,<br/>supported the livelihoods and<br/>protected millions of people.
         </h2>
       </div>
     </div>
@@ -900,7 +900,7 @@ ocha.HubScrolling.prototype.next = function() {
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
-  // $(window).off("keydown", that.keyPressDown);
+  $(window).off("keydown", that.keyPressDown);
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
