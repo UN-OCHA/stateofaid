@@ -169,7 +169,8 @@ section.hub-section {
       font-weight: bold; }
 
 #hub-slide-1-a {
-  background-image: url(../img/story/bad-news.jpg); }
+  background-image: url(../img/story/bad-news.jpg);
+  background-position: bottom center; }
   #hub-slide-1-a #hub-slide-1-bad-news {
     position: absolute;
     left: 0;

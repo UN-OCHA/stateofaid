@@ -631,7 +631,7 @@ ocha.HubScrolling = function(sections, options) {
 
   this.options = $.extend({
 
-    transitionSpeed: 500
+    transitionSpeed: 1000
 
   }, options);
 };
@@ -648,7 +648,7 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
       var target = that.surrogates.filter(function(i, item) {
         var topOffset = $(item).offset().top;
         // console.log("Limit ::: ", topOffset+limit+limit, scrollTop, topOffset+limit, (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit) ? "TRUE" : "FALSE");
-        return (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit);
+        return (topOffset+limit > scrollTop && scrollTop > topOffset);
       });
 
     // console.log("XXXX", target, scrollTop);
@@ -717,7 +717,7 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
       //   // console.log("TOP OFFSET " , limit,  topOffset);
       // }
 
-      return (topOffset-limit > scrollTop && scrollTop > topOffset-limit-limit);
+      return (topOffset > scrollTop && scrollTop > topOffset-limit);
 
     });
 
