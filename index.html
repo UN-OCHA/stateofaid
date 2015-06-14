@@ -785,7 +785,9 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
   var hash = window.location.hash;
 
   var $links = $("aside.hubscroll-nav-area ul.hubscroll-nav-list li a");
-  var $activeLinks = $("aside.hubscroll-nav-area ul.hubscroll-nav-list li a[href=" + hash + "]");
+  var $activeLinks = hash != ""
+                        ? $("aside.hubscroll-nav-area ul.hubscroll-nav-list li a[href=" + hash + "]")
+                        : $("aside.hubscroll-nav-area ul.hubscroll-nav-list li:first-child a");
 
   $links.removeClass("hubscroll-nav-active");
   $activeLinks.addClass("hubscroll-nav-active");
