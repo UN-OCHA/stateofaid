@@ -68,6 +68,12 @@ body { margin: 0; padding: 0; }
 
 <body>
 
+  <aside class='hubscroll-nav-area'>
+    <nav class='hubscroll-nav-viewport'>
+      <ul class='hubscroll-nav-list'>
+      </ul>
+    </nav>
+  </aside>
 <!-- data-next-0="ocha.Story.titleProcess1"
            data-next-1="ocha.Story.titleProcess2" -->
   <section id="mosaic-area" class="hub-section hub-neutral-background"
@@ -104,10 +110,10 @@ body { margin: 0; padding: 0; }
   <section class="hub-section hub-neutral-background" id="hub-slide-2" data-next-0="ocha.Story.playNextChartText" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
-      <div class='content' id="content-2-a">
+      <div class='content hub-subsection' id="content-2-a">
         <h2>In just over a decade, the number of <br/>people in need of aid has almost doubled.<br/>2015 opened with <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">73 million people</strong> <br/>in 22 countries needing assistance.</h2>
       </div>
-      <div class='content' id="content-2-b" style="display: none">
+      <div class='content hub-subsection' id="content-2-b" style="display: none">
         <h2>
           Six months later, we are calling for help to <br/>support an astounding <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9 million people</strong>.
           <br/>
@@ -299,7 +305,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section hub-neutral-background' id='hub-slide-13' data-next-after="ocha.Story.startSomaliaCounter">
+  <section class='hub-section hub-neutral-background' id='hub-slide-13'>
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
@@ -310,7 +316,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-14'  data-next-after="ocha.Story.startVanuatuCounter">
+  <section class='hub-section' id='hub-slide-14' data-on-init="ocha.Story.startSomaliaCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Somalia</h2></div>
       <div class='hub-country-stats abs-left'>
@@ -329,7 +335,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-15' data-next-after="ocha.Story.showSecondFace">
+  <section class='hub-section' id='hub-slide-15' data-on-init="ocha.Story.startVanuatuCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Vanuatu</h2></div>
       <div class='hub-country-stats'>
@@ -356,6 +362,7 @@ body { margin: 0; padding: 0; }
 
   <section class='hub-section hub-neutral-background' id='hub-slide-16' data-next="fade"
 
+      data-on-init="ocha.Story.showSecondFace"
       data-next-before="ocha.Story.hideAllForMap"
 
     data-next-0="ocha.Story.remove16_00"
@@ -409,7 +416,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section hub-neutral-background' id='hub-slide-18'>
+  <section class='hub-section hub-neutral-background' id='hub-slide-19'>
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
@@ -749,6 +756,56 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
 
 }
 
+ocha.HubScrolling.prototype.skipPage = function(d) {
+  //d.data.that;
+  var hash = window.location.hash;
+
+  var $currentPage = $("section.hub-section[data-page=" + d.data.currentPageNumber + "]");
+  var $nextSurrogate = $("div" + hash + ".hub-container-scroll");
+
+  var nextPageNumber = $nextSurrogate.attr("data-page-scroll");
+
+  var $nextPage = $("section.hub-section[data-page=" + nextPageNumber + "]");
+
+  console.log($currentPage.attr("data-next"), $currentPage.attr("data-prev"));
+  var nextTransition = $currentPage.attr("data-next") || "scrollUp";
+  var prevTransition = $currentPage.attr("data-prev") || "scrollDown";
+
+  var transition = (parseInt($currentPage.attr("data-page")) < parseInt($nextPage.attr("data-page")))
+                      ? nextTransition
+                      : prevTransition;
+
+  console.log(transition);
+
+  console.log("CURRENT DATA PAGE ::: ", $currentPage, d.data.currentPageNumber);
+  console.log("NEXT DATA PAGE ::: ", $nextPage, nextPageNumber);
+  // var currentPage = d.data.currentPage;
+  // var nextPage = d.data.nextPage;
+
+  if (d.data.currentPageNumber != $nextPage.attr("data-page") )
+  {
+    d.data.currentPageNumber = $nextPage.attr("data-page");
+
+
+
+    $("html,body").css("overflow", "hidden");
+    $(window).off("scroll", d.data.windowListenerNext);
+    $(window).off("scroll", d.data.windowListenerPrev);
+
+    d.data.transition($currentPage, $nextPage, transition);
+    $("html,body").animate({ scrollTop : $nextSurrogate.offset().top}, d.data.options.transitionSpeed,
+      function() {
+
+
+        $(window).on("scroll", d.data, d.data.windowListenerNext);
+        $(window).on("scroll", d.data, d.data.windowListenerPrev);
+        // $(window).on("keydown", that, that.keyPressDown);
+        // }
+        $("html,body").css("overflow", "auto");
+    });
+  }
+};
+
 
 ocha.HubScrolling.prototype.initialize = function() {
   var that = this;
@@ -757,6 +814,7 @@ ocha.HubScrolling.prototype.initialize = function() {
   var scrollTop = $("html,body").scrollTop();
   // console.log("!!! SCROLL TOP: ", scrollTop);
   //Add data-page counter;
+  var $linkArea = $("aside.hubscroll-nav-area nav ul.hubscroll-nav-list");
   this.containers.each(
       function(i, item) {
 
@@ -773,11 +831,25 @@ ocha.HubScrolling.prototype.initialize = function() {
           var $surrogate = $("<div />")
                           .addClass("hub-container-scroll hub-surrogate")
                           .attr("data-page-scroll", i)
+                          .attr("id", $(item).attr("id") ? $(item).attr("id") : "page-" + i)
                           .width(that.containers.width())
                           .height(that.containers.height());
 
 
           $("body").append($surrogate);
+
+          var $link = $("<li/>")
+                          .addClass("hubscroll-nav-list-item")
+                          .append($("<a/>")
+                              .attr("data-target", i)
+                              .attr("href", "#"
+                                                + ($(item).attr("id") ? $(item).attr("id") : "page-" + i) )
+                                                ) ;
+
+          console.log($linkArea, $link);
+          $linkArea.append($link);
+          // <li class='hubscroll-nav-list-item'><a href="#hub-slide-18"></a></li>
+
 
           // if ($surrogate.position().top < scrollTop) {
           //   $surrogate.css("visibility", "hidden");
@@ -786,32 +858,36 @@ ocha.HubScrolling.prototype.initialize = function() {
       }
   );
 
-  this.containers.each(function(i, item) {
-      var $target = $("[data-page-scroll=" + i+ "]");
+  $linkArea.closest("aside.hubscroll-nav-area").css("margin-top", "-" + $linkArea.height()/2 + "px");
 
-      // console.log("DISTANCE", i,  $(window).scrollTop(), $("[data-page-scroll=" + i+ "]").offset().top - $(window).scrollTop());
+  // this.containers.each(function(i, item) {
+  //     var $target = $("[data-page-scroll=" + i+ "]");
 
-      if ($target.offset().top - $(window).scrollTop() < 0) {
-        // console.log("HIDDEN : ", $($(".hub-section")[i]));
-        $($(".hub-section")[i]).css("top", "100%");
+  //     // console.log("DISTANCE", i,  $(window).scrollTop(), $("[data-page-scroll=" + i+ "]").offset().top - $(window).scrollTop());
 
-      }
-      else {
-        $($(".hub-section")[i]).css("opacity", 1)
-        $($(".hub-section")[i]).css("top", "0px")
-      }
+  //     if ($target.offset().top - $(window).scrollTop() < 0) {
+  //       // console.log("HIDDEN : ", $($(".hub-section")[i]));
+  //       $($(".hub-section")[i]).css("top", "100%");
+
+  //     }
+  //     else {
+  //       $($(".hub-section")[i]).css("opacity", 1)
+  //       $($(".hub-section")[i]).css("top", "0px")
+  //     }
 
 
-  });
+  // });
 
   this.surrogates = $("body > .hub-surrogate");
 
 
     // if (!this.eventActive) {
     //   this.eventActive = true;
-      $(window).on("scroll", that, that.windowListenerNext);
-      $(window).on("scroll", that, that.windowListenerPrev);
+  $(window).on("scroll", that, that.windowListenerNext);
+  $(window).on("scroll", that, that.windowListenerPrev);
+  $(window).on("hashchange", that, that.skipPage);
 
+  $(window).trigger("hashchange");
     // }
 
   //Event listeners
@@ -840,67 +916,74 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
 };
 
 ocha.HubScrolling.prototype.previous = function() {
-  $("html,body").css("overflow", "hidden");
+  // $("html,body").css("overflow", "hidden");
 
   var that = this;
 
-  // console.log("XXXXX");
+  // // console.log("XXXXX");
 
-  $(window).off("scroll", that.windowListenerNext);
-  $(window).off("scroll", that.windowListenerPrev);
-  // $(window).off("keydown", that.keyPressDown);
-  // that.eventActive = false;
+  // $(window).off("scroll", that.windowListenerNext);
+  // $(window).off("scroll", that.windowListenerPrev);
+  // // $(window).off("keydown", that.keyPressDown);
+  // // that.eventActive = false;
 
-  var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
+  // var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
-  var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  // var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
 
-  // console.log(currentPage, currentSurrogate);
-  nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
+  // // console.log(currentPage, currentSurrogate);
+  // var nextPage = this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
 
-    var mode = "scrollDown";
+  var nextSurrogate = $(that.surrogates.filter(function(d, item) {
+    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber-1; }));
 
-    if ( currentPage.attr("data-prev") !== undefined ) {
-      mode = currentPage.attr("data-prev");
-    }
 
-    var callback = currentPage.attr("data-prev-after");
-    // console.log("Mode, Callback", currentPage, mode, callback);
+  window.location.hash = nextSurrogate.attr("id");
 
-    var func = null;
-    if (callback !== undefined) {
-      func = eval(callback);
-    } else {
-      func = function(){};
-    }
+  //   var mode = "scrollDown";
 
-    that.currentPageNumber --;
+  //   if ( currentPage.attr("data-prev") !== undefined ) {
+  //     mode = currentPage.attr("data-prev");
+  //   }
 
-    //Scroll towards new surrogaete
-    var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  //   var callback = currentPage.attr("data-prev-after");
+  //   // console.log("Mode, Callback", currentPage, mode, callback);
 
-    that.transition(currentPage, nextPage, mode, func);
+  //   var func = null;
+  //   if (callback !== undefined) {
+  //     func = eval(callback);
+  //   } else {
+  //     func = function(){};
+  //   }
 
-    //Reset Subpage
-    that.currentSubPage = 0;
+  //   that.currentPageNumber --;
 
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
-      function() {
+  //   //Scroll towards new surrogaete
+  //   var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
-        that.transitionOngoing = false;
-        that.scrollPositionTop = $(window).scrollTop();
-        that.scrollPositionBottom = $(window).scrollTop();
-        // console.log("XX");
-        // if (!that.eventActive) {
-        //   that.eventActive = true;
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
-        // $(window).on("keydown", that, that.keyPressDown);
-        // }
-        $("html,body").css("overflow", "auto");
-      }
-    );
+  //   console.log("TRANSITION !!!!!! ::: ", currentPage, nextPage);
+  //   that.transition(currentPage, nextPage, mode, func);
+
+  //   //Reset Subpage
+  //   that.currentSubPage = 0;
+
+  //   $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
+  //     function() {
+
+  //       that.transitionOngoing = false;
+  //       that.scrollPositionTop = $(window).scrollTop();
+  //       that.scrollPositionBottom = $(window).scrollTop();
+  //       // console.log("XX");
+  //       // if (!that.eventActive) {
+  //       //   that.eventActive = true;
+  //       $(window).on("scroll", that, that.windowListenerNext);
+  //       $(window).on("scroll", that, that.windowListenerPrev);
+  //       // $(window).on("keydown", that, that.keyPressDown);
+  //       // }
+  //       $("html,body").css("overflow", "auto");
+  //     }
+  //   );
 };
 
 ocha.HubScrolling.prototype.next = function() {
@@ -996,60 +1079,63 @@ ocha.HubScrolling.prototype.nextAction = function() {
   var currentPage = that.currentPage;
   var nextPage = that.nextPage;
 
-  var mode = $(currentPage).attr("data-next");
+  var nextSurrogate = $(that.surrogates.filter(function(d, item) {
+    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber+1; }));
 
-  var callback = $(currentPage).attr("data-next-after");
-  // console.log("Mode, Callback", currentPage, mode, callback);
+  window.location.hash = nextSurrogate.attr("id");
 
-  var func = null;
-  if (callback !== undefined) {
-    try {
-      console.log("Entered Here", func);
-      func = eval(callback);
-    } catch (ex) { func = null; }
+  // var mode = $(currentPage).attr("data-next");
 
-    // console.log(func);
+  // var callback = $(currentPage).attr("data-next-after");
+  // // console.log("Mode, Callback", currentPage, mode, callback);
 
-  } else {
-    func = function(){};
-  }
+  // var func = null;
+  // if (callback !== undefined) {
+  //   try {
+  //     console.log("Entered Here", func);
+  //     func = eval(callback);
+  //   } catch (ex) { func = null; }
 
-  that.currentPageNumber ++;
+  //   // console.log(func);
 
-  // console.log("nextAction", that.surrogates);
+  // } else {
+  //   func = function(){};
+  // }
 
-  //Scroll towards new surrogaete
-  var currentSurrogate = $(that.surrogates.filter(function(d, item) {
-    // console.log($(item).attr("data-page-scroll"), that.currentPageNumber);
-    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  // that.currentPageNumber ++;
 
-  // console.log(currentSurrogate);
+  // // console.log("nextAction", that.surrogates);
 
-  that.transition(currentPage, nextPage, mode, func);
+  // //Scroll towards new surrogaete
 
-  //Reset Subpage
-  that.currentSubPage = 0;
 
-  console.log("Entered Here", that);
+  // // console.log(currentSurrogate);
 
-  console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
-  $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
-    function() {
-      // console.log("XXXXX About to body");
-      console.log("Entered Here");
-      that.transitionOngoing = false;
-      that.scrollPositionTop = $(window).scrollTop();
-      that.scrollPositionBottom = $(window).scrollTop();
-      // if (!that.eventActive) {
-      //   that.eventActive = true;
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
-        // $(window).on("keydown", that, that.keyPressDown);
-      // }
-      $("html,body").css("overflow", "auto");
-      console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
-    }
-  );
+  // that.transition(currentPage, nextPage, mode, func);
+
+  // //Reset Subpage
+  // that.currentSubPage = 0;
+
+  // console.log("Entered Here", that);
+
+  // console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
+  // $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
+  //   function() {
+  //     // console.log("XXXXX About to body");
+  //     console.log("Entered Here");
+  //     that.transitionOngoing = false;
+  //     that.scrollPositionTop = $(window).scrollTop();
+  //     that.scrollPositionBottom = $(window).scrollTop();
+  //     // if (!that.eventActive) {
+  //     //   that.eventActive = true;
+  //       $(window).on("scroll", that, that.windowListenerNext);
+  //       $(window).on("scroll", that, that.windowListenerPrev);
+  //       // $(window).on("keydown", that, that.keyPressDown);
+  //     // }
+  //     $("html,body").css("overflow", "auto");
+  //     console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
+  //   }
+  // );
 }
 
 ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, callback) {
@@ -1483,7 +1569,7 @@ ocha.Story = function() {
       console.log(target);
       var i = d3.interpolateRound(0, parseInt(target.attr("data-stat-count")));
       return function(t) {
-        console.log(i(t), this);
+        // console.log(i(t), this);
         var fP = d3.formatPrefix(i(t));
 
         if (fP.symbol != "")

@@ -329,4 +329,35 @@ div.hub-radial-overlay {
   text-shadow: 2px 2px 1px rgba(120, 120, 120, 0.7);
   color: black !important; }
 
+/***
+ Hubscroll area
+ */
+aside.hubscroll-nav-area {
+  position: fixed;
+  margin-left: 5px;
+  left: 0;
+  top: 50%;
+  z-index: 100000; }
+  aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list {
+    margin: 0;
+    padding: 0; }
+    aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item {
+      height: 16px;
+      width: 6px;
+      position: relative;
+      list-style-type: none; }
+      aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item a {
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: inline-block;
+        padding: 3px;
+        border-radius: 3px;
+        background-color: rgba(255, 255, 255, 0.5); }
+        aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item a:hover {
+          top: -3px;
+          left: -3px;
+          padding: 6px;
+          border-radius: 6px; }
+
 /*# sourceMappingURL=custom.css.map */

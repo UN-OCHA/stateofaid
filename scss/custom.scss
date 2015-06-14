@@ -427,3 +427,51 @@ div.hub-radial-overlay {
     color: black !important;
   }
 }
+
+
+/***
+ Hubscroll area
+ */
+
+ aside.hubscroll-nav-area {
+    position: fixed;
+    margin-left: 5px;
+    left: 0;
+    top: 50%;
+    z-index: 100000;
+
+    nav.hubscroll-nav-viewport {
+
+      ul.hubscroll-nav-list {
+        margin: 0;
+        padding: 0;
+
+        li.hubscroll-nav-list-item {
+
+          height: 16px;
+          width: 6px;
+
+          position: relative;
+          list-style-type: none;
+
+          a {
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: inline-block;
+            padding: 3px;
+            border-radius: 3px;
+
+            background-color: rgba(255,255,255,0.5);
+
+            &:hover {
+              top: -3px;
+              left: -3px;
+              padding: 6px;
+              border-radius: 6px;
+            }
+          }
+        }
+      }
+    }
+ }
