@@ -1,0 +1,448 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Open Sans', sans-serif; }
+
+#map {
+  width: 100%; }
+
+svg {
+  position: relative; }
+
+path.focused-country {
+  fill: #000;
+  fill-opacity: .0;
+  stroke: black;
+  stroke-width: .25px; }
+
+path.focused-in-need, rect.legend-item {
+  /*fill-opacity: .9;*/ }
+
+path.focused-country:hover {
+  fill: brown;
+  fill-opacity: .7; }
+
+text.focused-country-label {
+  font-familiy: sans-serif;
+  font-size: 13px;
+  fill: white;
+  /*stroke: white;*/
+  stroke-width: .1px; }
+
+#twitter-button {
+  display: inline-block;
+  vertical-align: middle; }
+
+#country-area {
+  width: 49%;
+  padding: .5%;
+  height: 700px;
+  position: absolute;
+  background-color: whitesmoke;
+  top: 0;
+  left: -51%;
+  border: #333333 solid;
+  border-width: 0 4px 0 0;
+  z-index: 100; }
+
+.chart-detail.y-axis line,
+.chart-detail.y-axis path {
+  fill: none;
+  stroke: black;
+  shape-rendering: crispEdges; }
+
+.chart-detail.y-axis, .legend-text {
+  font-family: sans-serif;
+  font-size: 11px; }
+
+#main-activity-area {
+  position: relative;
+  overflow: hidden; }
+
+#country-viewport {
+  position: relative; }
+
+#country-header {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  z-index: 100; }
+
+#country-loader {
+  position: absolute;
+  width: 100px;
+  left: 50%;
+  margin-left: -50px;
+  top: 100px;
+  text-align: center;
+  color: white; }
+
+#country-details {
+  width: 100%;
+  position: relative; }
+
+#country-details-viewport {
+  width: 100%;
+  position: relative; }
+
+#country-details-triangle {
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #aaaaaa;
+  position: absolute;
+  bottom: -15px;
+  left: 10px; }
+
+text.legend-label {
+  font-size: 10px;
+  fill: black;
+  font-family: sans-serif; }
+
+text.gap-info-text {
+  font-weight: bold; }
+
+/*SVG*/
+rect.chart_in_need {
+  fill: lightgray;
+  cursor: pointer; }
+
+rect.chart-funded {
+  fill: #0F6CB6;
+  cursor: pointer; }
+
+rect.chart-pledged {
+  fill: #E4EA89;
+  cursor: pointer; }
+
+#country-details-area h3,
+#country-details-area .main-area h1 {
+  font-size: 24px;
+  font-family: sans-serif;
+  color: #333333;
+  padding: 0;
+  margin: 0;
+  margin: 10px 0; }
+
+#country-details-area h3 {
+  text-transform: uppercase;
+  font-size: 15px;
+  padding: 0;
+  margin: 0;
+  color: gray;
+  padding-right: 90px;
+  margin-bottom: 4px; }
+
+/*#country-details-area .main-area h1 { width: 48%; }*/
+#country-details-area .main-area h1#country-title {
+  /*float: left;*/
+  text-align: center;
+  background-color: #003856;
+  color: white;
+  text-transform: uppercase;
+  font-size: 21px;
+  padding: 14px 12px 14px 6px;
+  margin: -6px -6px 0 -6px; }
+
+#country-details-area .main-area h1#people-in-need-title {
+  /*float: right; */
+  text-align: left;
+  line-height: 0.8;
+  color: #A82B2B;
+  margin-top: 15px;
+  padding-left: 1%; }
+
+#country-details-area .main-area h1#people-in-need-title div.num-area {
+  float: left;
+  font-size: 31px;
+  vertical-align: top;
+  margin-top: -2px;
+  margin-right: 5px;
+  margin-bottom: 21px; }
+
+#country-details-area .main-area h1#people-in-need-title span.span-area {
+  font-size: 14px;
+  vertical-align: top; }
+
+rect.chart-legend-item {
+  width: 15px;
+  height: 15px; }
+
+#country-details-hover {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: whitesmoke;
+  border: solid #aaaaaa 3px;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 11px;
+  width: 200px;
+  border-radius: 3px;
+  display: none; }
+
+#country-details-hover h4 {
+  padding: 0;
+  margin: 0;
+  font-size: 13px; }
+
+#country-details-hover #country-detail-image {
+  width: 40px;
+  height: 40px;
+  float: left;
+  background-image: url(../img/icons/fund.png); }
+
+#country-detail-table th {
+  text-align: right; }
+
+.clear {
+  clear: both; }
+
+/*For buttons*/
+#map-layer-ctrl {
+  position: absolute;
+  top: 0px;
+  left: 50%;
+  display: inline-block;
+  /*margin-left: -12%;*/
+  z-index: 1000; }
+
+#map-layer-ctrl button {
+  padding: 5px 10px;
+  cursor: pointer; }
+
+#map-layer-ctrl button.active {
+  background-color: #f47932;
+  border: black;
+  border-radius: 2px;
+  color: white;
+  font-weight: bold; }
+
+#country-main-info {
+  background-color: #e8e8e8;
+  padding-right: 5px;
+  margin-right: -5px;
+  margin-bottom: 10px; }
+
+.country-details {
+  background-color: #e8e8e8;
+  margin-left: -6px;
+  margin-right: -6px;
+  padding-bottom: 10px; }
+
+.country-details div.country-detail-item {
+  padding-top: 10px;
+  min-width: 48%;
+  font-family: sans-serif;
+  position: relative; }
+
+.country-details #country-details-people-in-need {
+  float: left; }
+
+.country-details #country-details-funding {
+  float: right; }
+
+.country-detail-item {
+  text-align: left; }
+
+.country-detail-item span.arrow {
+  font-size: 10px;
+  width: 26px;
+  height: 26px;
+  background-repeat: no-repeat;
+  background-size: 58%;
+  display: inline-block;
+  position: absolute;
+  right: -4px;
+  top: 57px;
+  padding: 8px;
+  font-weight: bold;
+  background-position-x: 65%; }
+
+span.previous-appeal sub,
+span.current-appeal sub {
+  font-size: 10px;
+  float: left;
+  margin-top: 4px; }
+
+span.previous-appeal, span.current-appeal {
+  display: block;
+  text-align: left;
+  position: relative;
+  padding-right: 90px; }
+
+span.current-appeal {
+  text-align: left;
+  color: #811B1B; }
+
+span.current-appeal h4 {
+  float: right;
+  margin-left: 3px;
+  margin-right: 40px; }
+
+span.previous-appeal h4 {
+  font-size: 29px;
+  padding: 0;
+  margin: 0;
+  font-weight: normal;
+  float: right;
+  margin-left: 3px; }
+
+span.previous-appeal sub, span.current-appeal sub {
+  color: white;
+  padding: 2px 5px;
+  float: right; }
+
+span.previous-appeal sub {
+  background-color: #333333; }
+
+span.current-appeal sub {
+  background-color: #811B1B; }
+
+span.current-appeal h4 {
+  font-size: 29px;
+  padding: 0;
+  margin: 0;
+  font-weight: bold;
+  margin-left: 3px; }
+
+#country-details-viewport-area {
+  float: left;
+  width: 100%;
+  text-align: right;
+  padding-right: 1%;
+  padding-top: 1%;
+  padding-bottom: 3%; }
+
+#country-details-viewport-area * {
+  text-align: right; }
+
+.country-detail-item span.arrow.arrow-none {
+  display: none !important; }
+
+.country-detail-item span.arrow.arrow-up {
+  background-image: url(../img/icons/red-arrow-up.png);
+  padding-top: 23px;
+  color: #990000; }
+
+.country-detail-item span.arrow {
+  position: absolute;
+  top: 41%;
+  right: 15%; }
+
+.country-detail-item span.arrow.arrow-down {
+  background-image: url(../img/icons/green-arrow-down.png);
+  background-position-y: 17px;
+  padding-top: 5px;
+  height: 29px;
+  color: #005500; }
+
+#country-funding-gap-area {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 15px;
+  font-family: sans-serif; }
+
+/** FUNDING GAP AREA */
+.gap-bars[data-type='Requirement'] {
+  fill: lightgray; }
+
+.gap-bars[data-type='Funded'] {
+  fill: #0F6CB6; }
+
+.gap-labels {
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: bold; }
+
+.detail-info-img {
+  width: 48px;
+  right: 40px;
+  top: 25px;
+  position: absolute; }
+
+#map-list h3 {
+  padding: 0;
+  margin: 12px 0 4px;
+  font-size: 15px;
+  font-weight: bold;
+  font-family: sans-serif; }
+
+/** Map detail area */
+#map-detail-area {
+  width: 220px;
+  background-color: whitesmoke;
+  /*padding: 10px;*/
+  position: absolute;
+  z-index: 1000;
+  right: 0;
+  top: 0;
+  height: 700px; }
+
+#map-detail-viewport {
+  padding: 10px; }
+
+#map-detail-viewport #map-details-show-hide {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 0;
+  left: -40px;
+  background-color: white; }
+
+#map-detail-viewport #map-details-show-hide a {
+  content: "Hide"; }
+
+#map-detail-viewport #map-details-show-hide a.show-navigation {
+  content: "Show"; }
+
+#map-detail-area #map-title h1 {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 38px; }
+
+#map-detail-area #map-title > p {
+  font-size: 14px;
+  line-height: 1.25;
+  color: #333333;
+  padding: 0;
+  margin: 4px 0;
+  font-family: sans-serif; }
+
+#regional-area, #country-list-area {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+#regional-area .region-item, #country-list-area .country-list-item {
+  cursor: pointer;
+  margin-bottom: 2px;
+  padding: 2px; }
+
+#regional-area .region-item .region-image, #country-list-area .country-list-item .country-list-image {
+  float: left;
+  width: 70px;
+  margin-right: 5px; }
+
+#regional-area .region-item h4, #country-list-area .country-list-item h4 {
+  padding: 0;
+  margin: 0;
+  font-size: 14px;
+  font-family: sans-serif;
+  font-weight: normal;
+  color: #0174BD; }
+
+#regional-area .region-item .regional-profile, #country-list-area .country-list-item .country-list-profile {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 11px;
+  color: #0174BD; }
+
+#regional-area .region-item .regional-profile img, #country-list-area .country-list-item .country-list-profile img {
+  vertical-align: bottom; }
+
+/*# sourceMappingURL=map-custom.css.map */
