@@ -285,19 +285,24 @@
   }
 
    .country-detail-item span.arrow.arrow-up
-  {   background-image: url(img/icons/red-arrow-up.png);
-      padding-top: 23px;
-      color: #990000;
-      margin-right: 22px;
+  {     background-image: url(img/icons/red-arrow-up.png);
+  padding-top: 23px;
+  color: #990000;
   }
 
+.country-detail-item span.arrow {
+  position: absolute;
+  top: 41%;
+  right: 15%;
+}
   .country-detail-item span.arrow.arrow-down
   {background-image: url(img/icons/green-arrow-down.png);
 
     background-position-y: 17px;
     padding-top: 5px;
   height: 29px;
-  color: #005500;}
+  color: #005500;
+}
 
   #country-funding-gap-area {
     width: 100%;
@@ -440,8 +445,7 @@
         <div id="country-main-info">
             <div id="country-details-viewport-area" class="country-details">
               <div id="country-details-people-in-need" class="country-detail-item">
-                <h3>People targeted</h3>
-                <img src="img/icons/people-affected-big.png" class='detail-info-img' />
+                <h3><img src="img/icons/people-small.png" class='detail-info-img-icon' /> People targeted</h3>
                 <span class="arrow">20%</span>
                 <span class="previous-appeal">
                   <h4>98M</h4>
@@ -455,8 +459,7 @@
                 <div class="clear"></div>
               </div>
               <div id="country-details-funding" class="country-detail-item">
-                <h3>Funding Requested</h3>
-                <img src="img/icons/fund-big.png" class='detail-info-img' />
+                <h3><img src="img/icons/fund-small.png" class='detail-info-img-icon' /> Funding Requested</h3>
                 <span class="arrow">20%</span>
                 <span class="previous-appeal">
                   <h4>$408M</h4>
