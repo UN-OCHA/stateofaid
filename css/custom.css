@@ -329,6 +329,39 @@ div.hub-radial-overlay {
   text-shadow: 2px 2px 1px rgba(120, 120, 120, 0.7);
   color: black !important; }
 
+#hub-call-to-action {
+  background-image: url(../img/story/final.png); }
+  #hub-call-to-action div.content h2 {
+    text-shadow: 0 1px 1px #000000; }
+  #hub-call-to-action div.content div#hub-call-to-action-area {
+    margin-top: 20px;
+    padding: 10px 15px 20px;
+    border-radius: 5px;
+    background-color: rgba(0, 56, 86, 0.5);
+    color: white; }
+    #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box {
+      width: 31%;
+      float: left;
+      margin-right: 2%; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box h3 {
+        text-transform: uppercase;
+        text-shadow: 0 1px 1px #000000; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box img.img-left {
+        float: left;
+        margin-right: 5px; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
+        text-align: left; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box .fb-share-button {
+        vertical-align: top; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box a.hub-button {
+        padding: 4px 12px;
+        display: inline-block;
+        background-color: #811B1B;
+        border-radius: 4px;
+        font-weight: bold;
+        text-decoration: none;
+        color: white; }
+
 /***
  Hubscroll area
  */
@@ -354,7 +387,7 @@ aside.hubscroll-nav-area {
         padding: 3px;
         border-radius: 3px;
         background-color: rgba(255, 255, 255, 0.5); }
-        aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item a:hover {
+        aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item a.hubscroll-nav-active, aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list li.hubscroll-nav-list-item a:hover {
           top: -3px;
           left: -3px;
           padding: 6px;
