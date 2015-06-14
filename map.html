@@ -432,7 +432,7 @@ $("#map-layer-ctrl button").on("click", function() {
     {
       case "Assistance":
 
-        svg_legend.style("height", 20)
+        svg_legend.style("height", 40)
               .style("width", (d3.range(scaleInNeed.range()[0], scaleInNeed.range()[1]-1).length+1) * 50);
 
         legend_area.selectAll("rect.legend-item.in-need")
@@ -441,7 +441,7 @@ $("#map-layer-ctrl button").on("click", function() {
             .append("rect")
               .attr("class", "legend-item in-need")
               .attr("fill", function(d) { return redColorScale(d); })
-              .attr("y", 0)
+              .attr("y", 20)
               .attr("width", 0)
               .attr("x", 0)
               .attr("height", 20);
@@ -451,7 +451,7 @@ $("#map-layer-ctrl button").on("click", function() {
             .enter()
               .append("text")
                 .attr("class", "legend-label")
-                .attr("y", 15)
+                .attr("y", 35)
                 .attr("text-anchor", "middle")
                 .attr("x", 0)
                 .text(function(d) {
@@ -469,12 +469,21 @@ $("#map-layer-ctrl button").on("click", function() {
             .duration(500)
             .attr("x", function(d) { return d * 50; })
             .attr("width", 50);
+
+          /* For the text */
+          legend_area.append("text")
+            .text("People targeted for assistance")
+            .style("font-weight", "bold")
+            .attr("fill", "white")
+            .attr("x", 50)
+            .attr("y", 15);
+
         break;
 
         case "Requirement" :
           console.log("Entered");
 
-          svg_legend.style("height", 20)
+          svg_legend.style("height", 40)
                 .style("width", (d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length+1) * 50);
 
           legend_area.selectAll("rect.legend-item")
@@ -483,7 +492,7 @@ $("#map-layer-ctrl button").on("click", function() {
               .append("rect")
                 .attr("class", "legend-item in-funding")
                 .attr("fill", function(d) { return fundColorScale(d); })
-                .attr("y", 0)
+                .attr("y", 20)
                 .attr("width", 0)
                 .attr("x", 0)
                 .attr("height", 20);
@@ -493,7 +502,7 @@ $("#map-layer-ctrl button").on("click", function() {
               .enter()
                 .append("text")
                   .attr("class", "legend-label")
-                  .attr("y", 15)
+                  .attr("y", 35)
                   .attr("text-anchor", "middle")
                   .attr("x", 0)
                   .text(function(d) {
@@ -514,13 +523,20 @@ $("#map-layer-ctrl button").on("click", function() {
               .duration(500)
               .attr("x", function(d) { return d * 50; })
               .attr("width", 50);
+
+            legend_area.append("text")
+              .text("Funding Requirement")
+              .style("font-weight", "bold")
+              .attr("fill", "white")
+              .attr("x", 50)
+              .attr("y", 15);
         break;
 
         case "Percent Funded" :
           // scaleChange
           // percentColorScale
 
-          svg_legend.style("height", 20)
+          svg_legend.style("height", 40)
                 .style("width", 11 * 40);
 
           var perc_data = d3.range(0, 1, percentColorScale.domain()[2]/10);
@@ -537,7 +553,7 @@ $("#map-layer-ctrl button").on("click", function() {
                 .attr("fill", function(d) {
                   console.log(d);
                   return percentColorScale(d); })
-                .attr("y", 0)
+                .attr("y", 20)
                 .attr("width", 0)
                 .attr("x", 0)
                 .attr("height", 20);
@@ -547,7 +563,7 @@ $("#map-layer-ctrl button").on("click", function() {
               .enter()
                 .append("text")
                   .attr("class", "legend-label")
-                  .attr("y", 15)
+                  .attr("y", 35)
                   .attr("text-anchor", "middle")
                   .attr("x", 0)
                   .text(function(d) {
@@ -565,6 +581,13 @@ $("#map-layer-ctrl button").on("click", function() {
               .duration(500)
               .attr("x", function(d, i) { return i  * 40; })
               .attr("width", 40);
+
+            legend_area.append("text")
+            .text("Percent Funded")
+            .style("font-weight", "bold")
+            .attr("fill", "white")
+            .attr("x", 50)
+            .attr("y", 15);
         break;
     }
 
