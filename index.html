@@ -1097,9 +1097,16 @@ ocha.HubScrolling.prototype.next = function() {
     this.nextPage = nextPage;
     this.currentPage = currentPage;
 
-    console.log(this.nextPage ' UNDEFINED ') ;
+    // console.log(this.nextPage ' UNDEFINED ') ;
 
-    if ( !this.nextPage ) {
+    if ( this.nextPage.length == 0 ) {
+      if ( !that.isMobile ) {
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      } else {
+        $("body").on("touchmove", that, that.windowListenerNext);
+        $("body").on("touchmove", that, that.windowListenerPrev);
+      }
       return;
     }
 
