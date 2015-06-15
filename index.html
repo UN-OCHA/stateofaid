@@ -486,7 +486,7 @@ ocha.FaceMosaic = function(selector, imageList, squareSize) {
         .each(function(d) {
 
           var coinFlip = Math.random() * 100;
-          if ( coinFlip > 25 ) {  //get new and replace
+          if ( coinFlip > 80 ) {  //get new and replace
             var randomIndex = parseInt(that.imageList.length * Math.random());
             var toBeRemoved = d3.select(this).select("img");
 
