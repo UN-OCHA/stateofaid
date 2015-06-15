@@ -227,11 +227,12 @@ $phone-max-width: 768px;
           text-align: left;
           color: $orange;
           margin-bottom: 2px;
+          font-size: $medium-font;
         }
         p {
           margin: 0;
           margin-bottom:5px;
-          font-size: $medium-font;
+          font-size: $small-font;
         }
       }
     }
