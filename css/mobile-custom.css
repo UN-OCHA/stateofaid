@@ -34,7 +34,7 @@
       margin: 0; }
   section.hub-section div.hub-viewport div.hub-country-stats {
     position: absolute;
-    bottom: 100px;
+    bottom: 110px;
     font-size: 24px;
     padding-left: 14px;
     width: 100%;
@@ -59,9 +59,9 @@
     background-image: url(../img/story/small/good-news.jpg); }
     #hub-slide-1 .hub-viewport #hub-slide-1-good-news, #hub-slide-1 .hub-viewport #hub-slide-1-bad-news, #hub-slide-1-a .hub-viewport #hub-slide-1-good-news, #hub-slide-1-a .hub-viewport #hub-slide-1-bad-news {
       background-color: transparent;
-      margin-bottom: 1em; }
+      margin-bottom: 110px; }
       #hub-slide-1 .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1 .hub-viewport #hub-slide-1-bad-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-bad-news h1 {
-        font-size: 32px;
+        font-size: 16px;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0 1px 1px black; }
@@ -69,7 +69,8 @@
         text-transform: none;
         font-weight: normal;
         text-shadow: 0 1px 1px black;
-        line-height: 1.2; }
+        line-height: 1.2;
+        font-size: 24px; }
 
   #hub-slide-1-a {
     background-image: url(../img/story/small/bad-news.jpg); }
@@ -140,7 +141,8 @@
         margin-bottom: 2px; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
         margin: 0;
-        margin-bottom: 5px; }
+        margin-bottom: 5px;
+        font-size: 24px; }
 
   #hub-slide-17 {
     display: none; }
@@ -150,7 +152,7 @@
 
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
-    bottom: 60px;
+    bottom: 90px;
     right: auto;
     top: auto;
     left: auto; }

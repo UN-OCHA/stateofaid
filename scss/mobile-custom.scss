@@ -5,6 +5,7 @@ $lightblue: #1E7793;
 
 $big-font: 32px;
 $medium-font: 24px;
+$small-font: 16px;
 
 $phone-min-width: 320px;
 $phone-max-width: 736px;
@@ -69,7 +70,7 @@ $phone-max-width: 736px;
       }
       div.hub-country-stats {
         position: absolute;
-        bottom: 100px;
+        bottom: 110px;
         font-size: $medium-font;
         padding-left: 14px;
         width: 100%;
@@ -106,9 +107,10 @@ $phone-max-width: 736px;
 
       #hub-slide-1-good-news, #hub-slide-1-bad-news {
         background-color: transparent;
-        margin-bottom: 1em;
+        // margin-bottom: 1em;
+        margin-bottom: 110px;
         h1 {
-          font-size: $big-font;
+          font-size: $small-font;
           text-transform: uppercase;
           font-weight: bold;
           text-shadow: 0 1px 1px rgb(0,0,0);
@@ -118,6 +120,8 @@ $phone-max-width: 736px;
           font-weight: normal;
           text-shadow: 0 1px 1px rgb(0,0,0);
           line-height: 1.2;
+
+          font-size: $medium-font;
         }
       }
     }
@@ -221,6 +225,7 @@ $phone-max-width: 736px;
         p {
           margin: 0;
           margin-bottom:5px;
+          font-size: $medium-font;
         }
       }
     }
@@ -238,7 +243,7 @@ $phone-max-width: 736px;
     &.hub-section .hub-country-stats {
       // width: 100%;
       background-color: transparent;
-      bottom: 60px;
+      bottom: 90px;
       right: auto;
       top: auto;
       left: auto;
