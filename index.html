@@ -1514,12 +1514,13 @@ ocha.Story = function() {
                                           faceWidth);
 
         lastMosaicInitialized = true;
-        // lastMosaic.initialize();
       }
 
       if ( !hubScrolling.isMobile ) {
         lastMosaic.stopMosaic();
         lastMosaic.startMosaic();
+      } else {
+        lastMosaic.initialize();
       }
     },
     playNextChartText: function() {
