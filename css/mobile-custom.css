@@ -7,9 +7,9 @@
     background-position: center center !important; }
 
   #mosaic-title-area h1 {
-    font-size: 3.5em; }
-  #mosaic-title-area h2 {
     font-size: 2.5em; }
+  #mosaic-title-area h2 {
+    font-size: 1.5em; }
 
   section.hub-section div.hub-viewport div.hub-country-title {
     position: absolute;
@@ -25,7 +25,7 @@
     position: absolute;
     bottom: 4%;
     font-size: 2em;
-    padding-left: 0.5em;
+    padding-left: 14px;
     width: 100%;
     background-color: transparent;
     color: #f47932;
@@ -50,7 +50,7 @@
       background-color: transparent;
       margin-bottom: 1em; }
       #hub-slide-1 .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1 .hub-viewport #hub-slide-1-bad-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-bad-news h1 {
-        font-size: 1em;
+        font-size: 18px;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0 1px 1px black; }
@@ -66,7 +66,7 @@
   #hub-slide-2 #chart-container {
     width: 100%; }
   #hub-slide-2 .content h2 {
-    font-size: 1em;
+    font-size: 14px;
     padding: 0 1em;
     margin-top: 25%; }
 
@@ -107,9 +107,9 @@
     font-size: 1.2em; }
 
   .hub-neutral-background div.content h1 {
-    font-size: 1.5em; }
+    font-size: 18px; }
   .hub-neutral-background div.content h2 {
-    font-size: 1em;
+    font-size: 14px;
     padding: 0 1em;
     font-weight: normal;
     line-height: 1.5; }
@@ -146,13 +146,13 @@
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
       width: 40%; }
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
-      font-size: 0.5em;
+      font-size: 14px;
       font-weight: bold;
       text-shadow: 0px 1px 1px black;
       width: 50%;
       color: #f47932; }
     #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
-      font-size: 0.5em;
+      font-size: 14px;
       vertical-align: bottom;
       font-weight: bold;
       display: inline-block;
