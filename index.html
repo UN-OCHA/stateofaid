@@ -1097,6 +1097,11 @@ ocha.HubScrolling.prototype.next = function() {
     this.nextPage = nextPage;
     this.currentPage = currentPage;
 
+
+    if ( !this.nextPage ) {
+      return;
+    }
+
     var beforeAction = currentPage.attr("data-next-before");
     var func = null;
 
