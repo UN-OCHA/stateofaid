@@ -1635,6 +1635,11 @@ $("#mosaic-area").css("opacity", 1);
 
 
 jQuery(window).load(function() {
+
+  if (hubScrolling.isMobile) {
+    $("#hub-slide-17").remove();
+  }
+
   ocha.Story.initialize();
   hubScrolling.initialize();
   $("#mosaic-actual").height($("#mosaic-area").height());
