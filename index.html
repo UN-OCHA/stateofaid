@@ -1295,8 +1295,7 @@ ocha.CountryChart = function (container) {
   this.container = $j(container);
   this.d3Container = d3.select(container[0]);
   this.svg = this.d3Container.append("svg").attr("class", "country-chart");
-  this.data = [ { year: 2003, requirement: 5300000000},
-               { year: 2004, requirement: 3000000000},
+  this.data = [
                { year: 2005, requirement: 5000000000, targeted: 40000000},
                { year: 2006, requirement: 4800000000, targeted: 32000000},
                { year: 2007, requirement: 4400000000, targeted: 26000000},
