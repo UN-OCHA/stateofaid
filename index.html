@@ -1097,6 +1097,7 @@ ocha.HubScrolling.prototype.next = function() {
     this.nextPage = nextPage;
     this.currentPage = currentPage;
 
+    console.log(this.nextPage ' UNDEFINED ') ;
 
     if ( !this.nextPage ) {
       return;
@@ -1134,7 +1135,9 @@ ocha.HubScrolling.prototype.nextAction = function() {
   var nextSurrogate = $(that.surrogates.filter(function(d, item) {
     return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber+1; }));
 
-  window.location.hash = nextSurrogate.attr("id");
+  if ( nextSurrogate.attr("id") != undefined ) {
+    window.location.hash = nextSurrogate.attr("id");
+  }
 
   // var mode = $(currentPage).attr("data-next");
 
