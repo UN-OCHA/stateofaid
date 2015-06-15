@@ -9,16 +9,16 @@
     height: device-height !important; }
 
   #mosaic-title-area h1 {
-    font-size: 24px; }
+    font-size: 32px; }
   #mosaic-title-area h2 {
-    font-size: 18px; }
+    font-size: 24px; }
 
   section.hub-section div.hub-viewport div.hub-country-title {
     position: absolute;
     width: 98%;
     top: 0; }
     section.hub-section div.hub-viewport div.hub-country-title h2 {
-      font-size: 18px;
+      font-size: 24px;
       background-color: transparent;
       color: #4e6c06;
       padding: 1%;
@@ -26,7 +26,7 @@
   section.hub-section div.hub-viewport div.hub-country-stats {
     position: absolute;
     bottom: 4%;
-    font-size: 18px;
+    font-size: 24px;
     padding-left: 14px;
     width: 100%;
     background-color: transparent;
@@ -52,7 +52,7 @@
       background-color: transparent;
       margin-bottom: 1em; }
       #hub-slide-1 .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1 .hub-viewport #hub-slide-1-bad-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-good-news h1, #hub-slide-1-a .hub-viewport #hub-slide-1-bad-news h1 {
-        font-size: 24px;
+        font-size: 32px;
         text-transform: uppercase;
         font-weight: bold;
         text-shadow: 0 1px 1px black; }
@@ -68,7 +68,7 @@
   #hub-slide-2 #chart-container {
     width: 100%; }
   #hub-slide-2 .content h2 {
-    font-size: 18px;
+    font-size: 24px;
     padding: 0 1em;
     margin-top: 25%; }
 
@@ -106,12 +106,12 @@
     background-image: url(../img/story/small/vanuatu.jpg); }
 
   #hub-slide-19 h2 {
-    font-size: 18px; }
+    font-size: 24px; }
 
   .hub-neutral-background div.content h1 {
-    font-size: 24px; }
+    font-size: 32px; }
   .hub-neutral-background div.content h2 {
-    font-size: 18px;
+    font-size: 24px;
     padding: 0 1em;
     font-weight: normal;
     line-height: 1.5; }
@@ -137,7 +137,7 @@
     display: none; }
 
   #hub-slide-12 h1 {
-    font-size: 24px; }
+    font-size: 32px; }
 
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
@@ -148,13 +148,13 @@
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
       width: 40%; }
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: bold;
       text-shadow: 0px 1px 1px black;
       width: 50%;
       color: #f47932; }
     #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
-      font-size: 18px;
+      font-size: 24px;
       vertical-align: bottom;
       font-weight: bold;
       display: inline-block;
