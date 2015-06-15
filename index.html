@@ -1502,8 +1502,10 @@ ocha.Story = function() {
         // lastMosaic.initialize();
       }
 
-      lastMosaic.stopMosaic();
-      lastMosaic.startMosaic();
+      if ( !hubScrolling.isMobile ) {
+        lastMosaic.stopMosaic();
+        lastMosaic.startMosaic();
+      }
     },
     playNextChartText: function() {
       $("#content-2-a").stop(true, true).fadeOut("fast", function() {
