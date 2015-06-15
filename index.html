@@ -347,7 +347,7 @@
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-17' data-on-init="ocha.Story.loadGHOMap">
+  <section class='hub-section' id='hub-slide-17' data-on-init="ocha.Story.loadGHOMap" data-mobile-hide="true">
     <div class='hub-viewport'>
       <div class='content'
             style="z-index: 1; opacity: 0.6; color: white; position: absolute; top: 40%; width: 100%; text-align: center; font-size: 6em; text-transform: uppercase" id="loading-map-item">LOADING MAP</div>
@@ -616,6 +616,7 @@ ocha.HubScrolling = function(sections, options) {
 
   this.scroller = null;
 
+  // this.isMobile = true;
   this.isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
   this.currentSubPage = 0;
@@ -623,7 +624,17 @@ ocha.HubScrolling = function(sections, options) {
   this.currentPage = null, this.nextPage = null;
   this.currentPageNumber = 0;
   this.d3Containers = d3.selectAll(sections[0]);
-  this.containers = $j(sections) ;
+
+  // console.log(sections);
+  this.containers = this.isMobile
+                      ? $j(sections.filter(function(d, item) {
+                          // console.log(d, item);
+                          var hideIfMobile = ( $(item).attr("data-mobile-hide") || "false" ) == "true";
+                          return !hideIfMobile;
+                        }))
+                      : $j(sections) ;
+
+  console.log("XXX" , this.containers);
   this.pageCount = this.containers.length;
 
   //Scrolling items:
@@ -1621,6 +1632,7 @@ ocha.Story = function() {
 }();
 
 
+
 /* Creating image list .. */
 var fmt = d3.format("03d");
 var hubScrolling = new ocha.HubScrolling($j(".hub-section"));
@@ -1636,9 +1648,6 @@ $("#mosaic-area").css("opacity", 1);
 
 jQuery(window).load(function() {
 
-  if (hubScrolling.isMobile) {
-    $("#hub-slide-17").remove();
-  }
 
   ocha.Story.initialize();
   hubScrolling.initialize();
