@@ -56,7 +56,7 @@ $phone-max-width: 736px;
       }
       div.hub-country-stats {
         position: absolute;
-        bottom: 4%;
+        bottom: 8%;
         font-size: $medium-font;
         padding-left: 14px;
         width: 100%;
@@ -225,7 +225,7 @@ $phone-max-width: 736px;
     &.hub-section .hub-country-stats {
       // width: 100%;
       background-color: transparent;
-      bottom: 20px;
+      bottom: 60px;
       right: auto;
       top: auto;
       left: auto;

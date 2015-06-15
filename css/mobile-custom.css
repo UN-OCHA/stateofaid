@@ -25,7 +25,7 @@
       margin: 0; }
   section.hub-section div.hub-viewport div.hub-country-stats {
     position: absolute;
-    bottom: 4%;
+    bottom: 8%;
     font-size: 24px;
     padding-left: 14px;
     width: 100%;
@@ -141,7 +141,7 @@
 
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
-    bottom: 20px;
+    bottom: 60px;
     right: auto;
     top: auto;
     left: auto; }
