@@ -1430,9 +1430,16 @@ ocha.Story = function() {
   return {
     initialize : function() {
       // console.log("Initializing Story", "-" + $(".hub-slide-center-text h2").height()/2 +"px");
+
       $(".hub-neutral-background div.content").each(function() {
           $(this).css("marginTop", "-" + parseInt($(this).height()/2) +"px");
       });
+
+      if ( hubScrolling.isMobile ) {
+        $(".hub-neutral-background div.content").each(function() {
+          $(this).css("marginTop", "-=110px");
+        });
+      }
 
       $("#mosaic-title-area").css("top", "50%");
       $("#mosaic-title-area").css("marginTop", "-" + parseInt($("#mosaic-title-area").height()/2) +"px");
