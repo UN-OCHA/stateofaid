@@ -929,8 +929,8 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
     that.containers.width(w);
     that.containers.height(h);
   } else {
-    that.containers.height(document.documentElement.clientHeight);
-    that.containers.width(document.documentElement.clientWidth);
+    that.containers.height(window.screen.height);
+    that.containers.width(window.screen.width);
     // that.containers.height(document.documentElement.clientWidth);
   }
   //For the scroller at the background
