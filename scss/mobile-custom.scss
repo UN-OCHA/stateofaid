@@ -11,6 +11,7 @@ $phone-max-width: 736px;
   and (min-width: $phone-min-width)
   and (max-width: $phone-max-width) {
 
+
   //Hide nav
   aside.hubscroll-nav-area {
     display: none;
@@ -18,6 +19,8 @@ $phone-max-width: 736px;
 
   section.hub-section {
     background-position: center center !important;
+    width: device-width !important;
+    height: device-height !important;
   }
   #mosaic-title-area {
     h1 {
@@ -219,7 +222,7 @@ $phone-max-width: 736px;
     &.hub-section .hub-country-stats {
       // width: 100%;
       background-color: transparent;
-      bottom: 10px;
+      bottom: 20px;
       right: auto;
       top: auto;
       left: auto;

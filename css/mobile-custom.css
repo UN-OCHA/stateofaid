@@ -4,7 +4,9 @@
     display: none; }
 
   section.hub-section {
-    background-position: center center !important; }
+    background-position: center center !important;
+    width: device-width !important;
+    height: device-height !important; }
 
   #mosaic-title-area h1 {
     font-size: 2.5em; }
@@ -139,7 +141,7 @@
 
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
-    bottom: 10px;
+    bottom: 20px;
     right: auto;
     top: auto;
     left: auto; }
