@@ -1305,7 +1305,7 @@ ocha.CountryChart = function (container) {
                { year: 2011, requirement: 7900000000, targeted: 65000000},
                { year: 2012, requirement: 8800000000, targeted: 62000000},
                { year: 2013, requirement: 12900000000, targeted: 73000000},
-               { year: 2014, requirement: 16400000000, targeted: 57500000},
+               { year: 2014, requirement: 16800000000, targeted: 76000000},
                { year: 2015, requirement: 18806048959, targeted: 78913640}
             ];
 
@@ -1361,12 +1361,12 @@ ocha.CountryChart = function (container) {
           x: {
             tick: {
               format: function(d) {
-                if ( d == 2014 ) {
-                  return "DEC " + d;
-                }
-                else {
+                // if ( d == 2014 ) {
+                //   return "DEC " + d;
+                // }
+                // else {
                   return "JUN " + d;
-                }
+                // }
               }
             }
           },
