@@ -40,9 +40,10 @@ $phone-max-width: 736px;
       .hub-photo-credit {
 
         position: absolute;
-        top: auto;
+        top: 0;
         left: auto;
         right: 0;
+        bottom: auto;
 
         &.hub-photo-credit-right {
           left: auto;

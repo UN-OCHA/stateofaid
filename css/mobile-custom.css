@@ -15,9 +15,10 @@
 
   section.hub-section div.hub-viewport .hub-photo-credit {
     position: absolute;
-    top: auto;
+    top: 0;
     left: auto;
-    right: 0; }
+    right: 0;
+    bottom: auto; }
     section.hub-section div.hub-viewport .hub-photo-credit.hub-photo-credit-right {
       left: auto;
       right: 0; }
