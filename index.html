@@ -791,6 +791,9 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
     $("html,body").css("overflow", "hidden");
     $(window).off("scroll", d.data.windowListenerNext);
     $(window).off("scroll", d.data.windowListenerPrev);
+    $("body").off("touchmove", d.data.windowListenerNext);
+    $("body").off("touchmove", d.data.windowListenerPrev);
+
 
     d.data.transition($currentPage, $nextPage, transition);
     $("html,body").animate({ scrollTop : $nextSurrogate.offset().top}, d.data.options.transitionSpeed,
@@ -799,6 +802,8 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
 
         $(window).on("scroll", d.data, d.data.windowListenerNext);
         $(window).on("scroll", d.data, d.data.windowListenerPrev);
+        $("body").on("touchmove", d.data, d.data.windowListenerNext);
+        $("body").on("touchmove", d.data, d.data.windowListenerPrev);
         // $(window).on("keydown", that, that.keyPressDown);
         // }
         $("html,body").css("overflow", "auto");
@@ -885,6 +890,9 @@ ocha.HubScrolling.prototype.initialize = function() {
     //   this.eventActive = true;
   $(window).on("scroll", that, that.windowListenerNext);
   $(window).on("scroll", that, that.windowListenerPrev);
+  $("body").on("touchmove", that, that.windowListenerNext);
+  $("body").on("touchmove", that, that.windowListenerPrev);
+
   $(window).on("hashchange", that, that.skipPage);
 
   $(window).trigger("hashchange");
@@ -995,7 +1003,10 @@ ocha.HubScrolling.prototype.next = function() {
 
   $(window).off("scroll", that.windowListenerNext);
   $(window).off("scroll", that.windowListenerPrev);
-  $(window).off("keydown", that.keyPressDown);
+  $("body").off("touchmove", that.windowListenerNext);
+  $("body").off("touchmove", that.windowListenerPrev);
+
+  // $(window).off("keydown", that.keyPressDown);
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
@@ -1034,6 +1045,8 @@ ocha.HubScrolling.prototype.next = function() {
         //   that.eventActive = true;
           $(window).on("scroll", that, that.windowListenerNext);
           $(window).on("scroll", that, that.windowListenerPrev);
+          $("body").on("touchmove", that, that.windowListenerNext);
+          $("body").on("touchmove", that, that.windowListenerPrev);
 
           // $(window).on("keydown", that, that.keyPressDown);
         // }
