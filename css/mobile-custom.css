@@ -76,11 +76,12 @@
     background-image: url(../img/story/small/bad-news.jpg); }
 
   #hub-slide-2 #chart-container {
-    width: 100%; }
+    width: 100%;
+    margin-bottom: 110px; }
   #hub-slide-2 .content h2 {
-    font-size: 24px;
+    font-size: 16px;
     padding: 0 1em;
-    margin-top: 25%; }
+    margin-top: 11%; }
 
   #hub-slide-4 {
     background-image: url(../img/story/small/iraq.jpg); }
@@ -152,7 +153,7 @@
 
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
-    bottom: 90px;
+    bottom: 110px;
     right: auto;
     top: auto;
     left: auto; }

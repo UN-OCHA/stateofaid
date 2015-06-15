@@ -128,11 +128,17 @@ $phone-max-width: 736px;
   }
   #hub-slide-1-a { background-image: url(../img/story/small/bad-news.jpg); }
   #hub-slide-2 {
-    #chart-container { width: 100%; }
+
+    #chart-container {
+
+      width: 100%;
+      margin-bottom: 110px;
+
+    }
     .content h2 {
-      font-size: $medium-font;
+      font-size: $small-font;
       padding: 0 1em;
-      margin-top: 25%;
+      margin-top: 11%;
     }
   }
   #hub-slide-4 {
@@ -243,7 +249,7 @@ $phone-max-width: 736px;
     &.hub-section .hub-country-stats {
       // width: 100%;
       background-color: transparent;
-      bottom: 90px;
+      bottom: 110px;
       right: auto;
       top: auto;
       left: auto;
