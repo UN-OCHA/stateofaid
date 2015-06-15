@@ -19,13 +19,13 @@
 
   <!-- FB -->
   <div id="fb-root"></div>
-  <script>/*(function(d, s, id) {
+  <script>(function(d, s, id) {
     var js, fjs = d.getElementsByTagName(s)[0];
     if (d.getElementById(id)) return;
     js = d.createElement(s); js.id = id;
     js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=449161795236219";
     fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk')); */</script>
+  }(document, 'script', 'facebook-jssdk'));</script>
   <!-- ENDOF FB -->
 
   <aside class='hubscroll-nav-area'>
@@ -380,38 +380,37 @@
 
   <section class='hub-section hub-neutral-background' id='hub-call-to-action'>
     <div class='hub-viewport'>
-      <div class='hub-radial-overlay'></div>
+      <div class='hub-radial-overlay' style="opacity: 0.5"></div>
       <div class='content'>
-        <h2>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam</h2>
+        <h2>Let's achieve more. TOGETHER.</h2>
         <div id='hub-call-to-action-area'>
-          <div id='call-download-report' class='hub-call-to-action-3box'>
-            <h3>Download Report</h3>
-            <a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf'>
-              <img src='./img/story/gho-cover.png' class='img-left'/>
-            </a>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis. </p>
-            <p><a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf' target="_blank" class='hub-button'>Download Report</a></p>
-            <div class="clear"></div>
-          </div>
           <div id='call-to-action-share' class='hub-call-to-action-3box'>
             <h3>Spread the word</h3>
-            <p>Praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
             <div>
-              <!--
+
                <div class="fb-share-button" data-href="http://www.unocha.org/stateofaid" data-layout="box_count"></div>
               <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2Fstateofaid" class="twitter-share-button" data-via="UNOCHA" data-count="vertical">Tweet</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-            -->
             </div>
           </div>
           <div id='call-to-action-donate' class='hub-call-to-action-3box'>
             <h3>Donate</h3>
             <p>
-          Et harum quidem rerum facilis est et expedita distinctio.
+          Support relief efforts by donating to OCHA managed pooled funds. Every dollar counts.
             </p>
             <p>
-              <a href='https://secure.globalproblems-globalsolutions.org/site/Donation2?df_id=1200&1200.donation=form1' class='hub-button'>Donate</a>
+              <a href='http://www.unfoundation.org/how-to-help/donate/support-unherf.html' class='hub-button'>Donate</a>
             </p>
+          </div>
+          <div id='call-download-report' class='hub-call-to-action-3box'>
+            <h3>Learn more</h3>
+            <a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf'>
+              <img src='./img/story/gho-cover.png' class='img-left'/>
+
+            </a>
+            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis. </p>
+            <p><a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf' target="_blank" class='hub-button'>Download Report</a></p>
+            <div class="clear"></div>
           </div>
           <div class='clear'></div>
         </div>
@@ -660,7 +659,7 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
       var target = that.surrogates.filter(function(i, item) {
         var topOffset = $(item).offset().top;
         // console.log("Limit ::: ", topOffset+limit+limit, scrollTop, topOffset+limit, (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit) ? "TRUE" : "FALSE");
-        return (topOffset+limit > scrollTop && scrollTop > topOffset);
+        return (topOffset+limit > scrollTop+5 && scrollTop+5 > topOffset);
       });
 
     // console.log("XXXX", target, scrollTop);
@@ -729,7 +728,7 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
       //   // console.log("TOP OFFSET " , limit,  topOffset);
       // }
 
-      return (topOffset > scrollTop && scrollTop > topOffset-limit);
+      return (topOffset > scrollTop-5 && scrollTop-5 > topOffset-limit);
 
     });
 

@@ -24,10 +24,10 @@ body { margin: 0; padding: 0; }
   top: 0;
   left: 0;
 
-  background: -webkit-radial-gradient(white, whitesmoke, gray); /* Safari 5.1 to 6.0 */
-  background: -o-radial-gradient(white, whitesmoke, gray); /* For Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(white, whitesmoke, gray); /* For Firefox 3.6 to 15 */
-  background: radial-gradient(white, whitesmoke, gray); /* Standard syntax */
+  background: -webkit-radial-gradient(white, whitesmoke, black); /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(white, whitesmoke, black); /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(white, whitesmoke, black); /* For Firefox 3.6 to 15 */
+  background: radial-gradient(white, whitesmoke, black); /* Standard syntax */
 
 }
 
@@ -514,6 +514,8 @@ div.hub-radial-overlay {
   div.content {
     h2 {
       text-shadow: 0 1px 1px #000000;
+      color: $orange;
+      font-size: 4em;
     }
 
 
@@ -532,6 +534,7 @@ div.hub-radial-overlay {
         h3 {
           text-transform: uppercase;
           text-shadow: 0 1px 1px #000000;
+          font-size: 2em;
         }
 
         img.img-left { float: left; margin-right: 5px; }
@@ -562,7 +565,7 @@ div.hub-radial-overlay {
  aside.hubscroll-nav-area {
     position: fixed;
     margin-left: 5px;
-    left: 0;
+    right: 0;
     top: 50%;
     z-index: 100000;
 

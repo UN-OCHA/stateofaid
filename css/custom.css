@@ -17,13 +17,13 @@ body {
   opacity: 0.8;
   top: 0;
   left: 0;
-  background: -webkit-radial-gradient(white, whitesmoke, gray);
+  background: -webkit-radial-gradient(white, whitesmoke, black);
   /* Safari 5.1 to 6.0 */
-  background: -o-radial-gradient(white, whitesmoke, gray);
+  background: -o-radial-gradient(white, whitesmoke, black);
   /* For Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(white, whitesmoke, gray);
+  background: -moz-radial-gradient(white, whitesmoke, black);
   /* For Firefox 3.6 to 15 */
-  background: radial-gradient(white, whitesmoke, gray);
+  background: radial-gradient(white, whitesmoke, black);
   /* Standard syntax */ }
 
 div.hub-radial-overlay-transparent {
@@ -404,7 +404,9 @@ div.hub-radial-overlay {
 #hub-call-to-action {
   background-image: url(../img/story/final.png); }
   #hub-call-to-action div.content h2 {
-    text-shadow: 0 1px 1px #000000; }
+    text-shadow: 0 1px 1px #000000;
+    color: #f47932;
+    font-size: 4em; }
   #hub-call-to-action div.content div#hub-call-to-action-area {
     margin-top: 20px;
     padding: 10px 15px 20px;
@@ -417,7 +419,8 @@ div.hub-radial-overlay {
       margin-right: 2%; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box h3 {
         text-transform: uppercase;
-        text-shadow: 0 1px 1px #000000; }
+        text-shadow: 0 1px 1px #000000;
+        font-size: 2em; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box img.img-left {
         float: left;
         margin-right: 5px; }
@@ -440,7 +443,7 @@ div.hub-radial-overlay {
 aside.hubscroll-nav-area {
   position: fixed;
   margin-left: 5px;
-  left: 0;
+  right: 0;
   top: 50%;
   z-index: 100000; }
   aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list {
