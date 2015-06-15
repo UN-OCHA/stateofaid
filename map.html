@@ -203,7 +203,7 @@ var MAPBOX_TILES_URL = "http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.p
 var ocha = ocha || {};
 var $j = jQuery;
 
-console.log("XX", ocha);
+// console.log("XX", ocha);
 /*
   Map Control
   Controller for the Map
@@ -214,7 +214,7 @@ ocha.MapControl = function(map, mapContainer, details, navigation) {
     .addLayer(new L.TileLayer(MAPBOX_TILES_URL));
   }
   else {
-    console.log(map);
+    // console.log(map);
     this.map = map;
   }
 
@@ -395,7 +395,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
   $(".map-layer[data-type='" + dataLayer +"']").stop(true, true).show("fast");
 
-  console.log("#map-layer-ctrl button[data-type='" + dataLayer +"']");
+  // console.log("#map-layer-ctrl button[data-type='" + dataLayer +"']");
   $("#map-layer-ctrl button[data-type='" + dataLayer +"']").addClass("active");
 
   define_scales(dataLayer);
@@ -417,7 +417,7 @@ $("#map-layer-ctrl button").on("click", function() {
       domInNeed = domInNeed.filter(function(d) { return d != 0; });
       domFunding = domFunding.filter(function(d) { return d != 0; });
 
-      console.log(domPercentChange);
+      // console.log(domPercentChange);
 
       initialize_map();
     });
@@ -481,7 +481,7 @@ $("#map-layer-ctrl button").on("click", function() {
         break;
 
         case "Requirement" :
-          console.log("Entered");
+          // console.log("Entered");
 
           svg_legend.style("height", 40)
                 .style("width", (d3.range(scaleFunding.range()[0], scaleFunding.range()[1]-1).length+1) * 50);
@@ -509,7 +509,7 @@ $("#map-layer-ctrl button").on("click", function() {
                     var format = d3.formatPrefix(scaleFunding.invert(d));
 
                     if (format.symbol == "G") { format.symbol = "B"; }
-                    console.log(d3.round(format.scale(scaleFunding.invert(d))) + format.symbol);
+                    // console.log(d3.round(format.scale(scaleFunding.invert(d))) + format.symbol);
                     return "$" + d3.round(format.scale(scaleFunding.invert(d))) + format.symbol;
                   });
 
@@ -543,7 +543,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
           perc_data.push(1);
 
-          console.log("PERCENT DATA", perc_data);
+          // console.log("PERCENT DATA", perc_data);
 
           legend_area.selectAll("rect.legend-item")
               .data(perc_data)
@@ -551,7 +551,7 @@ $("#map-layer-ctrl button").on("click", function() {
               .append("rect")
                 .attr("class", "legend-item in-change")
                 .attr("fill", function(d) {
-                  console.log(d);
+                  // console.log(d);
                   return percentColorScale(d); })
                 .attr("y", 20)
                 .attr("width", 0)
@@ -567,7 +567,7 @@ $("#map-layer-ctrl button").on("click", function() {
                   .attr("text-anchor", "middle")
                   .attr("x", 0)
                   .text(function(d) {
-                    console.log(d, d3.round(d*100));
+                    // console.log(d, d3.round(d*100));
                     return d3.round(d*100) + "%";
                   });
 
@@ -618,7 +618,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
 
 
-    console.log($("#country-details-hover").height());
+    // console.log($("#country-details-hover").height());
     var target = d3.select(this);
     var boxHeight = $("#country-details-hover").height();
     var bottomOffset = scaleFunds(d.current_requirement ? d.current_requirement : d.funding)-padding;
@@ -648,7 +648,7 @@ $("#map-layer-ctrl button").on("click", function() {
     var node = d3.select(this);
 
     var countryData = data;
-    console.log(countryData);
+    // console.log(countryData);
     // console.log(data, this, node, node.attr("data-centroid"));
     stored_zoom = map.getZoom();
     stored_center = map.getCenter();
@@ -700,7 +700,7 @@ $("#map-layer-ctrl button").on("click", function() {
       .removeClass("arrow-up arrow-down arrow-none");
 
 
-    console.log(gha_data, parseInt(gha_data.in_need));
+    // console.log(gha_data, parseInt(gha_data.in_need));
     /* If there is past information */
     // console.log("XXXXXXXXXXX", gha_data.in_needisNaN(gha_data.in_need));
     if (gha_data.in_need) {
@@ -829,7 +829,7 @@ $("#map-layer-ctrl button").on("click", function() {
       async: false,
       dataType: "json",
       success: function(data) {
-        console.log(data);
+        // console.log(data);
         cluster_data = data;
       }
     });
@@ -859,7 +859,7 @@ $("#map-layer-ctrl button").on("click", function() {
                         .domain(d3.range(cluster_data.length))
                         .rangeRoundBands([padding*2, cont_width-padding],0.1);
 
-    console.log("INITIAL", current_requirement);
+    // console.log("INITIAL", current_requirement);
     var yAxis = d3.svg.axis()
                         .scale(
                           d3.scale.linear()
@@ -876,7 +876,7 @@ $("#map-layer-ctrl button").on("click", function() {
                                 .attr("class", "chart-detail y-axis")
                                 .attr("transform", "translate(" + padding*2 + ", 0)")
                                 .call(yAxis);
-    console.log("END", current_requirement);
+    // console.log("END", current_requirement);
 
     var g_chart_reqt = svg_chart.append("g").attr("id", "funding-requirement");
     var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
@@ -1007,7 +1007,7 @@ $("#map-layer-ctrl button").on("click", function() {
   }
 
   function build_funding_gap_chart(target_iso) {
-    console.log(target_iso);
+    // console.log(target_iso);
     $("#funding-gap-chart").empty();
 
     var svg_gap = d3.select("#funding-gap-chart").append("svg").attr("width", "99%").attr("height", 120);
@@ -1072,11 +1072,11 @@ $("#map-layer-ctrl button").on("click", function() {
             }
           };
         } else { //Funded
-          console.log(data.percent);
+          // console.log(data.percent);
           var i = d3.interpolate(0, data.percent);
-          console.log(i);
+          // console.log(i);
           return function(t) {
-            console.log(i(t));
+            // console.log(i(t));
             this.textContent = d3.round(i(t) * 100, 2) + "%";
           }
         }
@@ -1097,12 +1097,12 @@ $("#map-layer-ctrl button").on("click", function() {
 
     var maxFunded = d3.max(domPercentChange);
 
-    console.log(maxFunded);
+    // console.log(maxFunded);
     // scaleChange = d3.scale.linear().domain([0, maxFunded]).range([0,8]);
     percentColorScale = d3.scale.linear().domain([0, 0.5, 1.0]).interpolate(d3.interpolateRgb)
                           .range(["#CC0000", "#999999", "#00CC00"]);
 
-    console.log(percentColorScale.domain(), percentColorScale.range());
+    // console.log(percentColorScale.domain(), percentColorScale.range());
     define_scales("Assistance");
 
     features = topojson.feature(focus_countries, focus_countries.objects.nations);
@@ -1159,7 +1159,7 @@ $("#map-layer-ctrl button").on("click", function() {
                               var appeal = data_2015_funding.filter(function(d) { return d.id == csv_datum.Appeal_ID_2015})[0];
                               // var funding = data_2015_funding[csv_data.Appeal_ID_2015];
 
-                              console.log("XXX APPEAL!!!",  appeal);
+                              // console.log("XXX APPEAL!!!",  appeal);
                               if (!appeal || !appeal.funding) {
                                 return "#000000";
                               }
@@ -1318,12 +1318,12 @@ $("#map-layer-ctrl button").on("click", function() {
       success: function(data) {
 
         lookup_image = data;
-        console.log(lookup_image);
+        // console.log(lookup_image);
       }
     });
 
     d3.json("data/2015_funding.json", function(error, data) {
-        console.log(error);
+        // console.log(error);
         data_2015_funding = data;
     });
 
@@ -1339,7 +1339,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
     d3.json("viu/nation-bndry.json", function(error, data) {
       if (error) {
-        console.log(error);
+        // console.log(error);
       }
 
       focus_countries = data;

@@ -634,7 +634,7 @@ ocha.HubScrolling = function(sections, options) {
                         }))
                       : $j(sections) ;
 
-  console.log("XXX" , this.containers);
+  // console.log("XXX" , this.containers);
   this.pageCount = this.containers.length;
 
   //Scrolling items:
@@ -677,11 +677,11 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
 
         that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
         // console.log(that.currentPageNumber);
-        console.log("NEXT()", target, that.currentPageNumber);
+        // console.log("NEXT()", target, that.currentPageNumber);
         d.data.next();
       }
       else if (target.length > 0  && scrollTop < that.scrollPositionTop) {
-        console.log("FROM WINDOW LISTENER NEXT ::: PREV()", target, that.currentPageNumber);
+        // console.log("FROM WINDOW LISTENER NEXT ::: PREV()", target, that.currentPageNumber);
       // //   // d.data.prev();
       }
     // }
@@ -695,7 +695,7 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
 
 ocha.HubScrolling.prototype.keyPressDown = function(e) {
     var that = e.data;
-    console.log(that, e);
+    // console.log(that, e);
     var code = (e.keyCode ? e.keyCode : e.which);
     if (code == 40) {
         e.data.next();
@@ -780,7 +780,7 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
 
   var $nextPage = $("section.hub-section[data-page=" + nextPageNumber + "]");
 
-  console.log($currentPage.attr("data-next"), $currentPage.attr("data-prev"));
+  // console.log($currentPage.attr("data-next"), $currentPage.attr("data-prev"));
   var nextTransition = $currentPage.attr("data-next") || "scrollUp";
   var prevTransition = $currentPage.attr("data-prev") || "scrollDown";
 
@@ -788,10 +788,10 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
                       ? nextTransition
                       : prevTransition;
 
-  console.log(transition);
+  // console.log(transition);
 
-  console.log("CURRENT DATA PAGE ::: ", $currentPage, d.data.currentPageNumber);
-  console.log("NEXT DATA PAGE ::: ", $nextPage, nextPageNumber);
+  // console.log("CURRENT DATA PAGE ::: ", $currentPage, d.data.currentPageNumber);
+  // console.log("NEXT DATA PAGE ::: ", $nextPage, nextPageNumber);
   // var currentPage = d.data.currentPage;
   // var nextPage = d.data.nextPage;
 
@@ -870,7 +870,7 @@ ocha.HubScrolling.prototype.initialize = function() {
                                                 + ($(item).attr("id") ? $(item).attr("id") : "page-" + i) )
                                                 ) ;
 
-          console.log($linkArea, $link);
+          // console.log($linkArea, $link);
           $linkArea.append($link);
           // <li class='hubscroll-nav-list-item'><a href="#hub-slide-18"></a></li>
 
@@ -1046,9 +1046,9 @@ ocha.HubScrolling.prototype.next = function() {
 
   // console.log(currentPage, currentPage.attr("data-current-subpage"))
   var currentSubPage = currentPage.attr("data-current-subpage") || 0;
-  console.log("Entered here");
+  // console.log("Entered here");
   if ( currentPage.attr("data-next-" + currentSubPage) != undefined ) {
-    console.log("Entered here too");
+    // console.log("Entered here too");
     // console.log("CURRENT SUBPAGE", currentSubPage);
     currentSubPage = parseInt(currentSubPage);
     currentPage.attr("data-subpage", currentSubPage);
@@ -1090,7 +1090,7 @@ ocha.HubScrolling.prototype.next = function() {
   }
   else
   {
-    console.log("Entered here 3");
+    // console.log("Entered here 3");
     currentPage.attr("data-current-subpage", currentSubPage+1);
     nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber+1; });
 
@@ -1117,11 +1117,11 @@ ocha.HubScrolling.prototype.next = function() {
 
     // console.log(beforeAction, func);
     if (beforeAction && func) {
-      console.log("Entered here Y", func);
+      // console.log("Entered here Y", func);
       func();
     }
     else {
-      console.log("Entered here X");
+      // console.log("Entered here X");
       that.nextAction();
     }
 
@@ -1132,7 +1132,7 @@ ocha.HubScrolling.prototype.nextAction = function() {
   //Disable scrolling...
 
   // console.log("DISABLING NEXT ACTION:::");
-  console.log("Entered Here");
+  // console.log("Entered Here");
 
   var that = this;
   // console.log(that, that.currentPageNumber);
@@ -1327,13 +1327,13 @@ ocha.CountryChart = function (container) {
     var requirements = [];
     var targeted = [];
 
-    console.log(data, year);
+    // console.log(data, year);
 
     for (var i in year) {
-      console.log(i, year[i]);
+      // console.log(i, year[i]);
       var filtered = data.filter(function(d) { return d.year == year[i]; });
 
-      console.log(filtered);
+      // console.log(filtered);
 
       if ( filtered.length == 0 ) {
         requirements.push(null);
@@ -1530,14 +1530,14 @@ ocha.Story = function() {
     },
     hideAllForMap : function() {
 
-      console.log("ENTERED HERE ?? ");
+      // console.log("ENTERED HERE ?? ");
       $("#hub-slide-16").css("background-image", "url(./img/story/010.jpg)");
       $("#hub-slide-16").css("background-position", "center center");
       $("#hub-slide-16 hub-radial-overlay").fadeOut("fast");
 
       // lastMosaicInitialized = true;
       if (lastMosaicInitialized) {
-        console.log("ENTERED HERE ?? ", lastMosaic);
+        // console.log("ENTERED HERE ?? ", lastMosaic);
         lastMosaic.stopMosaic();
         lastMosaic.hide(undefined, function() { hubScrolling.nextAction(); });
         lastMosaicInitialized = false;
@@ -1638,7 +1638,7 @@ ocha.Story = function() {
 
     tweener : function() {
       var target = d3.select(this);
-      console.log(target);
+      // console.log(target);
       var i = d3.interpolateRound(0, parseInt(target.attr("data-stat-count")));
       return function(t) {
         // console.log(i(t), this);
