@@ -32,6 +32,7 @@ body { margin: 0; padding: 0; }
 }
 
 div.hub-radial-overlay-transparent {
+  position: absolute;
   width: inherit;
   height: inherit;
   z-index: 100;
@@ -222,7 +223,6 @@ section.hub-section {
   overflow: hidden;
   .hub-photo-credit {
 
-    opacity: 0.7;
     position: absolute;
     bottom:0;
     left: 0;
@@ -414,14 +414,14 @@ div.hub-radial-overlay {
           width: 40%;
         }
         &.td-left {
-          font-size: 0.5em;
+          font-size: 1.3em;
           font-weight: bold;
           text-shadow: 0px 1px 1px rgb(255, 255, 255);
           width: 50%;
           color: #811B1B;
         }
         .country-stat-count {
-          font-size: 1em;
+          font-size: 3em;
           vertical-align: bottom;
           font-weight: bold;
           display: inline-block;
@@ -655,7 +655,7 @@ $phone-max-width: 736px;
         width: 100%;
         background-color: transparent;
         color: #f47932;
-        padding-right: 0.4em;
+        padding-right: 0.5em;
         right: auto;
         text-shadow: 0 1px 1px black;
         table {
@@ -706,7 +706,7 @@ $phone-max-width: 736px;
   #hub-slide-2 {
     #chart-container { width: 100%; }
     .content h2 {
-      font-size: 1em;
+      font-size: 1.4em;
       padding: 0 1em;
       margin-top: 25%;
     }
@@ -767,9 +767,9 @@ $phone-max-width: 736px;
   }
 
   .hub-neutral-background div.content {
-    h1 { font-size: 1.5em; }
+    h1 { font-size: 2em; }
     h2 {
-      font-size: 1em;
+      font-size: 1.5em;
       padding: 0 1em;
       // margin-top: 25%;
       font-weight: normal;
@@ -805,15 +805,8 @@ $phone-max-width: 736px;
       }
     }
   }
-  #hub-slide-17 {
-    display: none;
-  }
 
-  #hub-slide-12 {
-    h1 {
-      font-size: 1.5em;
-    }
-  }
+
   #hub-slide-10, #hub-slide-10-a {
     &.hub-section .hub-country-stats {
       // width: 100%;
@@ -831,7 +824,7 @@ $phone-max-width: 736px;
             width: 40%;
           }
           &.td-left {
-            font-size: 0.5em;
+            font-size: 1em;
             font-weight: bold;
             text-shadow: 0px 1px 1px black;
             width: 50%;
@@ -839,7 +832,7 @@ $phone-max-width: 736px;
             color: $orange;
           }
           .country-stat-count {
-            font-size: 0.5em;
+            font-size: 1.5em;
             vertical-align: bottom;
             font-weight: bold;
             display: inline-block;

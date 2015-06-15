@@ -27,6 +27,7 @@ body {
   /* Standard syntax */ }
 
 div.hub-radial-overlay-transparent {
+  position: absolute;
   width: inherit;
   height: inherit;
   z-index: 100;
@@ -179,7 +180,6 @@ section.hub-section {
   position: relative;
   overflow: hidden; }
   .hub-viewport .hub-photo-credit {
-    opacity: 0.7;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -329,13 +329,13 @@ div.hub-radial-overlay {
   #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
     width: 40%; }
   #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
-    font-size: 0.5em;
+    font-size: 1.3em;
     font-weight: bold;
     text-shadow: 0px 1px 1px white;
     width: 50%;
     color: #811B1B; }
   #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
-    font-size: 1em;
+    font-size: 3em;
     vertical-align: bottom;
     font-weight: bold;
     display: inline-block;
@@ -496,7 +496,7 @@ aside.hubscroll-nav-area {
     width: 100%;
     background-color: transparent;
     color: #f47932;
-    padding-right: 0.4em;
+    padding-right: 0.5em;
     right: auto;
     text-shadow: 0 1px 1px black; }
     section.hub-section div.hub-viewport div.hub-country-stats table {
@@ -533,7 +533,7 @@ aside.hubscroll-nav-area {
   #hub-slide-2 #chart-container {
     width: 100%; }
   #hub-slide-2 .content h2 {
-    font-size: 1em;
+    font-size: 1.4em;
     padding: 0 1em;
     margin-top: 25%; }
 
@@ -574,9 +574,9 @@ aside.hubscroll-nav-area {
     font-size: 1.2em; }
 
   .hub-neutral-background div.content h1 {
-    font-size: 1.5em; }
+    font-size: 2em; }
   .hub-neutral-background div.content h2 {
-    font-size: 1em;
+    font-size: 1.5em;
     padding: 0 1em;
     font-weight: normal;
     line-height: 1.5; }
@@ -598,12 +598,6 @@ aside.hubscroll-nav-area {
         margin: 0;
         margin-bottom: 5px; }
 
-  #hub-slide-17 {
-    display: none; }
-
-  #hub-slide-12 h1 {
-    font-size: 1.5em; }
-
   #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
     background-color: transparent;
     bottom: 10px;
@@ -613,13 +607,13 @@ aside.hubscroll-nav-area {
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
       width: 40%; }
     #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
-      font-size: 0.5em;
+      font-size: 1em;
       font-weight: bold;
       text-shadow: 0px 1px 1px black;
       width: 50%;
       color: #f47932; }
     #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
-      font-size: 0.5em;
+      font-size: 1.5em;
       vertical-align: bottom;
       font-weight: bold;
       display: inline-block;
