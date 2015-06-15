@@ -616,6 +616,8 @@ ocha.HubScrolling = function(sections, options) {
 
   this.scroller = null;
 
+  this.isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+
   this.currentSubPage = 0;
 
   this.currentPage = null, this.nextPage = null;
@@ -789,10 +791,13 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
 
 
     $("html,body").css("overflow", "hidden");
-    $(window).off("scroll", d.data.windowListenerNext);
-    $(window).off("scroll", d.data.windowListenerPrev);
-    $("body").off("touchmove", d.data.windowListenerNext);
-    $("body").off("touchmove", d.data.windowListenerPrev);
+    if ( !d.data.isMobile ) {
+      $(window).off("scroll", d.data.windowListenerNext);
+      $(window).off("scroll", d.data.windowListenerPrev);
+    } else {
+      $("body").off("touchmove", d.data.windowListenerNext);
+      $("body").off("touchmove", d.data.windowListenerPrev);
+    }
 
 
     d.data.transition($currentPage, $nextPage, transition);
@@ -800,10 +805,13 @@ ocha.HubScrolling.prototype.skipPage = function(d) {
       function() {
 
 
-        $(window).on("scroll", d.data, d.data.windowListenerNext);
-        $(window).on("scroll", d.data, d.data.windowListenerPrev);
-        $("body").on("touchmove", d.data, d.data.windowListenerNext);
-        $("body").on("touchmove", d.data, d.data.windowListenerPrev);
+        if ( !d.data.isMobile ) {
+          $(window).on("scroll", d.data, d.data.windowListenerNext);
+          $(window).on("scroll", d.data, d.data.windowListenerPrev);
+        } else {
+          $("body").on("touchmove", d.data, d.data.windowListenerNext);
+          $("body").on("touchmove", d.data, d.data.windowListenerPrev);
+        }
         // $(window).on("keydown", that, that.keyPressDown);
         // }
         $("html,body").css("overflow", "auto");
@@ -888,10 +896,14 @@ ocha.HubScrolling.prototype.initialize = function() {
 
     // if (!this.eventActive) {
     //   this.eventActive = true;
-  $(window).on("scroll", that, that.windowListenerNext);
-  $(window).on("scroll", that, that.windowListenerPrev);
-  $("body").on("touchmove", that, that.windowListenerNext);
-  $("body").on("touchmove", that, that.windowListenerPrev);
+
+  if ( !that.isMobile ) {
+    $(window).on("scroll", that, that.windowListenerNext);
+    $(window).on("scroll", that, that.windowListenerPrev);
+  } else {
+    $("body").on("touchmove", that, that.windowListenerNext);
+    $("body").on("touchmove", that, that.windowListenerPrev);
+  }
 
   $(window).on("hashchange", that, that.skipPage);
 
@@ -913,9 +925,10 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
   var w = $window.width(),
       h = $window.height();
 
-  that.containers.width(w);
-  that.containers.height(h);
-
+  if ( !that.isMobile ) {
+    that.containers.width(w);
+    that.containers.height(h);
+  }
   //For the scroller at the background
   // if (!this.scroller) {
   //   var wAll = that.containers.width(),
@@ -1001,10 +1014,13 @@ ocha.HubScrolling.prototype.next = function() {
   // var that = this;
   // that.eventActive = false;
 
-  $(window).off("scroll", that.windowListenerNext);
-  $(window).off("scroll", that.windowListenerPrev);
-  $("body").off("touchmove", that.windowListenerNext);
-  $("body").off("touchmove", that.windowListenerPrev);
+  if ( !that.isMobile ) {
+    $(window).off("scroll", that.windowListenerNext);
+    $(window).off("scroll", that.windowListenerPrev);
+  } else {
+    $("body").off("touchmove", that.windowListenerNext);
+    $("body").off("touchmove", that.windowListenerPrev);
+  }
 
   // $(window).off("keydown", that.keyPressDown);
 
@@ -1043,10 +1059,13 @@ ocha.HubScrolling.prototype.next = function() {
         that.scrollPositionBottom = $(window).scrollTop();
         // if (!that.eventActive) {
         //   that.eventActive = true;
+        if ( !that.isMobile ) {
           $(window).on("scroll", that, that.windowListenerNext);
           $(window).on("scroll", that, that.windowListenerPrev);
+        } else {
           $("body").on("touchmove", that, that.windowListenerNext);
           $("body").on("touchmove", that, that.windowListenerPrev);
+        }
 
           // $(window).on("keydown", that, that.keyPressDown);
         // }
