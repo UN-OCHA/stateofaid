@@ -26,6 +26,23 @@ body {
   background: radial-gradient(white, whitesmoke, gray);
   /* Standard syntax */ }
 
+div.hub-radial-overlay-transparent {
+  width: inherit;
+  height: inherit;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  opacity: 0.3;
+  background-color: whitesmoke;
+  background: -webkit-radial-gradient(transparent, transparent, black);
+  /* Safari 5.1 to 6.0 */
+  background: -o-radial-gradient(transparent, transparent, black);
+  /* For Opera 11.6 to 12.0 */
+  background: -moz-radial-gradient(transparent, transparent, black);
+  /* For Firefox 3.6 to 15 */
+  background: radial-gradient(transparent, transparent, black);
+  /* Standard syntax */ }
+
 #mosaic-title-area {
   position: absolute;
   z-index: 2000;
@@ -141,7 +158,8 @@ section.hub-section {
       section.hub-section .hub-country-stats tr td {
         margin-bottom: 0.75em;
         text-transform: uppercase;
-        font-size: .6em; }
+        font-size: .6em;
+        text-shadow: 0 1px 1px black; }
         section.hub-section .hub-country-stats tr td .country-stat-count {
           font-size: 2em;
           margin-right: 4px;
@@ -461,13 +479,36 @@ aside.hubscroll-nav-area {
 
   section.hub-section div.hub-viewport div.hub-country-title {
     position: absolute;
-    width: 98%; }
+    width: 98%;
+    top: 0; }
     section.hub-section div.hub-viewport div.hub-country-title h2 {
       font-size: 2em;
       background-color: transparent;
       color: #4e6c06;
       padding: 1%;
       margin: 0; }
+  section.hub-section div.hub-viewport div.hub-country-stats {
+    position: absolute;
+    bottom: 4%;
+    font-size: 2em;
+    padding-left: 0.5em;
+    width: 100%;
+    background-color: transparent;
+    color: #f47932;
+    padding-right: 0.5em;
+    right: auto;
+    text-shadow: 0 1px 1px black; }
+    section.hub-section div.hub-viewport div.hub-country-stats table {
+      width: 90%;
+      border-spacing: 0; }
+      section.hub-section div.hub-viewport div.hub-country-stats table tr:first-child td {
+        border: 2px solid #4d3535;
+        border-width: 0 0 2px; }
+      section.hub-section div.hub-viewport div.hub-country-stats table tr:last-child td {
+        padding-top: 5px; }
+      section.hub-section div.hub-viewport div.hub-country-stats table tr td {
+        font-weight: bold;
+        text-shadow: 0 1px 1px black; }
 
   #hub-slide-1, #hub-slide-1-a {
     background-image: url(../img/story/small/good-news.jpg); }
@@ -554,6 +595,30 @@ aside.hubscroll-nav-area {
         margin-bottom: 2px; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
         margin: 0;
-        margin-bottom: 5px; } }
+        margin-bottom: 5px; }
+
+  #hub-slide-10.hub-section .hub-country-stats, #hub-slide-10-a.hub-section .hub-country-stats {
+    background-color: transparent;
+    bottom: 10px;
+    right: auto;
+    top: auto;
+    left: auto; }
+    #hub-slide-10.hub-section .hub-country-stats table tr td.td-right, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-right {
+      width: 40%; }
+    #hub-slide-10.hub-section .hub-country-stats table tr td.td-left, #hub-slide-10-a.hub-section .hub-country-stats table tr td.td-left {
+      font-size: 1em;
+      font-weight: bold;
+      text-shadow: 0px 1px 1px black;
+      width: 50%;
+      color: #f47932; }
+    #hub-slide-10.hub-section .hub-country-stats table tr td .country-stat-count, #hub-slide-10-a.hub-section .hub-country-stats table tr td .country-stat-count {
+      font-size: 1.5em;
+      vertical-align: bottom;
+      font-weight: bold;
+      display: inline-block;
+      text-shadow: 0px 1px 1px black;
+      color: #f47932;
+      margin-bottom: -0.24em;
+      padding-bottom: 10px; } }
 
 /*# sourceMappingURL=custom.css.map */

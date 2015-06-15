@@ -222,6 +222,7 @@
   </section>
   <section class="hub-section" id="hub-slide-10-a" data-on-init="ocha.Story.startSecondNepalCounter">
     <div class='hub-viewport'>
+      <div class='hub-radial-overlay-transparent'></div>
       <div class='hub-country-title'><h2>Afghanistan</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -485,7 +486,7 @@ ocha.FaceMosaic = function(selector, imageList, squareSize) {
         .each(function(d) {
 
           var coinFlip = Math.random() * 100;
-          if ( coinFlip > 80 ) {  //get new and replace
+          if ( coinFlip > 25 ) {  //get new and replace
             var randomIndex = parseInt(that.imageList.length * Math.random());
             var toBeRemoved = d3.select(this).select("img");
 
@@ -501,8 +502,8 @@ ocha.FaceMosaic = function(selector, imageList, squareSize) {
               .style("z-index", "100");
 
             toBeAdded.transition()
-              .duration(500 + that.TIMEOUT_PERIOD/2)
-              .delay(Math.random() * that.TIMEOUT_PERIOD/2)
+              .duration(500 + that.TIMEOUT_PERIOD)
+              .delay(Math.random() * that.TIMEOUT_PERIOD)
               .style("opacity", 1)
               .each("end", function() { toBeRemoved.remove(); });
           }
