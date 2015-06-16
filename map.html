@@ -475,7 +475,7 @@ var redColorScale = null, fundColorScale = null, scaleInNeed = null, scaleFundin
 var svg_legend = d3.select(map.getContainer())
                     .append("svg")
                       .attr("width", d3.select(map.getContainer()).style("width"))
-                      .attr("height", 20)
+                      .attr("height", 40)
                       .attr("style", "position: absolute; bottom: 0; left: 20px;");
 var legend_area = svg_legend.append("g").attr("class", "legends_area");
 
@@ -1104,19 +1104,21 @@ $("#map-layer-ctrl button").on("click", function() {
           //legend
           var g_legend = svg_chart.append("g").attr("class", "chart-legend");
           var req = g_legend.append("rect").attr("class", "chart-legend-item chart_in_need")
-                          .attr("y", cont_height - padding/2)
+                          .attr("y", cont_height - padding/2 - 5)
                           .attr("x", padding*2 + 10)
-                          .attr("width", 15),
+                          .attr("width", 15)
+                          .attr("height", 15),
              req_label = g_legend.append("text").attr("class", "legend-text").text("Requirement")
-                          .attr("y", cont_height - padding/2 + 10)
+                          .attr("y", cont_height - padding/2 + 5)
                           .attr("x", parseInt(req.attr("x")) + parseInt(req.attr("width")) + 2 )
                           .attr("width", function(d) { return this.getBBox().width; }),
               funded = g_legend.append("rect").attr("class", "chart-legend-item chart-funded")
-                          .attr("y", cont_height - padding/2)
+                          .attr("y", cont_height - padding/2 - 5)
                           .attr("x", parseInt(req_label.attr("x")) + parseInt(req_label.attr("width")) + 6)
-                          .attr("width", 15),
+                          .attr("width", 15)
+                          .attr("height", 15),
               funded_label = g_legend.append("text").attr("class", "legend-text").text("Funding")
-                          .attr("y", cont_height - padding/2 + 10)
+                          .attr("y", cont_height - padding/2 + 5)
                           .attr("x", parseInt(funded.attr("x")) + parseInt(funded.attr("width")) + 2)
                           .attr("width", function(d) { return this.getBBox().width; })
               // pledged = g_legend.append("rect").attr("class", "chart-legend-item chart-pledged")
