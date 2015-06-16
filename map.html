@@ -377,7 +377,7 @@ ocha.MapControl.prototype.init = function() {
 
     var data = regionalLayer.regions.filter(function(d) { return d.id == regionID; })[0];
 
-    console.log(data.coordinates);
+    // console.log(data.coordinates);
 
     var coords = [];
 
@@ -418,9 +418,9 @@ ocha.MapControl.prototype.init = function() {
         callback = buildCARFundingGap;
         break;
     }
-    console.log(regionID, callback);
+    // console.log(regionID, callback);
     showMoreDetails(data, callback);
-    console.log(data);
+    // console.log(data);
   });
 }
 
@@ -771,7 +771,7 @@ $("#map-layer-ctrl button").on("click", function() {
 
     $loader.show();
     //SLIDE MAP TO THE LEFT
-    console.log("NODE ::: ", node);
+    // console.log("NODE ::: ", node);
     if ( !regionalCallback || typeof regionalCallback != "function") {
       regionalLayer.hideAllRegions();
       if ( map_control.showDetails )
@@ -817,7 +817,7 @@ $("#map-layer-ctrl button").on("click", function() {
     // console.log(gha_data, parseInt(gha_data.in_need));
     /* If there is past information */
     // console.log("XXXXXXXXXXX", gha_data.in_needisNaN(gha_data.in_need));
-    console.log("IN NEED!!! ", gha_data.in_need);
+    // console.log("IN NEED!!! ", gha_data.in_need);
     if (dec2014inNeed) {
       $("#country-details-people-in-need .arrow").show();
       $("#country-details-people-in-need .previous-appeal").show();
@@ -955,7 +955,7 @@ $("#map-layer-ctrl button").on("click", function() {
           async: false,
           dataType: "json",
           success: function(data) {
-            console.log(data);
+            // console.log(data);
             cluster_data = data;
           }
         });
@@ -1114,7 +1114,7 @@ $("#map-layer-ctrl button").on("click", function() {
           //Show total
     }
     else {
-      console.log(regionalCallback);
+      // console.log(regionalCallback);
       regionalCallback();
     }
 
@@ -1130,9 +1130,12 @@ $("#map-layer-ctrl button").on("click", function() {
     $("#funding-gap-chart").empty();
 
     var svg_gap = d3.select("#funding-gap-chart").append("svg").attr("width", "99%").attr("height", 120);
-    var funding_data = data_2015_funding.filter(function(d) { console.log(d.id, d.title, gha_csv[target_iso].Appeal_ID_2015); return d.id == gha_csv[target_iso].Appeal_ID_2015; })[0];
+    var funding_data = data_2015_funding.filter(function(d) {
+      // console.log(d.id, d.title, gha_csv[target_iso].Appeal_ID_2015);
 
-    console.log("FANDING DAA", funding_data, data_2015_funding);
+      return d.id == gha_csv[target_iso].Appeal_ID_2015; })[0];
+
+    // console.log("FANDING DAA", funding_data, data_2015_funding);
 
     var reqt = gha_csv[target_iso].June_2015_funding_required;
     var gap_collated_data = [{"name": "Requirement", "value": reqt}, {"name": "Funded", "value" : funding_data.funding, "percent": parseFloat(funding_data.funding)/parseFloat(reqt) }];
@@ -1232,15 +1235,15 @@ $("#map-layer-ctrl button").on("click", function() {
         }
     });
 
-    console.log(data_2015_funding, appealIds);
+    // console.log(data_2015_funding, appealIds);
     var cluster_data = data_2015_funding.filter(function(d) { return appealIds.indexOf(d.id) >= 0; });
 
     cluster_data = cluster_data.sort(function(a,b) { return b.current_requirements - a.current_requirements; })
 
-    $(cluster_data).each(function(i,item) {
-        console.log(item.current_requirements);
-    });
-    console.log("CLUSTER DATA", cluster_data);
+    // $(cluster_data).each(function(i,item) {
+        // console.log(item.current_requirements);
+    // });
+    // console.log("CLUSTER DATA", cluster_data);
     // $("#priority-cluster").text(cluster_data[0].name);
     //Build chart...
     var cont_width = $profile.width(), cont_height = $profile.height()*2/5;
@@ -1368,7 +1371,7 @@ $("#map-layer-ctrl button").on("click", function() {
                 // return  perc + "%";
 
                 var fmt = d3.formatPrefix(d.current_requirements);
-                console.log(d, fmt);
+                // console.log(d, fmt);
                 return "$" + d3.round(fmt.scale(d.current_requirements),1) + fmt.symbol;
               })
               ;
@@ -1835,7 +1838,7 @@ ocha.RegionalLayer = function(map, options) {
                     })
                 );
 
-      console.log(temp);
+      // console.log(temp);
       item.type = temp.type;
       item.coordinates = temp.coordinates;
     });
@@ -1930,7 +1933,7 @@ ocha.RegionalLayer = function(map, options) {
   this.hideAllRegions = function () {
     var that = this;
     that.regionPaths.each(function(item) {
-      console.log(this);
+      // console.log(this);
       d3.select(this).style("visibility", "hidden");
     });
 
