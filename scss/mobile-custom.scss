@@ -277,6 +277,9 @@ $phone-max-width: 768px;
   }
   #hub-slide-16 {
     .hub-subsection { margin-top: 0 !important;
+
+        h1, h2, h3 { font-size: $small-font; }
+
         &#hub-16-00 {
           top: 5%;
         }

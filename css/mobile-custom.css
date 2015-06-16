@@ -183,6 +183,8 @@
 
   #hub-slide-16 .hub-subsection {
     margin-top: 0 !important; }
+    #hub-slide-16 .hub-subsection h1, #hub-slide-16 .hub-subsection h2, #hub-slide-16 .hub-subsection h3 {
+      font-size: 16px; }
     #hub-slide-16 .hub-subsection#hub-16-00 {
       top: 5%; }
     #hub-slide-16 .hub-subsection#hub-16-01 {
