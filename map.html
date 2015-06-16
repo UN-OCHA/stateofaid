@@ -1,6 +1,11 @@
 <!DOCTYPE html>
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
+
+<meta property="og:image" content="http://www.unocha.org/stateofaid/cover.png"/>
+<meta property="og:title" content="Map: The State of Aid"/>
+<meta property="og:description" content="In just over a decade, the number of people in need of aid has almost doubled. At the beginning of 2015 we were aiming to assist 57.5 million people in 22 countries needing assistance."/>
+
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800">
  <link rel="stylesheet" href="css/leaflet.css" />
@@ -14,6 +19,14 @@
 }
 </style>
 <body>
+<div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=449161795236219";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 
 <div id="main-activity-area">
   <div id="country-area">
@@ -117,6 +130,11 @@
         <h1>The State of Aid</h1>
         <p>Click on a country to visualize funding information.</p>
 
+        <div>
+          <div class="fb-share-button" data-href="http://www.unocha.org/stateofaid/map.html" data-layout="button_count" style="vertical-align: top"></div>
+              <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2Fstateofaid%2Fmap.html" class="twitter-share-button" data-via="UNOCHA" >Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+        </div>
 
       </div>
       <div id="map-list">
