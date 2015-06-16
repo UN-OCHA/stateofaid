@@ -1,73 +1,43 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800">
 <link rel="stylesheet" href="./css/leaflet.css" />
 <script src='./js/mapbox.js'></script>
 <link href='./css/mapbox.css' rel='stylesheet' />
 <link href='./css/c3.css' rel='stylesheet' />
 <link href='./css/custom.css' rel='stylesheet' />
-
+<link media="only screen and (max-width: 700px)" href="./css/mobile-custom.css" rel='stylesheet' />
 <style>
-body { margin: 0; padding: 0; }
-#mosaic-area {
-  /*background-color: black;*/
-  /*background-repeat: no-repeat;*/
-  /*background-size: cover;*/
-
-  /*background-image: url(./img/story/000.jpg);*/
-  background-position: center center;
-}
-
-#mosaic-overlay-area {
-
-  position: absolute;
-  z-index: 1000;
-  width: inherit;
-  height: inherit;
-  opacity: 0.8;
-
-  top: 0;
-  left: 0;
-
-  background: -webkit-radial-gradient(white, whitesmoke, gray); /* Safari 5.1 to 6.0 */
-  background: -o-radial-gradient(white, whitesmoke, gray); /* For Opera 11.6 to 12.0 */
-  background: -moz-radial-gradient(white, whitesmoke, gray); /* For Firefox 3.6 to 15 */
-  background: radial-gradient(white, whitesmoke, gray); /* Standard syntax */
-
-}
-
-#mosaic-title-area {
-  position: absolute;
-  z-index: 2000;
-  text-align: center;
-  font-family: 'Open Sans', sans-serif;
-  font-weight: bold;
-
-  width: inherit;
-  height: inherit;
-
-  top: 0;
-  left: 0;
-
-}
-#title-content { z-index: 500; }
-
-#mosaic-title-area h1 {
-  font-size: 8em;
-  padding: 0 1em;
-  margin: 0;
-  /*margin-top: 1em;*/
-  text-shadow: 2px 1px 1px rgb(255,255,255);
-}
 
 </style>
 
 
 <body>
 
+  <!-- FB -->
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3&appId=449161795236219";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+  <!-- ENDOF FB -->
+
+  <aside class='hubscroll-nav-area'>
+    <nav class='hubscroll-nav-viewport'>
+      <ul class='hubscroll-nav-list'>
+      </ul>
+    </nav>
+  </aside>
+
 <!-- data-next-0="ocha.Story.titleProcess1"
            data-next-1="ocha.Story.titleProcess2" -->
-  <section id="mosaic-area" class="hub-section hub-neutral-background"
+ <section id="mosaic-area" class="hub-section hub-neutral-background"
            data-next-before="ocha.Story.titleToOpening"
            data-next="fade"
 
@@ -86,6 +56,7 @@ body { margin: 0; padding: 0; }
         <h1>The Good News:</h1>
         <p>We are doing more for more people than ever before.</p>
       </div>
+      <div class='hub-photo-credit hub-photo-credit-right'>Credit: OCHA/Yasmina Guerda/Sierra Leone, 2014 </div>
     </div>
   </section>
 
@@ -95,20 +66,21 @@ body { margin: 0; padding: 0; }
         <h1>The Bad News:</h1>
         <p>The humanitarian system is under unprecedented strain.</p>
       </div>
+      <div class='hub-photo-credit hub-photo-credit-right'>Credit: UNICEF/Lebanon, 2012</div>
     </div>
   </section>
 
   <section class="hub-section hub-neutral-background" id="hub-slide-2" data-next-0="ocha.Story.playNextChartText" data-on-init="ocha.Story.loadChart">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
-      <div class='content' id="content-2-a">
-        <h2>In just over a decade, the number of <br/>people in need of aid has almost doubled.<br/>2015 opened with <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">73 million people</strong> <br/>in 22 countries needing assistance.</h2>
+      <div class='content hub-subsection' id="content-2-a">
+        <h2>In&nbsp;just&nbsp;over&nbsp;a&nbsp;decade,&nbsp;the&nbsp;number&nbsp;of people&nbsp;in&nbsp;need&nbsp;of&nbsp;aid&nbsp;has&nbsp;almost&nbsp;doubled. At the beginning of 2015 we were aiming to assist <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">57.5&nbsp;million&nbsp;people</strong> in&nbsp;22&nbsp;countries&nbsp;needing&nbsp;assistance.</h2>
       </div>
-      <div class='content' id="content-2-b" style="display: none">
+      <div class='content hub-subsection' id="content-2-b" style="display: none">
         <h2>
-          Six months later, we are calling for help to <br/>support an astounding <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9 million people</strong>.
-          <br/>
-          We need <strong style="color: #ff7f0e">$18.8 billion</strong> to help them.
+          Six&nbsp;months&nbsp;later,&nbsp;we&nbsp;are&nbsp;calling&nbsp;for&nbsp;help&nbsp;to support&nbsp;an astounding&nbsp;<strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9&nbsp;million&nbsp;people</strong>.
+
+          We&nbsp;need&nbsp;<strong style="color: #ff7f0e">$18.8&nbsp;billion</strong>&nbsp;to&nbsp;help&nbsp;them.
         </h2>
       </div>
       <div id="chart-container">
@@ -121,7 +93,7 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay' style="opacity: 0.3"></div>
       <div class='content'>
-          <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/><br/>In 2015 alone, we have seen</h2> <h1>700,000 people newly displaced.</h1>
+          <h2>In many countries, violence and insecurity<br/>continue to cause massive internal<br/>and cross-border displacement.<br/><br/>In 2015 alone, </h2> <h1>700,000 people have been newly displaced.</h1>
       </div>
     </div>
   </section>
@@ -139,14 +111,6 @@ body { margin: 0; padding: 0; }
                 <span class=''>people in need of assistance</span>
               </td>
             </tr>
-            <!-- <tr>
-              <td class='td-right'>
-                <span class='country-stat-count' data-stat-count='2800000'>0</span>
-              </td>
-              <td class='td-left'>
-                people internally displaced
-              </td>
-            </tr> -->
             <tr>
               <td class='td-right'>
                 <span class='country-stat-count' data-stat-count='60'>0</span>%
@@ -157,6 +121,7 @@ body { margin: 0; padding: 0; }
             </tr>
           </table>
       </div>
+      <div class='hub-photo-credit'>Credit: OCHA/Charlotte Cans/Iraq, 2015 </div>
     </div>
   </section>
   <section class="hub-section" id="hub-slide-5" data-on-init="ocha.Story.startSyriaCounter">
@@ -164,10 +129,6 @@ body { margin: 0; padding: 0; }
         <div class='hub-country-title'><h2>Syria</h2></div>
         <div class='hub-country-stats abs-left'>
           <table>
-           <!--  <tr>
-                <td class='td-right'><span class='country-stat-count' data-stat-count='7600000'>0</span></td>
-                <td class='td-left'>internally displaced<div class="clear"></div></td>
-            </tr> -->
             <tr>
               <td class='td-right'><span class='country-stat-count' data-stat-count='4000000'>0</span></td>
               <td class='td-left'>forced across borders<div class="clear"></div></td>
@@ -178,6 +139,7 @@ body { margin: 0; padding: 0; }
             </tr>
           </table>
         </div>
+        <div class='hub-photo-credit hub-photo-credit-right'>Credit: UNHCR/S. Rich/Jordan, 2013</div>
       </div>
   </section>
   <section class="hub-section"  id="hub-slide-6" data-on-init="ocha.Story.startSouthSudanCounter">
@@ -189,16 +151,13 @@ body { margin: 0; padding: 0; }
             <td class='td-right'><span class='country-stat-count' data-stat-count='1500000'>0</span></td>
             <td class='td-left'>internally displaced<div class="clear"></div></td>
           </tr>
-          <!-- <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='550000'>0</span></td>
-            <td class='td-left'>refugees<div class="clear"></div></td>
-          </tr> -->
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='4600000'>0</span></td>
             <td class='td-left'>severely food insecure<div class="clear"></div></td>
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit'>Credit: UN Photo/JC McIlwaine/South Sudan, 2015</div>
     </div>
   </section>
   <section class="hub-section" id="hub-slide-7" data-on-init="ocha.Story.startYemenCounter">
@@ -206,14 +165,15 @@ body { margin: 0; padding: 0; }
       <div class='hub-country-title'><h2>Yemen</h2></div>
       <div class='hub-country-stats'>
         <table>
-          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='545000'>0</span></td>
-            <td class='td-left'>civilians displaced</td>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='21400000'>0</span></td>
+            <td class='td-left'>people in dire need of assistance</td>
           </tr>
-          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='20000000'>0</span></td>
-            <td class='td-left'>people lack access to clean water</td>
+          <tr><td class='td-right'><span class='country-stat-count' data-stat-count='20400000'>0</span></td>
+            <td class='td-left'>people need access to clean water and sanitation</td>
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit'>Credit: UNICEF/Hamoud/Yemen, 2015</div>
     </div>
   </section>
   <section class="hub-section" data-next="fade" id="hub-slide-8" data-on-init="ocha.Story.startUkraineCounter">
@@ -228,6 +188,7 @@ body { margin: 0; padding: 0; }
               <td class='td-left'>uprooted by conflict</td>
         </table>
       </div>
+      <div class='hub-photo-credit hub-photo-credit-right'>Credit: UNICEF/Ukraine, 2015</div>
     </div>
   </section>
   <section class="hub-section hub-neutral-background"  data-prev="fade" id="hub-slide-9">
@@ -256,10 +217,12 @@ body { margin: 0; padding: 0; }
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit'  style='color: #333333'>Credit: UNDP/Nepal, 2015 </div>
     </div>
   </section>
   <section class="hub-section" id="hub-slide-10-a" data-on-init="ocha.Story.startSecondNepalCounter">
     <div class='hub-viewport'>
+      <div class='hub-radial-overlay-transparent'></div>
       <div class='hub-country-title'><h2>Afghanistan</h2></div>
       <div class='hub-country-stats'>
         <table>
@@ -267,10 +230,11 @@ body { margin: 0; padding: 0; }
             <td class='td-left'><span class='country-stat-count' data-stat-count='250000'>0</span></td>
           </tr>
           <tr>
-            <td class='td-left'>people affected by <br/>natural disasters<br/>in 2015<div class="clear"></div></td>
+            <td class='td-left'>people&nbsp;affected&nbsp;by natural&nbsp;disasters in&nbsp;2015<div class="clear"></div></td>
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit hub-photo-credit-right'>Credit: Fardin Waezi/UNAMA/Afghanistan, 2014</div>
     </div>
   </section>
 
@@ -293,21 +257,22 @@ body { margin: 0; padding: 0; }
         <h1>9 million</h1>
         <h2>women, children and men will go hungry this year if aid doesn't reach them.</h2>
       </div>
+      <div class='hub-photo-credit'>Credit: French Red Cross/Sylvain Cherkaoui/Niger, 2012</div>
     </div>
   </section>
 
-  <section class='hub-section hub-neutral-background' id='hub-slide-13' data-next-after="ocha.Story.startSomaliaCounter">
+  <section class='hub-section hub-neutral-background' id='hub-slide-13'>
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
         <h2>
-          Aid organizations have<br/>achieved a lot so far in 2015. <br/><br/>They have saved lives,<br/>supported the livelihoods and<br/>protected the safety of millions of people.
+          Aid organizations have<br/>achieved a lot so far in 2015. <br/><br/>They have saved lives,<br/>supported the livelihoods and<br/>protected millions of people.
         </h2>
       </div>
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-14'  data-next-after="ocha.Story.startVanuatuCounter">
+  <section class='hub-section' id='hub-slide-14' data-on-init="ocha.Story.startSomaliaCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Somalia</h2></div>
       <div class='hub-country-stats abs-left'>
@@ -323,36 +288,32 @@ body { margin: 0; padding: 0; }
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit hub-photo-credit-right'>Credit: UN Photo/Tobin Jones/Somalia, 2013</div>
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-15' data-next-after="ocha.Story.showSecondFace">
+  <section class='hub-section' id='hub-slide-15' data-on-init="ocha.Story.startVanuatuCounter">
     <div class='hub-viewport'>
       <div class='hub-country-title'><h2>Vanuatu</h2></div>
       <div class='hub-country-stats'>
         <table>
-          <!-- <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='19500'>0</span></td>
-            <td class='td-left'>children vaccinated against measles<div class="clear"></div></td>
-          </tr> -->
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='370000'>0</span></td>
             <td class='td-left'>people received food assistance<div class="clear"></div></td>
           </tr>
-          <!-- <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='47000'>0</span></td>
-            <td class='td-left'>people received clean water.<div class="clear"></div></td></tr> -->
           <tr>
             <td class='td-right'><span class='country-stat-count' data-stat-count='50000'>0</span></td>
-            <td class='td-left'>people received emergency shelter assistance<div class="clear"></div></td>
+            <td class='td-left'>people received emergency shelter<div class="clear"></div></td>
           </tr>
         </table>
       </div>
+      <div class='hub-photo-credit'>Credit: UNICEF Pacific/Vanuatu, 2015</div>
     </div>
   </section>
 
   <section class='hub-section hub-neutral-background' id='hub-slide-16' data-next="fade"
 
+      data-on-init="ocha.Story.showSecondFace"
       data-next-before="ocha.Story.hideAllForMap"
 
     data-next-0="ocha.Story.remove16_00"
@@ -362,23 +323,23 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div id='hub-face-final-area'></div>
       <div class='hub-radial-overlay'></div>
-      <div class='content' id="hub-16-00">
+      <div class='content hub-subsection' id="hub-16-00">
         <h2>
           But each year millions of people<br/>do not get the help they need because</h2>
         <h1>humanitarian access is compromised.</h1>
       </div>
-      <div class='content' id="hub-16-01" style="display: none">
+      <div class='content hub-subsection' id="hub-16-01" style="display: none">
         <h2>Or because </h2>
         <h1>funding does <br/> not come through.</h1>
       </div>
-      <div class='content' id="hub-16-02" style="display: none">
+      <div class='content hub-subsection' id="hub-16-02" style="display: none">
         <h2>
           Donors have been generous but the global humanitarian appeal remains just
         </h2>
-        <h1>23 per cent funded</h1>
+        <h1>26 per cent funded</h1>
         <h2>half-way through the year.</h2>
       </div>
-      <div class='content' id="hub-16-03" style="display: none">
+      <div class='content hub-subsection' id="hub-16-03" style="display: none">
         <h2>
           One thing is clear: the sheer scale of needs continues to outpace the level of funding.
         </h2>
@@ -386,7 +347,7 @@ body { margin: 0; padding: 0; }
     </div>
   </section>
 
-  <section class='hub-section' id='hub-slide-17' data-on-init="ocha.Story.loadGHOMap">
+  <section class='hub-section' id='hub-slide-17' data-on-init="ocha.Story.loadGHOMap" data-mobile-hide="true">
     <div class='hub-viewport'>
       <div class='content'
             style="z-index: 1; opacity: 0.6; color: white; position: absolute; top: 40%; width: 100%; text-align: center; font-size: 6em; text-transform: uppercase" id="loading-map-item">LOADING MAP</div>
@@ -401,20 +362,77 @@ body { margin: 0; padding: 0; }
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
-        <h1>We can turn this around.</h1>
+        <h1>Together we can turn this around.</h1>
       </div>
     </div>
   </section>
-
-  <section class='hub-section hub-neutral-background' id='hub-slide-18'>
+  <section class='hub-section hub-neutral-background' id='hub-slide-19' data-next="fade">
     <div class='hub-viewport'>
       <div class='hub-radial-overlay'></div>
       <div class='content'>
-        <h2 style="font-size: 2.5em">Together we can do more to help every child, woman
+        <h2>We can do more to help every child, woman
         <br/>and man, from Chad to Yemen, to receive the
         <br/><strong style="color: #811B1B">life saving assistance</strong> that they deserve &dash;
         <br/>if we <strong style="color: #811B1B">fully fund</strong> the humanitarian response in 2015.</h2>
       </div>
+    </div>
+  </section>
+
+  <section class='hub-section hub-neutral-background' id='hub-call-to-action'>
+    <div class='hub-viewport'>
+      <div class='hub-radial-overlay' style="opacity: 0.5"></div>
+      <div class='content'>
+        <h2>Let's achieve more. TOGETHER.</h2>
+        <div id='hub-call-to-action-area'>
+          <div id='call-to-action-share' class='hub-call-to-action-3box'>
+            <h3>Spread the word</h3>
+            <div>
+
+               <div class="fb-share-button" data-href="http://www.unocha.org/stateofaid" data-layout="box_count"></div>
+              <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2Fstateofaid" class="twitter-share-button" data-via="UNOCHA" data-count="vertical">Tweet</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </div>
+          </div>
+          <div id='call-to-action-donate' class='hub-call-to-action-3box'>
+            <h3>Donate</h3>
+            <p>
+          Support relief efforts by donating to OCHA managed pooled funds. Every dollar counts.
+            </p>
+            <p>
+              <a href='http://www.unfoundation.org/how-to-help/donate/support-unherf.html' class='hub-button'>Donate</a>
+            </p>
+          </div>
+          <div id='call-download-report' class='hub-call-to-action-3box'>
+            <h3>Learn more</h3>
+            <table>
+              <tr>
+                <td>
+                  <a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf' target="_blank">
+                    <img src='./img/story/gho-cover.png' />
+                  </a>
+                </td>
+                <td>
+                  <a href="https://docs.unocha.org/sites/dms/Documents/GHO-FINAL-web.pdf" target="_blank">
+                    <img src='./img/story/gho-cover-dec2014.png' />
+                  </a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>
+                  <a href='https://docs.unocha.org/sites/dms/Documents/GHO-status_report-FINAL.pdf' target="_blank" class='hub-button'>Jun 2015</a>
+                </td>
+                <td>
+                  <a href='https://docs.unocha.org/sites/dms/Documents/GHO-FINAL-web.pdf' target="_blank" class='hub-button'>Dec 2014</a>
+                </td>
+              </tr>
+            </table>
+            <div class="clear"></div>
+          </div>
+          <div class='clear'></div>
+        </div>
+      </div>
+      <div class='hub-photo-credit'>Credit: OCHA/David Gough/2013</div>
     </div>
   </section>
 
@@ -500,8 +518,8 @@ ocha.FaceMosaic = function(selector, imageList, squareSize) {
               .style("z-index", "100");
 
             toBeAdded.transition()
-              .duration(500 + that.TIMEOUT_PERIOD/2)
-              .delay(Math.random() * that.TIMEOUT_PERIOD/2)
+              .duration(500 + that.TIMEOUT_PERIOD)
+              .delay(Math.random() * that.TIMEOUT_PERIOD)
               .style("opacity", 1)
               .each("end", function() { toBeRemoved.remove(); });
           }
@@ -609,23 +627,41 @@ ocha.FaceMosaic.prototype.hide = function (userDefMode, callback) {
 
 //* Hub Section Scrolling */
 var ocha = ocha || {};
-ocha.HubScrolling = function(sections) {
+ocha.HubScrolling = function(sections, options) {
   var $j = jQuery;
-  this.TRANSITION_SPEED = 1000;
 
   this.scroller = null;
+
+  // this.isMobile = true;
+  this.isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
   this.currentSubPage = 0;
 
   this.currentPage = null, this.nextPage = null;
   this.currentPageNumber = 0;
   this.d3Containers = d3.selectAll(sections[0]);
-  this.containers = $j(sections) ;
+
+  // console.log(sections);
+  this.containers = this.isMobile
+                      ? $j(sections.filter(function(d, item) {
+                          // console.log(d, item);
+                          var hideIfMobile = ( $(item).attr("data-mobile-hide") || "false" ) == "true";
+                          return !hideIfMobile;
+                        }))
+                      : $j(sections) ;
+
+  // console.log("XXX" , this.containers);
   this.pageCount = this.containers.length;
 
   //Scrolling items:
   this.scrollPositionTop = $(window).scrollTop();
   this.scrollPositionBottom = $(window).scrollTop();
+
+  this.options = $.extend({
+
+    transitionSpeed: 1000
+
+  }, options);
 };
 
 ocha.HubScrolling.prototype.windowListenerNext = function(d) {
@@ -640,7 +676,7 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
       var target = that.surrogates.filter(function(i, item) {
         var topOffset = $(item).offset().top;
         // console.log("Limit ::: ", topOffset+limit+limit, scrollTop, topOffset+limit, (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit) ? "TRUE" : "FALSE");
-        return (topOffset+limit+limit > scrollTop && scrollTop > topOffset+limit);
+        return (topOffset+limit > scrollTop && scrollTop > topOffset);
       });
 
     // console.log("XXXX", target, scrollTop);
@@ -657,11 +693,11 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
 
         that.currentPageNumber = parseInt($(target).attr("data-page-scroll"));
         // console.log(that.currentPageNumber);
-        console.log("NEXT()", target, that.currentPageNumber);
+        // console.log("NEXT()", target, that.currentPageNumber);
         d.data.next();
       }
       else if (target.length > 0  && scrollTop < that.scrollPositionTop) {
-        console.log("FROM WINDOW LISTENER NEXT ::: PREV()", target, that.currentPageNumber);
+        // console.log("FROM WINDOW LISTENER NEXT ::: PREV()", target, that.currentPageNumber);
       // //   // d.data.prev();
       }
     // }
@@ -675,7 +711,7 @@ ocha.HubScrolling.prototype.windowListenerNext = function(d) {
 
 ocha.HubScrolling.prototype.keyPressDown = function(e) {
     var that = e.data;
-    console.log(that, e);
+    // console.log(that, e);
     var code = (e.keyCode ? e.keyCode : e.which);
     if (code == 40) {
         e.data.next();
@@ -709,7 +745,7 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
       //   // console.log("TOP OFFSET " , limit,  topOffset);
       // }
 
-      return (topOffset-limit > scrollTop && scrollTop > topOffset-limit-limit);
+      return (topOffset > scrollTop && scrollTop > topOffset-limit);
 
     });
 
@@ -741,6 +777,75 @@ ocha.HubScrolling.prototype.windowListenerPrev = function(d) {
 
 }
 
+ocha.HubScrolling.prototype.skipPage = function(d) {
+  //d.data.that;
+  var hash = window.location.hash;
+
+  var $links = $("aside.hubscroll-nav-area ul.hubscroll-nav-list li a");
+  var $activeLinks = hash != ""
+                        ? $("aside.hubscroll-nav-area ul.hubscroll-nav-list li a[href=" + hash + "]")
+                        : $("aside.hubscroll-nav-area ul.hubscroll-nav-list li:first-child a");
+
+  $links.removeClass("hubscroll-nav-active");
+  $activeLinks.addClass("hubscroll-nav-active");
+
+  var $currentPage = $("section.hub-section[data-page=" + d.data.currentPageNumber + "]");
+  var $nextSurrogate = $("div" + hash + ".hub-container-scroll");
+
+  var nextPageNumber = $nextSurrogate.attr("data-page-scroll");
+
+  var $nextPage = $("section.hub-section[data-page=" + nextPageNumber + "]");
+
+  // console.log($currentPage.attr("data-next"), $currentPage.attr("data-prev"));
+  var nextTransition = $currentPage.attr("data-next") || "scrollUp";
+  var prevTransition = $currentPage.attr("data-prev") || "scrollDown";
+
+  var transition = (parseInt($currentPage.attr("data-page")) < parseInt($nextPage.attr("data-page")))
+                      ? nextTransition
+                      : prevTransition;
+
+  // console.log(transition);
+
+  // console.log("CURRENT DATA PAGE ::: ", $currentPage, d.data.currentPageNumber);
+  // console.log("NEXT DATA PAGE ::: ", $nextPage, nextPageNumber);
+  // var currentPage = d.data.currentPage;
+  // var nextPage = d.data.nextPage;
+
+  if (d.data.currentPageNumber != $nextPage.attr("data-page") )
+  {
+    d.data.currentPageNumber = $nextPage.attr("data-page");
+
+
+
+    $("html,body").css("overflow", "hidden");
+    if ( !d.data.isMobile ) {
+      $(window).off("scroll", d.data.windowListenerNext);
+      $(window).off("scroll", d.data.windowListenerPrev);
+    } else {
+      $("body").off("touchmove", d.data.windowListenerNext);
+      $("body").off("touchmove", d.data.windowListenerPrev);
+    }
+
+
+    d.data.transition($currentPage, $nextPage, transition);
+    $("html,body").animate({ scrollTop : $nextSurrogate.offset().top}, d.data.options.transitionSpeed,
+      function() {
+
+
+        if ( !d.data.isMobile ) {
+          $(window).on("scroll", d.data, d.data.windowListenerNext);
+          $(window).on("scroll", d.data, d.data.windowListenerPrev);
+        } else {
+          $("body").on("touchmove", d.data, d.data.windowListenerNext);
+          $("body").on("touchmove", d.data, d.data.windowListenerPrev);
+        }
+        // $(window).on("keydown", that, that.keyPressDown);
+        // }
+        $("html,body").css("overflow", "auto");
+    });
+  }
+};
+
 
 ocha.HubScrolling.prototype.initialize = function() {
   var that = this;
@@ -749,6 +854,7 @@ ocha.HubScrolling.prototype.initialize = function() {
   var scrollTop = $("html,body").scrollTop();
   // console.log("!!! SCROLL TOP: ", scrollTop);
   //Add data-page counter;
+  var $linkArea = $("aside.hubscroll-nav-area nav ul.hubscroll-nav-list");
   this.containers.each(
       function(i, item) {
 
@@ -765,11 +871,25 @@ ocha.HubScrolling.prototype.initialize = function() {
           var $surrogate = $("<div />")
                           .addClass("hub-container-scroll hub-surrogate")
                           .attr("data-page-scroll", i)
+                          .attr("id", $(item).attr("id") ? $(item).attr("id") : "page-" + i)
                           .width(that.containers.width())
                           .height(that.containers.height());
 
 
           $("body").append($surrogate);
+
+          var $link = $("<li/>")
+                          .addClass("hubscroll-nav-list-item")
+                          .append($("<a/>")
+                              .attr("data-target", i)
+                              .attr("href", "#"
+                                                + ($(item).attr("id") ? $(item).attr("id") : "page-" + i) )
+                                                ) ;
+
+          // console.log($linkArea, $link);
+          $linkArea.append($link);
+          // <li class='hubscroll-nav-list-item'><a href="#hub-slide-18"></a></li>
+
 
           // if ($surrogate.position().top < scrollTop) {
           //   $surrogate.css("visibility", "hidden");
@@ -778,37 +898,52 @@ ocha.HubScrolling.prototype.initialize = function() {
       }
   );
 
-  this.containers.each(function(i, item) {
-      var $target = $("[data-page-scroll=" + i+ "]");
+  $linkArea.closest("aside.hubscroll-nav-area").css("margin-top", "-" + $linkArea.height()/2 + "px");
 
-      // console.log("DISTANCE", i,  $(window).scrollTop(), $("[data-page-scroll=" + i+ "]").offset().top - $(window).scrollTop());
+  // this.containers.each(function(i, item) {
+  //     var $target = $("[data-page-scroll=" + i+ "]");
 
-      if ($target.offset().top - $(window).scrollTop() < 0) {
-        // console.log("HIDDEN : ", $($(".hub-section")[i]));
-        $($(".hub-section")[i]).css("top", "100%");
+  //     // console.log("DISTANCE", i,  $(window).scrollTop(), $("[data-page-scroll=" + i+ "]").offset().top - $(window).scrollTop());
 
-      }
-      else {
-        $($(".hub-section")[i]).css("opacity", 1)
-        $($(".hub-section")[i]).css("top", "0px")
-      }
+  //     if ($target.offset().top - $(window).scrollTop() < 0) {
+  //       // console.log("HIDDEN : ", $($(".hub-section")[i]));
+  //       $($(".hub-section")[i]).css("top", "100%");
+
+  //     }
+  //     else {
+  //       $($(".hub-section")[i]).css("opacity", 1)
+  //       $($(".hub-section")[i]).css("top", "0px")
+  //     }
 
 
-  });
+  // });
 
   this.surrogates = $("body > .hub-surrogate");
 
 
     // if (!this.eventActive) {
     //   this.eventActive = true;
-      $(window).on("scroll", that, that.windowListenerNext);
-      $(window).on("scroll", that, that.windowListenerPrev);
 
+  if ( !that.isMobile ) {
+    $(window).on("scroll", that, that.windowListenerNext);
+    $(window).on("scroll", that, that.windowListenerPrev);
+  } else {
+    $("body").on("touchmove", that, that.windowListenerNext);
+    $("body").on("touchmove", that, that.windowListenerPrev);
+  }
+
+  $(window).on("hashchange", that, that.skipPage);
+
+  $(window).trigger("hashchange");
     // }
 
   //Event listeners
   $j(window).on("resize", function () { that.resizeWindow(); });
   // $j(window).on("keydown", that, that.keyPressDown);
+};
+
+ocha.HubScrolling.prototype.stopScrolling = function() {
+
 };
 
 ocha.HubScrolling.prototype.resizeWindow = function() {
@@ -817,9 +952,14 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
   var w = $window.width(),
       h = $window.height();
 
-  that.containers.width(w);
-  that.containers.height(h);
-
+  if ( !that.isMobile ) {
+    that.containers.width(w);
+    that.containers.height(h);
+  } else {
+    that.containers.height(window.screen.height);
+    that.containers.width(window.screen.width);
+    // that.containers.height(document.documentElement.clientWidth);
+  }
   //For the scroller at the background
   // if (!this.scroller) {
   //   var wAll = that.containers.width(),
@@ -828,67 +968,74 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
 };
 
 ocha.HubScrolling.prototype.previous = function() {
-  $("html,body").css("overflow", "hidden");
+  // $("html,body").css("overflow", "hidden");
 
   var that = this;
 
-  // console.log("XXXXX");
+  // // console.log("XXXXX");
 
-  $(window).off("scroll", that.windowListenerNext);
-  $(window).off("scroll", that.windowListenerPrev);
-  // $(window).off("keydown", that.keyPressDown);
-  // that.eventActive = false;
+  // $(window).off("scroll", that.windowListenerNext);
+  // $(window).off("scroll", that.windowListenerPrev);
+  // // $(window).off("keydown", that.keyPressDown);
+  // // that.eventActive = false;
 
-  var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
+  // var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
 
-  var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  // var currentSurrogate = $(this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
 
-  // console.log(currentPage, currentSurrogate);
-  nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
+  // // console.log(currentPage, currentSurrogate);
+  // var nextPage = this.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber-1; });
 
-    var mode = "scrollDown";
+  var nextSurrogate = $(that.surrogates.filter(function(d, item) {
+    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber-1; }));
 
-    if ( currentPage.attr("data-prev") !== undefined ) {
-      mode = currentPage.attr("data-prev");
-    }
 
-    var callback = currentPage.attr("data-prev-after");
-    // console.log("Mode, Callback", currentPage, mode, callback);
+  window.location.hash = nextSurrogate.attr("id");
 
-    var func = null;
-    if (callback !== undefined) {
-      func = eval(callback);
-    } else {
-      func = function(){};
-    }
+  //   var mode = "scrollDown";
 
-    that.currentPageNumber --;
+  //   if ( currentPage.attr("data-prev") !== undefined ) {
+  //     mode = currentPage.attr("data-prev");
+  //   }
 
-    //Scroll towards new surrogaete
-    var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  //   var callback = currentPage.attr("data-prev-after");
+  //   // console.log("Mode, Callback", currentPage, mode, callback);
 
-    that.transition(currentPage, nextPage, mode, func);
+  //   var func = null;
+  //   if (callback !== undefined) {
+  //     func = eval(callback);
+  //   } else {
+  //     func = function(){};
+  //   }
 
-    //Reset Subpage
-    that.currentSubPage = 0;
+  //   that.currentPageNumber --;
 
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
-      function() {
+  //   //Scroll towards new surrogaete
+  //   var currentSurrogate = $(that.surrogates.filter(function(d, item) { return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
 
-        that.transitionOngoing = false;
-        that.scrollPositionTop = $(window).scrollTop();
-        that.scrollPositionBottom = $(window).scrollTop();
-        // console.log("XX");
-        // if (!that.eventActive) {
-        //   that.eventActive = true;
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
-        // $(window).on("keydown", that, that.keyPressDown);
-        // }
-        $("html,body").css("overflow", "auto");
-      }
-    );
+  //   console.log("TRANSITION !!!!!! ::: ", currentPage, nextPage);
+  //   that.transition(currentPage, nextPage, mode, func);
+
+  //   //Reset Subpage
+  //   that.currentSubPage = 0;
+
+  //   $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
+  //     function() {
+
+  //       that.transitionOngoing = false;
+  //       that.scrollPositionTop = $(window).scrollTop();
+  //       that.scrollPositionBottom = $(window).scrollTop();
+  //       // console.log("XX");
+  //       // if (!that.eventActive) {
+  //       //   that.eventActive = true;
+  //       $(window).on("scroll", that, that.windowListenerNext);
+  //       $(window).on("scroll", that, that.windowListenerPrev);
+  //       // $(window).on("keydown", that, that.keyPressDown);
+  //       // }
+  //       $("html,body").css("overflow", "auto");
+  //     }
+  //   );
 };
 
 ocha.HubScrolling.prototype.next = function() {
@@ -898,8 +1045,14 @@ ocha.HubScrolling.prototype.next = function() {
   // var that = this;
   // that.eventActive = false;
 
-  $(window).off("scroll", that.windowListenerNext);
-  $(window).off("scroll", that.windowListenerPrev);
+  if ( !that.isMobile ) {
+    $(window).off("scroll", that.windowListenerNext);
+    $(window).off("scroll", that.windowListenerPrev);
+  } else {
+    $("body").off("touchmove", that.windowListenerNext);
+    $("body").off("touchmove", that.windowListenerPrev);
+  }
+
   // $(window).off("keydown", that.keyPressDown);
 
   var currentPage = $(this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber; }));
@@ -909,9 +1062,9 @@ ocha.HubScrolling.prototype.next = function() {
 
   // console.log(currentPage, currentPage.attr("data-current-subpage"))
   var currentSubPage = currentPage.attr("data-current-subpage") || 0;
-  console.log("Entered here");
+  // console.log("Entered here");
   if ( currentPage.attr("data-next-" + currentSubPage) != undefined ) {
-    console.log("Entered here too");
+    // console.log("Entered here too");
     // console.log("CURRENT SUBPAGE", currentSubPage);
     currentSubPage = parseInt(currentSubPage);
     currentPage.attr("data-subpage", currentSubPage);
@@ -929,7 +1082,7 @@ ocha.HubScrolling.prototype.next = function() {
 
     //   // $("#hub-scrolling-scroller-component").show();
     // }, 500);
-    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
+    $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
       function() {
         // console.log("XXXXX About to body");
         that.transitionOngoing = false;
@@ -937,8 +1090,13 @@ ocha.HubScrolling.prototype.next = function() {
         that.scrollPositionBottom = $(window).scrollTop();
         // if (!that.eventActive) {
         //   that.eventActive = true;
+        if ( !that.isMobile ) {
           $(window).on("scroll", that, that.windowListenerNext);
           $(window).on("scroll", that, that.windowListenerPrev);
+        } else {
+          $("body").on("touchmove", that, that.windowListenerNext);
+          $("body").on("touchmove", that, that.windowListenerPrev);
+        }
 
           // $(window).on("keydown", that, that.keyPressDown);
         // }
@@ -948,12 +1106,25 @@ ocha.HubScrolling.prototype.next = function() {
   }
   else
   {
-    console.log("Entered here 3");
+    // console.log("Entered here 3");
     currentPage.attr("data-current-subpage", currentSubPage+1);
     nextPage = this.containers.filter(function(d, item) { return parseInt($(item).attr("data-page")) == that.currentPageNumber+1; });
 
     this.nextPage = nextPage;
     this.currentPage = currentPage;
+
+    // console.log(this.nextPage ' UNDEFINED ') ;
+
+    if ( this.nextPage.length == 0 ) {
+      if ( !that.isMobile ) {
+        $(window).on("scroll", that, that.windowListenerNext);
+        $(window).on("scroll", that, that.windowListenerPrev);
+      } else {
+        $("body").on("touchmove", that, that.windowListenerNext);
+        $("body").on("touchmove", that, that.windowListenerPrev);
+      }
+      return;
+    }
 
     var beforeAction = currentPage.attr("data-next-before");
     var func = null;
@@ -962,11 +1133,11 @@ ocha.HubScrolling.prototype.next = function() {
 
     // console.log(beforeAction, func);
     if (beforeAction && func) {
-      console.log("Entered here Y", func);
+      // console.log("Entered here Y", func);
       func();
     }
     else {
-      console.log("Entered here X");
+      // console.log("Entered here X");
       that.nextAction();
     }
 
@@ -977,67 +1148,72 @@ ocha.HubScrolling.prototype.nextAction = function() {
   //Disable scrolling...
 
   // console.log("DISABLING NEXT ACTION:::");
-  console.log("Entered Here");
+  // console.log("Entered Here");
 
   var that = this;
   // console.log(that, that.currentPageNumber);
   var currentPage = that.currentPage;
   var nextPage = that.nextPage;
 
-  var mode = $(currentPage).attr("data-next");
+  var nextSurrogate = $(that.surrogates.filter(function(d, item) {
+    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber+1; }));
 
-  var callback = $(currentPage).attr("data-next-after");
-  // console.log("Mode, Callback", currentPage, mode, callback);
-
-  var func = null;
-  if (callback !== undefined) {
-    try {
-      console.log("Entered Here", func);
-      func = eval(callback);
-    } catch (ex) { func = null; }
-
-    // console.log(func);
-
-  } else {
-    func = function(){};
+  if ( nextSurrogate.attr("id") != undefined ) {
+    window.location.hash = nextSurrogate.attr("id");
   }
 
-  that.currentPageNumber ++;
+  // var mode = $(currentPage).attr("data-next");
 
-  // console.log("nextAction", that.surrogates);
+  // var callback = $(currentPage).attr("data-next-after");
+  // // console.log("Mode, Callback", currentPage, mode, callback);
 
-  //Scroll towards new surrogaete
-  var currentSurrogate = $(that.surrogates.filter(function(d, item) {
-    // console.log($(item).attr("data-page-scroll"), that.currentPageNumber);
-    return parseInt($(item).attr("data-page-scroll")) == that.currentPageNumber; }));
+  // var func = null;
+  // if (callback !== undefined) {
+  //   try {
+  //     console.log("Entered Here", func);
+  //     func = eval(callback);
+  //   } catch (ex) { func = null; }
 
-  // console.log(currentSurrogate);
+  //   // console.log(func);
 
-  that.transition(currentPage, nextPage, mode, func);
+  // } else {
+  //   func = function(){};
+  // }
 
-  //Reset Subpage
-  that.currentSubPage = 0;
+  // that.currentPageNumber ++;
 
-  console.log("Entered Here", that);
+  // // console.log("nextAction", that.surrogates);
 
-  console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
-  $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.TRANSITION_SPEED,
-    function() {
-      // console.log("XXXXX About to body");
-      console.log("Entered Here");
-      that.transitionOngoing = false;
-      that.scrollPositionTop = $(window).scrollTop();
-      that.scrollPositionBottom = $(window).scrollTop();
-      // if (!that.eventActive) {
-      //   that.eventActive = true;
-        $(window).on("scroll", that, that.windowListenerNext);
-        $(window).on("scroll", that, that.windowListenerPrev);
-        // $(window).on("keydown", that, that.keyPressDown);
-      // }
-      $("html,body").css("overflow", "auto");
-      console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
-    }
-  );
+  // //Scroll towards new surrogaete
+
+
+  // // console.log(currentSurrogate);
+
+  // that.transition(currentPage, nextPage, mode, func);
+
+  // //Reset Subpage
+  // that.currentSubPage = 0;
+
+  // console.log("Entered Here", that);
+
+  // console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
+  // $("html,body").animate({ scrollTop : currentSurrogate.offset().top}, that.options.transitionSpeed,
+  //   function() {
+  //     // console.log("XXXXX About to body");
+  //     console.log("Entered Here");
+  //     that.transitionOngoing = false;
+  //     that.scrollPositionTop = $(window).scrollTop();
+  //     that.scrollPositionBottom = $(window).scrollTop();
+  //     // if (!that.eventActive) {
+  //     //   that.eventActive = true;
+  //       $(window).on("scroll", that, that.windowListenerNext);
+  //       $(window).on("scroll", that, that.windowListenerPrev);
+  //       // $(window).on("keydown", that, that.keyPressDown);
+  //     // }
+  //     $("html,body").css("overflow", "auto");
+  //     console.log(currentSurrogate, currentSurrogate.offset(), $(window).scrollTop());
+  //   }
+  // );
 }
 
 ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, callback) {
@@ -1075,9 +1251,9 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       // console.log("ScrollUp : NEXT PAGE ", nextPage);
 
-      currentPage.stop(true, true).animate({ top: -h + "px" }, that.TRANSITION_SPEED,
+      currentPage.stop(true, true).animate({ top: -h + "px" }, that.options.transitionSpeed,
         function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+      nextPage.stop(true, true).animate({ top: "0px" }, that.options.transitionSpeed, function() {that.transitionOngoing=false
         onInit();
       });
     break;
@@ -1092,8 +1268,8 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       // console.log("NEXT PAGE ", nextPage);
 
-      currentPage.stop(true, true).animate({ top: h + "px" }, that.TRANSITION_SPEED, function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ top: "0px" }, that.TRANSITION_SPEED, function() {that.transitionOngoing=false
+      currentPage.stop(true, true).animate({ top: h + "px" }, that.options.transitionSpeed, function() { if (callback) callback(); });
+      nextPage.stop(true, true).animate({ top: "0px" }, that.options.transitionSpeed, function() {that.transitionOngoing=false
         onInit();
       });
     break;
@@ -1109,8 +1285,8 @@ ocha.HubScrolling.prototype.transition = function(currentPage, nextPage, mode, c
 
       nextPage.css("zIndex", parseInt(currentPage.css("zIndex")) - 10);
 
-      currentPage.stop(true, true).animate({ opacity: 0}, that.TRANSITION_SPEED, function() { if (callback) callback(); });
-      nextPage.stop(true, true).animate({ opacity: 1}, that.TRANSITION_SPEED, function() {
+      currentPage.stop(true, true).animate({ opacity: 0}, that.options.transitionSpeed, function() { if (callback) callback(); });
+      nextPage.stop(true, true).animate({ opacity: 1}, that.options.transitionSpeed, function() {
         that.transitionOngoing=false;
         nextPage.css("zIndex", nextPageZindex);
         currentPage.hide();
@@ -1127,7 +1303,7 @@ CHART AREA
 
 *****/
 
-$j("#chart-container").width($(window).width() * 3 / 4);
+// $j("#chart-container").width($(window).width() * 3 / 4);
 $j("#chart-container").css("marginLeft", "-" + parseInt($j("#chart-container").width()/2) + "px");
 $j("#chart-container").height($(window).height()/2);
 var ocha = ocha || {};
@@ -1135,8 +1311,7 @@ ocha.CountryChart = function (container) {
   this.container = $j(container);
   this.d3Container = d3.select(container[0]);
   this.svg = this.d3Container.append("svg").attr("class", "country-chart");
-  this.data = [ { year: 2003, requirement: 5300000000},
-               { year: 2004, requirement: 3000000000},
+  this.data = [
                { year: 2005, requirement: 5000000000, targeted: 40000000},
                { year: 2006, requirement: 4800000000, targeted: 32000000},
                { year: 2007, requirement: 4400000000, targeted: 26000000},
@@ -1146,7 +1321,7 @@ ocha.CountryChart = function (container) {
                { year: 2011, requirement: 7900000000, targeted: 65000000},
                { year: 2012, requirement: 8800000000, targeted: 62000000},
                { year: 2013, requirement: 12900000000, targeted: 73000000},
-               { year: 2014, requirement: 13000000000, targeted: 81000000},
+               { year: 2014, requirement: 16800000000, targeted: 76000000},
                { year: 2015, requirement: 18806048959, targeted: 78913640}
             ];
 
@@ -1167,13 +1342,13 @@ ocha.CountryChart = function (container) {
     var requirements = [];
     var targeted = [];
 
-    console.log(data, year);
+    // console.log(data, year);
 
     for (var i in year) {
-      console.log(i, year[i]);
+      // console.log(i, year[i]);
       var filtered = data.filter(function(d) { return d.year == year[i]; });
 
-      console.log(filtered);
+      // console.log(filtered);
 
       if ( filtered.length == 0 ) {
         requirements.push(null);
@@ -1202,12 +1377,12 @@ ocha.CountryChart = function (container) {
           x: {
             tick: {
               format: function(d) {
-                if ( d < 2015 ) {
-                  return "DEC " + d;
-                }
-                else {
+                // if ( d == 2014 ) {
+                //   return "DEC " + d;
+                // }
+                // else {
                   return "JUN " + d;
-                }
+                // }
               }
             }
           },
@@ -1285,9 +1460,16 @@ ocha.Story = function() {
   return {
     initialize : function() {
       // console.log("Initializing Story", "-" + $(".hub-slide-center-text h2").height()/2 +"px");
+
       $(".hub-neutral-background div.content").each(function() {
           $(this).css("marginTop", "-" + parseInt($(this).height()/2) +"px");
       });
+
+      if ( hubScrolling.isMobile ) {
+        $(".hub-neutral-background div.content").each(function() {
+          $(this).css("marginTop", "-=50px");
+        });
+      }
 
       $("#mosaic-title-area").css("top", "50%");
       $("#mosaic-title-area").css("marginTop", "-" + parseInt($("#mosaic-title-area").height()/2) +"px");
@@ -1339,7 +1521,7 @@ ocha.Story = function() {
       $(window).trigger("resize");
 
       if ( !lastMosaicInitialized ) {
-        $("#hub-slide-16 #hub-face-final-area").height($("#hub-slide-16").width());
+        $("#hub-slide-16 #hub-face-final-area").height($("#hub-slide-16").height());
         $("#hub-slide-16 #hub-face-final-area").empty();
         lastMosaic = new ocha.FaceMosaic("#hub-slide-16 #hub-face-final-area",
                                         d3.range(IMAGE_COUNT)
@@ -1347,11 +1529,14 @@ ocha.Story = function() {
                                           faceWidth);
 
         lastMosaicInitialized = true;
-        // lastMosaic.initialize();
       }
 
-      lastMosaic.stopMosaic();
-      lastMosaic.startMosaic();
+      if ( !hubScrolling.isMobile ) {
+        lastMosaic.stopMosaic();
+        lastMosaic.startMosaic();
+      } else {
+        lastMosaic.initialize();
+      }
     },
     playNextChartText: function() {
       $("#content-2-a").stop(true, true).fadeOut("fast", function() {
@@ -1360,14 +1545,14 @@ ocha.Story = function() {
     },
     hideAllForMap : function() {
 
-      console.log("ENTERED HERE ?? ");
+      // console.log("ENTERED HERE ?? ");
       $("#hub-slide-16").css("background-image", "url(./img/story/010.jpg)");
       $("#hub-slide-16").css("background-position", "center center");
       $("#hub-slide-16 hub-radial-overlay").fadeOut("fast");
 
       // lastMosaicInitialized = true;
       if (lastMosaicInitialized) {
-        console.log("ENTERED HERE ?? ", lastMosaic);
+        // console.log("ENTERED HERE ?? ", lastMosaic);
         lastMosaic.stopMosaic();
         lastMosaic.hide(undefined, function() { hubScrolling.nextAction(); });
         lastMosaicInitialized = false;
@@ -1468,10 +1653,10 @@ ocha.Story = function() {
 
     tweener : function() {
       var target = d3.select(this);
-      console.log(target);
+      // console.log(target);
       var i = d3.interpolateRound(0, parseInt(target.attr("data-stat-count")));
       return function(t) {
-        console.log(i(t), this);
+        // console.log(i(t), this);
         var fP = d3.formatPrefix(i(t));
 
         if (fP.symbol != "")
@@ -1486,7 +1671,6 @@ ocha.Story = function() {
   };
 }();
 
-ocha.Story.initialize();
 
 
 /* Creating image list .. */
@@ -1503,6 +1687,9 @@ $("#mosaic-area").css("opacity", 1);
 
 
 jQuery(window).load(function() {
+
+
+  ocha.Story.initialize();
   hubScrolling.initialize();
   $("#mosaic-actual").height($("#mosaic-area").height());
 

@@ -1,0 +1,294 @@
+$orange: #f47932;
+$blue: rgb(0, 56, 86);
+$red: #811B1B;
+$lightblue: #1E7793;
+
+$big-font: 32px;
+$medium-font: 24px;
+$small-font: 16px;
+
+$phone-min-width: 320px;
+$phone-max-width: 768px;
+
+/* For Phones! */
+@media only screen
+  and (min-width: $phone-min-width)
+  and (max-width: $phone-max-width) {
+
+
+  //Hide nav
+  aside.hubscroll-nav-area {
+    display: none;
+  }
+
+  section.hub-section {
+    background-position: center center !important;
+    width: device-width !important;
+    height: device-height !important;
+  }
+  #mosaic-title-area {
+    h1 {
+      font-size: $big-font;
+    }
+
+    h2 {
+      font-size: $medium-font;
+    }
+  }
+
+  section.hub-section {
+    div.hub-viewport {
+      .hub-photo-credit {
+
+        position: absolute;
+        top: 0;
+        left: auto;
+        right: 0;
+        bottom: auto;
+
+        &.hub-photo-credit-right {
+          left: auto;
+          right: 0;
+        }
+      }
+      div.hub-country-title {
+        position: absolute;
+        // left: -50px;
+        // bottom: 59px;
+        // -webkit-transform: rotate(90deg);
+        // -ms-transform: rotate(90deg);
+        // transform: rotate(90deg);
+        width: 98%;
+        top: 0;
+        h2 {
+          font-size: $medium-font;
+          background-color: transparent;
+          color: rgb(78, 108, 6);
+          padding: 1%;
+          margin: 0;
+        }
+      }
+      div.hub-country-stats {
+        position: absolute;
+        bottom: 110px;
+        font-size: $medium-font;
+        padding-left: 14px;
+        width: 100%;
+        background-color: transparent;
+        color: #f47932;
+        padding-right: 0.4em;
+        right: auto;
+        text-shadow: 0 1px 1px black;
+        table {
+          width: 90%;
+          border-spacing: 0;
+          tr:first-child td {
+            border: 2px solid rgb(77, 53, 53);
+            border-width: 0 0 2px;
+          }
+          tr:last-child td {
+            padding-top: 5px;
+          }
+
+          tr td {
+            font-weight: bold;
+            text-shadow: 0 1px 1px black;
+          }
+        }
+      }
+    }
+  }
+
+  #hub-slide-1, #hub-slide-1-a {
+    background-image: url(../img/story/small/good-news.jpg);
+
+    .hub-viewport {
+      // background-color: rgba(0, 56, 86, 0.2);
+
+      #hub-slide-1-good-news, #hub-slide-1-bad-news {
+        background-color: transparent;
+        // margin-bottom: 1em;
+        margin-bottom: 110px;
+        h1 {
+          font-size: $small-font;
+          text-transform: uppercase;
+          font-weight: bold;
+          text-shadow: 0 1px 1px rgb(0,0,0);
+        }
+        p {
+          text-transform: none;
+          font-weight: normal;
+          text-shadow: 0 1px 1px rgb(0,0,0);
+          line-height: 1.2;
+
+          font-size: $medium-font;
+        }
+      }
+    }
+  }
+  #hub-slide-1-a { background-image: url(../img/story/small/bad-news.jpg); }
+  #hub-slide-2 {
+
+    #chart-container {
+
+      width: 100%;
+      bottom: 200px;
+
+    }
+    .content h2 {
+      font-size: $small-font;
+      padding: 0 1em;
+      margin-top: 11%;
+    }
+  }
+  #hub-slide-4 {
+    background-image: url(../img/story/small/iraq.jpg);
+  }
+  #hub-slide-5 {
+    background-image: url(../img/story/small/syria.jpg);
+  }
+  #hub-slide-6 {
+    background-image: url(../img/story/small/004.jpg);
+  }
+
+  //Yemen
+  #hub-slide-7 {
+    background-image: url(../img/story/small/005.jpg);
+  }
+
+  #hub-slide-8 {
+    background-size: cover;
+    background-image: url(../img/story/small/ukraine.jpg);
+  }
+
+  #hub-slide-10 {
+    &.hub-section {
+      background-image: url(../img/story/small/006.jpg);
+      background-position: center right !important;
+    }
+  }
+
+  //Afghanistan
+  #hub-slide-10-a {
+    &.hub-section {
+      background-image: url(../img/story/small/afghanistan.jpg);
+      background-position: center right !important;
+    }
+  }
+
+  //Sahel
+  #hub-slide-12 {
+    background-image: url(../img/story/small/007.jpg);
+  }
+
+  //Somalia
+  #hub-slide-14 {
+    background-image: url(../img/story/small/somalia.jpg);
+  }
+
+  #hub-slide-15 {
+    background-image: url(../img/story/small/vanuatu.jpg);
+  }
+
+  #hub-slide-19 {
+    h2 {
+      font-size: $medium-font;
+    }
+  }
+
+  .hub-neutral-background div.content {
+    width: 99%;
+    padding: 0.5%;
+    h1 { font-size: $medium-font; }
+    h2 {
+      font-size: $small-font;
+      padding: 0 1em;
+      // margin-top: 25%;
+      font-weight: normal;
+      line-height: 1.5;
+
+    }
+  }
+
+  #hub-call-to-action {
+    background-image: url(../img/story/small/final.png);
+    div.content {
+      div#hub-call-to-action-area {
+        padding: 2px 2px ; margin: 0; border-radius: 0;
+        div.hub-call-to-action-3box {
+          width: 100%;
+          float: none;
+          margin-right: 0;
+          padding: 0;
+          &#call-download-report {
+            img {
+              height: 75px;
+              margin-right: 5px;
+            }
+          }
+
+          h3 {
+            text-align: left;
+            color: $orange;
+            margin-bottom: 0px;
+            font-size: $small-font;
+            margin-top: 2px;
+          }
+          p {
+            margin: 0;
+            margin-bottom:5px;
+            font-size: $small-font;
+          }
+        }
+      }
+    }
+  }
+  #hub-slide-17 {
+    display: none;
+  }
+
+  #hub-slide-12 {
+    h1 {
+      font-size: $big-font;
+    }
+  }
+  #hub-slide-10, #hub-slide-10-a {
+    &.hub-section .hub-country-stats {
+      // width: 100%;
+      background-color: transparent;
+      bottom: 110px;
+      right: auto;
+      top: auto;
+      left: auto;
+
+      table {
+        // float: right;
+        // width: 33em;
+        tr td {
+          &.td-right {
+            width: 40%;
+          }
+          &.td-left {
+            font-size: $medium-font;
+            font-weight: bold;
+            text-shadow: 0px 1px 1px black;
+            width: 50%;
+            // color: #811B1B;
+            color: $orange;
+          }
+          .country-stat-count {
+            font-size: $medium-font;
+            vertical-align: bottom;
+            font-weight: bold;
+            display: inline-block;
+            text-shadow: 0px 1px 1px black;
+            // color: #811B1B;
+            color: $orange;
+            margin-bottom: -0.24em;
+              padding-bottom: 10px;
+          }
+        }
+      }
+    }
+  }
+}
