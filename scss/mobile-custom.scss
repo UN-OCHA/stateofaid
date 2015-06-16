@@ -37,14 +37,16 @@ $phone-max-width: 768px;
   }
 
   section.hub-section {
+    opacity: 0;
+
     div.hub-viewport {
       .hub-photo-credit {
 
         position: absolute;
-        top: 0;
+        top: auto;
         left: auto;
         right: 0;
-        bottom: auto;
+        bottom: 2px;
 
         &.hub-photo-credit-right {
           left: auto;
@@ -128,17 +130,35 @@ $phone-max-width: 768px;
   }
   #hub-slide-1-a { background-image: url(../img/story/small/bad-news.jpg); }
   #hub-slide-2 {
-
+    height: auto !important;
+    .hub-viewport { height: auto; }
+    .hub-radial-overlay {
+      display: none;
+    }
+    #content-2-b {
+      display: block;
+      top: auto;
+    }
     #chart-container {
 
       width: 100%;
-      bottom: 200px;
+      bottom: auto;
 
+    }
+
+    #chart-container, #content-2-a, #content-2-b {
+      height: auto !important;
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      h2 {
+        margin-top: 10px;
+      }
     }
     .content h2 {
       font-size: $small-font;
       padding: 0 1em;
-      margin-top: 11%;
+      // margin-top: 11%;
     }
   }
   #hub-slide-4 {
@@ -192,7 +212,7 @@ $phone-max-width: 768px;
 
   #hub-slide-19 {
     h2 {
-      font-size: $medium-font;
+      font-size: $small-font;
     }
   }
 
@@ -213,7 +233,15 @@ $phone-max-width: 768px;
   #hub-call-to-action {
     background-image: url(../img/story/small/final.png);
     div.content {
+      margin-top: auto !important;
+      top: 20px !important;
+
+      h2 {
+        font-size: $medium-font;
+      }
       div#hub-call-to-action-area {
+        background-color: transparent;
+
         padding: 2px 2px ; margin: 0; border-radius: 0;
         div.hub-call-to-action-3box {
           width: 100%;
@@ -222,26 +250,54 @@ $phone-max-width: 768px;
           padding: 0;
           &#call-download-report {
             img {
-              height: 75px;
+              height: 50px;
               margin-right: 5px;
             }
           }
 
           h3 {
-            text-align: left;
+            text-align: center;
+            text-shadow: 0 1px 1px black;
             color: $orange;
             margin-bottom: 0px;
             font-size: $small-font;
-            margin-top: 2px;
+            margin-top: 20px;
           }
           p {
             margin: 0;
             margin-bottom:5px;
             font-size: $small-font;
+
+            text-align: center;
+            padding: 1px 5px;
+            color: #333333;
+            font-weight: bold;
+            text-shadow: 0 1px 1px white;
           }
         }
       }
     }
+  }
+  #hub-slide-16 {
+    .hub-subsection { margin-top: 0 !important;
+
+        h1, h2, h3 { font-size: $small-font; }
+
+        &#hub-16-00 {
+          top: 5%;
+        }
+        &#hub-16-01 {
+          top: 30%;
+        }
+        &#hub-16-02 {
+          top: 50%;
+        }
+        &#hub-16-03 {
+          top: 80%;
+        }
+    }
+
+    #hub-16-01, #hub-16-02, #hub-16-03 { display: block; margin: auto !important; position: absolute;}
   }
   #hub-slide-17 {
     display: none;

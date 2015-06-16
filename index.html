@@ -7,7 +7,7 @@
 
 <meta name="description" content="In just over a decade, the number of people in need of aid has almost doubled. At the beginning of 2015 we were aiming to assist 57.5 million people in 22 countries needing assistance.">
 <meta name="keywords" content="Humanitarian Aid, UNOCHA, OCHA, United Nations">
-<meta property="og:image" content="http://www.unocha.org/2015appeal/img/cover.png"/>
+<meta property="og:image" content="http://www.unocha.org/stateofaid/img/cover.png"/>
 <meta property="og:title" content="Humanitarian Needs: State of Play"/>
 <meta property="og:description" content="In just over a decade, the number of people in need of aid has almost doubled. At the beginning of 2015 we were aiming to assist 57.5 million people in 22 countries needing assistance."/>
 
@@ -85,7 +85,7 @@
       <div class='content hub-subsection' id="content-2-a">
         <h2>In&nbsp;just&nbsp;over&nbsp;a&nbsp;decade,&nbsp;the&nbsp;number&nbsp;of people&nbsp;in&nbsp;need&nbsp;of&nbsp;aid&nbsp;has&nbsp;almost&nbsp;doubled. At the beginning of 2015 we were aiming to assist <strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">57.5&nbsp;million&nbsp;people</strong> in&nbsp;22&nbsp;countries&nbsp;needing&nbsp;assistance.</h2>
       </div>
-      <div class='content hub-subsection' id="content-2-b" style="display: none">
+      <div class='content hub-subsection' id="content-2-b">
         <h2>
           Six&nbsp;months&nbsp;later,&nbsp;we&nbsp;are&nbsp;calling&nbsp;for&nbsp;help&nbsp;to support&nbsp;an astounding&nbsp;<strong style="color: #811B1B; text-shadow: 2px 2px 1px rgba(0,0,0, 0.2);">78.9&nbsp;million&nbsp;people</strong>.
 
@@ -287,12 +287,12 @@
       <div class='hub-country-stats abs-left'>
         <table>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='333000'>0</span></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='331000'>0</span></td>
             <td class='td-left'>received food assistance<div class="clear"></div></td>
           </tr>
           <tr>
             <td class='td-right'>
-              <span class='country-stat-count' data-stat-count='128000'>0</span></td>
+              <span class='country-stat-count' data-stat-count='140400'>0</span></td>
             <td class='td-left'>received seeds, tools, and fishing equipment<div class="clear"></div></td>
           </tr>
         </table>
@@ -307,12 +307,12 @@
       <div class='hub-country-stats'>
         <table>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='370000'>0</span></td>
-            <td class='td-left'>people received food assistance<div class="clear"></div></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='21000'>0</span></td>
+            <td class='td-left'>people have received emergency supplies of safe drinking water<div class="clear"></div></td>
           </tr>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='50000'>0</span></td>
-            <td class='td-left'>people received emergency shelter<div class="clear"></div></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='55000'>0</span></td>
+            <td class='td-left'>received tool kits to rebuild their homes<div class="clear"></div></td>
           </tr>
         </table>
       </div>
@@ -337,18 +337,18 @@
           But each year millions of people<br/>do not get the help they need because</h2>
         <h1>humanitarian access is compromised.</h1>
       </div>
-      <div class='content hub-subsection' id="hub-16-01" style="display: none">
+      <div class='content hub-subsection' id="hub-16-01">
         <h2>Or because </h2>
         <h1>funding does <br/> not come through.</h1>
       </div>
-      <div class='content hub-subsection' id="hub-16-02" style="display: none">
+      <div class='content hub-subsection' id="hub-16-02">
         <h2>
           Donors have been generous but the global humanitarian appeal remains just
         </h2>
         <h1>26 per cent funded</h1>
         <h2>half-way through the year.</h2>
       </div>
-      <div class='content hub-subsection' id="hub-16-03" style="display: none">
+      <div class='content hub-subsection' id="hub-16-03">
         <h2>
           One thing is clear: the sheer scale of needs continues to outpace the level of funding.
         </h2>
@@ -397,8 +397,8 @@
             <h3>Spread the word</h3>
             <div>
 
-               <div class="fb-share-button" data-href="http://www.unocha.org/2015appeal" data-layout="box_count"></div>
-              <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2F2015appeal" class="twitter-share-button" data-via="UNOCHA" data-count="vertical">Tweet</a>
+               <div class="fb-share-button" data-href="http://www.unocha.org/stateofaid" data-layout="box_count"></div>
+              <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2Fstateofaid" class="twitter-share-button" data-via="UNOCHA" data-count="vertical">Tweet</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
             </div>
           </div>
@@ -867,42 +867,65 @@ ocha.HubScrolling.prototype.initialize = function() {
   this.containers.each(
       function(i, item) {
 
-        $j(item)
-          .attr("data-page", i)
-          .css({
-              "position": "fixed",
-              "zIndex" : ( that.pageCount - i ) * 100,
-              "top" : i != 0 ? that.containers.height() : 0,
-              "left" : 0
-          });
+        if(!that.isMobile) {
+            $j(item)
+              .attr("data-page", i)
+              .css({
+                  "position": "fixed",
+                  "zIndex" : ( that.pageCount - i ) * 100,
+                  "top" : i != 0 ? that.containers.height() : 0,
+                  "left" : 0
+              });
 
-          //Insert surrogate containers
-          var $surrogate = $("<div />")
-                          .addClass("hub-container-scroll hub-surrogate")
-                          .attr("data-page-scroll", i)
-                          .attr("id", $(item).attr("id") ? $(item).attr("id") : "page-" + i)
-                          .width(that.containers.width())
-                          .height(that.containers.height());
-
-
-          $("body").append($surrogate);
-
-          var $link = $("<li/>")
-                          .addClass("hubscroll-nav-list-item")
-                          .append($("<a/>")
-                              .attr("data-target", i)
-                              .attr("href", "#"
-                                                + ($(item).attr("id") ? $(item).attr("id") : "page-" + i) )
-                                                ) ;
-
-          // console.log($linkArea, $link);
-          $linkArea.append($link);
-          // <li class='hubscroll-nav-list-item'><a href="#hub-slide-18"></a></li>
+              //Insert surrogate containers
+              var $surrogate = $("<div />")
+                              .addClass("hub-container-scroll hub-surrogate")
+                              .attr("data-page-scroll", i)
+                              .attr("id", $(item).attr("id") ? $(item).attr("id") : "page-" + i)
+                              .width(that.containers.width())
+                              .height(that.containers.height());
 
 
-          // if ($surrogate.position().top < scrollTop) {
-          //   $surrogate.css("visibility", "hidden");
-          // }
+              $("body").append($surrogate);
+
+              var $link = $("<li/>")
+                              .addClass("hubscroll-nav-list-item")
+                              .append($("<a/>")
+                                  .attr("data-target", i)
+                                  .attr("href", "#"
+                                                    + ($(item).attr("id") ? $(item).attr("id") : "page-" + i) )
+                                                    ) ;
+
+              // console.log($linkArea, $link);
+              $linkArea.append($link);
+              // <li class='hubscroll-nav-list-item'><a href="#hub-slide-18"></a></li>
+
+
+              // if ($surrogate.position().top < scrollTop) {
+              //   $surrogate.css("visibility", "hidden");
+              // }
+            } else { // if hubscrolling is in mobile...
+              // var newH = $("#hub-slide-16").height() * 1.5;
+              // $("#hub-slide-16").height(newH);
+
+              lastMosaic = new ocha.FaceMosaic("#hub-slide-16 #hub-face-final-area",
+                                  d3.range(IMAGE_COUNT)
+                                    .map(function(d) { return "./img/faces/" + fmt(d) + ".png"; }),
+                                    faceWidth);
+
+              lastMosaic.initialize();
+              countryChart.initialize();
+
+              d3.selectAll(".country-stat-count").each(function(d) {
+                var count = parseInt(d3.select(this).attr("data-stat-count"));
+                var format = d3.formatPrefix(count);
+
+                format.symbol = format.symbol == "G" ? "B" : format.symbol;
+                d3.select(this).text(format.scale(count) + "" + format.symbol);
+              });
+
+              $("section.hub-section").css("opacity", 1);
+            }
 
       }
   );
@@ -937,13 +960,14 @@ ocha.HubScrolling.prototype.initialize = function() {
     $(window).on("scroll", that, that.windowListenerNext);
     $(window).on("scroll", that, that.windowListenerPrev);
   } else {
-    $("body").on("touchmove", that, that.windowListenerNext);
-    $("body").on("touchmove", that, that.windowListenerPrev);
+    // $("body").on("touchmove", that, that.windowListenerNext);
+    // $("body").on("touchmove", that, that.windowListenerPrev);
   }
 
-  $(window).on("hashchange", that, that.skipPage);
-
-  $(window).trigger("hashchange");
+  if ( !that.isMobile ) {
+    $(window).on("hashchange", that, that.skipPage);
+    $(window).trigger("hashchange");
+  }
     // }
 
   //Event listeners
@@ -961,14 +985,19 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
   var w = $window.width(),
       h = $window.height();
 
-  if ( !that.isMobile ) {
+  // if ( !that.isMobile ) {
     that.containers.width(w);
     that.containers.height(h);
-  } else {
-    that.containers.height(window.screen.height);
-    that.containers.width(window.screen.width);
-    // that.containers.height(document.documentElement.clientWidth);
-  }
+
+    // if ( that.isMobile ){
+    //   that.containers.height("auto");
+    //   that.containers.css("minHeight", h);
+    // }
+  // } else {
+  //   that.containers.height(window.screen.height);
+  //   that.containers.width(window.screen.width);
+  //   // that.containers.height(document.documentElement.clientWidth);
+  // }
   //For the scroller at the background
   // if (!this.scroller) {
   //   var wAll = that.containers.width(),
@@ -1545,6 +1574,7 @@ ocha.Story = function() {
         lastMosaic.startMosaic();
       } else {
         lastMosaic.initialize();
+        countryChart.initialize();
       }
     },
     playNextChartText: function() {
@@ -1696,7 +1726,6 @@ $("#mosaic-area").css("opacity", 1);
 
 
 jQuery(window).load(function() {
-
 
   ocha.Story.initialize();
   hubScrolling.initialize();

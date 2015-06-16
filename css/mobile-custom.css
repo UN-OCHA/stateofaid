@@ -13,47 +13,49 @@
   #mosaic-title-area h2 {
     font-size: 24px; }
 
-  section.hub-section div.hub-viewport .hub-photo-credit {
-    position: absolute;
-    top: 0;
-    left: auto;
-    right: 0;
-    bottom: auto; }
-    section.hub-section div.hub-viewport .hub-photo-credit.hub-photo-credit-right {
+  section.hub-section {
+    opacity: 0; }
+    section.hub-section div.hub-viewport .hub-photo-credit {
+      position: absolute;
+      top: auto;
       left: auto;
-      right: 0; }
-  section.hub-section div.hub-viewport div.hub-country-title {
-    position: absolute;
-    width: 98%;
-    top: 0; }
-    section.hub-section div.hub-viewport div.hub-country-title h2 {
+      right: 0;
+      bottom: 2px; }
+      section.hub-section div.hub-viewport .hub-photo-credit.hub-photo-credit-right {
+        left: auto;
+        right: 0; }
+    section.hub-section div.hub-viewport div.hub-country-title {
+      position: absolute;
+      width: 98%;
+      top: 0; }
+      section.hub-section div.hub-viewport div.hub-country-title h2 {
+        font-size: 24px;
+        background-color: transparent;
+        color: #4e6c06;
+        padding: 1%;
+        margin: 0; }
+    section.hub-section div.hub-viewport div.hub-country-stats {
+      position: absolute;
+      bottom: 110px;
       font-size: 24px;
+      padding-left: 14px;
+      width: 100%;
       background-color: transparent;
-      color: #4e6c06;
-      padding: 1%;
-      margin: 0; }
-  section.hub-section div.hub-viewport div.hub-country-stats {
-    position: absolute;
-    bottom: 110px;
-    font-size: 24px;
-    padding-left: 14px;
-    width: 100%;
-    background-color: transparent;
-    color: #f47932;
-    padding-right: 0.4em;
-    right: auto;
-    text-shadow: 0 1px 1px black; }
-    section.hub-section div.hub-viewport div.hub-country-stats table {
-      width: 90%;
-      border-spacing: 0; }
-      section.hub-section div.hub-viewport div.hub-country-stats table tr:first-child td {
-        border: 2px solid #4d3535;
-        border-width: 0 0 2px; }
-      section.hub-section div.hub-viewport div.hub-country-stats table tr:last-child td {
-        padding-top: 5px; }
-      section.hub-section div.hub-viewport div.hub-country-stats table tr td {
-        font-weight: bold;
-        text-shadow: 0 1px 1px black; }
+      color: #f47932;
+      padding-right: 0.4em;
+      right: auto;
+      text-shadow: 0 1px 1px black; }
+      section.hub-section div.hub-viewport div.hub-country-stats table {
+        width: 90%;
+        border-spacing: 0; }
+        section.hub-section div.hub-viewport div.hub-country-stats table tr:first-child td {
+          border: 2px solid #4d3535;
+          border-width: 0 0 2px; }
+        section.hub-section div.hub-viewport div.hub-country-stats table tr:last-child td {
+          padding-top: 5px; }
+        section.hub-section div.hub-viewport div.hub-country-stats table tr td {
+          font-weight: bold;
+          text-shadow: 0 1px 1px black; }
 
   #hub-slide-1, #hub-slide-1-a {
     background-image: url(../img/story/small/good-news.jpg); }
@@ -75,13 +77,28 @@
   #hub-slide-1-a {
     background-image: url(../img/story/small/bad-news.jpg); }
 
-  #hub-slide-2 #chart-container {
-    width: 100%;
-    bottom: 200px; }
-  #hub-slide-2 .content h2 {
-    font-size: 16px;
-    padding: 0 1em;
-    margin-top: 11%; }
+  #hub-slide-2 {
+    height: auto !important; }
+    #hub-slide-2 .hub-viewport {
+      height: auto; }
+    #hub-slide-2 .hub-radial-overlay {
+      display: none; }
+    #hub-slide-2 #content-2-b {
+      display: block;
+      top: auto; }
+    #hub-slide-2 #chart-container {
+      width: 100%;
+      bottom: auto; }
+    #hub-slide-2 #chart-container, #hub-slide-2 #content-2-a, #hub-slide-2 #content-2-b {
+      height: auto !important;
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px; }
+      #hub-slide-2 #chart-container h2, #hub-slide-2 #content-2-a h2, #hub-slide-2 #content-2-b h2 {
+        margin-top: 10px; }
+    #hub-slide-2 .content h2 {
+      font-size: 16px;
+      padding: 0 1em; }
 
   #hub-slide-4 {
     background-image: url(../img/story/small/iraq.jpg); }
@@ -117,7 +134,7 @@
     background-image: url(../img/story/small/vanuatu.jpg); }
 
   #hub-slide-19 h2 {
-    font-size: 24px; }
+    font-size: 16px; }
 
   .hub-neutral-background div.content {
     width: 99%;
@@ -132,28 +149,57 @@
 
   #hub-call-to-action {
     background-image: url(../img/story/small/final.png); }
-    #hub-call-to-action div.content div#hub-call-to-action-area {
-      padding: 2px 2px;
-      margin: 0;
-      border-radius: 0; }
-      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box {
-        width: 100%;
-        float: none;
-        margin-right: 0;
-        padding: 0; }
-        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box#call-download-report img {
-          height: 75px;
-          margin-right: 5px; }
-        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box h3 {
-          text-align: left;
-          color: #f47932;
-          margin-bottom: 0px;
-          font-size: 16px;
-          margin-top: 2px; }
-        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
-          margin: 0;
-          margin-bottom: 5px;
-          font-size: 16px; }
+    #hub-call-to-action div.content {
+      margin-top: auto !important;
+      top: 20px !important; }
+      #hub-call-to-action div.content h2 {
+        font-size: 24px; }
+      #hub-call-to-action div.content div#hub-call-to-action-area {
+        background-color: transparent;
+        padding: 2px 2px;
+        margin: 0;
+        border-radius: 0; }
+        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box {
+          width: 100%;
+          float: none;
+          margin-right: 0;
+          padding: 0; }
+          #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box#call-download-report img {
+            height: 50px;
+            margin-right: 5px; }
+          #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box h3 {
+            text-align: center;
+            text-shadow: 0 1px 1px black;
+            color: #f47932;
+            margin-bottom: 0px;
+            font-size: 16px;
+            margin-top: 20px; }
+          #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
+            margin: 0;
+            margin-bottom: 5px;
+            font-size: 16px;
+            text-align: center;
+            padding: 1px 5px;
+            color: #333333;
+            font-weight: bold;
+            text-shadow: 0 1px 1px white; }
+
+  #hub-slide-16 .hub-subsection {
+    margin-top: 0 !important; }
+    #hub-slide-16 .hub-subsection h1, #hub-slide-16 .hub-subsection h2, #hub-slide-16 .hub-subsection h3 {
+      font-size: 16px; }
+    #hub-slide-16 .hub-subsection#hub-16-00 {
+      top: 5%; }
+    #hub-slide-16 .hub-subsection#hub-16-01 {
+      top: 30%; }
+    #hub-slide-16 .hub-subsection#hub-16-02 {
+      top: 50%; }
+    #hub-slide-16 .hub-subsection#hub-16-03 {
+      top: 80%; }
+  #hub-slide-16 #hub-16-01, #hub-slide-16 #hub-16-02, #hub-slide-16 #hub-16-03 {
+    display: block;
+    margin: auto !important;
+    position: absolute; }
 
   #hub-slide-17 {
     display: none; }
