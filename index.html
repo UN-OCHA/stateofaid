@@ -907,6 +907,7 @@ ocha.HubScrolling.prototype.initialize = function() {
             } else { // if hubscrolling is in mobile...
               // var newH = $("#hub-slide-16").height() * 1.5;
               // $("#hub-slide-16").height(newH);
+
               lastMosaic = new ocha.FaceMosaic("#hub-slide-16 #hub-face-final-area",
                                   d3.range(IMAGE_COUNT)
                                     .map(function(d) { return "./img/faces/" + fmt(d) + ".png"; }),
@@ -922,6 +923,8 @@ ocha.HubScrolling.prototype.initialize = function() {
                 format.symbol = format.symbol == "G" ? "B" : format.symbol;
                 d3.select(this).text(format.scale(count) + "" + format.symbol);
               });
+
+              $("section.hub-section").css("opacity", 1);
             }
 
       }
