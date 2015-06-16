@@ -37,6 +37,8 @@ $phone-max-width: 768px;
   }
 
   section.hub-section {
+    opacity: 1;
+
     div.hub-viewport {
       .hub-photo-credit {
 
@@ -128,11 +130,14 @@ $phone-max-width: 768px;
   }
   #hub-slide-1-a { background-image: url(../img/story/small/bad-news.jpg); }
   #hub-slide-2 {
-
+    #content-2-b {
+      display: block;
+      top: 114px;
+    }
     #chart-container {
 
       width: 100%;
-      bottom: 200px;
+      bottom: 70px;
 
     }
     .content h2 {
@@ -213,7 +218,12 @@ $phone-max-width: 768px;
   #hub-call-to-action {
     background-image: url(../img/story/small/final.png);
     div.content {
+      h2 {
+        font-size: $big-font;
+      }
       div#hub-call-to-action-area {
+        background-color: transparent;
+
         padding: 2px 2px ; margin: 0; border-radius: 0;
         div.hub-call-to-action-3box {
           width: 100%;
@@ -228,20 +238,45 @@ $phone-max-width: 768px;
           }
 
           h3 {
-            text-align: left;
+            text-align: center;
+            text-shadow: 0 1px 1px black;
             color: $orange;
             margin-bottom: 0px;
-            font-size: $small-font;
-            margin-top: 2px;
+            font-size: $medium-font;
+            margin-top: 20px;
           }
           p {
             margin: 0;
             margin-bottom:5px;
             font-size: $small-font;
+
+            text-align: center;
+            padding: 1px 5px;
+            color: #333333;
+            font-weight: bold;
+            text-shadow: 0 1px 1px white;
           }
         }
       }
     }
+  }
+  #hub-slide-16 {
+    .hub-subsection { margin-top: 0 !important;
+        &#hub-16-00 {
+          top: 10%;
+        }
+        &#hub-16-01 {
+          top: 30%;
+        }
+        &#hub-16-02 {
+          top: 50%;
+        }
+        &#hub-16-03 {
+          top: 70%;
+        }
+    }
+
+    #hub-16-01, #hub-16-02, #hub-16-03 { display: block; margin: auto !important; position: absolute;}
   }
   #hub-slide-17 {
     display: none;

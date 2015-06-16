@@ -365,8 +365,13 @@ div.hub-radial-overlay {
 #hub-slide-15 {
   background-image: url(../img/story/vanuatu.jpg); }
 
+#content-2-b {
+  display: none; }
+
 #hub-slide-16 {
   background-position: center center !important; }
+  #hub-slide-16 #hub-16-01, #hub-slide-16 #hub-16-02, #hub-slide-16 #hub-16-03 {
+    display: none; }
   #hub-slide-16 div.hub-radial-overlay {
     opacity: 0.8; }
   #hub-slide-16 div.content h2 {
