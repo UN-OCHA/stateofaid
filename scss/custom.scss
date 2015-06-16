@@ -538,6 +538,12 @@ div.hub-radial-overlay {
         }
 
         img.img-left { float: left; margin-right: 5px; }
+        &#call-download-report {
+          table {
+            display: inline-block;
+            img { width: 90px; height: 128px; }
+          }
+        }
         p { text-align: left; }
         .fb-share-button { vertical-align: top; }
 
@@ -565,7 +571,7 @@ div.hub-radial-overlay {
  aside.hubscroll-nav-area {
     position: fixed;
     margin-left: 5px;
-    right: 0;
+    right: 10px;
     top: 50%;
     z-index: 100000;
 

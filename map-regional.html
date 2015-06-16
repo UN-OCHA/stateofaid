@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+<META HTTP-EQUIV="Expires" CONTENT="-1">
+<meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,800">
+ <link rel="stylesheet" href="css/leaflet.css" />
+  <script src='js/mapbox.js'></script>
+  <link href='css/mapbox.css' rel='stylesheet' />
+  <link href='css/map-custom.css' rel='stylesheet' />
+<style>
+.region-item {
+  fill: rgba(128,128,0,0.5);
+  stroke: #fff;
+  stroke-width: 3px;
+
+}
+#map { width: 100%; }
+</style>
+<body>
+<div id="map"></div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/d3.js"></script>
+<script src="js/topojson.js"></script>
+<script src="js/leaflet.js"></script>
+
+<script>
+/** CONSTANTS! */
+
+var $j = jQuery;
+$j("#map").height($(window).height());
+
+
+var ANIMATION_DURATION = 400;
+var MAPBOX_TILES_URL = "http://api.tiles.mapbox.com/v4/mapbox.dark/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoicmFwaWNhc3RpbGxvIiwiYSI6IjViOWEzMzdlY2E5MTUxNDUyNDNkYTY3ODI4ODU4OGMxIn0.hLg3pFTybrk5EViaYX9bzA";
+
+var map = new L.Map("map", {center: [24, 27], zoom: 2}).addLayer(new L.TileLayer(MAPBOX_TILES_URL));
+var _projectPoint = function(x, y) {
+    var point = map.latLngToLayerPoint(new L.LatLng(y, x));
+    this.stream.point(point.x, point.y);
+  },
+  _transform = d3.geo.transform({point: _projectPoint}),
+  _path = d3.geo.path().projection(_transform);
+
+
+//Manage Regional Area and add events to the regionalLayer
+var ocha = ocha || {};
+ocha.RegionalLayer = function(map, options) {
+
+  this.map = map;
+
+  this.canvas = null;
+  this.layer = null;
+  this.regionPaths = null;
+
+  this.features = null;
+
+  this.regions = [
+      { id: "Sahel",
+        name: "Sahel Regional Response Plan",
+        countries: ['TCD', 'MLI', 'NER', 'CMR', 'MRT', 'NGA', 'BFA', 'SEN', 'GMB', 'SAHEL']},
+      {
+        id: "CAR",
+        name: "Central African Republic Regional Response Plan",
+        countries: ['TCD', 'CMR', 'COD', 'COG']
+      },
+      { id: "Nigeria",
+        name: "Nigeria Regional Refugee Response Plan",
+        countries: ['CMR', 'TCD', 'NER']},
+      { id: "Burundi",
+        name: "Burundi Regional Refugee Response Plan",
+        countries: ['RWA', 'TZA', 'COD']},
+      { id: "Sahel",
+        name: "South Sudan Regional Refugee Response Plan",
+        countries: ['ETH', 'KEN', 'SDN', 'UGA']},
+      { id: "Syria",
+        name: "Syria Regional Response Plan",
+        countries: ['TUR', 'IRQ', 'JOR', 'EGY', 'LBN']}
+      ];
+
+  this.options = $.extend(true, {
+    areaData : null
+  }, options);
+
+  this.initialize = function () {
+    // Initialize map
+    var that = this;
+
+    that.loadRegionalAreaData();
+  };
+
+  this.loadRegionalAreaData = function () {
+    var that = this;
+    if ( that.options.areaData == null ) {
+      d3.json('./viu/nation-bndry.json',
+        function (err, data) {
+          that.options.areaData = data;
+          that.collateRegionalArea();
+        });
+    } else {
+      that.collateRegionalArea();
+    }
+  };
+
+  //Produce the regional merging for each of the Regions
+  this.collateRegionalArea = function () {
+    var that = this;
+
+    that.features = topojson.feature(that.options.areaData, that.options.areaData.objects.nations)
+
+    $j(that.regions).each(function(i, item) {
+      var temp = topojson.merge(that.options.areaData,
+                    that.options.areaData.objects.nations.geometries.filter(function(d) {
+                      return item.countries.indexOf(d.id) > 0;
+                    })
+                );
+      item.type = temp.type;
+      item.coordinates = temp.coordinates;
+    });
+
+    that.renderRegionalArea();
+  }
+
+  this.renderRegionalArea = function () {
+    var that = this;
+
+    if ( that.options.canvas == null ) {
+    that.canvas = d3.select(map.getPanes().overlayPane)
+                    .append("svg")
+                      .attr("width", d3.select(that.map.getContainer()).style("width"))
+                      .attr("height", d3.select(that.map.getContainer()).style("height"))
+                      .attr("data-region", function(d) {})
+                      .attr("data-region-id", function(d) {});
+    } else {
+      that.canvas = that.options.canvas;
+    }
+
+    that.layer = that.canvas.append("g").attr("id", "regional-layer");
+
+    that.regionPaths = that.layer
+      .selectAll("path")
+      .data(that.regions)
+      .enter()
+      .append("path")
+        .attr("class", "region-item")
+        .attr("d", _path);
+
+
+    that.recalibrateLayer();
+
+  }
+
+  this.recalibrateLayer = function () {
+    var that = this;
+    that.layer.style("visibility", "hidden");
+
+    var bounds = _path.bounds(that.features),
+          topLeft = bounds[0],
+          bottomRight =bounds[1];
+
+    that.canvas.attr("width", bottomRight[0] - topLeft[0])
+      .attr("height", bottomRight[1] - topLeft[1])
+      .style("left", topLeft[0] + "px")
+      .style("top", topLeft[1] + "px");
+
+    that.layer.attr("transform", "translate(" + -topLeft[0] + "," + -topLeft[1] + ")");
+
+    that.regionPaths.attr("d", _path);
+
+    that.layer.style("visibility", "visible");
+  }
+
+  this.showRegion = function(id) {
+    var that = this;
+
+    var toReturn = null;
+    that.regionPaths.each(function(item) {
+      if ( item.id == id ) {
+        toReturn = this;
+        d3.select(this).style("visibility", "visible");
+      }
+    });
+
+    return toReturn;
+  };
+
+  this.hideRegion = function(id) {
+    var that = this;
+    var toReturn = null;
+    that.regionPaths.each(function(item) {
+      if ( item.id == id ) {
+        toReturn = this;
+        d3.select(this).style("visibility", "hidden");
+      }
+    });
+    return toReturn;
+  }
+
+  this.showAllRegions = function() {
+    var that = this;
+    that.regionPaths.each(function(item) {
+      d3.select(this).style("visibility", "visible");
+    });
+
+    return that.regionPaths;
+  };
+
+  this.hideAllRegions = function () {
+    var that = this;
+    that.regionPaths.each(function(item) {
+      console.log(this);
+      d3.select(this).style("visibility", "hidden");
+    });
+
+    return that.regionPaths;
+  };
+
+};
+
+
+
+var regionalLayer = new ocha.RegionalLayer(map, { canvas: svg});
+
+regionalLayer.initialize();
+
+
+map.on('zoomstart', function() {
+  regionalLayer.layer.style("visibility","hidden");
+});
+
+map.on('zoomend', function () {
+  regionalLayer.recalibrateLayer();
+});
+
+
+</script>
+</body>

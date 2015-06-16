@@ -424,6 +424,11 @@ div.hub-radial-overlay {
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box img.img-left {
         float: left;
         margin-right: 5px; }
+      #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box#call-download-report table {
+        display: inline-block; }
+        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box#call-download-report table img {
+          width: 90px;
+          height: 128px; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box p {
         text-align: left; }
       #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box .fb-share-button {
@@ -443,7 +448,7 @@ div.hub-radial-overlay {
 aside.hubscroll-nav-area {
   position: fixed;
   margin-left: 5px;
-  right: 0;
+  right: 10px;
   top: 50%;
   z-index: 100000; }
   aside.hubscroll-nav-area nav.hubscroll-nav-viewport ul.hubscroll-nav-list {
