@@ -77,16 +77,28 @@
   #hub-slide-1-a {
     background-image: url(../img/story/small/bad-news.jpg); }
 
-  #hub-slide-2 #content-2-b {
-    display: block;
-    top: 114px; }
-  #hub-slide-2 #chart-container {
-    width: 100%;
-    bottom: 70px; }
-  #hub-slide-2 .content h2 {
-    font-size: 16px;
-    padding: 0 1em;
-    margin-top: 11%; }
+  #hub-slide-2 {
+    height: auto !important; }
+    #hub-slide-2 .hub-viewport {
+      height: auto; }
+    #hub-slide-2 .hub-radial-overlay {
+      display: none; }
+    #hub-slide-2 #content-2-b {
+      display: block;
+      top: auto; }
+    #hub-slide-2 #chart-container {
+      width: 100%;
+      bottom: auto; }
+    #hub-slide-2 #chart-container, #hub-slide-2 #content-2-a, #hub-slide-2 #content-2-b {
+      height: auto !important;
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px; }
+      #hub-slide-2 #chart-container h2, #hub-slide-2 #content-2-a h2, #hub-slide-2 #content-2-b h2 {
+        margin-top: 10px; }
+    #hub-slide-2 .content h2 {
+      font-size: 16px;
+      padding: 0 1em; }
 
   #hub-slide-4 {
     background-image: url(../img/story/small/iraq.jpg); }

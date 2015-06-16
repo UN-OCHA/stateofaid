@@ -130,20 +130,35 @@ $phone-max-width: 768px;
   }
   #hub-slide-1-a { background-image: url(../img/story/small/bad-news.jpg); }
   #hub-slide-2 {
+    height: auto !important;
+    .hub-viewport { height: auto; }
+    .hub-radial-overlay {
+      display: none;
+    }
     #content-2-b {
       display: block;
-      top: 114px;
+      top: auto;
     }
     #chart-container {
 
       width: 100%;
-      bottom: 70px;
+      bottom: auto;
 
+    }
+
+    #chart-container, #content-2-a, #content-2-b {
+      height: auto !important;
+      position: relative;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      h2 {
+        margin-top: 10px;
+      }
     }
     .content h2 {
       font-size: $small-font;
       padding: 0 1em;
-      margin-top: 11%;
+      // margin-top: 11%;
     }
   }
   #hub-slide-4 {
