@@ -287,12 +287,12 @@
       <div class='hub-country-stats abs-left'>
         <table>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='333000'>0</span></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='331000'>0</span></td>
             <td class='td-left'>received food assistance<div class="clear"></div></td>
           </tr>
           <tr>
             <td class='td-right'>
-              <span class='country-stat-count' data-stat-count='128000'>0</span></td>
+              <span class='country-stat-count' data-stat-count='140400'>0</span></td>
             <td class='td-left'>received seeds, tools, and fishing equipment<div class="clear"></div></td>
           </tr>
         </table>
@@ -307,12 +307,12 @@
       <div class='hub-country-stats'>
         <table>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='370000'>0</span></td>
-            <td class='td-left'>people received food assistance<div class="clear"></div></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='21000'>0</span></td>
+            <td class='td-left'>people have received emergency supplies of safe drinking water<div class="clear"></div></td>
           </tr>
           <tr>
-            <td class='td-right'><span class='country-stat-count' data-stat-count='50000'>0</span></td>
-            <td class='td-left'>people received emergency shelter<div class="clear"></div></td>
+            <td class='td-right'><span class='country-stat-count' data-stat-count='55000'>0</span></td>
+            <td class='td-left'>received tool kits to rebuild their homes<div class="clear"></div></td>
           </tr>
         </table>
       </div>
@@ -641,8 +641,8 @@ ocha.HubScrolling = function(sections, options) {
 
   this.scroller = null;
 
-  this.isMobile = true;
-  // this.isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
+  // this.isMobile = true;
+  this.isMobile = (/android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(navigator.userAgent.toLowerCase()));
 
   this.currentSubPage = 0;
 
@@ -985,6 +985,11 @@ ocha.HubScrolling.prototype.resizeWindow = function() {
   // if ( !that.isMobile ) {
     that.containers.width(w);
     that.containers.height(h);
+
+    // if ( that.isMobile ){
+    //   that.containers.height("auto");
+    //   that.containers.css("minHeight", h);
+    // }
   // } else {
   //   that.containers.height(window.screen.height);
   //   that.containers.width(window.screen.width);
