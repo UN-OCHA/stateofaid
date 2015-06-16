@@ -122,7 +122,7 @@
     background-image: url(../img/story/small/vanuatu.jpg); }
 
   #hub-slide-19 h2 {
-    font-size: 24px; }
+    font-size: 16px; }
 
   .hub-neutral-background div.content {
     width: 99%;
@@ -172,13 +172,13 @@
   #hub-slide-16 .hub-subsection {
     margin-top: 0 !important; }
     #hub-slide-16 .hub-subsection#hub-16-00 {
-      top: 10%; }
+      top: 5%; }
     #hub-slide-16 .hub-subsection#hub-16-01 {
       top: 30%; }
     #hub-slide-16 .hub-subsection#hub-16-02 {
-      top: 50%; }
+      top: 55%; }
     #hub-slide-16 .hub-subsection#hub-16-03 {
-      top: 70%; }
+      top: 80%; }
   #hub-slide-16 #hub-16-01, #hub-slide-16 #hub-16-02, #hub-slide-16 #hub-16-03 {
     display: block;
     margin: auto !important;
