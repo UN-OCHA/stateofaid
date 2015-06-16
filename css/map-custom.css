@@ -460,4 +460,10 @@ span.current-appeal h4 {
   stroke: #f47932;
   stroke-width: 3px; }
 
+.chart-country-name, .chart-funded-funded, .chart-funded-reqt {
+  font-size: 10px; }
+
+.chart-funded-funded {
+  fill: #0F6CB6; }
+
 /*# sourceMappingURL=map-custom.css.map */

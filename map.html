@@ -958,6 +958,7 @@ $("#map-layer-ctrl button").on("click", function() {
             cluster_data = data;
           }
         });
+
         //Sort data
         cluster_data = cluster_data.sort(function(a,b) { return b.current_requirement - a.current_requirement; })
 
@@ -1209,6 +1210,253 @@ $("#map-layer-ctrl button").on("click", function() {
     $("#funding-by-set").text("Funding by Country");
 
     var targets = ['TCD', 'MLI', 'NER', 'CMR', 'MRT', 'NGA', 'BFA', 'SEN', 'GMB'];
+    var countryISO = { TCD : "Chad", MLI: "Mali", NER: "Niger", CMR: "Cameroon", MRT: "Mauritania", NGA: "Nigeria", BFA: "Burkina Faso", SEN: "Senegal", GMB: "Gambia"};
+
+//Sort data
+    var $content_detail = $("#country-details");
+    var $profile = $("#country-area");
+    var $map = $("#map");
+
+    //From the country details area;
+    var $loader = $("#country-loader");
+    var $content = $("#country-details-area");
+    var $content_detail = $("#country-details");
+
+    var appealIds = [];
+    $(targets).each(function(i, item) {
+        var appealId = gha_csv[item].Appeal_ID_2015;
+        if (appealId) {
+          appealIds.push(parseInt(appealId));
+        }
+    });
+
+    console.log(data_2015_funding, appealIds);
+    var cluster_data = data_2015_funding.filter(function(d) { return appealIds.indexOf(d.id) >= 0; });
+
+    cluster_data = cluster_data.sort(function(a,b) { return b.current_requirements - a.current_requirements; })
+
+    $(cluster_data).each(function(i,item) {
+        console.log(item.current_requirements);
+    });
+    console.log("CLUSTER DATA", cluster_data);
+    // $("#priority-cluster").text(cluster_data[0].name);
+    //Build chart...
+    var cont_width = $profile.width(), cont_height = $profile.height()*2/5;
+
+    var svg_chart = d3.select($content_detail[0]).append("svg")
+              .attr("width", cont_width-20)
+              .attr("height", cont_height)
+              .style("padding", 10)
+              .attr("class", "svg-details");
+
+
+    var current_requirements = cluster_data.map(function(h) { return h.current_requirements });
+
+
+    scaleFunds = d3.scale.linear()
+                .domain([0, d3.max(current_requirements)])
+                .rangeRound([padding, (cont_height) - padding*2]);
+
+    scaleFundLabels = d3.scale.ordinal()
+                      .domain(d3.range(cluster_data.length))
+                      .rangeRoundBands([padding*2, cont_width-padding],0.1);
+
+    // console.log("INITIAL", current_requirement);
+    var yAxis = d3.svg.axis()
+                      .scale(
+                        d3.scale.linear()
+                          .domain([0, d3.max(current_requirements)])
+                          .rangeRound([(cont_height) - padding, padding*2])
+                        )
+                      .orient("left")
+                      .tickFormat(function(tick) {
+                        var tickForm = d3.formatPrefix(tick);
+                        return "$" + tickForm.scale(tick) + tickForm.symbol;
+                      });
+
+    var axis_group = svg_chart.append("g")
+                              .attr("class", "chart-detail y-axis")
+                              .attr("transform", "translate(" + padding*2 + ", 0)")
+                              .call(yAxis);
+    // console.log("END", current_requirement);
+
+    var g_chart_reqt = svg_chart.append("g").attr("id", "funding-requirement");
+    var g_chart_funded = svg_chart.append("g").attr("id", "funding-funded");
+    var g_chart_funding_img = svg_chart.append("g").attr("id", "funding-image");
+    // var g_chart_pledged = svg_chart.append("g").attr("id", "funding-pledged");
+    g_chart_reqt.selectAll("rect")
+          .data(cluster_data)
+          .enter()
+          .append("rect")
+            .attr("class", "chart_in_need")
+            .attr("width", scaleFundLabels.rangeBand())
+            .attr("data-requirement", function(d) { return d.current_requirements; })
+            .attr("x", function(d,i) { return scaleFundLabels(i); })
+            .attr("y", function(d) { return cont_height - padding; })
+            .attr("height", 0)
+            .on("mouseenter", showChartBlockInformation)
+            .on("mouseleave", showChartBlockInformation_hide);
+
+
+    g_chart_funded.selectAll("rect.chart-funded")
+          .data(cluster_data)
+          .enter()
+            .append("rect")
+              .attr("class", "chart-funded")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("x", function(d,i) { return scaleFundLabels(i); })
+              .attr("height", 0)
+              .attr("y", cont_height - padding)
+              .on("mouseenter", showChartBlockInformation)
+              .on("mouseleave", showChartBlockInformation_hide);
+
+
+
+    //country name
+    g_chart_funded.selectAll("text.chart-country-name")
+          .data(cluster_data)
+          .enter()
+            .append("text")
+              .attr("class", "chart-country-name")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("x", function(d,i) { return scaleFundLabels(i) + scaleFundLabels.rangeBand()/2; })
+              .attr("text-anchor","middle")
+              .attr("height", 0)
+              .attr("y", cont_height-6)
+              .text(function(d) {
+                return d.country;
+              })
+              ;
+
+    //funding name
+    g_chart_funded.selectAll("text.chart-funded-funded")
+          .data(cluster_data)
+          .enter()
+            .append("text")
+              .attr("class", "chart-funded-funded")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("x", function(d,i) { return scaleFundLabels(i) + scaleFundLabels.rangeBand()/2; })
+              .attr("text-anchor","middle")
+              .attr("height", 0)
+              .attr("y", cont_height - padding)
+              .text(function(d) {
+                var perc = d3.round(parseFloat(d.funding)/parseFloat(d.current_requirements) * 100,1);
+                if ( perc < 5 || perc > 95) { return ""; }
+
+                return  perc + "%";
+                // var fmt = d3.formatPrefix(d.current_requirements);
+                // return fmt.scale(d.current_requirements) + d3.symbol;
+              })
+              ;
+
+    g_chart_funded.selectAll("text.chart-funded-reqt")
+          .data(cluster_data)
+          .enter()
+            .append("text")
+              .attr("class", "chart-funded-reqt")
+              .attr("width", scaleFundLabels.rangeBand())
+              .attr("x", function(d,i) { return scaleFundLabels(i) + scaleFundLabels.rangeBand()/2; })
+              .attr("text-anchor","middle")
+              .attr("height", 0)
+              .attr("y", cont_height - padding)
+              .text(function(d) {
+                // var perc = d3.round(parseFloat(d.funding)/parseFloat(d.current_requirements) * 100,1);
+                // if ( perc < 5 || perc > 95) { return ""; }
+
+                // return  perc + "%";
+
+                var fmt = d3.formatPrefix(d.current_requirements);
+                console.log(d, fmt);
+                return "$" + d3.round(fmt.scale(d.current_requirements),1) + fmt.symbol;
+              })
+              ;
+
+    // g_chart_funding_img.selectAll("image.chart-funded-img")
+    //     .data(cluster_data)
+    //     .enter()
+    //       .append("image")
+    //         .attr("class", "chart-funded-img")
+    //         .attr("width", scaleFundLabels.rangeBand())
+    //         .attr("x", function(d,i) { return scaleFundLabels(i); })
+    //         .attr("height", scaleFundLabels.rangeBand())
+    //         .attr("y", cont_height - padding - scaleFundLabels.rangeBand())
+    //         .attr("xlink:href", function(d) { return "img/icons/" +lookup_image[d.title.toLowerCase()]; });
+
+
+    //animate
+    g_chart_funded.selectAll("text.chart-funded-funded")
+      .transition()
+      .duration(500)
+      .ease("sin")
+      .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.funding)) - 2; });
+
+      g_chart_funded.selectAll("text.chart-funded-reqt")
+      .transition()
+      .duration(500)
+      .ease("sin")
+      .attr("y",  function(d) { return Math.round(cont_height - scaleFunds(d.current_requirements)) -2; });
+
+    g_chart_reqt.selectAll("rect.chart_in_need")
+            .transition()
+            .duration(500)
+            .ease("sin")
+            // .delay(function(d,i) { return i * 10;})
+            .attr("height", function(d) { return scaleFunds(d.current_requirements)- padding; })
+            .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.current_requirements)); });
+
+    g_chart_funded.selectAll("rect.chart-funded")
+            .transition()
+            .duration(500)
+            .ease("sin")
+            .attr("height", function(d) { return scaleFunds(d.funding)- padding; })
+            .attr("y", function(d) { return Math.round(cont_height - scaleFunds(d.funding)); });
+
+
+    // g_chart_pledged.selectAll("rect.chart-pledged")
+    //         .transition()
+    //         .duration(500)
+    //         .ease("sin")
+    //         .attr("height", function(d) { var exp = d.pledges*10; return scaleFunds(d.pledges) - padding; })
+    //         .attr("y", function(d) { return Math.round(cont_height- scaleFunds(d.pledges + d.funding)); });
+
+    // g_chart_funding_img.selectAll("image.chart-funded-img")
+    //         .transition()
+    //         .duration(500)
+    //         .ease("sin")
+    //         .attr("y", function(d) {
+    //               return Math.round(cont_height -
+    //                 scaleFunds(d.current_requirements ? d.current_requirements : d.funding) - scaleFundLabels.rangeBand()); })
+    //         ;
+
+    //legend
+    var g_legend = svg_chart.append("g").attr("class", "chart-legend");
+    var req = g_legend.append("rect").attr("class", "chart-legend-item chart_in_need")
+                    .attr("y", 0)
+                    .attr("x", padding*2 + 16)
+                    .attr("width", 15),
+       req_label = g_legend.append("text").attr("class", "legend-text").text("Requirement")
+                    .attr("y", 10)
+                    .attr("x", parseInt(req.attr("x")) + parseInt(req.attr("width")) + 2 )
+                    .attr("width", function(d) { return this.getBBox().width; }),
+        funded = g_legend.append("rect").attr("class", "chart-legend-item chart-funded")
+                    .attr("y", 0)
+                    .attr("x", parseInt(req_label.attr("x")) + parseInt(req_label.attr("width")) + 6)
+                    .attr("width", 15),
+        funded_label = g_legend.append("text").attr("class", "legend-text").text("Funding")
+                    .attr("y", 10)
+                    .attr("x", parseInt(funded.attr("x")) + parseInt(funded.attr("width")) + 2)
+                    .attr("width", function(d) { return this.getBBox().width; })
+        // pledged = g_legend.append("rect").attr("class", "chart-legend-item chart-pledged")
+        //             .attr("y", cont_height - padding/2)
+        //             .attr("x", parseInt(funded_label.attr("x")) + parseInt(funded_label.attr("width")) + 6)
+        //             .attr("width", 15),
+        // pledged_label = g_legend.append("text").attr("class", "legend-text").text("Pledges")
+        //             .attr("y", cont_height - padding/2 + 10)
+        //             .attr("x", parseInt(pledged.attr("x")) + parseInt(pledged.attr("width")) + 2)
+                    ;
+
+    //floating item
+    var g_chart_hover = svg_chart.append("g").attr("class", "chart-hover");
 
 
   }

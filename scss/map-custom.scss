@@ -430,3 +430,8 @@ $lightblue: #1E7793;
   stroke: $orange;
   stroke-width: 3px;
 }
+
+.chart-country-name, .chart-funded-funded,.chart-funded-reqt {
+  font-size: 10px;
+}
+.chart-funded-funded { fill: #0F6CB6; }
