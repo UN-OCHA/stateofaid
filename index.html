@@ -1679,7 +1679,7 @@ ocha.Story = function() {
     },
     loadGHOMap : function () {
       if (!iframeLoaded) {
-        $("iframe#hub-slide-map").attr("src", './map.html');
+        $("iframe#hub-slide-map").attr("src", './map.html?q=' + (Math.random() * 1000));
         iframeLoaded = true;
 
         setTimeout(function() {$("#loading-map-item").hide();}, 1000);
