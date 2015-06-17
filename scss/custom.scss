@@ -520,7 +520,35 @@ div.hub-radial-overlay {
       font-size: 4em;
     }
 
+    #call-to-action-share {
+      ul {
+        padding: 0 10%;
+        list-style-type: none;
+        li {
+          margin-bottom: 10px;
+          text-align: left;
+          a {
+            text-decoration: none;
+            img {
+              width: 30px; height: 30px;
 
+            }
+            img, span {
+              vertical-align: middle;
+              color: white;
+              font-weight: bold;
+              text-shadow: 0px 1px 1px black;
+            }
+            &:hover {
+              span {
+                color: $orange;
+              }
+            }
+          }
+
+        }
+      }
+    }
     div#hub-call-to-action-area {
       margin-top: 20px;
       padding: 10px 15px 20px;
@@ -557,6 +585,9 @@ div.hub-radial-overlay {
           font-weight: bold;
           text-decoration: none;
           color: white;
+          &:hover {
+            background-color: $orange;
+          }
         }
       }
     }

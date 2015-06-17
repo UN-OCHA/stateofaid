@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<title>Humanitarian Needs: The State of Aid</title>
+<title>The State of Humanitarian Aid</title>
 <meta charset="utf-8">
 <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
 <META HTTP-EQUIV="Expires" CONTENT="-1">
@@ -8,7 +8,7 @@
 <meta name="description" content="In just over a decade, the number of people in need of aid has almost doubled. At the beginning of 2015 we were aiming to assist 57.5 million people in 22 countries needing assistance.">
 <meta name="keywords" content="Humanitarian Aid, UNOCHA, OCHA, United Nations">
 <meta property="og:image" content="http://www.unocha.org/stateofaid/img/cover.png"/>
-<meta property="og:title" content="Humanitarian Needs: The State of Aid"/>
+<meta property="og:title" content="The State of Humanitarian Aid"/>
 <meta property="og:description" content="In just over a decade, the number of people in need of aid has almost doubled. At the beginning of 2015 we were aiming to assist 57.5 million people in 22 countries needing assistance."/>
 
 
@@ -54,8 +54,8 @@
     <div id="mosaic-actual"></div>
     <div id="mosaic-overlay-area"></div>
     <div id="mosaic-title-area">
-      <h1>Humanitarian Needs:</h1>
-      <h2>The State of Aid</h2>
+      <h1>The State of Humanitarian Aid</h1>
+      <!-- <h2>The State of Aid</h2> -->
     </div>
   </section>
 
@@ -396,10 +396,14 @@
           <div id='call-to-action-share' class='hub-call-to-action-3box'>
             <h3>Spread the word</h3>
             <div>
-
-               <div class="fb-share-button" data-href="http://www.unocha.org/stateofaid" data-layout="box_count"></div>
-              <a href="https://twitter.com/share?url=http%3A%2F%2Fwww.unocha.org%2Fstateofaid" class="twitter-share-button" data-via="UNOCHA" data-count="vertical">Tweet</a>
-              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+              <ul>
+                <li>
+                  <a class="facebook-logo" id="facebook-link" target="_blank" href="javascript: void(0);"><img src="img/facebookicon.png" /> <span style='vertical-align: middle; display: inline-block'>Share on Facebook</span></a>
+                </li>
+                <li>
+                  <a class="twitter-logo" href="javascript: void(0);"><img src="img/twittericon.png" /> <span style='vertical-align: middle; display: inline-block'>Share on Twitter</span></a>
+                </li>
+              </ul>
             </div>
           </div>
           <div id='call-to-action-donate' class='hub-call-to-action-3box'>
@@ -407,7 +411,7 @@
             <p>
           Support relief efforts by donating to OCHA managed pooled funds. Every dollar counts.
             </p>
-            <p>
+            <p style='text-align: center'>
               <a href='http://www.unfoundation.org/how-to-help/donate/support-unherf.html' class='hub-button' target="_blank">Donate</a>
             </p>
           </div>
@@ -1725,6 +1729,7 @@ $("#mosaic-area").css("opacity", 1);
   $("#hub-slide-17 iframe").height($(window).height());
 
 
+var win;
 jQuery(window).load(function() {
 
   ocha.Story.initialize();
@@ -1736,7 +1741,38 @@ jQuery(window).load(function() {
                                         .map(function(d) { return "./img/faces/" + fmt(d) + ".png"; }),
                                       faceWidth);
 
+
+  $j("#facebook-link").on("click", function() {
+      var INTERACTIVE_URL = encodeURIComponent("http://www.unocha.org/stateofaid");
+      window.open('http://www.facebook.com/sharer.php?u='+ INTERACTIVE_URL,'sharer','toolbar=0,status=0,width=626,height=436');return false;
+
+  });
+
+  $(".twitter-logo").each(function(i, item) {
+
+    $(this).on("click", function() {
+      if (win)
+      {
+        win.close();
+      }
+
+      show_text = $(this).find("p").text();
+
+      var param = $.param({
+        url: "http://www.unocha.org/stateofaid",
+        via: "unocha",
+        hashtags: "ReshapeAid",
+      });
+
+      win = window.open("https://twitter.com/intent/tweet?" + param, "twitter", "height=300,width=600,modal=yes,alwaysRaised=yes");
+      win.focus();
+    })
+
+
+    //$(this).appendTo($link);
+  });
 });
+
 
 </script>
 <script>

@@ -412,6 +412,24 @@ div.hub-radial-overlay {
     text-shadow: 0 1px 1px #000000;
     color: #f47932;
     font-size: 4em; }
+  #hub-call-to-action div.content #call-to-action-share ul {
+    padding: 0 10%;
+    list-style-type: none; }
+    #hub-call-to-action div.content #call-to-action-share ul li {
+      margin-bottom: 10px;
+      text-align: left; }
+      #hub-call-to-action div.content #call-to-action-share ul li a {
+        text-decoration: none; }
+        #hub-call-to-action div.content #call-to-action-share ul li a img {
+          width: 30px;
+          height: 30px; }
+        #hub-call-to-action div.content #call-to-action-share ul li a img, #hub-call-to-action div.content #call-to-action-share ul li a span {
+          vertical-align: middle;
+          color: white;
+          font-weight: bold;
+          text-shadow: 0px 1px 1px black; }
+        #hub-call-to-action div.content #call-to-action-share ul li a:hover span {
+          color: #f47932; }
   #hub-call-to-action div.content div#hub-call-to-action-area {
     margin-top: 20px;
     padding: 10px 15px 20px;
@@ -446,6 +464,8 @@ div.hub-radial-overlay {
         font-weight: bold;
         text-decoration: none;
         color: white; }
+        #hub-call-to-action div.content div#hub-call-to-action-area div.hub-call-to-action-3box a.hub-button:hover {
+          background-color: #f47932; }
 
 /***
  Hubscroll area
