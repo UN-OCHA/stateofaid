@@ -498,6 +498,22 @@ aside.hubscroll-nav-area {
           padding: 6px;
           border-radius: 6px; }
 
+.hub-country-date {
+  font-size: 10px;
+  color: white;
+  background: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  padding: 2px 30px;
+  bottom: 0;
+  right: 0; }
+
+h1 {
+  position: relative; }
+  h1 super {
+    font-size: 24px;
+    top: 12px;
+    position: absolute; }
+
 /* For Phones! */
 @media only screen and (min-width: 320px) and (max-width: 736px) {
   aside.hubscroll-nav-area {
